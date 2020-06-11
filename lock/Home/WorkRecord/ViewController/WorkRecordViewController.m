@@ -56,7 +56,10 @@
     calendar.appearance.headerTitleColor = [UIColor blackColor];
     calendar.appearance.titleFont = [UIFont systemFontOfSize:16];
     calendar.appearance.headerDateFormat = STR_FORMATTER_YM;
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSArray * allLanguages = [defaults objectForKey:@"AppleLanguages"];
+    NSString * preferredLang = [allLanguages objectAtIndex:0];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:preferredLang];
     calendar.locale = locale;
     calendar.swipeToChooseGesture.enabled = YES;
     calendar.today = nil;

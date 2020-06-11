@@ -13,7 +13,7 @@
 #define STR_TIMEOUT                         L(@"网络连接超时")
 #define STR_PARSE_FAILURE                   L(@"解析失败")
 #define STR_LOADING                         L(@"加载中")
-#define STR_SAVE                            L(@"保 存")
+#define STR_SAVE                            L(@"保存")
 #define STR_PHOTO                           L(@"相册")
 #define STR_TIPS                            L(@"提示")
 #define STR_KNOW                            L(@"知道了")
@@ -42,7 +42,7 @@
 //登录界面
 #define STR_ACCOUNT                         L(@"帐号")
 #define STR_PASSWORD                        L(@"密码")
-#define STR_LOGIN                           L(@"登 录")
+#define STR_LOGIN                           L(@"登录")
 #define STR_SETTING                         L(@"设置")
 #define STR_ADDRESS_TIPS                    L(@"请设置服务器地址")
 #define STR_ACCOUNT_TIPS                    L(@"请输入账户")
@@ -104,9 +104,10 @@
 #define STR_KEY_NUMBER_NO_MATE              L(@"钥匙号码不匹配")
 #define STR_PLEASE_SWITH_LOCK               L(@"请开关锁")
 #define STR_CLOSE_LOCK_SUCCESS              L(@"关锁成功")
+#define STR_MY_TASK_INVALID                 L(@"任务已失效")
 
 //系统参数
-#define STR_QUIT                            L(@"退 出")
+#define STR_QUIT                            L(@"退出")
 #define STR_DEFINE_QUIT                     L(@"确定退出当前帐号吗")
 #define STR_DEVICE_NUMBER                   L(@"设备号码")
 #define STR_SERVER_ADDRESS                  L(@"服务器地址")

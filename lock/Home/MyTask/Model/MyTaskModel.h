@@ -86,6 +86,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy)NSString * keydataid;
 @end
 
+@interface MyTaskValidResponse : ResponseBean
+@property (nonatomic,assign)BOOL data;
+@end
+
 @interface MyTaskSwitchLockInfoBean : BaseBean
 @property (nonatomic,copy)NSString * name;
 @property (nonatomic,copy)NSString * time;

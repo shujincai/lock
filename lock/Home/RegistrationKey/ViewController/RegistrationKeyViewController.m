@@ -44,6 +44,7 @@
         [SetKeyController setDelegate:self];
     }
 }
+
 - (NSMutableArray *)bleArray {
     if (_bleArray == nil) {
         _bleArray = [NSMutableArray array];
@@ -147,10 +148,9 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //停止扫描
+    CBPeripheral * currentBle = [_bleArray objectAtIndex:indexPath.row];
     [self.searchBluetoothView hide];
     [SetKeyController stopScan];
-    CBPeripheral * currentBle = [_bleArray objectAtIndex:indexPath.row];
-    
     if ([self.type isEqualToString:@"0"]) {//注册钥匙
         ConnectKeyViewController * connectKey = [[ConnectKeyViewController alloc]init];
         connectKey.currentBle = currentBle;

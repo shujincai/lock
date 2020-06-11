@@ -34,7 +34,7 @@ NSString *const kCount = @"api/v1/app/keydatas/count";
 //获取任务列表
 NSString *const kTaskList = @"api/v1/app/keydatas";
 //根据任务ID判断任务是否有效
-NSString *const kTaskValid = @"api/v1/app/keydatas/{keydataid}";
+NSString *const kTaskValid = @"api/v1/app/keydatas/%@";
 //注册蓝牙钥匙
 NSString *const kRegKey = @"api/v1/app/keys";
 //注册锁

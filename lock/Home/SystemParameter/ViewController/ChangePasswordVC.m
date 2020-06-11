@@ -103,6 +103,29 @@
     request.oldpwd = self.oldPassword.textField.text;
     request.newpwd = self.newsPassword.textField.text;
     [MSHTTPRequest POST:kChangePW parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+        NSError * error = nil;
+        ResponseBean * response = [[ResponseBean alloc]initWithDictionary:responseObject error:&error];
+        if (error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:STR_PARSE_FAILURE];
+            return ;
+        }
+        if ([response.resultCode intValue] == 0) {
+            [self exitAccount];
+        }else {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:response.msg];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_TIMEOUT];
+    }];
+    
+}
+//退出账号
+- (void)exitAccount {
+    RequestBean * request = [[RequestBean alloc]init];
+    [MSHTTPRequest requestWithMethod:MSRequestMethodDELETE url:kLogin parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         [MBProgressHUD hideHUD];
         NSError * error = nil;
         ResponseBean * response = [[ResponseBean alloc]initWithDictionary:responseObject error:&error];
@@ -125,6 +148,5 @@
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:STR_TIMEOUT];
     }];
-    
 }
 @end

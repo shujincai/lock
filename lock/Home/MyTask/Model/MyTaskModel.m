@@ -44,6 +44,10 @@
 
 @end
 
+@implementation MyTaskValidResponse
+
+@end
+
 @implementation MyTaskSwitchLockInfoBean
 
 @end

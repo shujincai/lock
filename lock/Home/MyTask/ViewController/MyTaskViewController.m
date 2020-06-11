@@ -222,22 +222,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MyTaskListBean * taskList = [_listArray objectAtIndex:indexPath.section];
     UnlockListBean * listBean = [taskList.unlocklist objectAtIndex:indexPath.row];
-    RegistrationKeyViewController* regLock = [RegistrationKeyViewController new];
-    regLock.type = @"2";
-    regLock.taskBean = taskList;
-    regLock.lockBean = listBean;
-    [self.navigationController pushViewController:regLock animated:YES];
+    [self getTaskValid:listBean withTaskList:taskList];
 }
 
 //任务ID判断任务是否有效
-- (void)getTaskValid:(UnlockListBean *)infoBean {
+- (void)getTaskValid:(UnlockListBean *)infoBean withTaskList:(MyTaskListBean *)taskList {
     [MBProgressHUD showActivityMessage:STR_LOADING];
-    MyTaskValidRequest * request = [[MyTaskValidRequest alloc]init];
-    request.keydataid = infoBean.keydataid;
-    [MSHTTPRequest GET:kTaskValid parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+    RequestBean * request = [[RequestBean alloc]init];
+    [MSHTTPRequest GET:[NSString stringWithFormat:kTaskValid,infoBean.keydataid] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         [MBProgressHUD hideHUD];
         NSError * error = nil;
-        MyTaskListResponse * response = [[MyTaskListResponse alloc]initWithDictionary:responseObject error:&error];
+        MyTaskValidResponse * response = [[MyTaskValidResponse alloc]initWithDictionary:responseObject error:&error];
         if (error) {
             [MBProgressHUD showMessage:STR_PARSE_FAILURE];
             return ;
@@ -246,7 +241,15 @@
             [MBProgressHUD showError:response.msg];
             return ;
         }else {
-            
+            if (response.data == NO) {
+                [MBProgressHUD showError:STR_MY_TASK_INVALID];
+            }else {
+                RegistrationKeyViewController* regLock = [RegistrationKeyViewController new];
+                regLock.type = @"2";
+                regLock.taskBean = taskList;
+                regLock.lockBean = infoBean;
+                [self.navigationController pushViewController:regLock animated:YES];
+            }
         }
     } failure:^(NSError * _Nonnull error) {
         [MBProgressHUD hideHUD];
