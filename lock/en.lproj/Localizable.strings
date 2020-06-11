@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  lock
+
+  Created by 李金洋 on 2020/3/25.
+  Copyright © 2020 li. All rights reserved.
+*/
+
+"帐号"="accounts";
+"密码"="password";
+"设置"="setting";
+"保存"="save";
+"开关锁记录"="Switch lock record";
+"开锁"="Unlock";
+"关锁"="Lock";
+"工作记录"="Operation Log";
+"请选择开始时间"="The start time";
+"请选择结束时间"="The end of time";
+"确定"="Confirm";
+"我的任务"="My Task";
+"工作记录"="Operation Log";
+"注册锁"="Lock Registration";
+"注册钥匙"="Key Registration";
+"系统参数"="Parameters";
+"设备编号"="No Patrol Content!!!";
+"服务器地址"="Server Address";
+"版本号"="Lock Name:%@";
+
+"开锁成功"="Log Off";
+"设置成功"="Set Lock";
+"设置失败"="Input unlock reason";
+"超出有效期"="Sync locks and apply for rule";
+"没有权限"="No Authorization";
+"超出时间范围"="Beyond the Time";
+"蓝牙钥匙开锁成功"="UnLock Successfully";
+"蓝牙钥匙关锁成功"="Lock or unlock Successfully";
+"请设置服务器地址"="Please set server address";
+"请输入账户"="Please enter your account";
+"请输入密码"="Please enter your password";
+"地图"="Map";
+"主页"="Home";
