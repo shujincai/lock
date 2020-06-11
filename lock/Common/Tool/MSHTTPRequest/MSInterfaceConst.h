@@ -43,5 +43,7 @@ UIKIT_EXTERN NSString *const kTaskValid;
 UIKIT_EXTERN NSString *const kRegKey;
 //注册锁
 UIKIT_EXTERN NSString *const kRegLock;
+//修改密码
+UIKIT_EXTERN NSString *const kChangePW;
 
 

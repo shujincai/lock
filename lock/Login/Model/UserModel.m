@@ -16,6 +16,10 @@
 
 @end
 
+@implementation UserKeyInfoList
+
+@end
+
 @implementation UserInfo
 
 @end

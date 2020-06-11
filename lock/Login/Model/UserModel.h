@@ -24,6 +24,27 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * updatetime;//更新时间
 @end
 
+@protocol UserKeyInfoList
+@end
+@interface UserKeyInfoList : BaseBean
+
+@property(nonatomic,copy)NSString * createtime;//创建时间
+@property(nonatomic,copy)NSString * factoryno;//设备序列号
+@property(nonatomic,copy)NSString * keyflag;//
+@property(nonatomic,copy)NSString * keyid;//钥匙id
+@property(nonatomic,copy)NSString * keymode;//
+@property(nonatomic,copy)NSString * keyname;//钥匙名称
+@property(nonatomic,copy)NSString * keyno;//钥匙号
+@property(nonatomic,copy)NSString * keystatus;//钥匙状态
+@property(nonatomic,copy)NSString * keytype;//钥匙类型
+@property(nonatomic,copy)NSString * manager;//管理者
+@property(nonatomic,copy)NSString * unlockinfo;//开锁信息
+@property(nonatomic,copy)NSString * updatetime;//更新时间
+@property(nonatomic,copy)NSString * workerid;//用户id
+@property(nonatomic,copy)NSString * workername;//用户名称
+
+@end
+
 @interface UserInfo : BaseBean
 
 @property(nonatomic,copy)NSString * address;//地址
@@ -39,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * token;//token
 @property(nonatomic,copy)NSString * workerid;//用户id
 @property(nonatomic,copy)NSString * workername;//用户名称
-@property(nonatomic,strong)NSMutableArray * keylist;//钥匙数组
+@property(nonatomic,strong)NSMutableArray<UserKeyInfoList> * keylist;//钥匙数组
 @property(nonatomic,strong)UserDepartmentInfo * dept;//部门信息
 
 @end

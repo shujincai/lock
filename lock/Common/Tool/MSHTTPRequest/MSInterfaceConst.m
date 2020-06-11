@@ -39,3 +39,5 @@ NSString *const kTaskValid = @"api/v1/app/keydatas/{keydataid}";
 NSString *const kRegKey = @"api/v1/app/keys";
 //注册锁
 NSString *const kRegLock = @"api/v1/app/locks";
+//修改密码
+NSString *const kChangePW = @"api/v1/app/workers/password";

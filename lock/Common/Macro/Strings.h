@@ -115,4 +115,15 @@
 #define STR_CLICK_CHANGE                    L(@"点击修改")
 #define STR_QUIT_SUCCESS                    L(@"退出成功")
 
+//修改密码
+#define STR_OLD_PASSWORD                    L(@"原密码")
+#define STR_NEWS_PASSWORD                   L(@"新密码")
+#define STR_CONFIRM_PASSWORD                L(@"确认密码")
+#define STR_PLEASE_OLD_PWD                  L(@"请输入原密码")
+#define STR_PLEASE_NEWS_PWD                 L(@"请输入新密码")
+#define STR_PLEASE_CONFIRM_PWD              L(@"请输入确认密码")
+#define STR_PASSWORD_ATYPISM                L(@"两次密码不一致")
+#define STR_DEFINE_CHANGE_PWD               L(@"确定修改密码吗")
+#define STR_CHANGE_PWD_SUCCESS              L(@"修改成功，请重新登录")
+
 #endif /* Strings_h */

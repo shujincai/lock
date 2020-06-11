@@ -88,6 +88,7 @@
 		FB608CBB248A1E47008BA56C /* RegistrationLockTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */; };
 		FB608CBE248A1E4F008BA56C /* RegistrationLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */; };
 		FBD313C02491C4160053CBC8 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */; };
+		FBD313C3249212EA0053CBC8 /* SystemParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,6 +269,8 @@
 		FB608CBD248A1E4F008BA56C /* RegistrationLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationLockVC.h; sourceTree = "<group>"; };
 		FBD313BE2491C4160053CBC8 /* ChangePasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
 		FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
+		FBD313C1249212EA0053CBC8 /* SystemParameterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemParameterModel.h; sourceTree = "<group>"; };
+		FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemParameterModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -629,6 +632,8 @@
 		8405DBC924738669000F94EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FBD313C1249212EA0053CBC8 /* SystemParameterModel.h */,
+				FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1120,6 +1125,7 @@
 				8405DBF22473BB6B000F94EE /* ResponseBean.m in Sources */,
 				A4102A73242B200500B03620 /* MMScanView.m in Sources */,
 				8405DBE124738669000F94EE /* SystemViewController.m in Sources */,
+				FBD313C3249212EA0053CBC8 /* SystemParameterModel.m in Sources */,
 				A430EF772432C69C00F68BCE /* NSDate+Extension.m in Sources */,
 				A4102ACF242B477700B03620 /* MSInterfaceConst.m in Sources */,
 				8405DBDF24738669000F94EE /* HomeTableViewCell.m in Sources */,

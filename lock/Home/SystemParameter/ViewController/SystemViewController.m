@@ -120,7 +120,7 @@
             return ;
         }
         if ([response.resultCode intValue] == 0) {
-            [MBProgressHUD showSuccess:@"退出成功"];
+            [MBProgressHUD showSuccess:STR_QUIT_SUCCESS];
             [CommonUtil removeObjectFromUserDefaultWith:@"token"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 LogInViewController * loginViewController=[[LogInViewController alloc] init];
