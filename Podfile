@@ -14,4 +14,5 @@ target 'lock' do
   pod 'DZNEmptyDataSet'
   pod 'IQKeyboardManager'
   pod 'FSCalendar'
+  pod 'Bugly'
 end

@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
+#import <Bugly/Bugly.h>
+
 @interface AppDelegate ()
 
 @end
@@ -18,6 +20,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [AMapServices sharedServices].apiKey = @"6a164f52cd5c8fc0966f50dac52cbeba";
+    BuglyConfig * config = [[BuglyConfig alloc] init];
+    config.reportLogLevel = BuglyLogLevelWarn;
+    config.blockMonitorEnable = YES;
+    config.unexpectedTerminatingDetectionEnable = YES;
+    [Bugly startWithAppId:@"e562acc538" config:config];
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
 

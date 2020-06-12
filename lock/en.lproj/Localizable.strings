@@ -5,37 +5,121 @@
   Created by 李金洋 on 2020/3/25.
   Copyright © 2020 li. All rights reserved.
 */
+//公共
+"网络连接超时"="Network connection timeout";
+"解析失败"="Parsing failed";
+"加载中"="Loading";
+"保存"="save";
+"相册"="photo album";
+"提示"="Tips";
+"知道了"="Got it";
+"时间"="time";
+"注册"="register";
+"提交数据失败"="Failed to submit data";
+"暂无数据"="No data available";
+"注意"="be careful";
+"取消"="cancel";
+"确定"="Confirm";
 
+//设置服务地址
+"请输入服务器地址"="Please enter the server address";
+"二维码"="QR code";
+"将取景框对准二维码,即可自动扫描"="Align the viewfinder with the QR code to scan automatically";
+"条码"="bar code";
+"将取景框对准条码,即可自动扫描"="Align the viewfinder with the barcode to scan automatically";
+"图片中未识别到二维码"="QR code not recognized in picture";
+"相册读取权限未开启"="Album read permission is not enabled";
+"请到手机系统的\n【设置】->【隐私】->【相册】\n对%@开启相机的访问权限"="Please go to the mobile system\n Settings > Privacy > album\n access %@ to turn on the camera";
+"相机权限未开启"="Camera permission is not turned on";
+"请到手机系统的\n【设置】->【隐私】->【相机】\n对%@开启相机的访问权限"="Please go to the mobile system\n Settings > Privacy > camera\n access %@ to turn on the camera";
+"只支持iOS8.0以上系统"="Only IOS 8.0 and above systems are supported";
+
+//登录界面
 "帐号"="accounts";
 "密码"="password";
+"登录"="Sign in";
 "设置"="setting";
-"保存"="save";
-"开关锁记录"="Switch lock record";
-"开锁"="Unlock";
-"关锁"="Lock";
-"工作记录"="Operation Log";
-"请选择开始时间"="The start time";
-"请选择结束时间"="The end of time";
-"确定"="Confirm";
+"请设置服务器地址"="Please set server address";
+"请输入账户"="Please enter your account";
+"请输入密码"="Please enter your password";
+
+//首页
+"地图"="Map";
+"主页"="Home";
 "我的任务"="My Task";
 "工作记录"="Operation Log";
 "注册锁"="Lock Registration";
 "注册钥匙"="Key Registration";
 "系统参数"="Parameters";
-"设备编号"="No Patrol Content!!!";
-"服务器地址"="Server Address";
-"版本号"="Lock Name:%@";
 
-"开锁成功"="Log Off";
-"设置成功"="Set Lock";
-"设置失败"="Input unlock reason";
+//蓝牙钥匙搜索
+"搜索蓝牙钥匙"="Search Bluetooth key";
+"暂无蓝牙"="No Bluetooth";
+"未连接"="Not connected";
+"连接中"="Connecting";
+"已连接"="Connected";
+"断开中"="Disconnected";
+
+//注册钥匙
+"连接钥匙失败"="Failed to connect key";
+"名称"="name";
+"钥匙"="key";
+"钥匙序号"="Key No";
+"注册钥匙成功"="Successfully registered key";
+
+//注册锁
+"请连锁，读取锁id..."="Please interlock and read the lock id...";
+"连接锁失败"="Connection lock failed";
+"锁ID"="lock ID";
+"请输入锁名称"="Please enter the lock name";
+"注册锁成功"="Successfully registered lock";
+
+//工作记录
+"日期选择"="Date selection";
+"请选择开始时间"="The start time";
+"请选择结束时间"="The end of time";
+"yyyy年MM月"="yyyy-MM";
+"yyyy年MM月dd日"="yyyy-MM-dd";
+"查询"="query";
+"开关锁记录"="Switch lock record";
+"开锁成功"="Unlocking successful";
+"设置成功"="Set successfully";
+"设置失败"="Setting failed";
 "超出有效期"="Sync locks and apply for rule";
 "没有权限"="No Authorization";
 "超出时间范围"="Beyond the Time";
-"蓝牙钥匙开锁成功"="UnLock Successfully";
-"蓝牙钥匙关锁成功"="Lock or unlock Successfully";
-"请设置服务器地址"="Please set server address";
-"请输入账户"="Please enter your account";
-"请输入密码"="Please enter your password";
-"地图"="Map";
-"主页"="Home";
+"蓝牙钥匙开锁成功"="Bluetooth key unlocked successfully";
+"蓝牙钥匙关锁成功"="Bluetooth key is locked successfully";
+
+//我的任务
+"工作任务"="Task";
+"开关锁"="Switch lock";
+"初始化成功"="Initialization successful";
+"连接钥匙成功"="Key connected successfully";
+"钥匙号码不匹配"="Key number mismatch";
+"请开关锁"="Please switch the lock";
+"关锁成功"="Lock closed successfully";
+"任务已失效"="Task has expired";
+
+//系统参数
+"退出"="sign out";
+"确定退出当前帐号吗"="Are you sure to exit the current account ？";
+"设备号码"="No Patrol Content!!!";
+"服务器地址"="Server Address";
+"版本号"="Version No";
+"修改密码"="Change Password";
+"点击修改"="Click Modify";
+"退出成功"="Exit successful";
+
+//修改密码
+"原密码"="Original password";
+"新密码"="New password";
+"确认密码"="Confirm password";
+"请输入原密码"="Please enter the original password";
+"请输入新密码"="Please enter a new password";
+"请输入确认密码"="Please enter the confirmation password";
+"两次密码不一致"="Two passwords are inconsistent";
+"确定修改密码吗"="Are you sure to change the password ？";
+"修改成功，请重新登录"="Modification succeeded, please login again";
+
+
