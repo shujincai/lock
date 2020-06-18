@@ -111,7 +111,7 @@ _Pragma("clang diagnostic pop") \
 
 #define NSLocalizedString(key, comment) \
 [NSBundle.mainBundle localizedStringForKey:(key) value:@"" table:nil]
-#define L(key)   NSLocalizedString(key, nil)
+#define L(key)   NSLocalizedStringFromTable(key,@"InfoPlist",nil)
 //存
 #define kSaveMyDefault(A,B) [[NSUserDefaults standardUserDefaults] setObject:B forKey:A]
 //取值

@@ -55,7 +55,6 @@
 		A409CA222428B08700A4004E /* SZKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A409CA212428B08700A4004E /* SZKButton.m */; };
 		A4102A302429A7B400B03620 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4102A2F2429A7B400B03620 /* QuartzCore.framework */; };
 		A4102A342429A7F500B03620 /* RKNotificationHub.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102A332429A7F500B03620 /* RKNotificationHub.m */; };
-		A4102A66242AF76900B03620 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4102A68242AF76900B03620 /* Localizable.strings */; };
 		A4102A73242B200500B03620 /* MMScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102A6F242B200300B03620 /* MMScanView.m */; };
 		A4102A74242B200500B03620 /* MMScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102A70242B200300B03620 /* MMScanViewController.m */; };
 		A4102A75242B200500B03620 /* resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4102A71242B200400B03620 /* resource.bundle */; };
@@ -87,6 +86,7 @@
 		FB608CB8248A1E3C008BA56C /* RegistrationLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB6248A1E3B008BA56C /* RegistrationLockModel.m */; };
 		FB608CBB248A1E47008BA56C /* RegistrationLockTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */; };
 		FB608CBE248A1E4F008BA56C /* RegistrationLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */; };
+		FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB83FF81249B493600432C35 /* InfoPlist.strings */; };
 		FBD313C02491C4160053CBC8 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */; };
 		FBD313C3249212EA0053CBC8 /* SystemParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */; };
 /* End PBXBuildFile section */
@@ -202,10 +202,6 @@
 		A4102A2F2429A7B400B03620 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A4102A322429A7F400B03620 /* RKNotificationHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKNotificationHub.h; sourceTree = "<group>"; };
 		A4102A332429A7F500B03620 /* RKNotificationHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKNotificationHub.m; sourceTree = "<group>"; };
-		A4102A62242AF6B400B03620 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		A4102A63242AF6B500B03620 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		A4102A67242AF76900B03620 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A4102A69242AF77000B03620 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A4102A6E242B200200B03620 /* MMScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMScanViewController.h; sourceTree = "<group>"; };
 		A4102A6F242B200300B03620 /* MMScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMScanView.m; sourceTree = "<group>"; };
 		A4102A70242B200300B03620 /* MMScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMScanViewController.m; sourceTree = "<group>"; };
@@ -267,6 +263,10 @@
 		FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationLockTFCell.m; sourceTree = "<group>"; };
 		FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationLockVC.m; sourceTree = "<group>"; };
 		FB608CBD248A1E4F008BA56C /* RegistrationLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationLockVC.h; sourceTree = "<group>"; };
+		FB83FF80249B493600432C35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FB83FF82249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		FB83FF83249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		FB83FF84249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FBD313BE2491C4160053CBC8 /* ChangePasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
 		FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
 		FBD313C1249212EA0053CBC8 /* SystemParameterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemParameterModel.h; sourceTree = "<group>"; };
@@ -840,7 +840,7 @@
 				A44661A8242473A4000D1D9D /* SceneDelegate.m */,
 				A44661AA242473A4000D1D9D /* ViewController.h */,
 				A44661AB242473A4000D1D9D /* ViewController.m */,
-				A4102A68242AF76900B03620 /* Localizable.strings */,
+				FB83FF81249B493600432C35 /* InfoPlist.strings */,
 				A44661AD242473A4000D1D9D /* Main.storyboard */,
 				A44661B0242473A6000D1D9D /* Assets.xcassets */,
 				A44661B2242473A6000D1D9D /* LaunchScreen.storyboard */,
@@ -991,7 +991,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44661B4242473A6000D1D9D /* LaunchScreen.storyboard in Resources */,
-				A4102A66242AF76900B03620 /* Localizable.strings in Resources */,
+				FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */,
 				A4102A75242B200500B03620 /* resource.bundle in Resources */,
 				A44661B1242473A6000D1D9D /* Assets.xcassets in Resources */,
 				A430EF752432C69C00F68BCE /* WSDatePickerView.xib in Resources */,
@@ -1194,20 +1194,11 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A4102A68242AF76900B03620 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A4102A67242AF76900B03620 /* en */,
-				A4102A69242AF77000B03620 /* zh-Hans */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		A44661AD242473A4000D1D9D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A44661AE242473A4000D1D9D /* Base */,
-				A4102A62242AF6B400B03620 /* zh-Hans */,
+				FB83FF82249B495600432C35 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1216,9 +1207,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				A44661B3242473A6000D1D9D /* Base */,
-				A4102A63242AF6B500B03620 /* zh-Hans */,
+				FB83FF83249B495600432C35 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FB83FF81249B493600432C35 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB83FF80249B493600432C35 /* en */,
+				FB83FF84249B495600432C35 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

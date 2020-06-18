@@ -1,11 +1,17 @@
 /* 
-  Localizable.strings
+  InfoPlist.strings
   lock
 
-  Created by 李金洋 on 2020/3/25.
+  Created by 金万码 on 2020/6/18.
   Copyright © 2020 li. All rights reserved.
 */
-//Info.plist
+//info.plist
+"CFBundleDisplayName" = "locks";
+"NSBluetoothAlwaysUsageDescription" = "The system needs to turn on your Bluetooth";
+"NSCameraUsageDescription" = "App needs your permission to access camera";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "System to open your location";
+"NSLocationWhenInUseUsageDescription" = "System to get your location";
+"NSPhotoLibraryUsageDescription" = "App needs your permission to access the album";
 
 //公共
 "网络连接超时"="Network connection timeout";
@@ -124,5 +130,3 @@
 "两次密码不一致"="Two passwords are inconsistent";
 "确定修改密码吗"="Are you sure to change the password ？";
 "修改成功，请重新登录"="Modification succeeded, please login again";
-
-
