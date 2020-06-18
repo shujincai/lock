@@ -10,11 +10,13 @@
 #import "RegistrationLockVC.h"
 #import "ConnectKeyTableViewCell.h"
 #import "RegistrationLockTFCell.h"
+#import "RegistrationKeyModel.h"
 #import "RegistrationLockModel.h"
 
 @interface RegistrationLockVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
 
 @property (nonatomic,strong)UITableView * tableView;
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo;
 @property (nonatomic,strong)RegistrationLockInfoBean * lockInfo;
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UITextField * lockNameTF;
@@ -64,6 +66,35 @@
         [SetKeyController readKeyBasicInfo];
     }
 }
+//获取钥匙数据
+- (void)requestReadKeyInfoResultInfo:(ResultInfo *)info {
+    if (info.feedBackState == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [SetKeyController disConnectBle];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        NSCalendar * gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+        NSDate * beginDate = [NSDate date];
+        NSDate * endDate = [gregorian dateByAddingUnit:NSCalendarUnitDay value:7 toDate:beginDate options:0];
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yy-MM-dd-HH-mm";
+        
+        BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+        basicInfo.keyValidityPeriodStart = [dateFormatter stringFromDate:beginDate];
+        basicInfo.keyValidityPeriodEnd = [dateFormatter stringFromDate:endDate];
+        basicInfo.keyId = [self.keyInfo.key_id intValue];
+        
+        OnlineOpenInfo *onlineOpenInfo = [[OnlineOpenInfo alloc] init];
+        onlineOpenInfo.onlineOpenStartTime = [dateFormatter stringFromDate:beginDate];
+        onlineOpenInfo.onlineOpenEndTime = [dateFormatter stringFromDate:endDate];
+//        onlineOpenInfo.idType = 0x01;
+//        onlineOpenInfo.lockOrLockGroupId = [self.lockBean.lockno intValue];
+        [SetKeyController setOnlineOpen:basicInfo andOnlineOpenInfo:onlineOpenInfo];
+    }
+}
 //获取锁数据
 - (void)requestActiveReport:(ResultInfo *)info {
     [MBProgressHUD hideHUD];
@@ -76,9 +107,6 @@
         self.lockInfo = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
         [self.tableView reloadData];
     }
-}
-- (void)requestReadlockInfoResultInfo:(ResultInfo *)info {
-    
 }
 - (void)createTableView {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];

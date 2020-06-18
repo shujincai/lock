@@ -28,13 +28,22 @@
     [super viewDidLoad];
 
     self.title = STR_SEARCH_BLUETOOTH;
+    [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [self createTableView];
     [self KeyBtn];
     [SetKeyController initBlueToothManager];
     [SetKeyController setDelegate:self];
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)returnClick {
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.searchBluetoothView hide];
+    [SetKeyController stopScan];
+}
+- (void)didMoveToParentViewController:(nullable UIViewController *)parent {
+    if (parent == nil) {
+        [self.searchBluetoothView hide];
+        [SetKeyController stopScan];
+    }
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -140,11 +149,12 @@
     return nil;
 }
 - (void)scanedPeripheral:(CBPeripheral *)peripheral{
-    if (![_bleArray containsObject:peripheral]){
-        [_bleArray addObject:peripheral];
+    if ([peripheral.name rangeOfString:@"B030"].location != NSNotFound||[peripheral.name rangeOfString:@"rayonicskey"].location != NSNotFound) {
+        if (![_bleArray containsObject:peripheral]){
+            [_bleArray addObject:peripheral];
+        }
+        [self.tableView reloadData];
     }
-    [self.tableView reloadData];
-    
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //停止扫描

@@ -102,8 +102,8 @@
         }else {
             NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-            NSDate * beginDate = [formatter dateFromString:self.taskBean.begindatetime];
-            NSDate * endDate = [formatter dateFromString:self.taskBean.enddatetime];
+            NSDate * beginDate = [formatter dateFromString:self.taskBean.begintime];
+            NSDate * endDate = [formatter dateFromString:self.taskBean.endtime];
             
             NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
             dateFormatter.dateFormat = @"yy-MM-dd-HH-mm";
@@ -111,6 +111,7 @@
             BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
             basicInfo.keyValidityPeriodStart = [dateFormatter stringFromDate:beginDate];
             basicInfo.keyValidityPeriodEnd = [dateFormatter stringFromDate:endDate];
+            basicInfo.keyId = [self.taskBean.keyno intValue];
             
             OnlineOpenInfo *onlineOpenInfo = [[OnlineOpenInfo alloc] init];
             onlineOpenInfo.onlineOpenStartTime = [dateFormatter stringFromDate:beginDate];
@@ -130,6 +131,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {//请开关锁
+        [MBProgressHUD hideHUD];
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
         infoBean.name = STR_PLEASE_SWITH_LOCK;
         infoBean.time = [self getCurrentTime];
@@ -167,21 +169,16 @@
         if ([self.lockInfo.event_type isEqualToString:@"13"]) {
             infoBean.name = STR_OPEN_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
-            [self uploadKeyDatas:infoBean];
         }
         if ([self.lockInfo.event_type isEqualToString:@"14"]) {
             infoBean.name = STR_CLOSE_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
-            [self uploadKeyDatas:infoBean];
         }
         if (![self.lockInfo.event_type isEqualToString:@"1"]) {
-            [MBProgressHUD hideHUD];
-            if (self.listArray.count == 4) {
-                [self.listArray removeObjectAtIndex:3];
-            }
             [self.listArray addObject:infoBean];
             [self.tableView reloadData];
         }
+        [self uploadKeyDatas:infoBean];
     }
 }
 

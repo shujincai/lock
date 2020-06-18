@@ -16,7 +16,7 @@
 #import "MyTaskModel.h"
 #import "WorkListModel.h"
 #import "RegistrationKeyViewController.h"
-static NSString * cellIdentifer = @"TZRoomCollectionViewCell";
+static NSString * cellIdentifer = @"HomeCollectionViewCell";
 
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
 
@@ -25,6 +25,7 @@ static NSString * cellIdentifer = @"TZRoomCollectionViewCell";
 @property (nonatomic,strong) UICollectionViewFlowLayout * flowLayout;
 @property (nonatomic,strong) NSMutableArray * dataArray;
 @property (nonatomic,assign) int data;
+@property (nonatomic,assign)BOOL isFirst;
 @property (nonatomic,strong) SZKLabel * leftLabel;
 @property (nonatomic,strong) SZKButton * taskBtn;
 
@@ -38,6 +39,12 @@ static NSString * cellIdentifer = @"TZRoomCollectionViewCell";
     [self initLayout];
     [self getData];
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.isFirst == NO) {
+        [self refreshData];
+    }
+}
 - (NSMutableArray *)dataArray {
     if (_dataArray == nil) {
         _dataArray = [NSMutableArray array];
@@ -46,6 +53,7 @@ static NSString * cellIdentifer = @"TZRoomCollectionViewCell";
 }
 - (void)initLayout {
     WS(weakSelf);
+    self.isFirst = YES;
     UIView * bgView = [UIView new];
     bgView.frame = CGRectMake(0, 0, UIScreenWidth, 130*2+155);
     UIImageView * image = [UIImageView new];
@@ -150,7 +158,9 @@ static NSString * cellIdentifer = @"TZRoomCollectionViewCell";
     cell.image.image = imageArray[indexPath.section*3+indexPath.item];
     cell.TopLabel.text = titleArray[indexPath.section*3+indexPath.item];
     if ((indexPath.section*3+indexPath.item) == 0) {
-        [cell.hub incrementBy:self.data]; //角标数字
+        cell.hub.count = self.data;
+    }else {
+        cell.hub.count = 0;
     }
      //角标数字
     return cell;
@@ -211,6 +221,7 @@ static NSString * cellIdentifer = @"TZRoomCollectionViewCell";
     [MSHTTPRequest GET:kCount parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         [MBProgressHUD hideHUD];
         NSError * error = nil;
+        self.isFirst = NO;
         MyTaskNumberResponse * response = [[MyTaskNumberResponse alloc]initWithDictionary:responseObject error:&error];
         if (error) {
             [MBProgressHUD showError:STR_PARSE_FAILURE];
@@ -228,6 +239,40 @@ static NSString * cellIdentifer = @"TZRoomCollectionViewCell";
         [MBProgressHUD showError:STR_TIMEOUT];
     }];
             
+}
+//刷新数据
+- (void)refreshData {
+    LockRecordListRequest * request = [[LockRecordListRequest alloc]init];
+    request.begintime =@"2019-02-24";
+    request.endtime = [CommonUtil getCurrentTimes];
+    request.page = 1;
+    request.pagesize = 5;
+    [MSHTTPRequest GET:kLockdatas parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+        NSError * error = nil;
+        LockRecordListResponse * response = [[LockRecordListResponse alloc]initWithDictionary:responseObject error:&error];
+        if (error) {
+            [MBProgressHUD showError:STR_PARSE_FAILURE];
+            return ;
+        }
+        if ([response.resultCode intValue] == 0) {
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:response.data.content];
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError * _Nonnull error) {
+
+    }];
+    MyTaskNumberRequest * taskRequest = [[MyTaskNumberRequest alloc]init];
+    [MSHTTPRequest GET:kCount parameters:[taskRequest toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+        NSError * error = nil;
+        MyTaskNumberResponse * response = [[MyTaskNumberResponse alloc]initWithDictionary:responseObject error:&error];
+        if ([response.resultCode intValue] == 0) {
+            self.data = response.data;
+            [self.taskBtn setTitle:[NSString stringWithFormat:@"%d",self.data] forState:UIControlStateNormal];
+            [self.rightCollectionView reloadData];
+        }
+    } failure:^(NSError * _Nonnull error) {
+    }];
 }
 - (UIView *)listView {
     return self.view;

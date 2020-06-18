@@ -200,7 +200,7 @@
 }
 //修改钥匙ID
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 3) {
+    if (indexPath.row == 7) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改钥匙ID" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
             textField.placeholder = @"请输入钥匙ID（1～60000）";
