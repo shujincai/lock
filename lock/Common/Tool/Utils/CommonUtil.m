@@ -10,6 +10,7 @@
 #import <arpa/inet.h>
 #import <netdb.h>
 #import <SystemConfiguration/SystemConfiguration.h>
+#import <CommonCrypto/CommonCryptor.h>
 
 @implementation CommonUtil
 
@@ -122,5 +123,52 @@
 
     return currentTimeString;
 
+}
+//获取连接蓝牙钥匙密钥
++ (NSArray *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key {
+    
+    NSData * codeData = [[NSData alloc]initWithBase64EncodedString:code options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    //设置密钥
+    NSMutableString * keyString = [[NSMutableString alloc]initWithString:key];
+    int mod = key.length % 8;
+    if (mod > 0) {
+        for (int i = 0; i < 8 - mod; i++){
+            [keyString appendString:@"0"];
+        }
+    }
+    char keyPtr[kCCKeySizeAES256+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    [keyString getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    
+    NSUInteger dataLength = [codeData length];
+    size_t bufferPtrSize = dataLength + kCCBlockSizeAES128;
+    unsigned char* buffer = (unsigned char *)malloc(bufferPtrSize);
+    memset(buffer, 0, bufferPtrSize);
+    
+    size_t numBytesDecrypted = 0;
+    Byte iv[] = {1,2,3,4,5,6,7,8};
+    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,//解密
+                                          kCCAlgorithmDES,//加密算法
+                                          kCCOptionPKCS7Padding|kCCOptionECBMode,//补码方式
+                                          keyPtr,//传入的密钥
+                                          kCCKeySizeDES,//密钥长度
+                                          iv,//偏移向量
+                                          [codeData bytes],//解密的数据
+                                          [codeData length],//解密的数据的长度
+                                          buffer,//解密完后，数据保存的地方
+                                          bufferPtrSize,//解密后的数据需要的空间
+                                          &numBytesDecrypted);
+    NSString* plainText = nil;
+    if (cryptStatus == kCCSuccess) {
+        NSData* data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesDecrypted];
+        plainText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    NSMutableArray * array = [NSMutableArray new];
+    for (int j = 0; j < 4; j++) {
+        NSString * str = [plainText substringWithRange:NSMakeRange(j*2, 2)];
+        NSString * str10 = [NSString stringWithFormat:@"%lu",strtoul([str UTF8String],0,16)];
+        [array addObject:[NSNumber numberWithInt:[str10 intValue]]];
+    }
+    return array;
 }
 @end

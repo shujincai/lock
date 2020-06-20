@@ -63,6 +63,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 //获取当前时间
 +(NSString*)getCurrentTimes;
+
+//获取连接蓝牙钥匙密钥
++ (NSArray *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key;
 @end
 
 NS_ASSUME_NONNULL_END

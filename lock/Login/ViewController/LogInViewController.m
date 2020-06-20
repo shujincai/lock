@@ -41,7 +41,7 @@
     self.account.placeholder = STR_ACCOUNT;
     self.account.tag = 10000;
     self.account.textField.text = kFetchMyDefault(@"appusername");
-//    self.account.textField.text = @"sjc";
+    //    self.account.textField.text = @"sjc";
     [image addSubview:self.account];
     [self.account mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.view.mas_centerY).offset(-60);
@@ -63,7 +63,7 @@
     self. password.placeholder = STR_PASSWORD;
     self.password.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.password.textField.secureTextEntry = YES;
-//    self.password.textField.text = @"123";
+    //    self.password.textField.text = @"123";
     [image addSubview:self.password];
     [self.password mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.account.mas_bottom).offset(10);
@@ -172,6 +172,7 @@
         if ([response.resultCode intValue] == 0) {
             kSaveMyDefault(@"token", response.data.token);
             kSaveMyDefault(@"appusername", response.data.appusername);
+            [CommonUtil saveObjectToUserDefault:response.data forKey:@"userInfo"];
             NSDictionary *tokenDic =@{@"token":response.data.token};
             [MSNetwork setBaseParameters:tokenDic];
             [MSNetwork setHeadr:tokenDic];
@@ -209,5 +210,4 @@
     
     //    }
 }
-
 @end

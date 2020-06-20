@@ -9,12 +9,15 @@
 #import "ConnectKeyViewController.h"
 #import "ConnectKeyTableViewCell.h"
 #import "RegistrationKeyModel.h"
+#import "UserModel.h"
 
 @interface ConnectKeyViewController ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
 
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo;
 @property (nonatomic,strong)UITextField * keyTF;
+@property (nonatomic,strong)UserInfo * userInfo;
+@property (nonatomic,assign)NSInteger registerNumber;
 
 @end
 
@@ -24,6 +27,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = STR_REG_KEY;
+    self.registerNumber = 0;
+    self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_CONNECTING];
     [self createTableView];
@@ -42,21 +47,43 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        [SetKeyController connectBlueTooth:_currentBle withSyscode:@[@0x36, @0x36, @0x36, @0x36] withRegcode:@[@0x31, @0x31, @0x31, @0x31] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
+        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
     }
     
 }
 //连接
 - (void)requestConnectResultInfo:(ResultInfo *)info {
-    if (info.feedBackState == NO) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
-        [SetKeyController disConnectBle];
-        [self.navigationController popViewControllerAnimated:YES];
-        return;
+    if (info.feedBackState == NO) {//连接失败
+        if ([[info.feedBackDic objectForKey:@"error"] isEqualToString:@"check_sys_reg_code_failed_time_out"]||[[info.feedBackDic objectForKey:@"error"] isEqualToString:@"check_sys_reg_code_failed_verify"]) {//连接密钥错误
+            if (self.registerNumber > 0) {
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+                [SetKeyController disConnectBle];
+                [self.navigationController popViewControllerAnimated:YES];
+                return;
+            }else {
+                [SetKeyController disConnectBle];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    self.registerNumber++;
+//                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:DEFINE_SYSCODE withRegcode:DEFINE_REGCODE withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:YES];
+                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:@[@36,@36,@36,@36] withRegcode:@[@31,@31,@31,@31] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
+                });
+            }
+            
+        }else {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+            [SetKeyController disConnectBle];
+            [self.navigationController popViewControllerAnimated:YES];
+            return;
+        }
     }else {
         [SetKeyController readKeyBasicInfo];
     }
+}
+//设置注册密钥
+- (void)requestSetRegisterKeyResultInfo:(ResultInfo *)info {
+
 }
 //获取钥匙数据
 - (void)requestReadKeyInfoResultInfo:(ResultInfo *)info {
@@ -68,6 +95,25 @@
         return;
     }else {
         self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        if (self.registerNumber > 0) {
+            NSCalendar * gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+            NSDate * beginDate = [NSDate date];
+            NSDate * endDate = [gregorian dateByAddingUnit:NSCalendarUnitDay value:7 toDate:beginDate options:0];
+            NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"yy-MM-dd-HH-mm";
+           
+            BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+            basicInfo.keyValidityPeriodStart = [dateFormatter stringFromDate:beginDate];
+            basicInfo.keyValidityPeriodEnd = [dateFormatter stringFromDate:endDate];
+            basicInfo.keyId = [self.keyInfo.key_id intValue];
+//            basicInfo.keyType = RASCRBleSDKKeyTypeSetting;
+            basicInfo.regCode = [CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd];
+            basicInfo.sysCode = [CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd];
+            RegisterKeyInfo *registerKeyInfo = [[RegisterKeyInfo alloc] init];
+            registerKeyInfo.lockCylinderCode = [CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd];
+            registerKeyInfo.newlockCylinderCode = [CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd];
+            [SetKeyController setRegisterKey:basicInfo andRegisterKeyInfo:registerKeyInfo];
+        }
         [self.tableView reloadData];
     }
 }

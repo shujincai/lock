@@ -136,6 +136,7 @@
         if ([response.resultCode intValue] == 0) {
             [MBProgressHUD showSuccess:STR_CHANGE_PWD_SUCCESS];
             [CommonUtil removeObjectFromUserDefaultWith:@"token"];
+            [CommonUtil removeObjectFromUserDefaultWith:@"userInfo"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 LogInViewController * loginViewController=[[LogInViewController alloc] init];
                 BaseNavigationController * nav = [[BaseNavigationController alloc]initWithRootViewController:loginViewController];
