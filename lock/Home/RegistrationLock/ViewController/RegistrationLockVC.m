@@ -20,6 +20,7 @@
 @property (nonatomic,strong)RegistrationLockInfoBean * lockInfo;
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UITextField * lockNameTF;
+@property (nonatomic,strong)UserInfo * userInfo;
 
 @end
 
@@ -29,8 +30,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = STR_REG_LOCK;
+    self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
-    [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK];
+    [MBProgressHUD showActivityMessage:STR_LOADING];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [MBProgressHUD hideHUD];
     });
@@ -50,7 +52,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        [SetKeyController connectBlueTooth:_currentBle withSyscode:@[@0x36, @0x36, @0x36, @0x36] withRegcode:@[@0x31, @0x31, @0x31, @0x31] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
+        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
     }
     
 }
@@ -90,9 +92,9 @@
         OnlineOpenInfo *onlineOpenInfo = [[OnlineOpenInfo alloc] init];
         onlineOpenInfo.onlineOpenStartTime = [dateFormatter stringFromDate:beginDate];
         onlineOpenInfo.onlineOpenEndTime = [dateFormatter stringFromDate:endDate];
-//        onlineOpenInfo.idType = 0x01;
-//        onlineOpenInfo.lockOrLockGroupId = [self.lockBean.lockno intValue];
         [SetKeyController setOnlineOpen:basicInfo andOnlineOpenInfo:onlineOpenInfo];
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK_READ];
     }
 }
 //获取锁数据
@@ -219,6 +221,7 @@
     }];
     
 }
+
 //修改锁ID
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 6) {

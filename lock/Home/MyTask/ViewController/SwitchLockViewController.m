@@ -19,6 +19,7 @@
 @property (nonatomic,strong)RegistrationLockInfoBean * lockInfo;
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UITextField * keyTF;
+@property (nonatomic,strong)UserInfo * userInfo;
 
 @end
 
@@ -28,6 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = STR_SWITH_LOCK;
+    self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_CONNECTING];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -62,7 +64,7 @@
         [self.listArray addObject:infoBean];
         [self.tableView reloadData];
         //连接钥匙
-        [SetKeyController connectBlueTooth:_currentBle withSyscode:@[@0x36, @0x36, @0x36, @0x36] withRegcode:@[@0x31, @0x31, @0x31, @0x31] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
+        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
     }
     
 }
@@ -102,8 +104,8 @@
         }else {
             NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-            NSDate * beginDate = [formatter dateFromString:self.taskBean.begintime];
-            NSDate * endDate = [formatter dateFromString:self.taskBean.endtime];
+            NSDate * beginDate = [formatter dateFromString:self.taskBean.begindatetime];
+            NSDate * endDate = [formatter dateFromString:self.taskBean.enddatetime];
             
             NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
             dateFormatter.dateFormat = @"yy-MM-dd-HH-mm";

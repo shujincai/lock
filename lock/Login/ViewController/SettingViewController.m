@@ -40,7 +40,7 @@
     [self.view addSubview:erweima];
     [erweima mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_right).offset(-20);
-        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+20);
+        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
     
@@ -50,7 +50,7 @@
     [self.view addSubview:self.account];
     [self.account mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(20);
-        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+20);
+        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
         make.right.equalTo(erweima.mas_left).offset(0);
         make.height.mas_equalTo(60);
     }];

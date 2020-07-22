@@ -6,7 +6,7 @@
   Copyright © 2020 li. All rights reserved.
 */
 //info.plist
-"CFBundleDisplayName" = "智锁";
+"CFBundleDisplayName" = "万码电子锁";
 "NSBluetoothAlwaysUsageDescription" = "系统需要打开您的蓝牙";
 "NSCameraUsageDescription" = "App需要您的同意,才能访问相机";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "系统要打开您的定位";
@@ -76,6 +76,8 @@
 "钥匙"="钥匙";
 "钥匙序号"="钥匙序号";
 "注册钥匙成功"="注册钥匙成功";
+"请连接锁"="请连接锁...";
+"设置初始化锁系统码钥匙"="设置初始化锁系统码钥匙";
 
 //注册锁
 "请连锁，读取锁id..."="请连锁，读取锁id...";

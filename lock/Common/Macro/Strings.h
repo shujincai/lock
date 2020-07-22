@@ -71,9 +71,11 @@
 #define STR_KEY                             L(@"钥匙")
 #define STR_KEY_NUMBER                      L(@"钥匙序号")
 #define STR_REG_KEY_SUCCESS                 L(@"注册钥匙成功")
+#define STR_PLEASE_CONNECT_LOCK             L(@"请连接锁")
+#define STR_INIT_LOCK_CODE                  L(@"设置初始化锁系统码钥匙")
 
 //注册锁
-#define STR_PLEASE_CONNECT_LOCK             L(@"请连锁，读取锁id...")
+#define STR_PLEASE_CONNECT_LOCK_READ        L(@"请连锁，读取锁id...")
 #define STR_CONNECT_LOCK_FAIL               L(@"连接锁失败")
 #define STR_LOCK_ID                         L(@"锁ID")
 #define STR_LOCK_NAME_TIPS                  L(@"请输入锁名称")

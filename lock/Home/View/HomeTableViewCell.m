@@ -42,13 +42,13 @@
     
     
     UIImageView * image = [UIImageView new];
-    image.frame = CGRectMake(SYRealValueW(10),SYRealValueH(10),25, 25);
+    image.frame = CGRectMake(20,12.5,25, 25);
     image.image = [UIImage imageNamed:@"ic_list_lock"];
     [bg addSubview:image];
     
-     self.TopLabel = [SZKLabel labelWithFrame:CGRectMake(SYRealValueW(45),SYRealValueH(5),self.frame.size.width,20) text:@"" textColor:UIColor.blackColor    font:kFont(15) textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.whiteColor];
+    self.TopLabel = [SZKLabel labelWithFrame:CGRectMake(65,5,self.frame.size.width,20) text:@"" textColor:UIColor.blackColor    font:SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2) textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.whiteColor];
     
-    self.bottomLabel = [SZKLabel labelWithFrame:CGRectMake(SYRealValueW(45),SYRealValueH(25),self.frame.size.width,20) text:@"" textColor:COLOR_LIST    font:kFont(12) textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.whiteColor];
+    self.bottomLabel = [SZKLabel labelWithFrame:CGRectMake(65,25,self.frame.size.width,20) text:@"" textColor:COLOR_LIST    font:SYSTEM_FONT_OF_SIZE(FONT_SIZE_H4) textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.whiteColor];
     
     [bg addSubview:self.TopLabel];
     [bg addSubview:self.bottomLabel];

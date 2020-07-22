@@ -55,5 +55,6 @@
 #import "MJRefresh.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "FSCalendar.h"
+#import "UserModel.h"
 
 #endif /* Headers_h */

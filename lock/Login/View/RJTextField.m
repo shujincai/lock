@@ -55,14 +55,14 @@
     
     [self addSubview:self.textField];
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(CURRENT_SIZE(280), CURRENT_SIZE(30)));
+        make.size.mas_equalTo(CGSizeMake(CURRENT_SIZE(280), 40));
         make.centerY.equalTo(weakSelf);
         make.left.equalTo(weakSelf.leftIcon.mas_right).offset(CURRENT_SIZE(8));
     }];
     
     [self addSubview:self.headerPlaceLabel];
     [self.headerPlaceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(CURRENT_SIZE(100), CURRENT_SIZE(15)));
+        make.size.mas_equalTo(CGSizeMake(CURRENT_SIZE(150), 20));
         make.left.equalTo(weakSelf.leftIcon.mas_left);
         make.bottom.equalTo(weakSelf.textField.mas_top);
     }];
@@ -95,7 +95,7 @@
         _textField = [UITextField new];
         _textField.backgroundColor = [UIColor clearColor];
         _textField.textColor = self.textColor;
-        _textField.font = [UIFont systemFontOfSize:CURRENT_SIZE(15)];
+        _textField.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
         _textField.textAlignment = NSTextAlignmentLeft;
         _textField.placeholder = self.placeholder;
         _textField.clearButtonMode=UITextFieldViewModeWhileEditing;
@@ -119,7 +119,7 @@
         _headerPlaceLabel.backgroundColor = [UIColor clearColor];
         _headerPlaceLabel.textColor = UIColor.redColor;
         _headerPlaceLabel.textAlignment = NSTextAlignmentLeft;
-        _headerPlaceLabel.font = [UIFont systemFontOfSize:CURRENT_SIZE(14)];
+        _headerPlaceLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
         _headerPlaceLabel.text = self.textField.placeholder;
         _headerPlaceLabel.alpha = 0.0;
     }
@@ -132,7 +132,7 @@
         _lengthLabel.backgroundColor = [UIColor clearColor];
         _lengthLabel.textColor = SELECT_COLOR(92, 94, 102, 1);
         _lengthLabel.textAlignment = NSTextAlignmentRight;
-        _lengthLabel.font = [UIFont systemFontOfSize:CURRENT_SIZE(11)];
+        _lengthLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H4);
         _lengthLabel.text = [[NSString alloc]initWithFormat:@"0/%ld",(long)self.maxLength];
     }
     return _lengthLabel;
@@ -151,7 +151,7 @@
         _errorLabel = [UILabel new];
         _errorLabel.backgroundColor = [UIColor clearColor];
         _errorLabel.textColor = self.errorLableColor;
-        _errorLabel.font = [UIFont systemFontOfSize:CURRENT_SIZE(12)];
+        _errorLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H4);
         _errorLabel.textAlignment = NSTextAlignmentLeft;
         _errorLabel.text = self.errorStr;
         _errorLabel.alpha = 0.0;

@@ -6,127 +6,129 @@
   Copyright © 2020 li. All rights reserved.
 */
 //info.plist
-"CFBundleDisplayName" = "locks";
-"NSBluetoothAlwaysUsageDescription" = "The system needs to turn on your Bluetooth";
-"NSCameraUsageDescription" = "App needs your permission to access camera";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "System to open your location";
-"NSLocationWhenInUseUsageDescription" = "System to get your location";
-"NSPhotoLibraryUsageDescription" = "App needs your permission to access the album";
+"CFBundleDisplayName" = "JWM LOCK";
+"NSBluetoothAlwaysUsageDescription" = "Allow system open Bluetooth";
+"NSCameraUsageDescription" = "Allow APP to access to the Camera？";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Allow system to access this device’s location？";
+"NSLocationWhenInUseUsageDescription" = "Allow system to access this device’s location？";
+"NSPhotoLibraryUsageDescription" = "Allow APP to access to the gallery？";
 
 //公共
 "网络连接超时"="Network connection timeout";
 "解析失败"="Parsing failed";
 "加载中"="Loading";
-"保存"="save";
-"相册"="photo album";
-"提示"="Tips";
+"保存"="Save";
+"相册"="Gallery";
+"提示"="Notice";
 "知道了"="Got it";
-"时间"="time";
-"注册"="register";
-"提交数据失败"="Failed to submit data";
-"暂无数据"="No data available";
-"注意"="be careful";
-"取消"="cancel";
+"时间"="Time";
+"注册"="Register";
+"提交数据失败"="Data submission failed";
+"暂无数据"="No data";
+"注意"="Attention";
+"取消"="Cancel";
 "确定"="Confirm";
 
 //设置服务地址
 "请输入服务器地址"="Please enter the server address";
 "二维码"="QR code";
-"将取景框对准二维码,即可自动扫描"="Align the viewfinder with the QR code to scan automatically";
-"条码"="bar code";
-"将取景框对准条码,即可自动扫描"="Align the viewfinder with the barcode to scan automatically";
-"图片中未识别到二维码"="QR code not recognized in picture";
-"相册读取权限未开启"="Album read permission is not enabled";
-"请到手机系统的\n【设置】->【隐私】->【相册】\n对%@开启相机的访问权限"="Please go to the mobile system\n Settings > Privacy > album\n access %@ to turn on the camera";
-"相机权限未开启"="Camera permission is not turned on";
-"请到手机系统的\n【设置】->【隐私】->【相机】\n对%@开启相机的访问权限"="Please go to the mobile system\n Settings > Privacy > camera\n access %@ to turn on the camera";
-"只支持iOS8.0以上系统"="Only IOS 8.0 and above systems are supported";
+"将取景框对准二维码,即可自动扫描"="Align the viewfinder with the QR code";
+"条码"="Barcode";
+"将取景框对准条码,即可自动扫描"="Align the viewfinder with the Barcode";
+"图片中未识别到二维码"="Failed to detect QR code";
+"相册读取权限未开启"="The gallery read permission is not enabled";
+"请到手机系统的\n【设置】->【隐私】->【相册】\n对%@开启相机的访问权限"="Go to Settings>Permission> Camera and allow access to Camera";
+"相机权限未开启"="Allow APP to access to the camera？";
+"请到手机系统的\n【设置】->【隐私】->【相机】\n对%@开启相机的访问权限"="Go to Settings>Permission> Camera and allow access to Camera";
+"只支持iOS8.0以上系统"="Support for iOS8.0 and above only";
 
 //登录界面
-"帐号"="accounts";
-"密码"="password";
-"登录"="Sign in";
-"设置"="setting";
-"设置服务器地址"="setting server address";
-"请设置服务器地址"="Please set server address";
-"请输入账户"="Please enter your account";
-"请输入密码"="Please enter your password";
+"帐号"="Account";
+"密码"="Password";
+"登录"="Login";
+"设置"="Settings";
+"设置服务器地址"="Server address";
+"请设置服务器地址"="Please set the server permission";
+"请输入账户"="Enter account";
+"请输入密码"="Enter password";
 
 //首页
 "地图"="Map";
-"主页"="Home";
-"我的任务"="My Task";
-"工作记录"="Operation Log";
-"注册锁"="Lock Registration";
-"注册钥匙"="Key Registration";
-"系统参数"="Parameters";
+"主页"="Homepage";
+"我的任务"="My task";
+"工作记录"="Work record";
+"注册锁"="Register lock";
+"注册钥匙"="Register key";
+"系统参数"="System parameter";
 
 //蓝牙钥匙搜索
-"搜索蓝牙钥匙"="Search Bluetooth key";
-"暂无蓝牙"="No Bluetooth";
-"未连接"="Not connected";
+"搜索蓝牙钥匙"="Researching Bluetooth key";
+"暂无蓝牙"="No result";
+"未连接"="No connection";
 "连接中"="Connecting";
 "已连接"="Connected";
-"断开中"="Disconnected";
+"断开中"="Disconnecting";
 
 //注册钥匙
 "连接钥匙失败"="Failed to connect key";
-"名称"="name";
-"钥匙"="key";
-"钥匙序号"="Key No";
-"注册钥匙成功"="Successfully registered key";
+"名称"="Name";
+"钥匙"="Key";
+"钥匙序号"="Key number";
+"注册钥匙成功"="Register key successfully";
+"请连接锁"="Please connect lock...";
+"设置初始化锁系统码钥匙"="Set initialization lock system code key";
 
 //注册锁
-"请连锁，读取锁id..."="Please interlock and read the lock id...";
-"连接锁失败"="Connection lock failed";
-"锁ID"="lock ID";
+"请连锁，读取锁id..."="Please connect, read ID of lock...";
+"连接锁失败"="Failed to connect lock";
+"锁ID"="Lock ID";
 "请输入锁名称"="Please enter the lock name";
-"注册锁成功"="Successfully registered lock";
+"注册锁成功"="Register lock successfully";
 
 //工作记录
 "日期选择"="Date selection";
-"请选择开始时间"="The start time";
-"请选择结束时间"="The end of time";
+"请选择开始时间"="Please choose start time";
+"请选择结束时间"="Please choose end time";
 "yyyy年MM月"="yyyy-MM";
 "yyyy年MM月dd日"="yyyy-MM-dd";
-"查询"="query";
+"查询"="Query";
 "开关锁记录"="Switch lock record";
-"开锁成功"="Unlocking successful";
-"设置成功"="Set successfully";
-"设置失败"="Setting failed";
-"超出有效期"="Sync locks and apply for rule";
-"没有权限"="No Authorization";
-"超出时间范围"="Beyond the Time";
+"开锁成功"="Unlock successfully";
+"设置成功"="Set successes";
+"设置失败"="Set failed";
+"超出有效期"="Beyond expiry date";
+"没有权限"="No permission";
+"超出时间范围"="Beyond time range";
 "蓝牙钥匙开锁成功"="Bluetooth key unlocked successfully";
-"蓝牙钥匙关锁成功"="Bluetooth key is locked successfully";
+"蓝牙钥匙关锁成功"="Bluetooth key locked successfully";
 
 //我的任务
 "工作任务"="Task";
 "开关锁"="Switch lock";
-"初始化成功"="Initialization successful";
-"连接钥匙成功"="Key connected successfully";
-"钥匙号码不匹配"="Key number mismatch";
+"初始化成功"="Initialization data succeed";
+"连接钥匙成功"="Key connection succeed";
+"钥匙号码不匹配"="Key number do not match";
 "请开关锁"="Please switch the lock";
-"关锁成功"="Lock closed successfully";
-"任务已失效"="Task has expired";
+"关锁成功"="Unlock successfully";
+"任务已失效"="Mission failure";
 
 //系统参数
-"退出"="sign out";
-"确定退出当前帐号吗"="Are you sure to exit the current account ？";
-"设备号码"="No Patrol Content!!!";
-"服务器地址"="Server Address";
-"版本号"="Version No";
-"修改密码"="Change Password";
-"点击修改"="Click Modify";
-"退出成功"="Exit successful";
+"退出"="Log out";
+"确定退出当前帐号吗"="Are you sure to logout?";
+"设备号码"="Device number";
+"服务器地址"="Server address";
+"版本号"="Version";
+"修改密码"="Modify password";
+"点击修改"="Click on modify";
+"退出成功"="Log out successfully";
 
 //修改密码
-"原密码"="Original password";
+"原密码"="Old password";
 "新密码"="New password";
 "确认密码"="Confirm password";
-"请输入原密码"="Please enter the original password";
-"请输入新密码"="Please enter a new password";
-"请输入确认密码"="Please enter the confirmation password";
-"两次密码不一致"="Two passwords are inconsistent";
-"确定修改密码吗"="Are you sure to change the password ？";
-"修改成功，请重新登录"="Modification succeeded, please login again";
+"请输入原密码"="Please enter the old password";
+"请输入新密码"="Please enter the new password";
+"请输入确认密码"="Please confirm password";
+"两次密码不一致"="The two passwords do not match";
+"确定修改密码吗"="Confirm the modify the password?";
+"修改成功，请重新登录"="Modify the password, please login again";

@@ -94,7 +94,7 @@
         make.right.equalTo(logInBtn.mas_right).offset(0);
         make.size.mas_equalTo(CGSizeMake(80, 35));
     }];
-    SZKLabel * setLabel = [SZKLabel labelWithFrame:CGRectZero text:STR_SETTING textColor:UIColor.whiteColor font:kFont(14) textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.clearColor];
+    SZKLabel * setLabel = [SZKLabel labelWithFrame:CGRectZero text:STR_SETTING textColor:UIColor.whiteColor font:SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3) textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.clearColor];
     [rightView addSubview: setLabel];
     [setLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(rightView.mas_centerY).offset(0);

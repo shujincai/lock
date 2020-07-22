@@ -10,6 +10,7 @@
 #import "ConnectKeyTableViewCell.h"
 #import "RegistrationKeyModel.h"
 #import "UserModel.h"
+#import "RegistrationLockModel.h"
 
 @interface ConnectKeyViewController ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
 
@@ -65,8 +66,7 @@
                 [SetKeyController disConnectBle];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     self.registerNumber++;
-//                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:DEFINE_SYSCODE withRegcode:DEFINE_REGCODE withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:YES];
-                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:@[@36,@36,@36,@36] withRegcode:@[@31,@31,@31,@31] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
+                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:DEFINE_SYSCODE withRegcode:DEFINE_REGCODE withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:YES];
                 });
             }
             
@@ -81,9 +81,15 @@
         [SetKeyController readKeyBasicInfo];
     }
 }
-//设置注册密钥
+//设置锁密钥
 - (void)requestSetRegisterKeyResultInfo:(ResultInfo *)info {
-
+    [MBProgressHUD hideHUD];
+    if (info.feedBackState == NO) {
+        [MBProgressHUD showError:STR_SETTING_FAIL];
+        return;
+    }else {
+        [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK];
+    }
 }
 //获取钥匙数据
 - (void)requestReadKeyInfoResultInfo:(ResultInfo *)info {
@@ -96,23 +102,15 @@
     }else {
         self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
         if (self.registerNumber > 0) {
-            NSCalendar * gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-            NSDate * beginDate = [NSDate date];
-            NSDate * endDate = [gregorian dateByAddingUnit:NSCalendarUnitDay value:7 toDate:beginDate options:0];
-            NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-            dateFormatter.dateFormat = @"yy-MM-dd-HH-mm";
            
             BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
-            basicInfo.keyValidityPeriodStart = [dateFormatter stringFromDate:beginDate];
-            basicInfo.keyValidityPeriodEnd = [dateFormatter stringFromDate:endDate];
+            basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+            basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
             basicInfo.keyId = [self.keyInfo.key_id intValue];
-//            basicInfo.keyType = RASCRBleSDKKeyTypeSetting;
-            basicInfo.regCode = [CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd];
-            basicInfo.sysCode = [CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd];
-            RegisterKeyInfo *registerKeyInfo = [[RegisterKeyInfo alloc] init];
-            registerKeyInfo.lockCylinderCode = [CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd];
-            registerKeyInfo.newlockCylinderCode = [CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd];
-            [SetKeyController setRegisterKey:basicInfo andRegisterKeyInfo:registerKeyInfo];
+            BlankKeyInfo *blankKeyInfo = [[BlankKeyInfo alloc] init];
+            blankKeyInfo.modifiedSyscode = [CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd];
+            blankKeyInfo.modifiedRegcode = [CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd];
+            [SetKeyController setBlankKey:basicInfo andBlankKeyInfo:blankKeyInfo];
         }
         [self.tableView reloadData];
     }
@@ -190,10 +188,28 @@
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 80;
+    return 130;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView * bgView = [[UIView alloc]init];
+    UIButton * changeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [changeBtn setTitle:STR_INIT_LOCK_CODE forState:UIControlStateNormal];
+    [changeBtn setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
+    changeBtn.titleLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
+    changeBtn.layer.masksToBounds = YES;
+    changeBtn.layer.cornerRadius = 4;
+    [changeBtn addTarget:self action:@selector(changeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [changeBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_GREEN] forState:UIControlStateNormal];
+    [changeBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_GREEN] forState:UIControlStateHighlighted];
+    [bgView addSubview:changeBtn];
+    [changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bgView.mas_top).offset(30);
+        make.centerX.equalTo(bgView.mas_centerX).offset(0);
+        make.left.equalTo(bgView.mas_left).offset(30);
+        make.right.equalTo(bgView.mas_right).offset(-30);
+        make.height.mas_equalTo(40);
+    }];
+    
     UIButton * regBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [regBtn setTitle:STR_REGISTER forState:UIControlStateNormal];
     [regBtn setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
@@ -206,10 +222,38 @@
     [bgView addSubview:regBtn];
     [regBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(bgView.mas_centerX).offset(0);
-        make.bottom.equalTo(bgView.mas_bottom).offset(0);
-        make.size.mas_equalTo(CGSizeMake(200, 40));
+        make.top.equalTo(changeBtn.mas_bottom).offset(20);
+        make.left.equalTo(bgView.mas_left).offset(30);
+        make.right.equalTo(bgView.mas_right).offset(-30);
+        make.height.mas_equalTo(40);
     }];
     return bgView;
+}
+//设置初始化锁系统码钥匙
+- (void)changeBtnClick:(UIButton *)btn {
+    [MBProgressHUD showActivityMessage:STR_LOADING];
+    BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+    basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+    basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+    basicInfo.keyId = [self.keyInfo.key_id intValue];
+    RegisterKeyInfo *registerKeyInfo = [[RegisterKeyInfo alloc] init];
+    registerKeyInfo.lockCylinderCode = DEFINE_SYSCODE;
+    registerKeyInfo.newlockCylinderCode = [CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd];
+    [SetKeyController setRegisterKey:basicInfo andRegisterKeyInfo:registerKeyInfo];
+}
+//获取锁数据
+- (void)requestActiveReport:(ResultInfo *)info {
+    [MBProgressHUD hideHUD];
+    if (info.feedBackState == NO) {
+        [MBProgressHUD showError:STR_CONNECT_LOCK_FAIL];
+    }else {
+        RegistrationLockInfoBean * lockInfo = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        if ([lockInfo.event_type isEqualToString:@"2"]) {
+            [MBProgressHUD showError:STR_SETTING_SUCCESS];
+        }else {
+            [MBProgressHUD showError:STR_SETTING_FAIL];
+        }
+    }
 }
 //注册钥匙
 - (void)registerBtnClick:(UIButton *)btn {

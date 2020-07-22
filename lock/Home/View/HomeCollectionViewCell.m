@@ -26,9 +26,9 @@
     [self addSubview:bgView];
     
     self.image = [UIImageView new];
-    self.image.frame = CGRectMake((self.frame.size.width)/2.0-32.5, SYRealValueH(18), 65, 65);
+    self.image.frame = CGRectMake((self.frame.size.width)/2.0-32.5, (self.frame.size.height)/2.0-46, 65, 65);
     [bgView addSubview:self.image];
-    self.TopLabel = [SZKLabel labelWithFrame:CGRectMake(0,SYRealValueH((18))+66,self.frame.size.width,20) text:@"133" textColor:UIColor.blackColor    font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentCenter backgroundColor:UIColor.whiteColor];
+    self.TopLabel = [SZKLabel labelWithFrame:CGRectMake(0,(self.frame.size.height)/2.0-40+66,self.frame.size.width,20) text:@"133" textColor:UIColor.blackColor    font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentCenter backgroundColor:UIColor.whiteColor];
     [bgView addSubview:self.TopLabel];
     //角标
      self.hub = [[RKNotificationHub alloc]initWithView:self.image];
