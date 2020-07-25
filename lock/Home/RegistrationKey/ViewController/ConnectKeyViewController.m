@@ -231,6 +231,7 @@
 }
 //设置初始化锁系统码钥匙
 - (void)changeBtnClick:(UIButton *)btn {
+    
     [MBProgressHUD showActivityMessage:STR_LOADING];
     BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
     basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";

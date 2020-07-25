@@ -7,10 +7,12 @@
 */
 //info.plist
 "CFBundleDisplayName" = "JWM LOCK";
-"NSBluetoothAlwaysUsageDescription" = "Allow system open Bluetooth";
-"NSCameraUsageDescription" = "Allow APP to access to the Camera？";
+"NSBluetoothAlwaysUsageDescription" = "App needs your permission to access Bluetooth";
+"NSBluetoothPeripheralUsageDescription" = "App needs your permission to access Bluetooth";
+"NSCameraUsageDescription" = "Allow APP to access to the Camera？In order to scan QR code and so on";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Allow system to access this device’s location？";
 "NSLocationWhenInUseUsageDescription" = "Allow system to access this device’s location？";
+"NSLocationAlwaysUsageDescription" = "The app needs your consent to always access the location";
 "NSPhotoLibraryUsageDescription" = "Allow APP to access to the gallery？";
 
 //公共

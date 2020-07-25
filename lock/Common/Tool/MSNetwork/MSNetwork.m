@@ -261,7 +261,7 @@ static YYCache *_dataCache;
                  progress:(MSHttpProgress)progress
                   success:(MSHttpSuccess)success
                   failure:(MSHttpFail)failure{
-    NSURLSessionTask *sessionTask = [_sessionManager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLSessionTask *sessionTask = [_sessionManager POST:url parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         //添加-文件
         NSError *error = nil;
         [formData appendPartWithFileURL:[NSURL URLWithString:filePath] name:name error:&error];
@@ -297,7 +297,7 @@ static YYCache *_dataCache;
                success:(MSHttpSuccess)success
                failure:(MSHttpFail)failure{
 
-    NSURLSessionTask *sessionTask = [_sessionManager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLSessionTask *sessionTask = [_sessionManager POST:url parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         //压缩-添加-上传图片
         [images enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger idx, BOOL * _Nonnull stop) {
             NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
@@ -521,15 +521,15 @@ static YYCache *_dataCache;
     
     switch (method) {
         case MSRequestMethodGET:{
-            sessionTask = [_sessionManager GET:url parameters:parameters progress:nil success:success failure:failure];
+            sessionTask = [_sessionManager GET:url parameters:parameters headers:nil progress:nil success:success failure:failure];
         }
             break;
         case MSRequestMethodPOST:{
-            sessionTask = [_sessionManager POST:url parameters:parameters progress:nil success:success failure:failure];
+            sessionTask = [_sessionManager POST:url parameters:parameters headers:nil progress:nil success:success failure:failure];
         }
             break;
         case MSRequestMethodHEAD:{
-            sessionTask = [_sessionManager HEAD:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task) {
+            sessionTask = [_sessionManager HEAD:url parameters:parameters headers:nil success:^(NSURLSessionDataTask * _Nonnull task) {
                 success(task,nil);
             } failure:failure];
         }
@@ -540,15 +540,15 @@ static YYCache *_dataCache;
 //                [appedUrl appendFormat:@"%@&%@",key,obj];
 //            }];
 //            url = NSStringFormat(@"%@?%@",url,appedUrl);
-            sessionTask = [_sessionManager PUT:url parameters:parameters success:success failure:failure];
+            sessionTask = [_sessionManager PUT:url parameters:parameters headers:nil success:success failure:failure];
         }
             break;
         case MSRequestMethodPATCH:{
-            sessionTask = [_sessionManager PATCH:url parameters:parameters success:success failure:failure];
+            sessionTask = [_sessionManager PATCH:url parameters:parameters headers:nil success:success failure:failure];
         }
             break;
         case MSRequestMethodDELETE:{
-            sessionTask = [_sessionManager DELETE:url parameters:parameters success:success failure:failure];
+            sessionTask = [_sessionManager DELETE:url parameters:parameters headers:nil success:success failure:failure];
         }
         default:
             break;

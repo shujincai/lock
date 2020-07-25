@@ -7,10 +7,12 @@
 */
 //info.plist
 "CFBundleDisplayName" = "万码电子锁";
-"NSBluetoothAlwaysUsageDescription" = "系统需要打开您的蓝牙";
-"NSCameraUsageDescription" = "App需要您的同意,才能访问相机";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "系统要打开您的定位";
-"NSLocationWhenInUseUsageDescription" = "系统要获取您的定位";
+"NSBluetoothAlwaysUsageDescription" = "App需要您的同意,才能访问蓝牙";
+"NSBluetoothPeripheralUsageDescription" = "App需要您的同意,才能访问蓝牙";
+"NSCameraUsageDescription" = "App需要您的同意,才能访问相机,以便于扫描二维码等";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "App需要您的同意,才能访问位置";
+"NSLocationWhenInUseUsageDescription" = "App需要您的同意,才能在使用期间访问位置";
+"NSLocationAlwaysUsageDescription" = "App需要您的同意,才能始终访问位置";
 "NSPhotoLibraryUsageDescription" = "App需要您的同意,才能访问相册";
 
 //公共
