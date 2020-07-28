@@ -19,6 +19,8 @@
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UserInfo * userInfo;
 @property (nonatomic,assign)NSInteger registerNumber;
+@property (nonatomic,assign)BOOL isHide;
+@property (nonatomic,assign)BOOL isHideInit;
 
 @end
 
@@ -29,12 +31,18 @@
     // Do any additional setup after loading the view.
     self.title = STR_REG_KEY;
     self.registerNumber = 0;
+    self.isHide = NO;
     self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_CONNECTING];
     [self createTableView];
     [SetKeyController setDelegate:self];
     [SetKeyController initSDK];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.isHide == NO) {
+            [MBProgressHUD hideHUD];
+        }
+    });
 }
 - (void)returnClick {
     [SetKeyController disConnectBle];
@@ -81,18 +89,9 @@
         [SetKeyController readKeyBasicInfo];
     }
 }
-//设置锁密钥
-- (void)requestSetRegisterKeyResultInfo:(ResultInfo *)info {
-    [MBProgressHUD hideHUD];
-    if (info.feedBackState == NO) {
-        [MBProgressHUD showError:STR_SETTING_FAIL];
-        return;
-    }else {
-        [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK];
-    }
-}
 //获取钥匙数据
 - (void)requestReadKeyInfoResultInfo:(ResultInfo *)info {
+    self.isHide = YES;
     [MBProgressHUD hideHUD];
     if (info.feedBackState == NO) {
         [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
@@ -242,8 +241,25 @@
     registerKeyInfo.newlockCylinderCode = [CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd];
     [SetKeyController setRegisterKey:basicInfo andRegisterKeyInfo:registerKeyInfo];
 }
+//设置锁密钥
+- (void)requestSetRegisterKeyResultInfo:(ResultInfo *)info {
+    [MBProgressHUD hideHUD];
+    if (info.feedBackState == NO) {
+        [MBProgressHUD showError:STR_SETTING_FAIL];
+        return;
+    }else {
+        self.isHideInit = NO;
+        [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.isHideInit == NO) {
+               [MBProgressHUD hideHUD];
+            }
+        });
+    }
+}
 //获取锁数据
 - (void)requestActiveReport:(ResultInfo *)info {
+    self.isHideInit = YES;
     [MBProgressHUD hideHUD];
     if (info.feedBackState == NO) {
         [MBProgressHUD showError:STR_CONNECT_LOCK_FAIL];

@@ -28,6 +28,7 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
 @property (nonatomic,assign)BOOL isFirst;
 @property (nonatomic,strong) SZKLabel * leftLabel;
 @property (nonatomic,strong) SZKButton * taskBtn;
+@property (nonatomic,strong)NSTimer * taskTimer;//任务定时
 
 @end
 
@@ -43,6 +44,34 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     [super viewWillAppear:animated];
     if (self.isFirst == NO) {
         [self refreshData];
+    }
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(enterForeground) name:NF_KEY_FOREGROUND object:nil];
+    [center addObserver:self selector:@selector(enterBackground) name:NF_KEY_BACKGROUND object:nil];
+    if (!_taskTimer.valid) {
+        _taskTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+    }
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NF_KEY_FOREGROUND object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NF_KEY_BACKGROUND object:nil];
+    if (_taskTimer.valid) {
+        [_taskTimer invalidate];
+        _taskTimer = nil;
+    }
+}
+//从后台进入前台 判断是否开启定时器
+- (void)enterForeground {
+    if (!_taskTimer.valid) {
+        _taskTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+    }
+}
+//从前台进入后台 判断是否关闭定时器
+- (void)enterBackground {
+    if (_taskTimer.valid) {
+        [_taskTimer invalidate];
+        _taskTimer = nil;
     }
 }
 - (NSMutableArray *)dataArray {

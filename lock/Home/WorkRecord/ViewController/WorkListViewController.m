@@ -98,7 +98,7 @@
         
     }
     LockRecordListBean * model = _listArray[indexPath.row];
-    cell.topLabel.text = model.deptname;
+    cell.topLabel.text = model.lockname;
     
     if ([model.eventtype isEqualToString:@"1"]) {//开锁成功
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_OPEN_LOCK_SUCCESS];
@@ -116,6 +116,8 @@
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_BLUETOOTH_OPEN_LOCK_SUCCESS];
     }else  if (model.eventtype.integerValue == 14){//蓝牙钥匙关锁成功
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_BLUETOOTH_CLOSE_LOCK_SUCCESS];
+    }else {
+        cell.bottomLabel.text =   [NSString stringWithFormat:@"%@",model.opttime];
     }
     cell.middleLabel.text = model.keyname;
     return cell;

@@ -20,6 +20,7 @@
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UserInfo * userInfo;
+@property (nonatomic,assign)BOOL isHide;
 
 @end
 
@@ -30,10 +31,13 @@
     // Do any additional setup after loading the view.
     self.title = STR_SWITH_LOCK;
     self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
+    self.isHide = NO;
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_CONNECTING];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUD];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.isHide == NO) {
+            [MBProgressHUD hideHUD];
+        }
     });
     [self createTableView];
     [SetKeyController setDelegate:self];
@@ -126,6 +130,7 @@
 }
 //设置在线开门钥匙
 - (void)requestSetOnlineOpenResultInfo:(ResultInfo *)info {
+    self.isHide = YES;
     if (info.feedBackState == NO) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:STR_SETTING_FAIL];

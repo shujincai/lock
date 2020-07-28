@@ -9,6 +9,10 @@
 #ifndef Strings_h
 #define Strings_h
 
+#pragma mark NSNotificationCenter key
+#define NF_KEY_FOREGROUND                   @"enterForeground"//进入前台
+#define NF_KEY_BACKGROUND                   @"houmeBackGround"//退出后台
+
 //公共
 #define STR_TIMEOUT                         L(@"网络连接超时")
 #define STR_PARSE_FAILURE                   L(@"解析失败")
@@ -47,6 +51,7 @@
 #define STR_ADDRESS_TIPS                    L(@"请设置服务器地址")
 #define STR_ACCOUNT_TIPS                    L(@"请输入账户")
 #define STR_PASSWORD_TIPS                   L(@"请输入密码")
+#define STR_WRONG_ACCOUNT_PASSWORD          L(@"账号或密码错误")
 
 //首页
 #define STR_HOMEPAGE                        L(@"主页")

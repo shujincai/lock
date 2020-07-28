@@ -21,6 +21,7 @@
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UITextField * lockNameTF;
 @property (nonatomic,strong)UserInfo * userInfo;
+@property (nonatomic,assign)BOOL isHide;
 
 @end
 
@@ -31,10 +32,13 @@
     // Do any additional setup after loading the view.
     self.title = STR_REG_LOCK;
     self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
+    self.isHide = NO;
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_LOADING];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUD];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.isHide == NO) {
+            [MBProgressHUD hideHUD];
+        }
     });
     [self createTableView];
     [SetKeyController setDelegate:self];
@@ -99,6 +103,7 @@
 }
 //获取锁数据
 - (void)requestActiveReport:(ResultInfo *)info {
+    self.isHide = YES;
     [MBProgressHUD hideHUD];
     if (info.feedBackState == NO) {
         [MBProgressHUD showError:STR_CONNECT_LOCK_FAIL];

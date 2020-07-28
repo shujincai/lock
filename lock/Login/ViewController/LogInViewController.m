@@ -170,16 +170,19 @@
             return ;
         }
         if ([response.resultCode intValue] == 0) {
-            kSaveMyDefault(@"token", response.data.token);
-            kSaveMyDefault(@"appusername", response.data.appusername);
-            [CommonUtil saveObjectToUserDefault:response.data forKey:@"userInfo"];
-            NSDictionary *tokenDic =@{@"token":response.data.token};
-            [MSNetwork setBaseParameters:tokenDic];
-            [MSNetwork setHeadr:tokenDic];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self gotoMain];
-            });
-            
+            if (response.data.wmSdk == false) {
+                kSaveMyDefault(@"token", response.data.token);
+                kSaveMyDefault(@"appusername", response.data.appusername);
+                [CommonUtil saveObjectToUserDefault:response.data forKey:@"userInfo"];
+                NSDictionary *tokenDic =@{@"token":response.data.token};
+                [MSNetwork setBaseParameters:tokenDic];
+                [MSNetwork setHeadr:tokenDic];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self gotoMain];
+                });
+            }else {
+                [MBProgressHUD showError:STR_WRONG_ACCOUNT_PASSWORD];
+            }
         }else {
             [MBProgressHUD showError:response.msg];
         }

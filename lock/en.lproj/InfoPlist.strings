@@ -53,6 +53,7 @@
 "请设置服务器地址"="Please set the server permission";
 "请输入账户"="Enter account";
 "请输入密码"="Enter password";
+"账号或密码错误"="Wrong account or password";
 
 //首页
 "地图"="Map";
