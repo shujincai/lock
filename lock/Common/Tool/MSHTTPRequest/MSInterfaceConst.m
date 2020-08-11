@@ -41,3 +41,7 @@ NSString *const kRegKey = @"api/v1/app/keys";
 NSString *const kRegLock = @"api/v1/app/locks";
 //修改密码
 NSString *const kChangePW = @"api/v1/app/workers/password";
+//锁出厂编号
+NSString *const kLockId = @"api/v1/app/locks/factoryno";
+//钥匙出厂编号
+NSString *const kKeyId = @"api/v1/app/keys/factoryno";

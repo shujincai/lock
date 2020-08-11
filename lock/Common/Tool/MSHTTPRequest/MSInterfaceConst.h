@@ -45,5 +45,9 @@ UIKIT_EXTERN NSString *const kRegKey;
 UIKIT_EXTERN NSString *const kRegLock;
 //修改密码
 UIKIT_EXTERN NSString *const kChangePW;
+//锁出厂编号
+UIKIT_EXTERN NSString *const kLockId;
+//钥匙出厂编号
+UIKIT_EXTERN NSString *const kKeyId;
 
 

@@ -26,4 +26,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * lockno;//锁号
 
 @end
+
+
+@interface RegistrationLockInitBean : BaseBean
+@property(nonatomic,copy)NSString * lockid;//锁ID
+@property(nonatomic,copy)NSString * keyno;//锁名称
+@property(nonatomic,copy)NSString * lockno;//锁号
+@end
+
+@interface RegistrationLockInitResponse : ResponseBean
+@property (nonatomic,strong)RegistrationLockInitBean * data;
+@end
 NS_ASSUME_NONNULL_END

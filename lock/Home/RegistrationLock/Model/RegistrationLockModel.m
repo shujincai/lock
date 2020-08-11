@@ -16,3 +16,11 @@
 @implementation RegistrationLockRegRequest
 
 @end
+
+@implementation RegistrationLockInitResponse
+
+@end
+
+@implementation RegistrationLockInitBean
+
+@end

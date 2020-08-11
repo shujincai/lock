@@ -21,6 +21,7 @@
 @property (nonatomic,assign)NSInteger registerNumber;
 @property (nonatomic,assign)BOOL isHide;
 @property (nonatomic,assign)BOOL isHideInit;
+@property (nonatomic,strong)NSString * setKeyId;
 
 @end
 
@@ -307,36 +308,69 @@
 }
 //修改钥匙ID
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 7) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改钥匙ID" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = @"请输入钥匙ID（1～60000）";
-            self.keyTF = textField;
-        }];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (self.keyTF.text.length <= 0) {
-                [MBProgressHUD showMessage:@"钥匙ID不能为空"];
-                return;
-            }
-            BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
-            basicInfo.keyValidityPeriodStart = self.keyInfo.key_validity_period_start;
-            basicInfo.keyValidityPeriodEnd = self.keyInfo.key_validity_period_end;
-            basicInfo.keyId = [self.keyTF.text intValue];
-            
-            UserKeyInfo *userKeyInfo = [[UserKeyInfo alloc] init];
-            [SetKeyController setUserKey:basicInfo andUserKeyInfo:userKeyInfo];
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+    if (indexPath.row == 2) {
+        if (self.setKeyId.length > 0) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改钥匙ID" message:self.setKeyId preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [MBProgressHUD showActivityMessage:STR_LOADING];
+                BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+                basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+                basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+                basicInfo.keyId = [self.setKeyId intValue];
+                
+                UserKeyInfo *userKeyInfo = [[UserKeyInfo alloc] init];
+                [SetKeyController setUserKey:basicInfo andUserKeyInfo:userKeyInfo];
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }else {
+            [MBProgressHUD showActivityMessage:STR_LOADING];
+            RequestBean * request = [[RequestBean alloc]init];
+            [MSHTTPRequest GET:kKeyId parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+                [MBProgressHUD hideHUD];
+                NSError * error = nil;
+                RegistrationLockInitResponse * response = [[RegistrationLockInitResponse alloc]initWithDictionary:responseObject error:&error];
+                if (error) {
+                    [MBProgressHUD showMessage:STR_PARSE_FAILURE];
+                    return ;
+                }
+                if ([response.resultCode intValue] != 0) {
+                    [MBProgressHUD showError:response.msg];
+                    return ;
+                }else {
+                    self.setKeyId = response.data.keyno;
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改钥匙ID" message:response.data.keyno preferredStyle:UIAlertControllerStyleAlert];
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }]];
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [MBProgressHUD showActivityMessage:STR_LOADING];
+                        BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+                        basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+                        basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+                        basicInfo.keyId = [response.data.keyno intValue];
+                        
+                        UserKeyInfo *userKeyInfo = [[UserKeyInfo alloc] init];
+                        [SetKeyController setUserKey:basicInfo andUserKeyInfo:userKeyInfo];
+                    }]];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                }
+            } failure:^(NSError * _Nonnull error) {
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:STR_TIMEOUT];
+            }];
+        }
     }
 }
 - (void)requestSetUserKeyResultInfo:(ResultInfo *)info {
+    [MBProgressHUD hideHUD];
     if (info.feedBackState == NO) {
-        [MBProgressHUD showError:@"修改钥匙失败"];
+        [MBProgressHUD showError:@"修改钥匙ID失败"];
     }else {
-        self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        self.keyInfo.key_id = self.setKeyId;
+        self.setKeyId = nil;
         [self.tableView reloadData];
     }
 }

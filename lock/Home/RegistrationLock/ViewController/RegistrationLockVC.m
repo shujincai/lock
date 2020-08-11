@@ -22,7 +22,8 @@
 @property (nonatomic,strong)UITextField * lockNameTF;
 @property (nonatomic,strong)UserInfo * userInfo;
 @property (nonatomic,assign)BOOL isHide;
-
+@property (nonatomic,assign)BOOL isLockHide;
+@property (nonatomic,strong)NSString * setLockId;
 @end
 
 @implementation RegistrationLockVC
@@ -33,6 +34,7 @@
     self.title = STR_REG_LOCK;
     self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
     self.isHide = NO;
+    self.isLockHide = NO;
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_LOADING];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -112,6 +114,11 @@
         return;
     }else {
         self.lockInfo = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        if ([self.lockInfo.event_type isEqualToString:@"2"]) {
+            self.isLockHide = YES;
+            self.lockInfo.lock_id = self.setLockId;
+            self.setLockId = nil;
+        }
         [self.tableView reloadData];
     }
 }
@@ -229,31 +236,76 @@
 
 //修改锁ID
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 6) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改锁ID" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = @"请输入锁ID（1～60000）";
-            self.keyTF = textField;
-        }];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (self.keyTF.text.length <= 0) {
-                [MBProgressHUD showMessage:@"锁ID不能为空"];
-                return;
-            }
-            
-
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+    if (indexPath.row == 1) {
+        if (self.setLockId.length > 0) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改锁ID" message:self.setLockId preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [MBProgressHUD showActivityMessage:STR_LOADING];
+                BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+                basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+                basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+                basicInfo.keyId = [self.keyInfo.key_id integerValue];
+                
+                SettingKeyInfo *setKeyInfo = [[SettingKeyInfo alloc] init];
+                setKeyInfo.lockId = [self.setLockId integerValue];
+                [SetKeyController setSettingKey:basicInfo andSettingKeyInfo:setKeyInfo];
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }else {
+         [MBProgressHUD showActivityMessage:STR_LOADING];
+         RequestBean * request = [[RequestBean alloc]init];
+         [MSHTTPRequest GET:kLockId parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+             [MBProgressHUD hideHUD];
+             NSError * error = nil;
+             RegistrationLockInitResponse * response = [[RegistrationLockInitResponse alloc]initWithDictionary:responseObject error:&error];
+             if (error) {
+                 [MBProgressHUD showMessage:STR_PARSE_FAILURE];
+                 return ;
+             }
+             if ([response.resultCode intValue] != 0) {
+                 [MBProgressHUD showError:response.msg];
+                 return ;
+             }else {
+                 self.setLockId = response.data.lockno;
+                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改锁ID" message:response.data.lockno preferredStyle:UIAlertControllerStyleAlert];
+                 [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                     
+                 }]];
+                 [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                     [MBProgressHUD showActivityMessage:STR_LOADING];
+                     BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+                     basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+                     basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+                     basicInfo.keyId = [self.keyInfo.key_id integerValue];
+                     
+                     SettingKeyInfo *setKeyInfo = [[SettingKeyInfo alloc] init];
+                     setKeyInfo.lockId = [response.data.lockno integerValue];
+                     [SetKeyController setSettingKey:basicInfo andSettingKeyInfo:setKeyInfo];
+                 }]];
+                 [self presentViewController:alertController animated:YES completion:nil];
+             }
+         } failure:^(NSError * _Nonnull error) {
+             [MBProgressHUD hideHUD];
+             [MBProgressHUD showError:STR_TIMEOUT];
+         }];
+        }
     }
 }
-- (void)requestSetUserKeyResultInfo:(ResultInfo *)info {
+- (void)requestSetSettingKeyResultInfo:(ResultInfo *)info{
     if (info.feedBackState == NO) {
-        [MBProgressHUD showError:@"修改锁失败"];
+        [MBProgressHUD showError:@"修改锁ID失败"];
     }else {
-        
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK_READ];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.isLockHide == NO) {
+                [MBProgressHUD hideHUD];
+            }
+        });
     }
+    
 }
 @end
