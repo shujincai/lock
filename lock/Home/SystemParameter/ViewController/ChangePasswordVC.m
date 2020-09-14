@@ -80,6 +80,10 @@
           [MBProgressHUD showMessage:STR_PASSWORD_ATYPISM];
           return;
       }
+        if ([weakSelf.newsPassword.textField.text isEqualToString:weakSelf.oldPassword.textField.text]) {
+            [MBProgressHUD showMessage:STR_NEW_OLD_EQUAL];
+            return;
+        }
       UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_DEFINE_CHANGE_PWD message:STR_DEFINE_QUIT preferredStyle:UIAlertControllerStyleAlert];
       [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
           
@@ -114,7 +118,11 @@
             [self exitAccount];
         }else {
             [MBProgressHUD hideHUD];
-            [MBProgressHUD showError:response.msg];
+            if ([response.resultCode intValue] == 20004) {
+                [MBProgressHUD showError:STR_OLD_PASSWORD_ERROR];
+            }else {
+                [MBProgressHUD showError:response.msg];
+            }
         }
     } failure:^(NSError * _Nonnull error) {
         [MBProgressHUD hideHUD];

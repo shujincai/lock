@@ -283,7 +283,7 @@
     keyRequest.keyname = _currentBle.name;
     keyRequest.keyno = _keyInfo.key_id;
     keyRequest.keystatus = @"0";
-    keyRequest.keytype = _keyInfo.key_type;
+    keyRequest.keytype = @"1";
     [MSHTTPRequest POST:kRegKey parameters:[keyRequest toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         [MBProgressHUD hideHUD];
         NSError * error = nil;
@@ -292,13 +292,28 @@
             [MBProgressHUD showMessage:STR_PARSE_FAILURE];
             return ;
         }
-        if ([response.resultCode intValue] != 0) {
-            [MBProgressHUD showError:[NSString stringWithFormat:@"%@(%@)",STR_SUBMIT_DATA_FAIL,response.resultCode]];
-            return ;
-        }else {
+        if ([response.resultCode intValue] == 0) {
             [MBProgressHUD showMessage:STR_REG_KEY_SUCCESS];
             [SetKeyController disConnectBle];
             [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            if ([response.resultCode intValue] == 15001) {//该钥匙信息不存在
+                [MBProgressHUD showError:STR_KEY_INFO_NO_EXISTENT];
+            } else if([response.resultCode intValue] == 15002){//钥匙编号为空
+                [MBProgressHUD showError:STR_KEY_NUMBER_EMPTY];
+            }else if([response.resultCode intValue] == 15003){//钥匙名称为空
+                [MBProgressHUD showError:STR_KEY_NAME_EMPTY];
+            }else if([response.resultCode intValue] == 15004){//钥匙编号重复
+                [MBProgressHUD showError:STR_KEY_NUMBER_REPEAT];
+            }else if([response.resultCode intValue] == 15005){//钥匙名称重复
+                [MBProgressHUD showError:STR_KEY_NAME_REPEAT];
+            }else if([response.resultCode intValue] == 15013){//钥匙硬件编号重复
+                [MBProgressHUD showError:STR_KEY_HARDWARE_NUMBER_REPEAT];
+            }else if([response.resultCode intValue] == 15014){//钥匙编号已超出范围（1~65500）
+                [MBProgressHUD showError:STR_KEY_NUMBER_RANGE];
+            }else {
+                [MBProgressHUD showError:STR_SUBMIT_DATA_FAIL];
+            }
         }
     } failure:^(NSError * _Nonnull error) {
         [MBProgressHUD hideHUD];
@@ -310,11 +325,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 2) {
         if (self.setKeyId.length > 0) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改钥匙ID" message:self.setKeyId preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_CHANGE_KEY_ID message:self.setKeyId preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 
             }]];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [MBProgressHUD showActivityMessage:STR_LOADING];
                 BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
                 basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
@@ -341,11 +356,11 @@
                     return ;
                 }else {
                     self.setKeyId = response.data.keyno;
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改钥匙ID" message:response.data.keyno preferredStyle:UIAlertControllerStyleAlert];
-                    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_CHANGE_KEY_ID message:response.data.keyno preferredStyle:UIAlertControllerStyleAlert];
+                    [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                         
                     }]];
-                    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         [MBProgressHUD showActivityMessage:STR_LOADING];
                         BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
                         basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
@@ -367,7 +382,7 @@
 - (void)requestSetUserKeyResultInfo:(ResultInfo *)info {
     [MBProgressHUD hideHUD];
     if (info.feedBackState == NO) {
-        [MBProgressHUD showError:@"修改钥匙ID失败"];
+        [MBProgressHUD showError:STR_CHANGE_KEY_ID_FAIL];
     }else {
         self.keyInfo.key_id = self.setKeyId;
         self.setKeyId = nil;

@@ -28,14 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 //注册钥匙
 @interface RegistrationKeyRegRequest : BaseBean
-@property(nonatomic,copy)NSString * factoryno;//钥匙序号
+@property(nonatomic,copy)NSString * factoryno;//钥匙硬件编号
 @property(nonatomic,copy)NSString * keyid;//钥匙id
-@property(nonatomic,copy)NSString * keymode;//0
+@property(nonatomic,copy)NSString * keymode;//钥匙模式（0-普通钥匙、1-巡检钥匙)
 @property(nonatomic,copy)NSString * keyname;//钥匙名称
 @property(nonatomic,copy)NSString * keyno;//钥匙号
-@property(nonatomic,copy)NSString * keystatus;//0
-@property(nonatomic,copy)NSString * keytype;//钥匙类型 0
-@property(nonatomic,copy)NSString * manager;//注册人
+@property(nonatomic,copy)NSString * keystatus;//0钥匙状态
+@property(nonatomic,copy)NSString * keytype;//钥匙类型 0-NFC钥匙、1-蓝牙钥匙、2-指纹钥匙
+@property(nonatomic,copy)NSString * manager;//钥匙管理人
+@property(nonatomic,copy)NSString * deptcode;
 @end
 
 

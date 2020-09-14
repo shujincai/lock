@@ -52,6 +52,9 @@
 #define STR_ACCOUNT_TIPS                    L(@"请输入账户")
 #define STR_PASSWORD_TIPS                   L(@"请输入密码")
 #define STR_WRONG_ACCOUNT_PASSWORD          L(@"账号或密码错误")
+#define STR_USER_NAME_ERROR                 L(@"用户名错误")
+#define STR_PASSWORD_ERROR                  L(@"密码错误")
+#define STR_USER_NON_EXISTENT               L(@"用户不存在")
 
 //首页
 #define STR_HOMEPAGE                        L(@"主页")
@@ -78,6 +81,16 @@
 #define STR_REG_KEY_SUCCESS                 L(@"注册钥匙成功")
 #define STR_PLEASE_CONNECT_LOCK             L(@"请连接锁")
 #define STR_INIT_LOCK_CODE                  L(@"设置初始化锁系统码钥匙")
+#define STR_CHANGE_KEY_ID                   L(@"修改钥匙ID")
+#define STR_CHANGE_KEY_ID_FAIL              L(@"修改钥匙ID失败")
+#define STR_KEY_INFO_NO_EXISTENT            L(@"该钥匙信息不存在")
+#define STR_KEY_NUMBER_EMPTY                L(@"钥匙编号为空")
+#define STR_KEY_NAME_EMPTY                  L(@"钥匙名称为空")
+#define STR_KEY_NUMBER_REPEAT               L(@"钥匙编号重复")
+#define STR_KEY_NAME_REPEAT                 L(@"钥匙名称重复")
+#define STR_KEY_HARDWARE_NUMBER_REPEAT      L(@"钥匙硬件编号重复")
+#define STR_KEY_NUMBER_RANGE                L(@"钥匙编号已超出范围")
+
 
 //注册锁
 #define STR_PLEASE_CONNECT_LOCK_READ        L(@"请连锁，读取锁id...")
@@ -85,6 +98,15 @@
 #define STR_LOCK_ID                         L(@"锁ID")
 #define STR_LOCK_NAME_TIPS                  L(@"请输入锁名称")
 #define STR_RE_LOCK_SUCCESS                 L(@"注册锁成功")
+#define STR_CHANGE_LOCK_ID                  L(@"修改锁ID")
+#define STR_CHANGE_LOCK_ID_FAIL             L(@"修改锁ID失败")
+#define STR_LOCK_NUMBER_EMPTY               L(@"锁编号为空")
+#define STR_LOCK_NAME_EMPTY                 L(@"锁名称为空")
+#define STR_LOCK_NUMBER_REPEAT              L(@"与本部门的锁编号重复")
+#define STR_LOCK_NAME_REPEAT                L(@"与本部门的锁名称重复")
+#define STR_LOCK_NUMBER_REPEAT_OTHER        L(@"与其他部门的锁编号重复")
+#define STR_LOCK_NUMBER_RANGE               L(@"锁编号已超出范围")
+#define STR_LOCK_HARDWARE_NUMBER_REPEAT     L(@"锁硬件编号重复")
 
 //工作记录
 #define STR_DATE_SELECT                     L(@"日期选择")
@@ -133,5 +155,7 @@
 #define STR_PASSWORD_ATYPISM                L(@"两次密码不一致")
 #define STR_DEFINE_CHANGE_PWD               L(@"确定修改密码吗")
 #define STR_CHANGE_PWD_SUCCESS              L(@"修改成功，请重新登录")
+#define STR_OLD_PASSWORD_ERROR              L(@"原密码错误")
+#define STR_NEW_OLD_EQUAL                   L(@"新密码和旧密码相同")
 
 #endif /* Strings_h */

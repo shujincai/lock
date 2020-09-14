@@ -184,7 +184,15 @@
                 [MBProgressHUD showError:STR_WRONG_ACCOUNT_PASSWORD];
             }
         }else {
-            [MBProgressHUD showError:response.msg];
+            if ([response.resultCode intValue] == 20001) {//用户名错误
+                [MBProgressHUD showError:STR_USER_NAME_ERROR];
+            } else if ([response.resultCode intValue] == 20002) {//密码错误
+                [MBProgressHUD showError:STR_PASSWORD_ERROR];
+            }else if ([response.resultCode intValue] == 20003) {//用户不存在
+                [MBProgressHUD showError:STR_USER_NON_EXISTENT];
+            }else {
+                [MBProgressHUD showError:response.msg];
+            }
         }
     } failure:^(NSError * _Nonnull error) {
         [MBProgressHUD hideHUD];

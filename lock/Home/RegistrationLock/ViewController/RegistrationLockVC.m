@@ -219,13 +219,28 @@
             [MBProgressHUD showMessage:STR_PARSE_FAILURE];
             return ;
         }
-        if ([response.resultCode intValue] != 0) {
-            [MBProgressHUD showError:[NSString stringWithFormat:@"%@(%@)",STR_SUBMIT_DATA_FAIL,response.resultCode]];
-            return ;
-        }else {
+        if ([response.resultCode intValue] == 0) {
             [MBProgressHUD showMessage:STR_RE_LOCK_SUCCESS];
             [SetKeyController disConnectBle];
             [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            if ([response.resultCode intValue]== 14002) {//锁编号为空
+                [MBProgressHUD showError:STR_LOCK_NUMBER_EMPTY];
+            }else if ([response.resultCode intValue]== 14003){//锁名称为空
+                [MBProgressHUD showError:STR_LOCK_NAME_EMPTY];
+            }else if ([response.resultCode intValue]== 14004){//与本部门的锁编号重复
+                [MBProgressHUD showError:STR_LOCK_NUMBER_REPEAT];
+            }else if ([response.resultCode intValue]== 14005){//与本部门的锁名称重复
+                [MBProgressHUD showError:STR_LOCK_NAME_REPEAT];
+            }else if ([response.resultCode intValue]== 14006){//与其他部门的锁编号重复
+                [MBProgressHUD showError:STR_LOCK_NUMBER_REPEAT_OTHER];
+            }else if ([response.resultCode intValue]== 14007){//锁编号已超出范围
+                [MBProgressHUD showError:STR_LOCK_NUMBER_RANGE];
+            }else if ([response.resultCode intValue]== 14008){//锁硬件编号重复
+                [MBProgressHUD showError:STR_LOCK_HARDWARE_NUMBER_REPEAT];
+            }else {
+                [MBProgressHUD showError:STR_SUBMIT_DATA_FAIL];
+            }
         }
     } failure:^(NSError * _Nonnull error) {
         [MBProgressHUD hideHUD];
@@ -238,11 +253,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) {
         if (self.setLockId.length > 0) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改锁ID" message:self.setLockId preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_CHANGE_LOCK_ID message:self.setLockId preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 
             }]];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [MBProgressHUD showActivityMessage:STR_LOADING];
                 BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
                 basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
@@ -270,11 +285,11 @@
                  return ;
              }else {
                  self.setLockId = response.data.lockno;
-                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"修改锁ID" message:response.data.lockno preferredStyle:UIAlertControllerStyleAlert];
-                 [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_CHANGE_LOCK_ID message:response.data.lockno preferredStyle:UIAlertControllerStyleAlert];
+                 [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                      
                  }]];
-                 [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                 [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                      [MBProgressHUD showActivityMessage:STR_LOADING];
                      BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
                      basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
@@ -296,7 +311,7 @@
 }
 - (void)requestSetSettingKeyResultInfo:(ResultInfo *)info{
     if (info.feedBackState == NO) {
-        [MBProgressHUD showError:@"修改锁ID失败"];
+        [MBProgressHUD showError:STR_CHANGE_LOCK_ID_FAIL];
     }else {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK_READ];
