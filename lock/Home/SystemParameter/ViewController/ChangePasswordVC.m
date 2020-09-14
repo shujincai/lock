@@ -64,34 +64,34 @@
     changeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self.view addSubview:changeBtn];
     [changeBtn setClicAction:^(UIButton * _Nonnull sender) {//修改密码
-      if (kStringIsEmpty(weakSelf.oldPassword.textField.text)) {
-          [MBProgressHUD showMessage:STR_PLEASE_OLD_PWD];
-          return;
-      }
-      if (kStringIsEmpty(weakSelf.newsPassword.textField.text)) {
-          [MBProgressHUD showMessage:STR_PLEASE_NEWS_PWD];
-          return;
-      }
-      if (kStringIsEmpty(weakSelf.confirmPassword.textField.text)) {
-          [MBProgressHUD showMessage:STR_PLEASE_CONFIRM_PWD];
-          return;
-      }
-      if (![weakSelf.newsPassword.textField.text isEqualToString:weakSelf.confirmPassword.textField.text]) {
-          [MBProgressHUD showMessage:STR_PASSWORD_ATYPISM];
-          return;
-      }
+        if (kStringIsEmpty(weakSelf.oldPassword.textField.text)) {
+            [MBProgressHUD showMessage:STR_PLEASE_OLD_PWD];
+            return;
+        }
+        if (kStringIsEmpty(weakSelf.newsPassword.textField.text)) {
+            [MBProgressHUD showMessage:STR_PLEASE_NEWS_PWD];
+            return;
+        }
+        if (kStringIsEmpty(weakSelf.confirmPassword.textField.text)) {
+            [MBProgressHUD showMessage:STR_PLEASE_CONFIRM_PWD];
+            return;
+        }
+        if (![weakSelf.newsPassword.textField.text isEqualToString:weakSelf.confirmPassword.textField.text]) {
+            [MBProgressHUD showMessage:STR_PASSWORD_ATYPISM];
+            return;
+        }
         if ([weakSelf.newsPassword.textField.text isEqualToString:weakSelf.oldPassword.textField.text]) {
             [MBProgressHUD showMessage:STR_NEW_OLD_EQUAL];
             return;
         }
-      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_DEFINE_CHANGE_PWD message:STR_DEFINE_QUIT preferredStyle:UIAlertControllerStyleAlert];
-      [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-          
-      }]];
-      [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-          [weakSelf getChangePassword];
-      }]];
-      [self presentViewController:alertController animated:YES completion:nil];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_DEFINE_CHANGE_PWD message:STR_DEFINE_QUIT preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [weakSelf getChangePassword];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
     [changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(30);
