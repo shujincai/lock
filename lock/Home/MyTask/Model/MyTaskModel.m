@@ -34,6 +34,12 @@
 }
 @end
 
+@implementation MyTaskTimeRangeListBean
++(JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:[NSDictionary dictionaryWithObjects:@[@"id"] forKeys:@[@"timeid"]]];
+}
+@end
+
 @implementation UnlockListBean
 +(JSONKeyMapper *)keyMapper {
     return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:[NSDictionary dictionaryWithObjects:@[@"id"] forKeys:@[@"listid"]]];

@@ -29,6 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger pagesize;//每页条数
 @end
 
+@protocol MyTaskTimeRangeListBean
+@end
+@interface MyTaskTimeRangeListBean : BaseBean
+@property(nonatomic,copy)NSString * timeid;//时间段id
+@property(nonatomic,copy)NSString * begintime;//开始时间
+@property(nonatomic,copy)NSString * endtime;//结束时间
+@property(nonatomic,copy)NSString * keydataid;//任务id
+@end
+
 @protocol UnlockListBean
 @end
 @interface UnlockListBean : BaseBean
@@ -62,12 +71,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * keyid;//钥匙id
 @property(nonatomic,copy)NSString * begindatetime;//结束日期
 @property(nonatomic,copy)NSString * keyno;//钥匙编号
-@property(nonatomic,strong)NSMutableArray<UnlockListBean> * unlocklist;//没有锁列表
+@property(nonatomic,strong)NSMutableArray<UnlockListBean> * unlocklist;//锁列表
 @property(nonatomic,copy)NSString * keytype;//钥匙类型
 @property(nonatomic,copy)NSString * createtime;//创建时间
 @property(nonatomic,copy)NSString * opttime;//操作时间
 @property(nonatomic,copy)NSString * keymode;//钥匙
 @property(nonatomic,copy)NSString * username;//用户名称
+@property(nonatomic,strong)NSMutableArray<MyTaskTimeRangeListBean> * timerangelist;//时间段
 @end
 
 @interface MyTaskListPage : BaseBean

@@ -89,7 +89,7 @@
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 55;
+    return 70;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MyTaskListBean * taskList = [_listArray objectAtIndex:section];
@@ -115,7 +115,18 @@
         make.left.equalTo(view.mas_left).offset(10);
         make.top.equalTo(view.mas_top).offset(5);
         make.right.equalTo(view.mas_right).offset(-10);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(65);
+    }];
+    UILabel * nameLabel = [[UILabel alloc]init];
+    nameLabel.text = taskList.keyname;
+    nameLabel.textColor = COLOR_WHITE;
+    nameLabel.font = BOLD_SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
+    [bgView addSubview:nameLabel];
+    [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(bgView.mas_left).offset(10);
+        make.top.equalTo(bgView.mas_top).offset(0);
+        make.right.equalTo(bgView.mas_right).offset(-20);
+        make.height.mas_equalTo(25);
     }];
     UILabel * dateLabel = [[UILabel alloc]init];
     dateLabel.text = [NSString stringWithFormat:@"%@~%@",[dateFormatter stringFromDate:beginDate],[dateFormatter stringFromDate:endDate]];
@@ -124,9 +135,9 @@
     [bgView addSubview:dateLabel];
     [dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(bgView.mas_left).offset(10);
-        make.top.equalTo(bgView.mas_top).offset(0);
+        make.top.equalTo(nameLabel.mas_bottom).offset(0);
         make.right.equalTo(bgView.mas_right).offset(-20);
-        make.height.mas_equalTo(25);
+        make.height.mas_equalTo(20);
     }];
     UILabel * timeLabel = [[UILabel alloc]init];
     timeLabel.text = [NSString stringWithFormat:@"%@~%@",[timeFormatter stringFromDate:beginTime],[timeFormatter stringFromDate:endTime]];
@@ -204,6 +215,46 @@
                     [self.tableView.mj_footer endRefreshing];
                     self.pageNumber++;
                 }
+            }
+            NSDate * nowDate = [NSDate date];
+            NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+            for (MyTaskListBean * taskList in response.data.content) {
+                NSString * startTime = @"";
+                NSString * endTime = @"";
+                NSInteger currentInterval= 0;
+                for (MyTaskTimeRangeListBean * timeList in taskList.timerangelist) {
+                    NSDate * startDate = [formatter dateFromString:timeList.begintime];
+                    NSDate * endDate = [formatter dateFromString:timeList.endtime];
+                    //当前时间是否在时间段内。
+                    if (([nowDate compare:startDate] == NSOrderedSame||[nowDate compare:startDate] == NSOrderedDescending)&&([nowDate compare:endDate] == NSOrderedSame||[nowDate compare:endDate] == NSOrderedAscending)) {
+                        startTime = timeList.begintime;
+                        endTime = timeList.endtime;
+                        break;
+                    } else {
+                        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                        //两日期间隔秒数
+                        NSDateComponents * comp = [calendar components:NSCalendarUnitSecond fromDate:nowDate toDate:startDate options:NSCalendarWrapComponents];
+                        if (comp.second < 0) {//开始时间在当前时间之前
+                            if (currentInterval == 0) {
+                                startTime = timeList.begintime;
+                                endTime = timeList.endtime;
+                            }
+                        }else {
+                            //判断距离当前时间最近的开始时间
+                            if (comp.second <= currentInterval || currentInterval == 0) {
+                                currentInterval = comp.second;
+                                startTime = timeList.begintime;
+                                endTime = timeList.endtime;
+                            }
+                        }
+                        
+                    }
+                }
+                taskList.begindatetime = startTime;
+                taskList.begintime = startTime;
+                taskList.enddatetime = endTime;
+                taskList.endtime = endTime;
             }
             [self.listArray addObjectsFromArray:response.data.content];
             [self.tableView reloadData];
