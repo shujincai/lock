@@ -127,8 +127,8 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"yyyy-MM-dd";
     self.calendar.accessibilityIdentifier = @"calendar";
-    self.starDate = [NSDate date];
-    self.endDate = [self.gregorian dateByAddingUnit:NSCalendarUnitDay value:7 toDate:self.starDate options:0];
+    self.endDate = [NSDate date];
+    self.starDate = [self.gregorian dateByAddingUnit:NSCalendarUnitDay value:-7 toDate:self.endDate options:0];
     [self.calendar selectDate:self.starDate scrollToDate:NO];
     [self.calendar selectDate:self.endDate scrollToDate:NO];
     
