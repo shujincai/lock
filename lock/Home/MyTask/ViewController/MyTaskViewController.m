@@ -216,36 +216,44 @@
                     self.pageNumber++;
                 }
             }
-            NSDate * nowDate = [NSDate date];
+            NSDate * date = [NSDate date];
             NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+            NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"yyyy-MM-dd";
+            NSDateFormatter * timeFormatter = [[NSDateFormatter alloc] init];
+            timeFormatter.dateFormat = @"HH:mm:ss";
+            NSDate * nowTime = [timeFormatter dateFromString:[timeFormatter stringFromDate:date]];
+            
             for (MyTaskListBean * taskList in response.data.content) {
+                NSDate * benginDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:[formatter dateFromString:taskList.begindate]]];
+                NSDate * finishDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:[formatter dateFromString:taskList.enddate]]];
                 NSString * startTime = @"";
                 NSString * endTime = @"";
                 NSInteger currentInterval= 0;
                 for (MyTaskTimeRangeListBean * timeList in taskList.timerangelist) {
-                    NSDate * startDate = [formatter dateFromString:timeList.begintime];
-                    NSDate * endDate = [formatter dateFromString:timeList.endtime];
+                    NSDate * startDate = [timeFormatter dateFromString:[timeFormatter stringFromDate:[formatter dateFromString:timeList.begintime]]];
+                    NSDate * endDate = [timeFormatter dateFromString:[timeFormatter stringFromDate:[formatter dateFromString:timeList.endtime]]];
                     //当前时间是否在时间段内。
-                    if (([nowDate compare:startDate] == NSOrderedSame||[nowDate compare:startDate] == NSOrderedDescending)&&([nowDate compare:endDate] == NSOrderedSame||[nowDate compare:endDate] == NSOrderedAscending)) {
-                        startTime = timeList.begintime;
-                        endTime = timeList.endtime;
+                    if (([nowTime compare:startDate] == NSOrderedSame||[nowTime compare:startDate] == NSOrderedDescending)&&([nowTime compare:endDate] == NSOrderedSame||[nowTime compare:endDate] == NSOrderedAscending)) {
+                        startTime = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:benginDate],[timeFormatter stringFromDate:startDate]];
+                        endTime = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:finishDate],[timeFormatter stringFromDate:endDate]];
                         break;
                     } else {
                         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
                         //两日期间隔秒数
-                        NSDateComponents * comp = [calendar components:NSCalendarUnitSecond fromDate:nowDate toDate:startDate options:NSCalendarWrapComponents];
+                        NSDateComponents * comp = [calendar components:NSCalendarUnitSecond fromDate:nowTime toDate:startDate options:NSCalendarWrapComponents];
                         if (comp.second < 0) {//开始时间在当前时间之前
                             if (currentInterval == 0) {
-                                startTime = timeList.begintime;
-                                endTime = timeList.endtime;
+                                startTime = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:benginDate],[timeFormatter stringFromDate:startDate]];
+                                endTime = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:finishDate],[timeFormatter stringFromDate:endDate]];
                             }
                         }else {
                             //判断距离当前时间最近的开始时间
                             if (comp.second <= currentInterval || currentInterval == 0) {
                                 currentInterval = comp.second;
-                                startTime = timeList.begintime;
-                                endTime = timeList.endtime;
+                                startTime = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:benginDate],[timeFormatter stringFromDate:startDate]];
+                                endTime = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:finishDate],[timeFormatter stringFromDate:endDate]];
                             }
                         }
                         
