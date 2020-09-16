@@ -221,6 +221,7 @@
             formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
             NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
             dateFormatter.dateFormat = @"yyyy-MM-dd";
+            NSDate * nowDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:date]];
             NSDateFormatter * timeFormatter = [[NSDateFormatter alloc] init];
             timeFormatter.dateFormat = @"HH:mm:ss";
             NSDate * nowTime = [timeFormatter dateFromString:[timeFormatter stringFromDate:date]];
@@ -228,6 +229,11 @@
             for (MyTaskListBean * taskList in response.data.content) {
                 NSDate * benginDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:[formatter dateFromString:taskList.begindate]]];
                 NSDate * finishDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:[formatter dateFromString:taskList.enddate]]];
+                // 判断当前日期是否超出日期范围
+                if (([nowDate compare:benginDate] == NSOrderedSame||[nowDate compare:benginDate] == NSOrderedDescending)&&([nowDate compare:finishDate] == NSOrderedSame||[nowDate compare:finishDate] == NSOrderedAscending)) {
+                    benginDate = nowDate;
+                    finishDate = nowDate;
+                }
                 NSString * startTime = @"";
                 NSString * endTime = @"";
                 NSInteger currentInterval= 0;
@@ -241,7 +247,7 @@
                         break;
                     } else {
                         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-                        //两日期间隔秒数
+                        //两时间间隔秒数
                         NSDateComponents * comp = [calendar components:NSCalendarUnitSecond fromDate:nowTime toDate:startDate options:NSCalendarWrapComponents];
                         if (comp.second < 0) {//开始时间在当前时间之前
                             if (currentInterval == 0) {
