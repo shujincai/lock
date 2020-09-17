@@ -54,9 +54,9 @@
 "请输入账户"="Enter account";
 "请输入密码"="Enter password";
 "账号或密码错误"="Wrong account or password";
-"用户名错误"="用户名错误";
-"密码错误"="密码错误";
-"用户不存在"="用户不存在";
+"用户名错误"="Wrong username";
+"密码错误"="Wrong password";
+"用户不存在"="User does not exit";
 
 //首页
 "地图"="Map";
@@ -85,13 +85,13 @@
 "设置初始化锁系统码钥匙"="Set initialization lock system code key";
 "修改钥匙ID"="Modify key ID";
 "修改钥匙ID失败"="Failed to modify key ID";
-"该钥匙信息不存在"="该钥匙信息不存在";
-"钥匙编号为空"="钥匙编号为空";
-"钥匙名称为空"="钥匙名称为空";
-"钥匙编号重复"="钥匙编号重复";
-"钥匙名称重复"="钥匙名称重复";
-"钥匙硬件编号重复"="钥匙硬件编号重复";
-"钥匙编号已超出范围"="钥匙编号已超出范围";
+"该钥匙信息不存在"="This key information is not exist";
+"钥匙编号为空"="Key ID is empty ";
+"钥匙名称为空"="Key name is empty";
+"钥匙编号重复"="Key ID is repeated";
+"钥匙名称重复"="Key name is repeated";
+"钥匙硬件编号重复"="Key hardware number is repeated";
+"钥匙编号已超出范围"="Key number is out of the range";
 
 //注册锁
 "请连锁，读取锁id..."="Please connect, read ID of lock...";
@@ -101,13 +101,13 @@
 "注册锁成功"="Register lock successfully";
 "修改锁ID"="Modify lock ID";
 "修改锁ID失败"="Failed to modify lock ID";
-"锁编号为空"="锁编号为空";
-"锁名称为空"="锁名称为空";
-"与本部门的锁编号重复"="与本部门的锁编号重复";
-"与本部门的锁名称重复"="与本部门的锁名称重复";
-"与其他部门的锁编号重复"="与其他部门的锁编号重复";
-"锁编号已超出范围"="锁编号已超出范围";
-"锁硬件编号重复"="锁硬件编号重复";
+"锁编号为空"="Lock ID is empty";
+"锁名称为空"="Lock name is empty";
+"与本部门的锁编号重复"="Repeat with the lock ID of this department";
+"与本部门的锁名称重复"="Repeat with the lock name of this department";
+"与其他部门的锁编号重复"="epeat with the lock ID of other department";
+"锁编号已超出范围"="Lock number is out of range";
+"锁硬件编号重复"="Hardware number is repeated";
 
 //工作记录
 "日期选择"="Date selection";
@@ -156,5 +156,5 @@
 "两次密码不一致"="The two passwords do not match";
 "确定修改密码吗"="Confirm the modify the password?";
 "修改成功，请重新登录"="Modify the password, please login again";
-"原密码错误"="原密码错误";
-"新密码和旧密码相同"="新密码和旧密码相同";
+"原密码错误"="Original password error";
+"新密码和旧密码相同"="The new password is the same as old password";
