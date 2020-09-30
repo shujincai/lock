@@ -15,7 +15,7 @@
 
 @interface RegistrationKeyViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,SetKeyControllerDelegate>
 
-@property (strong, nonatomic) NSMutableArray *bleArray;
+@property (strong, nonatomic) NSMutableArray *bleArray; //搜索到蓝牙
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)SearchBluetoothView * searchBluetoothView;
 @property ( nonatomic) BOOL _isScan;
@@ -36,9 +36,11 @@
 }
 - (void)returnClick {
     [self.navigationController popViewControllerAnimated:YES];
+    //停止蓝牙搜索
     [self.searchBluetoothView hide];
     [SetKeyController stopScan];
 }
+//当侧滑返回 停止蓝牙搜索
 - (void)didMoveToParentViewController:(nullable UIViewController *)parent {
     if (parent == nil) {
         [self.searchBluetoothView hide];
@@ -47,6 +49,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    //开始蓝牙搜索
     [self.searchBluetoothView start];
     [SetKeyController startScan];
     if (![SetKeyController sharedManager].delegate){
@@ -121,16 +124,16 @@
     }
     CBPeripheral * peripheral = [_bleArray objectAtIndex:indexPath.row];
     cell.topLabel.text =  peripheral.name;
-    if (peripheral.state == CBPeripheralStateDisconnected) {
+    if (peripheral.state == CBPeripheralStateDisconnected) {//未连接
         cell.bottomLabel.text = STR_NO_CONNECT;
     }
-    if (peripheral.state == CBPeripheralStateConnecting) {
+    if (peripheral.state == CBPeripheralStateConnecting) {//连接中
         cell.bottomLabel.text = STR_CONNECTING;
     }
-    if (peripheral.state == CBPeripheralStateConnected) {
+    if (peripheral.state == CBPeripheralStateConnected) {//已连接
         cell.bottomLabel.text = STR_CONNECTED;
     }
-    if (peripheral.state == CBPeripheralStateDisconnecting) {
+    if (peripheral.state == CBPeripheralStateDisconnecting) {//断开中
         cell.bottomLabel.text = STR_DISCONNECTING;
     }
     NSString *str = [[(CBPeripheral *)self.bleArray[[indexPath row]] name] substringToIndex:4];//str3 = "this"

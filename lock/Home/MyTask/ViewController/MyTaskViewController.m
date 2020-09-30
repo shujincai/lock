@@ -62,6 +62,7 @@
     }];
     self.tableView.mj_footer.hidden = YES;
 }
+//设置无数据界面
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
     return [UIImage imageNamed:@"ic_abnormal_no_notice"];
 }
@@ -91,8 +92,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 70;
 }
+// 不同任务 钥匙名称 日期范围 时间段
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MyTaskListBean * taskList = [_listArray objectAtIndex:section];
+    //时间格式转换
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSDate * beginDate = [formatter dateFromString:taskList.begindate];
@@ -117,6 +120,7 @@
         make.right.equalTo(view.mas_right).offset(-10);
         make.height.mas_equalTo(65);
     }];
+    //钥匙名称
     UILabel * nameLabel = [[UILabel alloc]init];
     nameLabel.text = taskList.keyname;
     nameLabel.textColor = COLOR_WHITE;
@@ -128,6 +132,7 @@
         make.right.equalTo(bgView.mas_right).offset(-20);
         make.height.mas_equalTo(25);
     }];
+    //日期范围
     UILabel * dateLabel = [[UILabel alloc]init];
     dateLabel.text = [NSString stringWithFormat:@"%@~%@",[dateFormatter stringFromDate:beginDate],[dateFormatter stringFromDate:endDate]];
     dateLabel.textColor = COLOR_WHITE;
@@ -139,6 +144,7 @@
         make.right.equalTo(bgView.mas_right).offset(-20);
         make.height.mas_equalTo(20);
     }];
+    //时间段
     UILabel * timeLabel = [[UILabel alloc]init];
     timeLabel.text = [NSString stringWithFormat:@"%@~%@",[timeFormatter stringFromDate:beginTime],[timeFormatter stringFromDate:endTime]];
     timeLabel.textColor = COLOR_WHITE;
@@ -163,12 +169,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     MyTaskListBean * taskList = [_listArray objectAtIndex:indexPath.section];
     UnlockListBean * listBean = [taskList.unlocklist objectAtIndex:indexPath.row];
-    cell.nameLabel.text = listBean.lockname;
-    cell.timeLabel.text = listBean.lockno;
+    cell.nameLabel.text = listBean.lockname; //锁名称
+    cell.timeLabel.text = listBean.lockno; //锁号
     return cell;
 }
 
-//获取任务列表
+#pragma mark 获取任务列表
 
 -(void)getTaskDatas{
     if (self.isFirst == YES) {
@@ -216,6 +222,7 @@
                     self.pageNumber++;
                 }
             }
+            //判断时间段选择距离当前时间最近的，且未发生的
             NSDate * date = [NSDate date];
             NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -284,13 +291,15 @@
     
     
 }
+//选择不同锁进行开关
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MyTaskListBean * taskList = [_listArray objectAtIndex:indexPath.section];
     UnlockListBean * listBean = [taskList.unlocklist objectAtIndex:indexPath.row];
     [self getTaskValid:listBean withTaskList:taskList];
 }
 
-//任务ID判断任务是否有效
+#pragma mark 任务ID判断任务是否有效
+ 
 - (void)getTaskValid:(UnlockListBean *)infoBean withTaskList:(MyTaskListBean *)taskList {
     [MBProgressHUD showActivityMessage:STR_LOADING];
     RequestBean * request = [[RequestBean alloc]init];

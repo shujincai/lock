@@ -269,7 +269,7 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     }];
             
 }
-//刷新数据
+//每间隔10秒刷新一次 任务数和工作记录
 - (void)refreshData {
     LockRecordListRequest * request = [[LockRecordListRequest alloc]init];
     request.begintime =@"2019-02-24";

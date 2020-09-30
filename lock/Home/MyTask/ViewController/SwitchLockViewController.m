@@ -15,12 +15,12 @@
 @interface SwitchLockViewController ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
 
 @property (nonatomic,strong)UITableView * tableView;
-@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo;
-@property (nonatomic,strong)RegistrationLockInfoBean * lockInfo;
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
+@property (nonatomic,strong)RegistrationLockInfoBean * lockInfo; //锁信息
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UserInfo * userInfo;
-@property (nonatomic,assign)BOOL isHide;
+@property (nonatomic,assign)BOOL isHide; //根据加载时间判断是否隐藏加载框
 
 @end
 
@@ -34,6 +34,7 @@
     self.isHide = NO;
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_CONNECTING];
+    //当加载15秒钟判断加载框是否显示，当显示进行隐藏
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.isHide == NO) {
             [MBProgressHUD hideHUD];
@@ -106,6 +107,7 @@
             [SetKeyController disConnectBle];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
+            //设置开关锁模式
             NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
             NSDate * beginDate = [formatter dateFromString:self.taskBean.begindatetime];
@@ -173,18 +175,19 @@
             infoBean.name = STR_OVERSTEP_TIME_RANGE;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if ([self.lockInfo.event_type isEqualToString:@"13"]) {
+        if ([self.lockInfo.event_type isEqualToString:@"13"]) {//开锁成功
             infoBean.name = STR_OPEN_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
         }
-        if ([self.lockInfo.event_type isEqualToString:@"14"]) {
+        if ([self.lockInfo.event_type isEqualToString:@"14"]) {//关锁成功
             infoBean.name = STR_CLOSE_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
         }
-        if (![self.lockInfo.event_type isEqualToString:@"1"]) {
+        if (![self.lockInfo.event_type isEqualToString:@"1"]) {//钥匙与锁接触
             [self.listArray addObject:infoBean];
             [self.tableView reloadData];
         }
+        //上传开关锁数据
         [self uploadKeyDatas:infoBean];
     }
 }

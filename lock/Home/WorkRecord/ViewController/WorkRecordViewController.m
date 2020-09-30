@@ -13,11 +13,11 @@
 
 @interface WorkRecordViewController () <FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegateAppearance>
 
-@property (weak, nonatomic) FSCalendar *calendar;
+@property (weak, nonatomic) FSCalendar *calendar;//日期选择组件
 @property (strong, nonatomic) NSCalendar *gregorian;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
-@property (strong, nonatomic) NSDate * starDate;
-@property (strong, nonatomic) NSDate * endDate;
+@property (strong, nonatomic) NSDate * starDate; //开始日期
+@property (strong, nonatomic) NSDate * endDate;//结束日期
 @property (strong, nonatomic) UILabel * startLabel;
 @property (strong, nonatomic) UILabel * endLabel;
 
@@ -35,7 +35,7 @@
     }
     return self;
 }
-
+//初始化页面
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -128,6 +128,7 @@
     self.dateFormatter.dateFormat = @"yyyy-MM-dd";
     self.calendar.accessibilityIdentifier = @"calendar";
     self.endDate = [NSDate date];
+    //开始日期在当前日期前7天
     self.starDate = [self.gregorian dateByAddingUnit:NSCalendarUnitDay value:-7 toDate:self.endDate options:0];
     [self.calendar selectDate:self.starDate scrollToDate:NO];
     [self.calendar selectDate:self.endDate scrollToDate:NO];

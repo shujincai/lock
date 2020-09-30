@@ -64,23 +64,24 @@
     changeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self.view addSubview:changeBtn];
     [changeBtn setClicAction:^(UIButton * _Nonnull sender) {//修改密码
-        if (kStringIsEmpty(weakSelf.oldPassword.textField.text)) {
+        if (kStringIsEmpty(weakSelf.oldPassword.textField.text)) {//原密码为空
             [MBProgressHUD showMessage:STR_PLEASE_OLD_PWD];
             return;
         }
-        if (kStringIsEmpty(weakSelf.newsPassword.textField.text)) {
+        if (kStringIsEmpty(weakSelf.newsPassword.textField.text)) {//新密码为空
             [MBProgressHUD showMessage:STR_PLEASE_NEWS_PWD];
             return;
         }
-        if (kStringIsEmpty(weakSelf.confirmPassword.textField.text)) {
+        if (kStringIsEmpty(weakSelf.confirmPassword.textField.text)) {//确认密码为空
             [MBProgressHUD showMessage:STR_PLEASE_CONFIRM_PWD];
             return;
         }
-        if (![weakSelf.newsPassword.textField.text isEqualToString:weakSelf.confirmPassword.textField.text]) {
+        if (![weakSelf.newsPassword.textField.text isEqualToString:weakSelf.confirmPassword.textField.text]) {//新密码与确认密码不一致
             [MBProgressHUD showMessage:STR_PASSWORD_ATYPISM];
             return;
         }
         if ([weakSelf.newsPassword.textField.text isEqualToString:weakSelf.oldPassword.textField.text]) {
+            //原密码与新密码一致
             [MBProgressHUD showMessage:STR_NEW_OLD_EQUAL];
             return;
         }
@@ -118,7 +119,7 @@
             [self exitAccount];
         }else {
             [MBProgressHUD hideHUD];
-            if ([response.resultCode intValue] == 20004) {
+            if ([response.resultCode intValue] == 20004) {//原密码错误
                 [MBProgressHUD showError:STR_OLD_PASSWORD_ERROR];
             }else {
                 [MBProgressHUD showError:response.msg];

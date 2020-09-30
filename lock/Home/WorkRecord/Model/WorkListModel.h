@@ -17,16 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger pagesize;//每页条数
 @end
 
-//开锁记录
+//开关锁记录
 @protocol LockRecordListBean
 @end
 @interface LockRecordListBean : BaseBean
 @property(nonatomic,copy)NSString * deptname;//部门名称
 @property(nonatomic,copy)NSString * keyname;//钥匙名称
 @property(nonatomic,copy)NSString * keytype;//钥匙类型
-@property(nonatomic,copy)NSString * opttime;
+@property(nonatomic,copy)NSString * opttime;//时间
 @property(nonatomic,copy)NSString * lockname;//锁名称
-@property(nonatomic,copy)NSString * eventtype;
+@property(nonatomic,copy)NSString * eventtype;//事件类型
 @end
 
 @interface LockRecordListPage : BaseBean

@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SwitchLockViewController : BaseViewController
 
-@property (strong, nonatomic) CBPeripheral *currentBle;
-@property (nonatomic,strong)MyTaskListBean * taskBean;
-@property (nonatomic,strong)UnlockListBean * lockBean;
+@property (strong, nonatomic) CBPeripheral *currentBle; //当前蓝牙
+@property (nonatomic,strong)MyTaskListBean * taskBean; //任务信息
+@property (nonatomic,strong)UnlockListBean * lockBean; //锁信息
 
 @end
 

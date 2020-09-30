@@ -16,14 +16,14 @@
 @interface RegistrationLockVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
 
 @property (nonatomic,strong)UITableView * tableView;
-@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo;
-@property (nonatomic,strong)RegistrationLockInfoBean * lockInfo;
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
+@property (nonatomic,strong)RegistrationLockInfoBean * lockInfo; //锁信息
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UITextField * lockNameTF;
 @property (nonatomic,strong)UserInfo * userInfo;
-@property (nonatomic,assign)BOOL isHide;
-@property (nonatomic,assign)BOOL isLockHide;
-@property (nonatomic,strong)NSString * setLockId;
+@property (nonatomic,assign)BOOL isHide; //根据加载时间判断是否隐藏加载框
+@property (nonatomic,assign)BOOL isLockHide; //根据加载时间判断是否隐藏连接锁加载框
+@property (nonatomic,strong)NSString * setLockId; //设置锁ID
 @end
 
 @implementation RegistrationLockVC
@@ -37,6 +37,7 @@
     self.isLockHide = NO;
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_LOADING];
+    //当加载15秒钟判断加载框是否显示，当显示进行隐藏
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.isHide == NO) {
             [MBProgressHUD hideHUD];
@@ -58,11 +59,12 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
+        //连接钥匙 根据钥匙系统码和锁注册码连接钥匙
         [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
     }
     
 }
-//连接
+//连接钥匙
 - (void)requestConnectResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
         [MBProgressHUD hideHUD];
@@ -83,6 +85,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
+        //设置在线开关锁模式
         self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
         NSCalendar * gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
         NSDate * beginDate = [NSDate date];
@@ -114,7 +117,7 @@
         return;
     }else {
         self.lockInfo = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
-        if ([self.lockInfo.event_type isEqualToString:@"2"]) {
+        if ([self.lockInfo.event_type isEqualToString:@"2"]) { //根据类型判断是否可以修改锁id
             self.isLockHide = YES;
             self.lockInfo.lock_id = self.setLockId;
             self.setLockId = nil;
@@ -142,7 +145,7 @@
     return 60;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0) {//锁名称
         static NSString * reuseIdentifier =  @"RegistrationLockTFCell";
         RegistrationLockTFCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (!cell) {
@@ -154,7 +157,7 @@
         cell.topLabel.text = STR_KEY_NAME;
         _lockNameTF = cell.textField;
         return cell;
-    }else {
+    }else {//锁id
         static NSString * reuseIdentifier =  @"cell";
         ConnectKeyTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (!cell) {
@@ -181,6 +184,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 80;
 }
+//注册按钮
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView * bgView = [[UIView alloc]init];
     UIButton * regBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -252,7 +256,7 @@
 //修改锁ID
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) {
-        if (self.setLockId.length > 0) {
+        if (self.setLockId.length > 0) {//是否存在锁ID 当存在不去接口请求新的
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_CHANGE_LOCK_ID message:self.setLockId preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 
@@ -270,45 +274,47 @@
             }]];
             [self presentViewController:alertController animated:YES completion:nil];
         }else {
-         [MBProgressHUD showActivityMessage:STR_LOADING];
-         RequestBean * request = [[RequestBean alloc]init];
-         [MSHTTPRequest GET:kLockId parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
-             [MBProgressHUD hideHUD];
-             NSError * error = nil;
-             RegistrationLockInitResponse * response = [[RegistrationLockInitResponse alloc]initWithDictionary:responseObject error:&error];
-             if (error) {
-                 [MBProgressHUD showMessage:STR_PARSE_FAILURE];
-                 return ;
-             }
-             if ([response.resultCode intValue] != 0) {
-                 [MBProgressHUD showError:response.msg];
-                 return ;
-             }else {
-                 self.setLockId = response.data.lockno;
-                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_CHANGE_LOCK_ID message:response.data.lockno preferredStyle:UIAlertControllerStyleAlert];
-                 [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                     
-                 }]];
-                 [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                     [MBProgressHUD showActivityMessage:STR_LOADING];
-                     BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
-                     basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
-                     basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
-                     basicInfo.keyId = [self.keyInfo.key_id integerValue];
-                     
-                     SettingKeyInfo *setKeyInfo = [[SettingKeyInfo alloc] init];
-                     setKeyInfo.lockId = [response.data.lockno integerValue];
-                     [SetKeyController setSettingKey:basicInfo andSettingKeyInfo:setKeyInfo];
-                 }]];
-                 [self presentViewController:alertController animated:YES completion:nil];
-             }
-         } failure:^(NSError * _Nonnull error) {
-             [MBProgressHUD hideHUD];
-             [MBProgressHUD showError:STR_TIMEOUT];
-         }];
+            //获取锁号
+            [MBProgressHUD showActivityMessage:STR_LOADING];
+            RequestBean * request = [[RequestBean alloc]init];
+            [MSHTTPRequest GET:kLockId parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+                [MBProgressHUD hideHUD];
+                NSError * error = nil;
+                RegistrationLockInitResponse * response = [[RegistrationLockInitResponse alloc]initWithDictionary:responseObject error:&error];
+                if (error) {
+                    [MBProgressHUD showMessage:STR_PARSE_FAILURE];
+                    return ;
+                }
+                if ([response.resultCode intValue] != 0) {
+                    [MBProgressHUD showError:response.msg];
+                    return ;
+                }else {
+                    self.setLockId = response.data.lockno;
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_CHANGE_LOCK_ID message:response.data.lockno preferredStyle:UIAlertControllerStyleAlert];
+                    [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }]];
+                    [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [MBProgressHUD showActivityMessage:STR_LOADING];
+                        BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+                        basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+                        basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+                        basicInfo.keyId = [self.keyInfo.key_id integerValue];
+                        
+                        SettingKeyInfo *setKeyInfo = [[SettingKeyInfo alloc] init];
+                        setKeyInfo.lockId = [response.data.lockno integerValue];
+                        [SetKeyController setSettingKey:basicInfo andSettingKeyInfo:setKeyInfo];
+                    }]];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                }
+            } failure:^(NSError * _Nonnull error) {
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:STR_TIMEOUT];
+            }];
         }
     }
 }
+//设置锁号
 - (void)requestSetSettingKeyResultInfo:(ResultInfo *)info{
     if (info.feedBackState == NO) {
         [MBProgressHUD showError:STR_CHANGE_LOCK_ID_FAIL];

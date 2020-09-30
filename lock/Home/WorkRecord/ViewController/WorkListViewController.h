@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WorkListViewController : BaseViewController
-@property (nonatomic, strong) NSString * startStr;
-@property (nonatomic, strong) NSString * endStr;
+@property (nonatomic, strong) NSString * startStr; //开始日期
+@property (nonatomic, strong) NSString * endStr; //结束日期
 
 @end
 

@@ -125,7 +125,8 @@
     return cell;
 }
 
-//获取开关锁记录
+#pragma mark获取开关锁记录
+
 -(void)getLockdatas{
     if (self.isFirst == YES) {
         [MBProgressHUD showActivityMessage:STR_LOADING];
