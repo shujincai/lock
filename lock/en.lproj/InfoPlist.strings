@@ -7,13 +7,13 @@
 */
 //info.plist
 "CFBundleDisplayName" = "JWM LOCK";
-"NSBluetoothAlwaysUsageDescription" = "App needs your permission to access Bluetooth";
-"NSBluetoothPeripheralUsageDescription" = "App needs your permission to access Bluetooth";
+"NSBluetoothAlwaysUsageDescription" = "App needs your permission to access Bluetooth, To facilitate the connection of the key";
+"NSBluetoothPeripheralUsageDescription" = "App needs your permission to access Bluetooth, To facilitate the connection of the key";
 "NSCameraUsageDescription" = "Allow APP to access to the Camera？In order to scan QR code and so on";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Allow system to access this device’s location？";
-"NSLocationWhenInUseUsageDescription" = "Allow system to access this device’s location？";
-"NSLocationAlwaysUsageDescription" = "The app needs your consent to always access the location";
-"NSPhotoLibraryUsageDescription" = "Allow APP to access to the gallery？";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Allow system to access this device’s location, To help you locate yourself";
+"NSLocationWhenInUseUsageDescription" = "Allow system to access this device’s location, To help you locate yourself";
+"NSLocationAlwaysUsageDescription" = "The app needs your consent to always access the location, To help you locate yourself";
+"NSPhotoLibraryUsageDescription" = "Allow APP to access to the gallery？In order to scan QR code and so on";
 
 //公共
 "网络连接超时"="Network connection timeout";
