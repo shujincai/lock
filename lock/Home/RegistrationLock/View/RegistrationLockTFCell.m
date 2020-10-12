@@ -35,7 +35,7 @@
     bgView.backgroundColor = [UIColor whiteColor];
     bgView.layer.masksToBounds = YES;
     bgView.layer.cornerRadius = 5;
-    [self addSubview:bgView];
+    [self.contentView addSubview:bgView];
     
     self.topLabel = [SZKLabel labelWithFrame:CGRectMake(10,0, 40, 50) text:@"" textColor:UIColor.blackColor font:[UIFont fontWithName:@"Helvetica-Bold" size:16] textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.whiteColor];
     [bgView addSubview:self.topLabel];
