@@ -80,6 +80,7 @@
 		FB03940D2490ED5C00D95AEA /* SystemParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB03940B2490ED5C00D95AEA /* SystemParameterCell.m */; };
 		FB03940E2490ED5C00D95AEA /* SystemParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */; };
 		FB23C69E248B6C1400E3C5AF /* RangeDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB23C69D248B6C1400E3C5AF /* RangeDatePickerCell.m */; };
+		FB30C09E25540DA1008D5F59 /* MyTaskLockSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB30C09D25540DA1008D5F59 /* MyTaskLockSearchVC.m */; };
 		FB3BDEAB248F0FE800B54021 /* SwitchLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3BDEAA248F0FE800B54021 /* SwitchLockViewController.m */; };
 		FB608CB2248A1CF7008BA56C /* RegistrationKeyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB0248A1CF7008BA56C /* RegistrationKeyModel.m */; };
 		FB608CB5248A1D32008BA56C /* SearchBluetoothView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB3248A1D32008BA56C /* SearchBluetoothView.m */; };
@@ -89,6 +90,8 @@
 		FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB83FF81249B493600432C35 /* InfoPlist.strings */; };
 		FBD313C02491C4160053CBC8 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */; };
 		FBD313C3249212EA0053CBC8 /* SystemParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */; };
+		FBFB51F32553F36600E5D71A /* SwitchLockListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFB51F12553F36600E5D71A /* SwitchLockListCell.xib */; };
+		FBFB51F42553F36600E5D71A /* SwitchLockListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFB51F22553F36600E5D71A /* SwitchLockListCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -251,6 +254,8 @@
 		FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SystemParameterCell.xib; sourceTree = "<group>"; };
 		FB23C69C248B6C1400E3C5AF /* RangeDatePickerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeDatePickerCell.h; sourceTree = "<group>"; };
 		FB23C69D248B6C1400E3C5AF /* RangeDatePickerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeDatePickerCell.m; sourceTree = "<group>"; };
+		FB30C09C25540DA1008D5F59 /* MyTaskLockSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTaskLockSearchVC.h; sourceTree = "<group>"; };
+		FB30C09D25540DA1008D5F59 /* MyTaskLockSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTaskLockSearchVC.m; sourceTree = "<group>"; };
 		FB3BDEA9248F0FE800B54021 /* SwitchLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchLockViewController.h; sourceTree = "<group>"; };
 		FB3BDEAA248F0FE800B54021 /* SwitchLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchLockViewController.m; sourceTree = "<group>"; };
 		FB608CB0248A1CF7008BA56C /* RegistrationKeyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationKeyModel.m; sourceTree = "<group>"; };
@@ -271,6 +276,9 @@
 		FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
 		FBD313C1249212EA0053CBC8 /* SystemParameterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemParameterModel.h; sourceTree = "<group>"; };
 		FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemParameterModel.m; sourceTree = "<group>"; };
+		FBFB51F02553F36600E5D71A /* SwitchLockListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchLockListCell.h; sourceTree = "<group>"; };
+		FBFB51F12553F36600E5D71A /* SwitchLockListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchLockListCell.xib; sourceTree = "<group>"; };
+		FBFB51F22553F36600E5D71A /* SwitchLockListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchLockListCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,6 +551,9 @@
 				842FC892247E2C8800489C50 /* MyTaskListCell.h */,
 				842FC893247E2C8800489C50 /* MyTaskListCell.m */,
 				842FC894247E2C8800489C50 /* MyTaskListCell.xib */,
+				FBFB51F02553F36600E5D71A /* SwitchLockListCell.h */,
+				FBFB51F22553F36600E5D71A /* SwitchLockListCell.m */,
+				FBFB51F12553F36600E5D71A /* SwitchLockListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -552,6 +563,8 @@
 			children = (
 				8405DBB224738669000F94EE /* MyTaskViewController.h */,
 				8405DBB324738669000F94EE /* MyTaskViewController.m */,
+				FB30C09C25540DA1008D5F59 /* MyTaskLockSearchVC.h */,
+				FB30C09D25540DA1008D5F59 /* MyTaskLockSearchVC.m */,
 				FB3BDEA9248F0FE800B54021 /* SwitchLockViewController.h */,
 				FB3BDEAA248F0FE800B54021 /* SwitchLockViewController.m */,
 			);
@@ -993,6 +1006,7 @@
 				A44661B4242473A6000D1D9D /* LaunchScreen.storyboard in Resources */,
 				FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */,
 				A4102A75242B200500B03620 /* resource.bundle in Resources */,
+				FBFB51F32553F36600E5D71A /* SwitchLockListCell.xib in Resources */,
 				A44661B1242473A6000D1D9D /* Assets.xcassets in Resources */,
 				A430EF752432C69C00F68BCE /* WSDatePickerView.xib in Resources */,
 				842FC896247E2C8800489C50 /* MyTaskListCell.xib in Resources */,
@@ -1126,6 +1140,8 @@
 				8405DBE6247386E2000F94EE /* MapViewController.m in Sources */,
 				FB608CB2248A1CF7008BA56C /* RegistrationKeyModel.m in Sources */,
 				8405DBEF2473BB47000F94EE /* RequestBean.m in Sources */,
+				FBFB51F42553F36600E5D71A /* SwitchLockListCell.m in Sources */,
+				FB30C09E25540DA1008D5F59 /* MyTaskLockSearchVC.m in Sources */,
 				8405DBDB24738669000F94EE /* WorkListTableViewCell.m in Sources */,
 				8405DBD624738669000F94EE /* ConnectKeyTableViewCell.m in Sources */,
 				A430EF792432C69C00F68BCE /* UIView+Extension.m in Sources */,
@@ -1343,7 +1359,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.4.1;
+				CURRENT_PROJECT_VERSION = 1.0.5.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1361,7 +1377,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
 				PRODUCT_NAME = "万码电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1377,7 +1393,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.4.1;
+				CURRENT_PROJECT_VERSION = 1.0.5.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1395,7 +1411,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
 				PRODUCT_NAME = "万码电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";

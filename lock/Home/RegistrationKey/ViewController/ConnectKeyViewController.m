@@ -11,12 +11,14 @@
 #import "RegistrationKeyModel.h"
 #import "UserModel.h"
 #import "RegistrationLockModel.h"
+#import "RegistrationLockTFCell.h"
 
 @interface ConnectKeyViewController ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
 
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo;
 @property (nonatomic,strong)UITextField * keyTF;
+@property (nonatomic,strong)UITextField * keyNameTF;
 @property (nonatomic,strong)UserInfo * userInfo;
 @property (nonatomic,assign)NSInteger registerNumber;
 @property (nonatomic,assign)BOOL isHide;
@@ -135,51 +137,63 @@
     return 60;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString * reuseIdentifier =  @"cell";
-      ConnectKeyTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-       if (!cell) {
-           cell = [[ ConnectKeyTableViewCell alloc]
-                   initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-           cell.selectionStyle = UITableViewCellSelectionStyleNone;
-           
-       }
-    if(indexPath.row == 0){
-        cell.topLabel.text = [NSString stringWithFormat:@"%@：%@",STR_KEY_NAME,_currentBle.name];
+    if (indexPath.row == 0) {//钥匙名称
+        static NSString * reuseIdentifier =  @"RegistrationLockTFCell";
+        RegistrationLockTFCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        if (!cell) {
+            cell = [[RegistrationLockTFCell alloc]
+                    initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+        }
+        cell.topLabel.text = STR_KEY_NAME;
+        _keyNameTF = cell.textField;
+        return cell;
+    }else {//锁id
+        static NSString * reuseIdentifier =  @"cell";
+          ConnectKeyTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+           if (!cell) {
+               cell = [[ ConnectKeyTableViewCell alloc]
+                       initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+               cell.selectionStyle = UITableViewCellSelectionStyleNone;
+               
+           }
+        if (indexPath.row == 1){
+            if (_keyInfo) {
+                cell.topLabel.text = [NSString stringWithFormat:@"MAC：%@",_keyInfo.mac_address];
+            }else {
+                cell.topLabel.text = @"MAC：";
+            }
+
+        }else if (indexPath.row == 2){
+            if (_keyInfo) {
+                cell.topLabel.text = [NSString stringWithFormat:@"%@ID：%@",STR_KEY,_keyInfo.key_id];
+            }else {
+                cell.topLabel.text = [NSString stringWithFormat:@"%@ID：",STR_KEY];
+            }
+
+        }else if (indexPath.row == 3){
+            if (_keyInfo) {
+                cell.topLabel.text = [NSString stringWithFormat:@"%@：%@",STR_KEY_NUMBER,_keyInfo.read_key_serial_number];
+            }else {
+                cell.topLabel.text = [NSString stringWithFormat:@"%@：",STR_KEY_NUMBER];
+            }
+
+        }else if (indexPath.row == 4){
+            if (_keyInfo) {
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+                NSDate *datenow = [NSDate date];
+                NSString *currentTimeString = [formatter stringFromDate:datenow];
+                cell.topLabel.text = [NSString stringWithFormat:@"%@%@：%@",STR_KEY,STR_TIME,currentTimeString];
+            }else {
+                cell.topLabel.text = [NSString stringWithFormat:@"%@%@：",STR_KEY,STR_TIME];
+            }
+        }
         
-    }else if (indexPath.row == 1){
-        if (_keyInfo) {
-            cell.topLabel.text = [NSString stringWithFormat:@"MAC：%@",_keyInfo.mac_address];
-        }else {
-            cell.topLabel.text = @"MAC：";
-        }
-
-    }else if (indexPath.row == 2){
-        if (_keyInfo) {
-            cell.topLabel.text = [NSString stringWithFormat:@"%@ID：%@",STR_KEY,_keyInfo.key_id];
-        }else {
-            cell.topLabel.text = [NSString stringWithFormat:@"%@ID：",STR_KEY];
-        }
-
-    }else if (indexPath.row == 3){
-        if (_keyInfo) {
-            cell.topLabel.text = [NSString stringWithFormat:@"%@：%@",STR_KEY_NUMBER,_keyInfo.read_key_serial_number];
-        }else {
-            cell.topLabel.text = [NSString stringWithFormat:@"%@：",STR_KEY_NUMBER];
-        }
-
-    }else if (indexPath.row == 4){
-        if (_keyInfo) {
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-            NSDate *datenow = [NSDate date];
-            NSString *currentTimeString = [formatter stringFromDate:datenow];
-            cell.topLabel.text = [NSString stringWithFormat:@"%@%@：%@",STR_KEY,STR_TIME,currentTimeString];
-        }else {
-            cell.topLabel.text = [NSString stringWithFormat:@"%@%@：",STR_KEY,STR_TIME];
-        }
+        return cell;
     }
     
-    return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10;
@@ -275,15 +289,20 @@
 }
 //注册钥匙
 - (void)registerBtnClick:(UIButton *)btn {
+    if (kStringIsEmpty(self.keyNameTF.text)) {
+        [MBProgressHUD showMessage:STR_KEY_NAME_TIPS];
+        return;
+    }
     [MBProgressHUD showActivityMessage:STR_LOADING];
     RegistrationKeyRegRequest * keyRequest = [[RegistrationKeyRegRequest alloc]init];
     keyRequest.factoryno = _keyInfo.read_key_serial_number;
     keyRequest.keyid = _keyInfo.key_id;
     keyRequest.keymode = @"0";
-    keyRequest.keyname = _currentBle.name;
+    keyRequest.keyname = _keyNameTF.text;
     keyRequest.keyno = _keyInfo.key_id;
     keyRequest.keystatus = @"0";
     keyRequest.keytype = @"1";
+    keyRequest.bleflag = _currentBle.name;
     [MSHTTPRequest POST:kRegKey parameters:[keyRequest toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         [MBProgressHUD hideHUD];
         NSError * error = nil;

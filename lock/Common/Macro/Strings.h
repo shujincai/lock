@@ -90,7 +90,7 @@
 #define STR_KEY_NAME_REPEAT                 L(@"钥匙名称重复")
 #define STR_KEY_HARDWARE_NUMBER_REPEAT      L(@"钥匙硬件编号重复")
 #define STR_KEY_NUMBER_RANGE                L(@"钥匙编号已超出范围")
-
+#define STR_KEY_NAME_TIPS                   L(@"请输入钥匙名称")
 
 //注册锁
 #define STR_PLEASE_CONNECT_LOCK_READ        L(@"请连锁，读取锁id...")

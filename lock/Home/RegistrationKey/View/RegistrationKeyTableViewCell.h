@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RegistrationKeyTableViewCell : UITableViewCell
 @property(nonatomic,strong)UIImageView * leftImage;
+@property(nonatomic,strong)UIImageView * rightImage;
 @property(nonatomic,strong)SZKLabel* topLabel;
 @property(nonatomic,strong)SZKLabel* bottomLabel;
 

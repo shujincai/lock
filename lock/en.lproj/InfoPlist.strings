@@ -92,6 +92,7 @@
 "钥匙名称重复"="Key name is repeated";
 "钥匙硬件编号重复"="Key hardware number is repeated";
 "钥匙编号已超出范围"="Key number is out of the range";
+"请输入钥匙名称"="Please enter the key name";
 
 //注册锁
 "请连锁，读取锁id..."="Please connect, read ID of lock...";

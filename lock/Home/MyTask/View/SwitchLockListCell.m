@@ -1,14 +1,14 @@
 //
-//  MyTaskListCell.m
+//  SwitchLockListCell.m
 //  lock
 //
 //  Created by admin on 2020/5/27.
 //  Copyright © 2020 li. All rights reserved.
 //
 
-#import "MyTaskListCell.h"
+#import "SwitchLockListCell.h"
 
-@implementation MyTaskListCell
+@implementation SwitchLockListCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -22,9 +22,7 @@
     self.headerImageV.image = [UIImage imageNamed:@"lock_128"];
     self.nameLabel.font = BOLD_SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
     self.nameLabel.textColor = COLOR_BLACK;
-    self.dateLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
-    self.dateLabel.textColor = COLOR_LIST;
-    self.timeLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
+    self.timeLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3);
     self.timeLabel.textColor = COLOR_LIST;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

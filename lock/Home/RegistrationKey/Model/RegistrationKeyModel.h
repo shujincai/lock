@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * keytype;//钥匙类型 0-NFC钥匙、1-蓝牙钥匙、2-指纹钥匙
 @property(nonatomic,copy)NSString * manager;//钥匙管理人
 @property(nonatomic,copy)NSString * deptcode;
+@property(nonatomic,copy)NSString * bleflag;//蓝牙唯一标志
 @end
 
 

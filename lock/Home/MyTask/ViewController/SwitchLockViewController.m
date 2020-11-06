@@ -7,7 +7,7 @@
 //
 
 #import "SwitchLockViewController.h"
-#import "MyTaskListCell.h"
+#import "SwitchLockListCell.h"
 #import "RegistrationKeyModel.h"
 #import "RegistrationLockModel.h"
 #import "MyTaskModel.h"
@@ -212,10 +212,10 @@
     return 55;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString * reuseIdentifier =  @"MyTaskListCell";
-    MyTaskListCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    static NSString * reuseIdentifier =  @"SwitchLockListCell";
+    SwitchLockListCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"MyTaskListCell" owner:self options:nil] lastObject];
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"SwitchLockListCell" owner:self options:nil] lastObject];
         
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

@@ -10,6 +10,7 @@
 #import "MyTaskListCell.h"
 #import "MyTaskModel.h"
 #import "RegistrationKeyViewController.h"
+#import "MyTaskLockSearchVC.h"
 
 @interface MyTaskViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 @property (nonatomic,strong)UITableView * tableView;
@@ -73,14 +74,13 @@
     return [[NSAttributedString alloc] initWithString:STR_NO_DATA attributes:attributes];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 55;
+    return 80;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _listArray.count;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    MyTaskListBean * listBean = [_listArray objectAtIndex:section];
-    return listBean.unlocklist.count;
+    return _listArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -90,11 +90,22 @@
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 70;
+    return 0;
 }
 // 不同任务 钥匙名称 日期范围 时间段
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    MyTaskListBean * taskList = [_listArray objectAtIndex:section];
+    return nil;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString * reuseIdentifier =  @"MyTaskListCell";
+    MyTaskListCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"MyTaskListCell" owner:self options:nil] lastObject];
+        
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    MyTaskListBean * taskList = [_listArray objectAtIndex:indexPath.row];
     //时间格式转换
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -107,70 +118,13 @@
     dateFormatter.dateFormat = @"yyyy-MM-dd";
     NSDateFormatter * timeFormatter = [[NSDateFormatter alloc] init];
     timeFormatter.dateFormat = @"HH:mm:ss";
-    
-    UIView * view = [UIView new];
-    UIView * bgView = [[UIView alloc]init];
-    bgView.backgroundColor = COLOR_TASK_HEADER_BG;
-    bgView.layer.cornerRadius = 4;
-    bgView.layer.masksToBounds = YES;
-    [view addSubview:bgView];
-    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(view.mas_left).offset(10);
-        make.top.equalTo(view.mas_top).offset(5);
-        make.right.equalTo(view.mas_right).offset(-10);
-        make.height.mas_equalTo(65);
-    }];
-    //钥匙名称
-    UILabel * nameLabel = [[UILabel alloc]init];
-    nameLabel.text = taskList.keyname;
-    nameLabel.textColor = COLOR_WHITE;
-    nameLabel.font = BOLD_SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
-    [bgView addSubview:nameLabel];
-    [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(bgView.mas_left).offset(10);
-        make.top.equalTo(bgView.mas_top).offset(0);
-        make.right.equalTo(bgView.mas_right).offset(-20);
-        make.height.mas_equalTo(25);
-    }];
-    //日期范围
-    UILabel * dateLabel = [[UILabel alloc]init];
-    dateLabel.text = [NSString stringWithFormat:@"%@~%@",[dateFormatter stringFromDate:beginDate],[dateFormatter stringFromDate:endDate]];
-    dateLabel.textColor = COLOR_WHITE;
-    dateLabel.font = BOLD_SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
-    [bgView addSubview:dateLabel];
-    [dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(bgView.mas_left).offset(10);
-        make.top.equalTo(nameLabel.mas_bottom).offset(0);
-        make.right.equalTo(bgView.mas_right).offset(-20);
-        make.height.mas_equalTo(20);
-    }];
-    //时间段
-    UILabel * timeLabel = [[UILabel alloc]init];
-    timeLabel.text = [NSString stringWithFormat:@"%@~%@",[timeFormatter stringFromDate:beginTime],[timeFormatter stringFromDate:endTime]];
-    timeLabel.textColor = COLOR_WHITE;
-    timeLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3);
-    [bgView addSubview:timeLabel];
-    [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(bgView.mas_left).offset(10);
-        make.top.equalTo(dateLabel.mas_bottom).offset(0);
-        make.right.equalTo(bgView.mas_right).offset(-20);
-        make.bottom.equalTo(bgView.mas_bottom).offset(0);
-    }];
-    return view;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString * reuseIdentifier =  @"MyTaskListCell";
-    MyTaskListCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"MyTaskListCell" owner:self options:nil] lastObject];
-        
+    if (taskList.subject.length > 0) {
+        cell.nameLabel.text = taskList.subject;
+    } else {
+        cell.nameLabel.text = @"暂无";
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    MyTaskListBean * taskList = [_listArray objectAtIndex:indexPath.section];
-    UnlockListBean * listBean = [taskList.unlocklist objectAtIndex:indexPath.row];
-    cell.nameLabel.text = listBean.lockname; //锁名称
-    cell.timeLabel.text = listBean.lockno; //锁号
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@~%@",[dateFormatter stringFromDate:beginDate],[dateFormatter stringFromDate:endDate]];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@~%@",[timeFormatter stringFromDate:beginTime],[timeFormatter stringFromDate:endTime]];
     return cell;
 }
 
@@ -293,17 +247,16 @@
 }
 //选择不同锁进行开关
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MyTaskListBean * taskList = [_listArray objectAtIndex:indexPath.section];
-    UnlockListBean * listBean = [taskList.unlocklist objectAtIndex:indexPath.row];
-    [self getTaskValid:listBean withTaskList:taskList];
+    MyTaskListBean * taskList = [_listArray objectAtIndex:indexPath.row];
+    [self getTaskValidTaskList:taskList];
 }
 
 #pragma mark 任务ID判断任务是否有效
  
-- (void)getTaskValid:(UnlockListBean *)infoBean withTaskList:(MyTaskListBean *)taskList {
+- (void)getTaskValidTaskList:(MyTaskListBean *)taskList {
     [MBProgressHUD showActivityMessage:STR_LOADING];
     RequestBean * request = [[RequestBean alloc]init];
-    [MSHTTPRequest GET:[NSString stringWithFormat:kTaskValid,infoBean.keydataid] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+    [MSHTTPRequest GET:[NSString stringWithFormat:kTaskValid,taskList.taskid] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         [MBProgressHUD hideHUD];
         NSError * error = nil;
         MyTaskValidResponse * response = [[MyTaskValidResponse alloc]initWithDictionary:responseObject error:&error];
@@ -318,11 +271,10 @@
             if (response.data == NO) {
                 [MBProgressHUD showError:STR_MY_TASK_INVALID];
             }else {
-                RegistrationKeyViewController* regLock = [RegistrationKeyViewController new];
-                regLock.type = @"2";
-                regLock.taskBean = taskList;
-                regLock.lockBean = infoBean;
-                [self.navigationController pushViewController:regLock animated:YES];
+                MyTaskLockSearchVC* lockList = [MyTaskLockSearchVC new];
+                lockList.type = @"2";
+                lockList.taskBean = taskList;
+                [self.navigationController pushViewController:lockList animated:YES];
             }
         }
     } failure:^(NSError * _Nonnull error) {

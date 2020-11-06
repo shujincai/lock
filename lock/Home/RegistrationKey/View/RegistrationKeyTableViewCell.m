@@ -42,11 +42,17 @@
     self.leftImage.frame = CGRectMake(10, 10,30, 30);
     [bgView addSubview:self.leftImage];
     
+    self.rightImage = [UIImageView new];
+    self.rightImage.frame = CGRectMake(UISCREEN_WIDTH-70, 14,30, 22);
+    [bgView addSubview:self.rightImage];
+    
     self.topLabel = [SZKLabel labelWithFrame:CGRectMake(50, 5, 300, 20) text:@"" textColor:UIColor.blackColor font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.whiteColor];
     [bgView addSubview:self.topLabel];
     
     self.bottomLabel = [SZKLabel labelWithFrame:CGRectMake(50, 25, 300, 20) text:@"" textColor:UIColor.blackColor font:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.whiteColor];
        [bgView addSubview:self.bottomLabel];
+    
+   
     
 }
 

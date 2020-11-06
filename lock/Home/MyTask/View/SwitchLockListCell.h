@@ -1,5 +1,5 @@
 //
-//  MyTaskListCell.h
+//  SwitchLockListCell.h
 //  lock
 //
 //  Created by admin on 2020/5/27.
@@ -10,11 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MyTaskListCell : UITableViewCell
+@interface SwitchLockListCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageV;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end

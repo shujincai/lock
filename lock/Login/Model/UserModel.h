@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * updatetime;//更新时间
 @property(nonatomic,copy)NSString * workerid;//用户id
 @property(nonatomic,copy)NSString * workername;//用户名称
+@property(nonatomic,copy)NSString * bleflag;//钥匙唯一标志
 
 @end
 

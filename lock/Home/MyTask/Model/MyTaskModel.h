@@ -78,6 +78,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * keymode;//钥匙
 @property(nonatomic,copy)NSString * username;//用户名称
 @property(nonatomic,strong)NSMutableArray<MyTaskTimeRangeListBean> * timerangelist;//时间段
+@property(nonatomic,strong)NSMutableArray<UserKeyInfoList> * keylist;//钥匙列表
+@property(nonatomic,copy)NSString * subject;//任务名称
+
 @end
 
 @interface MyTaskListPage : BaseBean
