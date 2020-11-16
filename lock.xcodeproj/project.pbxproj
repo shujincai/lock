@@ -225,7 +225,7 @@
 		A430EF702432C69A00F68BCE /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		A430EF732432C69B00F68BCE /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A430EF742432C69C00F68BCE /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		A44661A1242473A4000D1D9D /* 万码电子锁.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "万码电子锁.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A44661A1242473A4000D1D9D /* 南工作业门锁.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "南工作业门锁.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44661A4242473A4000D1D9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A44661A5242473A4000D1D9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A44661A7242473A4000D1D9D /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -831,7 +831,7 @@
 		A44661A2242473A4000D1D9D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A44661A1242473A4000D1D9D /* 万码电子锁.app */,
+				A44661A1242473A4000D1D9D /* 南工作业门锁.app */,
 				A44661BC242473A6000D1D9D /* lockTests.xctest */,
 				A44661C7242473A6000D1D9D /* lockUITests.xctest */,
 			);
@@ -916,7 +916,7 @@
 			);
 			name = lock;
 			productName = lock;
-			productReference = A44661A1242473A4000D1D9D /* 万码电子锁.app */;
+			productReference = A44661A1242473A4000D1D9D /* 南工作业门锁.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A44661BB242473A6000D1D9D /* lockTests */ = {
@@ -1359,7 +1359,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5.1;
+				CURRENT_PROJECT_VERSION = 1.0.1.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1377,9 +1377,9 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
-				PRODUCT_NAME = "万码电子锁";
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nangong.lock;
+				PRODUCT_NAME = "南工作业门锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1393,7 +1393,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5.1;
+				CURRENT_PROJECT_VERSION = 1.0.1.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1411,9 +1411,9 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
-				PRODUCT_NAME = "万码电子锁";
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nangong.lock;
+				PRODUCT_NAME = "南工作业门锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";

@@ -167,7 +167,12 @@
             
         }
         if (_lockInfo) {
-            cell.topLabel.text = [NSString stringWithFormat:@"%@：%@",STR_LOCK_ID,_lockInfo.lock_id];
+            if (_lockInfo.lock_id.length > 0) {
+                cell.topLabel.text = [NSString stringWithFormat:@"%@：%@",STR_LOCK_ID,_lockInfo.lock_id];
+            }else {
+                cell.topLabel.text = [NSString stringWithFormat:@"%@：",STR_LOCK_ID];
+            }
+            
         }else {
             cell.topLabel.text = cell.topLabel.text = [NSString stringWithFormat:@"%@：",STR_LOCK_ID];
         }

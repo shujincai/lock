@@ -147,6 +147,7 @@
             
         }
         cell.topLabel.text = STR_KEY_NAME;
+        cell.textField.placeholder = STR_KEY_NAME_TIPS;
         _keyNameTF = cell.textField;
         return cell;
     }else {//锁id

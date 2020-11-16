@@ -101,6 +101,12 @@
         return;
     }else {
         self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        for (UserKeyInfoList * keyList in self.taskBean.keylist) {
+            if ([keyList.keyno isEqualToString:self.keyInfo.key_id]) {
+                self.taskBean.keyno = keyList.keyno;
+                break;
+            }
+        }
         if (![self.keyInfo.key_id isEqualToString:self.taskBean.keyno]) {//钥匙不匹配
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:STR_KEY_NUMBER_NO_MATE];

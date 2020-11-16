@@ -144,14 +144,14 @@
         cell.leftImage.image = [UIImage imageNamed:@"ic_list_bluetooth"];
         
     }
-    if (_taskBean) {
-        for (UserKeyInfoList * keyList in _taskBean.keylist) {
-            if ([keyList.bleflag isEqualToString:peripheral.name]) {
-                cell.rightImage.image = [UIImage imageNamed:@"ic_lock_open"];
-                break;
-            }
-        }
-    }
+//    if (_taskBean) {
+//        for (UserKeyInfoList * keyList in _taskBean.keylist) {
+//            if ([keyList.bleflag isEqualToString:peripheral.name]) {
+//                cell.rightImage.image = [UIImage imageNamed:@"ic_lock_open"];
+//                break;
+//            }
+//        }
+//    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -184,13 +184,13 @@
         [self.navigationController pushViewController: lockVC animated:YES];
     }
     if ([self.type isEqualToString:@"2"]) {//我的任务 开关锁
-        for (UserKeyInfoList * keyList in _taskBean.keylist) {
-            if ([keyList.bleflag isEqualToString:currentBle.name]) {
-                self.taskBean.keyno = keyList.keyno;
-                self.taskBean.keyid = keyList.keyid;
-                break;
-            }
-        }
+//        for (UserKeyInfoList * keyList in _taskBean.keylist) {
+//            if ([keyList.bleflag isEqualToString:currentBle.name]) {
+//                self.taskBean.keyno = keyList.keyno;
+//                self.taskBean.keyid = keyList.keyid;
+//                break;
+//            }
+//        }
         SwitchLockViewController * switchLockVC = [[SwitchLockViewController alloc]init];
         switchLockVC.currentBle = currentBle;
         switchLockVC.taskBean = self.taskBean;

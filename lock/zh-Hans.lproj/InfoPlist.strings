@@ -6,7 +6,7 @@
   Copyright © 2020 li. All rights reserved.
 */
 //info.plist
-"CFBundleDisplayName" = "万码电子锁";
+"CFBundleDisplayName" = "南工作业门锁";
 "NSBluetoothAlwaysUsageDescription" = "App需要您的同意,才能访问蓝牙,以便于连接钥匙";
 "NSBluetoothPeripheralUsageDescription" = "App需要您的同意,才能访问蓝牙,以便于连接钥匙";
 "NSCameraUsageDescription" = "App需要您的同意,才能访问相机,以便于扫描二维码等";
