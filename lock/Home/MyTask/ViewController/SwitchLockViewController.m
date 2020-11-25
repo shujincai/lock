@@ -192,9 +192,10 @@
         if (![self.lockInfo.event_type isEqualToString:@"1"]) {//钥匙与锁接触
             [self.listArray addObject:infoBean];
             [self.tableView reloadData];
+            //上传开关锁数据
+            [self uploadKeyDatas:infoBean];
         }
-        //上传开关锁数据
-        [self uploadKeyDatas:infoBean];
+        
     }
 }
 
