@@ -30,7 +30,14 @@
                 NSLog(@"error: %@",error);
             } else {
                 NSLog(@"扫描结果：%@",result);
-                weakSelf.account.textField.text = result;
+                NSRange range = [result rangeOfString:@"#/app"];
+                if(range.location != NSNotFound)
+                {
+                    weakSelf.account.textField.text = [result substringToIndex:result.length-range.length];
+                }else{
+                    weakSelf.account.textField.text = result;
+                }
+                
                 [weakSelf showInfo:result];
             }
         }];

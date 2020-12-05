@@ -161,6 +161,7 @@
     return nil;
 }
 - (void)scanedPeripheral:(CBPeripheral *)peripheral{
+    NSLog(@"%@",peripheral);
     if ([peripheral.name rangeOfString:@"B030"].location != NSNotFound||[peripheral.name rangeOfString:@"rayonicskey"].location != NSNotFound) {
         if (![_bleArray containsObject:peripheral]){
             [_bleArray addObject:peripheral];
