@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <Bugly/Bugly.h>
+#import "LogInViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +19,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = COLOR_WHITE;
+    BaseNavigationController * nav = [[BaseNavigationController alloc]initWithRootViewController:[LogInViewController new]];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
+    
     [AMapServices sharedServices].apiKey = @"6a164f52cd5c8fc0966f50dac52cbeba";
     BuglyConfig * config = [[BuglyConfig alloc] init];
     config.reportLogLevel = BuglyLogLevelWarn;
@@ -28,32 +35,15 @@
     
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
-
-  
     return YES;
 }
-
-
-#pragma mark - UISceneSession lifecycle
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [[NSNotificationCenter defaultCenter]postNotificationName:NF_KEY_BACKGROUND object:nil];
 }
-
-- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
-    
-    [AMapServices sharedServices].apiKey = @"6a164f52cd5c8fc0966f50dac52cbeba";
-
-    // Called when a new scene session is being created.
-    // Use this method to select a configuration to create the new scene with.
-    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    [[NSNotificationCenter defaultCenter]postNotificationName:NF_KEY_FOREGROUND object:nil];
 }
+- (void)applicationWillTerminate:(UIApplication *)application {
 
-
-- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
-    // Called when the user discards a scene session.
-    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
 }
-
-
 @end

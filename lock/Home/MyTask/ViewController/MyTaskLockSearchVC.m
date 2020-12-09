@@ -48,10 +48,14 @@
     searchBar.translucent = YES;
     searchBar.searchBarStyle = UISearchBarStyleDefault;
     //改变占位符的字体大小颜色
-    searchBar.searchTextField.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3);
-    searchBar.searchTextField.backgroundColor = COLOR_BG_VIEW;
-    searchBar.searchTextField.textColor = COLOR_BLACK;
-    _searchTF = searchBar.searchTextField;
+    if(@available(iOS 13.0, *)) {
+        searchBar.searchTextField.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3);
+        searchBar.searchTextField.backgroundColor = COLOR_BG_VIEW;
+        searchBar.searchTextField.textColor = COLOR_BLACK;
+        _searchTF = searchBar.searchTextField;
+    }else {
+        _searchTF = [searchBar valueForKey:@"_searchField"];
+    }
     self.navigationItem.titleView = searchBar;
 }
 - (void)createTableView {

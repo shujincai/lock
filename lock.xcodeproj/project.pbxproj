@@ -67,7 +67,6 @@
 		A430EF772432C69C00F68BCE /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A430EF702432C69A00F68BCE /* NSDate+Extension.m */; };
 		A430EF792432C69C00F68BCE /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A430EF742432C69C00F68BCE /* UIView+Extension.m */; };
 		A44661A6242473A4000D1D9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A44661A5242473A4000D1D9D /* AppDelegate.m */; };
-		A44661A9242473A4000D1D9D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A44661A8242473A4000D1D9D /* SceneDelegate.m */; };
 		A44661AC242473A4000D1D9D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44661AB242473A4000D1D9D /* ViewController.m */; };
 		A44661AF242473A4000D1D9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44661AD242473A4000D1D9D /* Main.storyboard */; };
 		A44661B1242473A6000D1D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44661B0242473A6000D1D9D /* Assets.xcassets */; };
@@ -228,8 +227,6 @@
 		A44661A1242473A4000D1D9D /* 万码电子锁.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "万码电子锁.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44661A4242473A4000D1D9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A44661A5242473A4000D1D9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A44661A7242473A4000D1D9D /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		A44661A8242473A4000D1D9D /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		A44661AA242473A4000D1D9D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A44661AB242473A4000D1D9D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A44661AE242473A4000D1D9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -849,8 +846,6 @@
 				8405DB8524737EB2000F94EE /* Common */,
 				A44661A4242473A4000D1D9D /* AppDelegate.h */,
 				A44661A5242473A4000D1D9D /* AppDelegate.m */,
-				A44661A7242473A4000D1D9D /* SceneDelegate.h */,
-				A44661A8242473A4000D1D9D /* SceneDelegate.m */,
 				A44661AA242473A4000D1D9D /* ViewController.h */,
 				A44661AB242473A4000D1D9D /* ViewController.m */,
 				FB83FF81249B493600432C35 /* InfoPlist.strings */,
@@ -1150,7 +1145,6 @@
 				8405DBA0247382F7000F94EE /* MainViewController.m in Sources */,
 				A44661B7242473A6000D1D9D /* main.m in Sources */,
 				8405DBD924738669000F94EE /* MyTaskViewController.m in Sources */,
-				A44661A9242473A4000D1D9D /* SceneDelegate.m in Sources */,
 				A4102A342429A7F500B03620 /* RKNotificationHub.m in Sources */,
 				8405DBDA24738669000F94EE /* WorkListModel.m in Sources */,
 				FB608CB5248A1D32008BA56C /* SearchBluetoothView.m in Sources */,

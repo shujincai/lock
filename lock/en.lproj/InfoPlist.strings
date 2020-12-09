@@ -106,7 +106,7 @@
 "锁名称为空"="Lock name is empty";
 "与本部门的锁编号重复"="Repeat with the lock ID of this department";
 "与本部门的锁名称重复"="Repeat with the lock name of this department";
-"与其他部门的锁编号重复"="epeat with the lock ID of other department";
+"与其他部门的锁编号重复"="Repeat with the lock ID of other department";
 "锁编号已超出范围"="Lock number is out of range";
 "锁硬件编号重复"="Hardware number is repeated";
 
