@@ -66,6 +66,8 @@
 "注册锁"="Register lock";
 "注册钥匙"="Register key";
 "系统参数"="System parameter";
+"申请开锁"="Apply unlock";
+"开锁审核"="Unlock audit";
 
 //蓝牙钥匙搜索
 "搜索蓝牙钥匙"="Researching Bluetooth key";
@@ -93,6 +95,7 @@
 "钥匙硬件编号重复"="Key hardware number is repeated";
 "钥匙编号已超出范围"="Key number is out of the range";
 "请输入钥匙名称"="Please enter the key name";
+"钥匙已存在，请勿重复注册"="Key already exists, please do not register again";
 
 //注册锁
 "请连锁，读取锁id..."="Please connect, read ID of lock...";
@@ -136,6 +139,8 @@
 "请开关锁"="Please switch the lock";
 "关锁成功"="Unlock successfully";
 "任务已失效"="Mission failure";
+"锁列表"="Lock list";
+"暂无"="Not yet";
 
 //系统参数
 "退出"="Log out";
@@ -159,3 +164,21 @@
 "修改成功，请重新登录"="Modify the password, please login again";
 "原密码错误"="Original password error";
 "新密码和旧密码相同"="The new password is the same as old password";
+
+//申请开锁
+"请选择要删除的开锁申请"="Please select the unlock application to delete";
+"确定要删除开锁申请？"="Are you sure you want to delete the unlock request?";
+"删除成功"="Successfully deleted";
+"新建申请开锁"="New application unlock";
+"日期"="Date";
+"请选择要开的锁"="Please select the lock to open";
+"待审批"="Pending approval";
+"已驳回"="Rejected";
+"任务已存在"="The task already exists";
+
+//开锁审核
+"同意"="Agree";
+"驳回"="Reject";
+"申请人"="Applicant";
+"确定要同意开锁申请？"="Are you sure you want to approve the unlock application?";
+"确定要驳回开锁申请？"="Are you sure you want to reject the unlock application?";

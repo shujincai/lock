@@ -16,3 +16,15 @@
 @implementation RegistrationKeyRegRequest
 
 @end
+
+@implementation RegistrationKeyExistenceRequest
+
+@end
+
+@implementation RegistrationKeyExistenceBean
+
+@end
+
+@implementation RegistrationKeyExistenceResponse
+
+@end

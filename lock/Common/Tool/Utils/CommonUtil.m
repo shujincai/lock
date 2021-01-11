@@ -171,4 +171,14 @@
     }
     return array;
 }
+
++ (NSString *)getBluetoothKeyMac:(NSString *)name {
+    NSString * string = [name substringFromIndex:name.length - 12];
+    NSMutableArray * array = [NSMutableArray new];
+    for (int i = 0; i< 6; i++) {
+        NSString * str = [string substringWithRange:NSMakeRange(10-i*2, 2)];
+        [array addObject:str];
+    }
+    return [array componentsJoinedByString:@""];
+}
 @end

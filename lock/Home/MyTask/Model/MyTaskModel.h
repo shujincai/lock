@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MyTaskListRequest : RequestBean
 @property (nonatomic,assign)NSInteger page;//页码
 @property (nonatomic,assign)NSInteger pagesize;//每页条数
+@property(nonatomic,copy)NSString * approved;//0-待审核，1-已通过，2-已驳回
 @end
 
 @protocol MyTaskTimeRangeListBean
@@ -80,6 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<MyTaskTimeRangeListBean> * timerangelist;//时间段
 @property(nonatomic,strong)NSMutableArray<UserKeyInfoList> * keylist;//钥匙列表
 @property(nonatomic,copy)NSString * subject;//任务名称
+@property(nonatomic,copy)NSString * approved;//状态 0-待审核，1-已通过，2-已驳回
 
 @end
 

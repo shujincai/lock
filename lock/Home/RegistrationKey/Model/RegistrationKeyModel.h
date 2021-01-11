@@ -40,5 +40,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * bleflag;//蓝牙唯一标志
 @end
 
+//通过出厂编号查询钥匙信息
+@interface RegistrationKeyExistenceRequest : BaseBean
+@property(nonatomic,copy)NSString * factoryno;//钥匙硬件编号
+@end
+
+@interface RegistrationKeyExistenceBean : BaseBean
+@property(nonatomic,copy)NSString * factoryno;//钥匙硬件编号
+@property(nonatomic,copy)NSString * keyid;//钥匙id
+@property(nonatomic,copy)NSString * keymode;//钥匙模式（0-普通钥匙、1-巡检钥匙)
+@property(nonatomic,copy)NSString * keyname;//钥匙名称
+@property(nonatomic,copy)NSString * keyno;//钥匙号
+@property(nonatomic,copy)NSString * keystatus;//0钥匙状态
+@property(nonatomic,copy)NSString * keytype;//钥匙类型 0-NFC钥匙、1-蓝牙钥匙、2-指纹钥匙
+@property(nonatomic,copy)NSString * manager;//钥匙管理人
+@property(nonatomic,copy)NSString * deptcode;
+@property(nonatomic,copy)NSString * bleflag;//蓝牙唯一标志
+@end
+
+@interface RegistrationKeyExistenceResponse : ResponseBean
+@property(nonatomic,strong)RegistrationKeyExistenceBean * data;
+@end
 
 NS_ASSUME_NONNULL_END

@@ -163,7 +163,7 @@
     request.password = self.password.textField.text;
     [MSHTTPRequest POST:kLogin parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         [MBProgressHUD hideHUD];
-        NSError * error = nil;
+         NSError * error = nil;
         UserInfoResponse * response = [[UserInfoResponse alloc]initWithDictionary:responseObject error:&error];
         if (error) {
             [MBProgressHUD showError:STR_PARSE_FAILURE];

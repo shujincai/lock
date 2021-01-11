@@ -20,7 +20,17 @@
     //设置对应接口的Url
     [self requestWithMethod:MSRequestMethodPOST url:URL parameters:parameters cachePolicy:cachePolicy success:success failure:failure];
     
-    
+}
+/** 删除*/
++ (void)DELETE:(NSString *)URL parameters:(id)parameters cachePolicy:(MSCachePolicy)cachePolicy success:(MSHttpSuccess)success failure:(MSHttpFail)failure{
+    //设置对应接口的Url
+    [self requestWithMethod:MSRequestMethodDELETE url:URL parameters:parameters cachePolicy:cachePolicy success:success failure:failure];
+}
+
+/** 修改*/
++ (void)PUT:(NSString *)URL parameters:(id)parameters cachePolicy:(MSCachePolicy)cachePolicy success:(MSHttpSuccess)success failure:(MSHttpFail)failure{
+    //设置对应接口的Url
+    [self requestWithMethod:MSRequestMethodPUT url:URL parameters:parameters cachePolicy:cachePolicy success:success failure:failure];
 }
 
 

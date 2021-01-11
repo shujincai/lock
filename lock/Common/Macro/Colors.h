@@ -40,6 +40,8 @@
 #define COLOR_HOME_BG                       [UIColor colorFromHexString:@"#12314B"]
 //首页背景色
 #define COLOR_TASK_HEADER_BG                [UIColor colorFromHexString:@"#AA66CC"]
+//日期背景色
+#define COLOR_COVER                         [UIColor colorWithRed:0 / 255.f green:0 / 255.f blue:0 / 255.f alpha:0.3]
 
 
 #endif /* Colors_h */

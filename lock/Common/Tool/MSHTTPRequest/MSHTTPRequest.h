@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)GET:(NSString *)URL parameters:(id)parameters  cachePolicy:(MSCachePolicy)cachePolicy success:(MSHttpSuccess)success  failure:(MSHttpFail)failure;
 /** 退出*/
 + (void)POST:(NSString *)URL parameters:(id)parameters cachePolicy:(MSCachePolicy)cachePolicy success:(MSHttpSuccess)success failure:(MSHttpFail)failure;
+/** 删除*/
++ (void)DELETE:(NSString *)URL parameters:(id)parameters cachePolicy:(MSCachePolicy)cachePolicy success:(MSHttpSuccess)success failure:(MSHttpFail)failure;
+/** 修改*/
++ (void)PUT:(NSString *)URL parameters:(id)parameters cachePolicy:(MSCachePolicy)cachePolicy success:(MSHttpSuccess)success failure:(MSHttpFail)failure;
 
 + (void)requestWithMethod:(MSRequestMethod)method url:(NSString *)URL  parameters:(NSDictionary *)parameters cachePolicy:(MSCachePolicy)cachePolicy success:(MSHttpSuccess)success failure:(MSHttpFail)failure;
 @end

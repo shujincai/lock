@@ -45,3 +45,9 @@ NSString *const kChangePW = @"api/v1/app/workers/password";
 NSString *const kLockId = @"api/v1/app/locks/factoryno";
 //钥匙出厂编号
 NSString *const kKeyId = @"api/v1/app/keys/factoryno";
+//通过出厂编号查询钥匙信息
+NSString *const kExistenceKey = @"api/v1/app/keys/existence/%@";
+//获取锁列表
+NSString *const kLockTree = @"api/v1/app/locks/tree";
+//审核开关锁任务, 可批量审核
+NSString *const kTaskAuthid = @"api/v1/app/keydatas/auth/%ld?auth=%ld";

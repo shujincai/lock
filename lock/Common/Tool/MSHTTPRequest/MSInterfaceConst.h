@@ -49,5 +49,9 @@ UIKIT_EXTERN NSString *const kChangePW;
 UIKIT_EXTERN NSString *const kLockId;
 //钥匙出厂编号
 UIKIT_EXTERN NSString *const kKeyId;
-
-
+//通过出厂编号查询钥匙信息
+UIKIT_EXTERN NSString *const kExistenceKey;
+//获取锁列表
+UIKIT_EXTERN NSString *const kLockTree;
+//审核开关锁任务
+UIKIT_EXTERN NSString *const kTaskAuthid;

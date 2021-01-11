@@ -16,6 +16,9 @@
 #import "MyTaskModel.h"
 #import "WorkListModel.h"
 #import "RegistrationKeyViewController.h"
+#import "ApplyOpenLockListVC.h"
+#import "OpenLockAuditListVC.h"
+
 static NSString * cellIdentifer = @"HomeCollectionViewCell";
 
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
@@ -29,6 +32,9 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
 @property (nonatomic,strong) SZKLabel * leftLabel;
 @property (nonatomic,strong) SZKButton * taskBtn;
 @property (nonatomic,strong)NSTimer * taskTimer;//任务定时
+@property (nonatomic,strong)UserInfo * userInfo;
+@property (nonatomic,strong)NSMutableArray * imageArray;
+@property (nonatomic,strong)NSMutableArray * titleArray;
 
 @end
 
@@ -37,6 +43,7 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initData];
     [self initLayout];
     [self getData];
 }
@@ -80,11 +87,48 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     }
     return _dataArray;
 }
+- (NSMutableArray *)imageArray {
+    if (_imageArray == nil) {
+        _imageArray = [NSMutableArray array];
+    }
+    return _imageArray;
+}
+- (NSMutableArray *)titleArray {
+    if (_titleArray == nil) {
+        _titleArray = [NSMutableArray array];
+    }
+    return _titleArray;
+}
+- (void)initData {
+    self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
+    [self.imageArray addObject:[UIImage imageNamed:@"ctl_my_task"]];
+    [self.titleArray addObject:STR_MY_TASK];
+    if ([self.userInfo.ismanager isEqualToString:@"1"]) {
+        [self.imageArray addObject:[UIImage imageNamed:@"ctl_apply_open_lock"]];
+        [self.titleArray addObject:STR_APPLY_OPEN_LOCK];
+        [self.imageArray addObject:[UIImage imageNamed:@"ctl_open_lock_audit"]];
+        [self.titleArray addObject:STR_OPEN_LOCK_AUDIT];
+    }
+    [self.imageArray addObject:[UIImage imageNamed:@"ctl_work_record"]];
+    [self.titleArray addObject:STR_WORK_RECORD];
+    if ([self.userInfo.ismanager isEqualToString:@"1"]) {
+        [self.imageArray addObject:[UIImage imageNamed:@"ctl_registration_lock"]];
+        [self.titleArray addObject:STR_REG_LOCK];
+        [self.imageArray addObject:[UIImage imageNamed:@"ctl_registration_key"]];
+        [self.titleArray addObject:STR_REG_KEY];
+    }
+    [self.imageArray addObject:[UIImage imageNamed:@"ctl_system_parameter"]];
+    [self.titleArray addObject:STR_SYSTEM_PARAMETER];
+}
 - (void)initLayout {
     WS(weakSelf);
     self.isFirst = YES;
     UIView * bgView = [UIView new];
-    bgView.frame = CGRectMake(0, 0, UIScreenWidth, 130*2+155);
+    if ([self.userInfo.ismanager isEqualToString:@"1"]) {
+        bgView.frame = CGRectMake(0, 0, UIScreenWidth, 130*3+155);
+    }else {
+        bgView.frame = CGRectMake(0, 0, UIScreenWidth, 130*1+155);
+    }
     UIImageView * image = [UIImageView new];
     image.frame = CGRectMake(0, 0, UIScreenWidth, 150);
     image.image = [UIImage imageNamed:@"lock_background"];
@@ -130,7 +174,11 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
         self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
         self.flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         self.flowLayout.itemSize = CGSizeMake((UIScreenWidth-30)/3.0,130);
-        _rightCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(5,155,UIScreenWidth-10,130*2) collectionViewLayout:self.flowLayout];
+        if ([self.userInfo.ismanager isEqualToString:@"1"]) {
+            _rightCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(5,155,UIScreenWidth-10,130*3) collectionViewLayout:self.flowLayout];
+        }else {
+            _rightCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(5,155,UIScreenWidth-10,130*1) collectionViewLayout:self.flowLayout];
+        }
         
         _rightCollectionView.delegate = self;
         _rightCollectionView.dataSource = self;
@@ -165,13 +213,18 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
 
 #pragma mark UICollectionView
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 2;
+    if ([self.userInfo.ismanager isEqualToString:@"1"]) {
+        return  3;
+    }else {
+        return 1;
+    }
+    
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (section == 0) {
-        return 3;
+    if (section == 2) {
+        return 1;
     }else {
-        return 2;
+        return 3;
     }
 }
 // 两行之间的最小间距
@@ -181,11 +234,8 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     HomeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifer forIndexPath:indexPath];
-    NSArray * imageArray  = @[[UIImage imageNamed:@"ctl_my_task"],[UIImage imageNamed:@"ctl_work_record"],[UIImage imageNamed:@"ctl_registration_lock"],[UIImage imageNamed:@"ctl_registration_key"],[UIImage imageNamed:@"ctl_system_parameter"]];
-    NSArray *  titleArray = @[STR_MY_TASK,STR_WORK_RECORD,STR_REG_LOCK,STR_REG_KEY,STR_SYSTEM_PARAMETER];
-    
-    cell.image.image = imageArray[indexPath.section*3+indexPath.item];
-    cell.TopLabel.text = titleArray[indexPath.section*3+indexPath.item];
+    cell.image.image = _imageArray[indexPath.section*3+indexPath.item];
+    cell.TopLabel.text = _titleArray[indexPath.section*3+indexPath.item];
     if ((indexPath.section*3+indexPath.item) == 0) {
         cell.hub.count = self.data;
     }else {
@@ -196,23 +246,37 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ((indexPath.section*3+indexPath.item) == 0) {//我的任务
+    NSString * titleType = [self.titleArray objectAtIndex:indexPath.section*3+indexPath.item];
+    
+    if ([titleType isEqualToString:STR_MY_TASK]) {//我的任务
         MyTaskViewController * myTask = [MyTaskViewController new];
         [self.navigationController pushViewController:myTask animated:YES];
-    }else if ((indexPath.section*3+indexPath.item) == 1){//工作记录
+    }
+    if ([titleType isEqualToString:STR_WORK_RECORD]){//工作记录
         WorkRecordViewController * workRecord = [WorkRecordViewController new];
         [self.navigationController pushViewController:workRecord animated:YES];
-    }else if ((indexPath.section*3+indexPath.item) == 2){//注册锁
+    }
+    if ([titleType isEqualToString:STR_REG_LOCK]){//注册锁
         RegistrationKeyViewController* regLock = [RegistrationKeyViewController new];
         regLock.type = @"1";
         [self.navigationController pushViewController:regLock animated:YES];
-    }else if ((indexPath.section*3+indexPath.item) == 3){//注册钥匙
+    }
+    if ([titleType isEqualToString:STR_REG_KEY]){//注册钥匙
         RegistrationKeyViewController* regKey = [RegistrationKeyViewController new];
         regKey.type = @"0";
         [self.navigationController pushViewController:regKey animated:YES];
-    }else if ((indexPath.section*3+indexPath.item) == 4){//系统参数
+    }
+    if ([titleType isEqualToString:STR_SYSTEM_PARAMETER]){//系统参数
         SystemViewController* systemVC = [SystemViewController new];
         [self.navigationController pushViewController:systemVC animated:YES];
+    }
+    if ([titleType isEqualToString:STR_APPLY_OPEN_LOCK]){//申请开锁
+        ApplyOpenLockListVC* applyOpenLockVC = [ApplyOpenLockListVC new];
+        [self.navigationController pushViewController:applyOpenLockVC animated:YES];
+    }
+    if ([titleType isEqualToString:STR_OPEN_LOCK_AUDIT]){//开锁审核
+        OpenLockAuditListVC* openLockAuditVC = [OpenLockAuditListVC new];
+        [self.navigationController pushViewController:openLockAuditVC animated:YES];
     }
 }
 #pragma mark 查询开关锁记录

@@ -66,6 +66,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 //获取连接蓝牙钥匙密钥
 + (NSArray *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key;
+
+// 通过蓝牙钥匙名称获取mac地址
++ (NSString *)getBluetoothKeyMac:(NSString *)name;
 @end
 
 NS_ASSUME_NONNULL_END

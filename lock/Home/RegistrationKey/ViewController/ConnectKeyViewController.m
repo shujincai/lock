@@ -24,6 +24,7 @@
 @property (nonatomic,assign)BOOL isHide;
 @property (nonatomic,assign)BOOL isHideInit;
 @property (nonatomic,strong)NSString * setKeyId;
+@property (nonatomic,assign)BOOL isExistence; // 是否存在
 
 @end
 
@@ -35,6 +36,7 @@
     self.title = STR_REG_KEY;
     self.registerNumber = 0;
     self.isHide = NO;
+    self.isExistence = YES;
     self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
     [self gennerateNavigationItemReturnBtn:@selector(returnClick)];
     [MBProgressHUD showActivityMessage:STR_CONNECTING];
@@ -95,7 +97,6 @@
 //获取钥匙数据
 - (void)requestReadKeyInfoResultInfo:(ResultInfo *)info {
     self.isHide = YES;
-    [MBProgressHUD hideHUD];
     if (info.feedBackState == NO) {
         [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
         [SetKeyController disConnectBle];
@@ -104,7 +105,6 @@
     }else {
         self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
         if (self.registerNumber > 0) {
-           
             BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
             basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
             basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
@@ -115,7 +115,31 @@
             [SetKeyController setBlankKey:basicInfo andBlankKeyInfo:blankKeyInfo];
         }
         [self.tableView reloadData];
+        [self getKeyFactoryInfo];
     }
+}
+
+//通过出厂编号查询钥匙信息
+- (void)getKeyFactoryInfo {
+    RegistrationKeyExistenceRequest * request = [[RegistrationKeyExistenceRequest alloc]init];
+    [MSHTTPRequest GET:[NSString stringWithFormat:kExistenceKey,_keyInfo.read_key_serial_number] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+        [MBProgressHUD hideHUD];
+        NSError * error = nil;
+        RegistrationKeyExistenceResponse * response = [[RegistrationKeyExistenceResponse alloc]initWithDictionary:responseObject error:&error];
+        if (error) {
+            [MBProgressHUD showMessage:STR_PARSE_FAILURE];
+            return ;
+        }
+        if (response.data) {
+            self.isExistence = YES;
+            [MBProgressHUD showMessage:STR_KEY_FACTORY_REPEAT_TIPS];
+        }else {
+            self.isExistence = NO;
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_TIMEOUT];
+    }];
 }
 - (void)createTableView {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -303,7 +327,7 @@
     keyRequest.keyno = _keyInfo.key_id;
     keyRequest.keystatus = @"0";
     keyRequest.keytype = @"1";
-    keyRequest.bleflag = _currentBle.name;
+    keyRequest.bleflag = [CommonUtil getBluetoothKeyMac:_currentBle.name];
     [MSHTTPRequest POST:kRegKey parameters:[keyRequest toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         [MBProgressHUD hideHUD];
         NSError * error = nil;
@@ -344,6 +368,10 @@
 //修改钥匙ID
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 2) {
+        if (self.isExistence == YES) {
+            [MBProgressHUD showMessage:STR_KEY_FACTORY_REPEAT_TIPS];
+            return;
+        }
         if (self.setKeyId.length > 0) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_CHANGE_KEY_ID message:self.setKeyId preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {

@@ -12,6 +12,7 @@
 #pragma mark NSNotificationCenter key
 #define NF_KEY_FOREGROUND                   @"enterForeground"//进入前台
 #define NF_KEY_BACKGROUND                   @"houmeBackGround"//退出后台
+#define NF_KEY_APPLY_OPEN_LOCK_SUCCESS      @"applyOpenLockTaskSuccess"//申请开锁任务成功
 
 //公共
 #define STR_TIMEOUT                         L(@"网络连接超时")
@@ -64,6 +65,8 @@
 #define STR_REG_LOCK                        L(@"注册锁")
 #define STR_REG_KEY                         L(@"注册钥匙")
 #define STR_SYSTEM_PARAMETER                L(@"系统参数")
+#define STR_APPLY_OPEN_LOCK                 L(@"申请开锁")
+#define STR_OPEN_LOCK_AUDIT                 L(@"开锁审核")
 
 //搜索蓝牙钥匙
 #define STR_SEARCH_BLUETOOTH                L(@"搜索蓝牙钥匙")
@@ -91,6 +94,7 @@
 #define STR_KEY_HARDWARE_NUMBER_REPEAT      L(@"钥匙硬件编号重复")
 #define STR_KEY_NUMBER_RANGE                L(@"钥匙编号已超出范围")
 #define STR_KEY_NAME_TIPS                   L(@"请输入钥匙名称")
+#define STR_KEY_FACTORY_REPEAT_TIPS         L(@"钥匙已存在，请勿重复注册")
 
 //注册锁
 #define STR_PLEASE_CONNECT_LOCK_READ        L(@"请连锁，读取锁id...")
@@ -134,6 +138,8 @@
 #define STR_PLEASE_SWITH_LOCK               L(@"请开关锁")
 #define STR_CLOSE_LOCK_SUCCESS              L(@"关锁成功")
 #define STR_MY_TASK_INVALID                 L(@"任务已失效")
+#define STR_LOCK_LIST                       L(@"锁列表")
+#define STR_NO_YET                          L(@"暂无")
 
 //系统参数
 #define STR_QUIT                            L(@"退出")
@@ -157,5 +163,23 @@
 #define STR_CHANGE_PWD_SUCCESS              L(@"修改成功，请重新登录")
 #define STR_OLD_PASSWORD_ERROR              L(@"原密码错误")
 #define STR_NEW_OLD_EQUAL                   L(@"新密码和旧密码相同")
+
+//申请开锁
+#define STR_PLEASE_SELECT_DELETE_OPEN_LOCK  L(@"请选择要删除的开锁申请")
+#define STR_SURE_DELETE_OPEN_LOCK           L(@"确定要删除开锁申请？")
+#define STR_DELETE_SUCCESS                  L(@"删除成功")
+#define STR_NEW_APPLY_UNLOCK                L(@"新建申请开锁")
+#define STR_DATE                            L(@"日期")
+#define STR_PLEASE_SELECT_OPEN_LOCK         L(@"请选择要开的锁")
+#define STR_PENDING_APPROVAL                L(@"待审批")
+#define STR_REJECTED                        L(@"已驳回")
+#define STR_TASK_ALREADY_EXIST              L(@"任务已存在")
+
+//开锁审核
+#define STR_AGREE                           L(@"同意")
+#define STR_REJECT                          L(@"驳回")
+#define STR_APPLICANT                       L(@"申请人")
+#define STR_AGREE_UNLOCK_APPLY              L(@"确定要同意开锁申请？")
+#define STR_REJECT_UNLOCK_APPLY             L(@"确定要驳回开锁申请？")
 
 #endif /* Strings_h */

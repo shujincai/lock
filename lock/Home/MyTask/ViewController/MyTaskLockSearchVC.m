@@ -32,7 +32,7 @@
     return _listArray;
 }
 - (void)initData {
-    [self setTitle:@"锁列表"];
+    [self setTitle:STR_LOCK_LIST];
     [self.listArray addObjectsFromArray:_taskBean.unlocklist];
     [self initLayout];
     [self createTableView];
@@ -44,7 +44,7 @@
     searchBar.frame = CGRectMake(0, 60, UISCREEN_WIDTH-80, 44);
     searchBar.layer.cornerRadius = 17;
     searchBar.layer.masksToBounds = YES;
-    searchBar.placeholder = @"请输入锁名称";
+    searchBar.placeholder = STR_LOCK_NAME_TIPS;
     searchBar.translucent = YES;
     searchBar.searchBarStyle = UISearchBarStyleDefault;
     //改变占位符的字体大小颜色
@@ -80,7 +80,7 @@
 {
     NSDictionary *attributes = @{NSFontAttributeName: SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2),
                                  NSForegroundColorAttributeName: COLOR_BLACK};
-    return [[NSAttributedString alloc] initWithString:@"暂无数据" attributes:attributes];
+    return [[NSAttributedString alloc] initWithString:STR_NO_DATA attributes:attributes];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;

@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * token;//token
 @property(nonatomic,copy)NSString * workerid;//用户id
 @property(nonatomic,copy)NSString * workername;//用户名称
+@property(nonatomic,copy)NSString * ismanager;// 1 管理员角色，2 操作员角色，3 用户自定义角色
 @property(nonatomic,assign)BOOL wmSdk;//true C锁 false B锁
 @property(nonatomic,strong)NSMutableArray<UserKeyInfoList> * keylist;//钥匙数组
 @property(nonatomic,strong)UserDepartmentInfo * dept;//部门信息

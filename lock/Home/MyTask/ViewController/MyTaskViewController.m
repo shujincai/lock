@@ -121,7 +121,7 @@
     if (taskList.subject.length > 0) {
         cell.nameLabel.text = taskList.subject;
     } else {
-        cell.nameLabel.text = @"暂无";
+        cell.nameLabel.text = STR_NO_YET;
     }
     cell.dateLabel.text = [NSString stringWithFormat:@"%@~%@",[dateFormatter stringFromDate:beginDate],[dateFormatter stringFromDate:endDate]];
     cell.timeLabel.text = [NSString stringWithFormat:@"%@~%@",[timeFormatter stringFromDate:beginTime],[timeFormatter stringFromDate:endTime]];

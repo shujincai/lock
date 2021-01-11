@@ -13,6 +13,7 @@
 #import "SearchBluetoothView.h"
 #import "SwitchLockViewController.h"
 #import "MyTaskModel.h"
+#import "ApplyOpenLockDetailVC.h"
 
 @interface RegistrationKeyViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,SetKeyControllerDelegate>
 
@@ -144,14 +145,14 @@
         cell.leftImage.image = [UIImage imageNamed:@"ic_list_bluetooth"];
         
     }
-//    if (_taskBean) {
-//        for (UserKeyInfoList * keyList in _taskBean.keylist) {
-//            if ([keyList.bleflag isEqualToString:peripheral.name]) {
-//                cell.rightImage.image = [UIImage imageNamed:@"ic_lock_open"];
-//                break;
-//            }
-//        }
-//    }
+    if (_taskBean) {
+        for (UserKeyInfoList * keyList in _taskBean.keylist) {
+            if ([keyList.bleflag isEqualToString:[CommonUtil getBluetoothKeyMac:peripheral.name]]) {
+                cell.rightImage.image = [UIImage imageNamed:@"ic_lock_open"];
+                break;
+            }
+        }
+    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -197,6 +198,11 @@
         switchLockVC.taskBean = self.taskBean;
         switchLockVC.lockBean = self.lockBean;
         [self.navigationController pushViewController: switchLockVC animated:YES];
+    }
+    if ([self.type isEqualToString:@"3"]) {//申请开锁
+        ApplyOpenLockDetailVC * applyDetailVC = [[ApplyOpenLockDetailVC alloc]init];
+        applyDetailVC.currentBle = currentBle;
+        [self.navigationController pushViewController:applyDetailVC animated:YES];
     }
 }
 

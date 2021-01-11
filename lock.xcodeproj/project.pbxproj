@@ -87,6 +87,16 @@
 		FB608CBB248A1E47008BA56C /* RegistrationLockTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */; };
 		FB608CBE248A1E4F008BA56C /* RegistrationLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */; };
 		FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB83FF81249B493600432C35 /* InfoPlist.strings */; };
+		FBA45ADC259C119400EF2BF9 /* ApplyOpenLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA45ADB259C119400EF2BF9 /* ApplyOpenLockModel.m */; };
+		FBA45AE2259C11BB00EF2BF9 /* ApplyOpenLockListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA45AE1259C11BB00EF2BF9 /* ApplyOpenLockListVC.m */; };
+		FBCC72D025A552C400A2B86D /* ApplyOpenLockDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBCC72CA25A552C300A2B86D /* ApplyOpenLockDateCell.xib */; };
+		FBCC72D125A552C400A2B86D /* ApplyOpenLockLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBCC72CB25A552C300A2B86D /* ApplyOpenLockLockCell.xib */; };
+		FBCC72D225A552C400A2B86D /* ApplyOpenLockDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72CD25A552C400A2B86D /* ApplyOpenLockDateCell.m */; };
+		FBCC72D325A552C400A2B86D /* ApplyOpenLockLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72CF25A552C400A2B86D /* ApplyOpenLockLockCell.m */; };
+		FBCC72D925A552CF00A2B86D /* ApplyOpenLockDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72D825A552CF00A2B86D /* ApplyOpenLockDetailVC.m */; };
+		FBCC72E525A552E800A2B86D /* OpenLockAuditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72E025A552E800A2B86D /* OpenLockAuditModel.m */; };
+		FBCC72E625A552E800A2B86D /* OpenLockAuditListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72E425A552E800A2B86D /* OpenLockAuditListVC.m */; };
+		FBCC72F025A555AF00A2B86D /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72EF25A555AF00A2B86D /* DatePickerView.m */; };
 		FBD313C02491C4160053CBC8 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */; };
 		FBD313C3249212EA0053CBC8 /* SystemParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */; };
 		FBFB51F32553F36600E5D71A /* SwitchLockListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFB51F12553F36600E5D71A /* SwitchLockListCell.xib */; };
@@ -269,10 +279,29 @@
 		FB83FF82249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		FB83FF83249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		FB83FF84249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		FBA45ADA259C119400EF2BF9 /* ApplyOpenLockModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockModel.h; sourceTree = "<group>"; };
+		FBA45ADB259C119400EF2BF9 /* ApplyOpenLockModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyOpenLockModel.m; sourceTree = "<group>"; };
+		FBA45AE0259C11BB00EF2BF9 /* ApplyOpenLockListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockListVC.h; sourceTree = "<group>"; };
+		FBA45AE1259C11BB00EF2BF9 /* ApplyOpenLockListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyOpenLockListVC.m; sourceTree = "<group>"; };
+		FBCC72CA25A552C300A2B86D /* ApplyOpenLockDateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyOpenLockDateCell.xib; sourceTree = "<group>"; };
+		FBCC72CB25A552C300A2B86D /* ApplyOpenLockLockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyOpenLockLockCell.xib; sourceTree = "<group>"; };
+		FBCC72CC25A552C400A2B86D /* ApplyOpenLockLockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockLockCell.h; sourceTree = "<group>"; };
+		FBCC72CD25A552C400A2B86D /* ApplyOpenLockDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyOpenLockDateCell.m; sourceTree = "<group>"; };
+		FBCC72CE25A552C400A2B86D /* ApplyOpenLockDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockDateCell.h; sourceTree = "<group>"; };
+		FBCC72CF25A552C400A2B86D /* ApplyOpenLockLockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyOpenLockLockCell.m; sourceTree = "<group>"; };
+		FBCC72D725A552CF00A2B86D /* ApplyOpenLockDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockDetailVC.h; sourceTree = "<group>"; };
+		FBCC72D825A552CF00A2B86D /* ApplyOpenLockDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyOpenLockDetailVC.m; sourceTree = "<group>"; };
+		FBCC72DF25A552E800A2B86D /* OpenLockAuditModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenLockAuditModel.h; sourceTree = "<group>"; };
+		FBCC72E025A552E800A2B86D /* OpenLockAuditModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenLockAuditModel.m; sourceTree = "<group>"; };
+		FBCC72E325A552E800A2B86D /* OpenLockAuditListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenLockAuditListVC.h; sourceTree = "<group>"; };
+		FBCC72E425A552E800A2B86D /* OpenLockAuditListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenLockAuditListVC.m; sourceTree = "<group>"; };
+		FBCC72EE25A555AF00A2B86D /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerView.h; sourceTree = "<group>"; };
+		FBCC72EF25A555AF00A2B86D /* DatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerView.m; sourceTree = "<group>"; };
 		FBD313BE2491C4160053CBC8 /* ChangePasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
 		FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
 		FBD313C1249212EA0053CBC8 /* SystemParameterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemParameterModel.h; sourceTree = "<group>"; };
 		FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemParameterModel.m; sourceTree = "<group>"; };
+		FBF5895A25A45EE700A650A1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FBFB51F02553F36600E5D71A /* SwitchLockListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchLockListCell.h; sourceTree = "<group>"; };
 		FBFB51F12553F36600E5D71A /* SwitchLockListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchLockListCell.xib; sourceTree = "<group>"; };
 		FBFB51F22553F36600E5D71A /* SwitchLockListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchLockListCell.m; sourceTree = "<group>"; };
@@ -321,6 +350,7 @@
 				8405DB8724737EB2000F94EE /* libs */,
 				8405DB8824737EB2000F94EE /* Macro */,
 				8405DB8924737EB2000F94EE /* Tool */,
+				A4102AC5242B46C000B03620 /* MSNetwork */,
 				8405DB8A24737EB2000F94EE /* Control */,
 			);
 			path = Common;
@@ -371,7 +401,6 @@
 			children = (
 				842F51EA2474F4B100478914 /* Utils */,
 				A4102AC9242B476900B03620 /* MSHTTPRequest */,
-				A4102AC5242B46C000B03620 /* MSNetwork */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -379,6 +408,7 @@
 		8405DB8A24737EB2000F94EE /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				FBCC72ED25A555AE00A2B86D /* DatePickerView */,
 				8405DB8B24737EB2000F94EE /* BaseController */,
 				8405DB8C24737EB2000F94EE /* Beans */,
 				A48ADA66242D8E310069C875 /* Calendar */,
@@ -476,6 +506,8 @@
 				8405DBD124738669000F94EE /* RegistrationLock */,
 				8405DBA224738668000F94EE /* RegistrationKey */,
 				8405DBC824738669000F94EE /* SystemParameter */,
+				FBA45AD6259C070300EF2BF9 /* ApplyOpenLock */,
+				FBCC72DD25A552E800A2B86D /* OpenLockAudit */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -890,6 +922,93 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		FBA45AD6259C070300EF2BF9 /* ApplyOpenLock */ = {
+			isa = PBXGroup;
+			children = (
+				FBA45AD7259C073400EF2BF9 /* Model */,
+				FBA45AD8259C073E00EF2BF9 /* View */,
+				FBA45AD9259C074900EF2BF9 /* ViewController */,
+			);
+			path = ApplyOpenLock;
+			sourceTree = "<group>";
+		};
+		FBA45AD7259C073400EF2BF9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FBA45ADA259C119400EF2BF9 /* ApplyOpenLockModel.h */,
+				FBA45ADB259C119400EF2BF9 /* ApplyOpenLockModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FBA45AD8259C073E00EF2BF9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FBCC72CE25A552C400A2B86D /* ApplyOpenLockDateCell.h */,
+				FBCC72CD25A552C400A2B86D /* ApplyOpenLockDateCell.m */,
+				FBCC72CA25A552C300A2B86D /* ApplyOpenLockDateCell.xib */,
+				FBCC72CC25A552C400A2B86D /* ApplyOpenLockLockCell.h */,
+				FBCC72CF25A552C400A2B86D /* ApplyOpenLockLockCell.m */,
+				FBCC72CB25A552C300A2B86D /* ApplyOpenLockLockCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FBA45AD9259C074900EF2BF9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FBA45AE0259C11BB00EF2BF9 /* ApplyOpenLockListVC.h */,
+				FBA45AE1259C11BB00EF2BF9 /* ApplyOpenLockListVC.m */,
+				FBCC72D725A552CF00A2B86D /* ApplyOpenLockDetailVC.h */,
+				FBCC72D825A552CF00A2B86D /* ApplyOpenLockDetailVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FBCC72DD25A552E800A2B86D /* OpenLockAudit */ = {
+			isa = PBXGroup;
+			children = (
+				FBCC72DE25A552E800A2B86D /* Model */,
+				FBCC72E125A552E800A2B86D /* View */,
+				FBCC72E225A552E800A2B86D /* ViewController */,
+			);
+			path = OpenLockAudit;
+			sourceTree = "<group>";
+		};
+		FBCC72DE25A552E800A2B86D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FBCC72DF25A552E800A2B86D /* OpenLockAuditModel.h */,
+				FBCC72E025A552E800A2B86D /* OpenLockAuditModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FBCC72E125A552E800A2B86D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FBCC72E225A552E800A2B86D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FBCC72E325A552E800A2B86D /* OpenLockAuditListVC.h */,
+				FBCC72E425A552E800A2B86D /* OpenLockAuditListVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FBCC72ED25A555AE00A2B86D /* DatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				FBCC72EE25A555AF00A2B86D /* DatePickerView.h */,
+				FBCC72EF25A555AF00A2B86D /* DatePickerView.m */,
+			);
+			path = DatePickerView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -980,6 +1099,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				ru,
 			);
 			mainGroup = A4466198242473A4000D1D9D;
 			productRefGroup = A44661A2242473A4000D1D9D /* Products */;
@@ -1002,9 +1122,11 @@
 				FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */,
 				A4102A75242B200500B03620 /* resource.bundle in Resources */,
 				FBFB51F32553F36600E5D71A /* SwitchLockListCell.xib in Resources */,
+				FBCC72D125A552C400A2B86D /* ApplyOpenLockLockCell.xib in Resources */,
 				A44661B1242473A6000D1D9D /* Assets.xcassets in Resources */,
 				A430EF752432C69C00F68BCE /* WSDatePickerView.xib in Resources */,
 				842FC896247E2C8800489C50 /* MyTaskListCell.xib in Resources */,
+				FBCC72D025A552C400A2B86D /* ApplyOpenLockDateCell.xib in Resources */,
 				FB03940E2490ED5C00D95AEA /* SystemParameterCell.xib in Resources */,
 				A44661AF242473A4000D1D9D /* Main.storyboard in Resources */,
 			);
@@ -1107,12 +1229,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBCC72F025A555AF00A2B86D /* DatePickerView.m in Sources */,
 				FB23C69E248B6C1400E3C5AF /* RangeDatePickerCell.m in Sources */,
 				84CA534A2476175900D32586 /* MBProgressHUD+Helper.m in Sources */,
+				FBCC72E525A552E800A2B86D /* OpenLockAuditModel.m in Sources */,
 				A4102AC8242B46CA00B03620 /* MSNetwork.m in Sources */,
 				FBD313C02491C4160053CBC8 /* ChangePasswordVC.m in Sources */,
 				842FC895247E2C8800489C50 /* MyTaskListCell.m in Sources */,
 				8405DBE024738669000F94EE /* HomeCollectionViewCell.m in Sources */,
+				FBA45AE2259C11BB00EF2BF9 /* ApplyOpenLockListVC.m in Sources */,
 				A44661AC242473A4000D1D9D /* ViewController.m in Sources */,
 				8405DB9B2473814F000F94EE /* LogInViewController.m in Sources */,
 				A409CA1F2428AFC500A4004E /* SZKLabel.m in Sources */,
@@ -1136,9 +1261,11 @@
 				FB608CB2248A1CF7008BA56C /* RegistrationKeyModel.m in Sources */,
 				8405DBEF2473BB47000F94EE /* RequestBean.m in Sources */,
 				FBFB51F42553F36600E5D71A /* SwitchLockListCell.m in Sources */,
+				FBCC72D925A552CF00A2B86D /* ApplyOpenLockDetailVC.m in Sources */,
 				FB30C09E25540DA1008D5F59 /* MyTaskLockSearchVC.m in Sources */,
 				8405DBDB24738669000F94EE /* WorkListTableViewCell.m in Sources */,
 				8405DBD624738669000F94EE /* ConnectKeyTableViewCell.m in Sources */,
+				FBCC72D225A552C400A2B86D /* ApplyOpenLockDateCell.m in Sources */,
 				A430EF792432C69C00F68BCE /* UIView+Extension.m in Sources */,
 				8405DBDC24738669000F94EE /* WorkRecordViewController.m in Sources */,
 				8405DB9C2473814F000F94EE /* SettingViewController.m in Sources */,
@@ -1149,8 +1276,10 @@
 				8405DBDA24738669000F94EE /* WorkListModel.m in Sources */,
 				FB608CB5248A1D32008BA56C /* SearchBluetoothView.m in Sources */,
 				8405DBD524738669000F94EE /* RegistrationKeyTableViewCell.m in Sources */,
+				FBCC72E625A552E800A2B86D /* OpenLockAuditListVC.m in Sources */,
 				842F51E02474CAB200478914 /* BaseTableViewCell.m in Sources */,
 				8405DBF22473BB6B000F94EE /* ResponseBean.m in Sources */,
+				FBA45ADC259C119400EF2BF9 /* ApplyOpenLockModel.m in Sources */,
 				A4102A73242B200500B03620 /* MMScanView.m in Sources */,
 				8405DBE124738669000F94EE /* SystemViewController.m in Sources */,
 				FBD313C3249212EA0053CBC8 /* SystemParameterModel.m in Sources */,
@@ -1164,6 +1293,7 @@
 				A409CA222428B08700A4004E /* SZKButton.m in Sources */,
 				8405DBDE24738669000F94EE /* HomeModel.m in Sources */,
 				8405DB9A2473814F000F94EE /* RJTextField.m in Sources */,
+				FBCC72D325A552C400A2B86D /* ApplyOpenLockLockCell.m in Sources */,
 				8405DBD724738669000F94EE /* ConnectKeyViewController.m in Sources */,
 				A430EF762432C69C00F68BCE /* WSDatePickerView.m in Sources */,
 				8405DBE224738669000F94EE /* HomeViewController.m in Sources */,
@@ -1227,6 +1357,7 @@
 			children = (
 				FB83FF80249B493600432C35 /* en */,
 				FB83FF84249B495600432C35 /* zh-Hans */,
+				FBF5895A25A45EE700A650A1 /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1353,7 +1484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5.1;
+				CURRENT_PROJECT_VERSION = 1.0.6.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1371,7 +1502,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
 				PRODUCT_NAME = "万码电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1387,7 +1518,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5.1;
+				CURRENT_PROJECT_VERSION = 1.0.6.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1405,7 +1536,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
 				PRODUCT_NAME = "万码电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
