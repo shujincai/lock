@@ -134,10 +134,61 @@
     }else {
         self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
         self.isHide = YES;
-        [self getLockTreeData];
+        [self getKeyInfoDetail];
     }
 }
-
+// 获取钥匙详情
+- (void)getKeyInfoDetail {
+    RequestBean * request = [[RequestBean alloc]init];
+    [MSHTTPRequest GET:[NSString stringWithFormat:kKeyDetail,self.keyInfo.key_id] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+        NSError * error = nil;
+        KeyInfoDetailResponse * response = [[KeyInfoDetailResponse alloc]initWithDictionary:responseObject error:&error];
+        if (error) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showMessage:STR_PARSE_FAILURE];
+            return ;
+        }
+        if ([response.resultCode intValue] == 0) {
+            if (response.data) {
+                if ([response.data.keystatus isEqualToString:@"2"]) { // 损坏
+                    [MBProgressHUD hideHUD];
+                    [MBProgressHUD showError:STR_KEY_DAMAGED];
+                    [SetKeyController disConnectBle];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else if ([response.data.keystatus isEqualToString:@"3"]){ // 丢失
+                    [MBProgressHUD hideHUD];
+                    [MBProgressHUD showError:STR_KEY_LOSE];
+                    [SetKeyController disConnectBle];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else if ([response.data.keystatus isEqualToString:@"1"]){ // 领出
+                    [MBProgressHUD hideHUD];
+                    [MBProgressHUD showError:STR_KEY_TASK_OUT];
+                    [SetKeyController disConnectBle];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else {
+                    [self getLockTreeData];
+                }
+            } else {
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:STR_KEY_INFO_NO_EXISTENT];
+                [SetKeyController disConnectBle];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }else {
+            [MBProgressHUD hideHUD];
+            if ([response.resultCode intValue]== 15020) {//无部门权限可以操作该钥匙
+                [MBProgressHUD showError:STR_KEY_NO_DEPT_POWER];
+            }else {
+                [MBProgressHUD showError:response.msg];
+            }
+            [SetKeyController disConnectBle];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_TIMEOUT];
+    }];
+}
 // 根据区域id获取锁-区域列表
 - (void)getLockTreeData {
     ApplyOpenLockTreeRequest * request = [[ApplyOpenLockTreeRequest alloc]init];

@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface KeyInfoDetailResponse : ResponseBean
 
+@property (nonatomic,strong)UserKeyInfoList * data;
+
+@end
 
 
 NS_ASSUME_NONNULL_END

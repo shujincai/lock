@@ -56,5 +56,6 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "FSCalendar.h"
 #import "UserModel.h"
+#import "HomeModel.h"
 
 #endif /* Headers_h */

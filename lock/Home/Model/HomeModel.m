@@ -8,6 +8,9 @@
 
 #import "HomeModel.h"
 
+@implementation KeyInfoDetailResponse
+
+@end
 
 
 

@@ -85,26 +85,68 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        //设置在线开关锁模式
         self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
-        NSCalendar * gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-        NSDate * beginDate = [NSDate date];
-        NSDate * endDate = [gregorian dateByAddingUnit:NSCalendarUnitDay value:7 toDate:beginDate options:0];
-        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"yy-MM-dd-HH-mm";
-        
-        BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
-        basicInfo.keyValidityPeriodStart = [dateFormatter stringFromDate:beginDate];
-        basicInfo.keyValidityPeriodEnd = [dateFormatter stringFromDate:endDate];
-        basicInfo.keyId = [self.keyInfo.key_id intValue];
-        
-        OnlineOpenInfo *onlineOpenInfo = [[OnlineOpenInfo alloc] init];
-        onlineOpenInfo.onlineOpenStartTime = [dateFormatter stringFromDate:beginDate];
-        onlineOpenInfo.onlineOpenEndTime = [dateFormatter stringFromDate:endDate];
-        [SetKeyController setOnlineOpen:basicInfo andOnlineOpenInfo:onlineOpenInfo];
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK_READ];
+        [self getKeyInfoDetail];
     }
+}
+// 获取钥匙详情
+- (void)getKeyInfoDetail {
+    RequestBean * request = [[RequestBean alloc]init];
+    [MSHTTPRequest GET:[NSString stringWithFormat:kKeyDetail,self.keyInfo.key_id] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+        [MBProgressHUD hideHUD];
+        NSError * error = nil;
+        KeyInfoDetailResponse * response = [[KeyInfoDetailResponse alloc]initWithDictionary:responseObject error:&error];
+        if (error) {
+            [MBProgressHUD showMessage:STR_PARSE_FAILURE];
+            return ;
+        }
+        if ([response.resultCode intValue] == 0) {
+            if (response.data) {
+                //设置在线开关锁模式
+                if ([response.data.keystatus isEqualToString:@"2"]) { // 损坏
+                    [MBProgressHUD showError:STR_KEY_DAMAGED];
+                    [SetKeyController disConnectBle];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else if ([response.data.keystatus isEqualToString:@"3"]){ // 丢失
+                    [MBProgressHUD showError:STR_KEY_LOSE];
+                    [SetKeyController disConnectBle];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else {
+                    NSCalendar * gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+                    NSDate * beginDate = [NSDate date];
+                    NSDate * endDate = [gregorian dateByAddingUnit:NSCalendarUnitDay value:7 toDate:beginDate options:0];
+                    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+                    dateFormatter.dateFormat = @"yy-MM-dd-HH-mm";
+                    
+                    BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+                    basicInfo.keyValidityPeriodStart = [dateFormatter stringFromDate:beginDate];
+                    basicInfo.keyValidityPeriodEnd = [dateFormatter stringFromDate:endDate];
+                    basicInfo.keyId = [self.keyInfo.key_id intValue];
+                    
+                    OnlineOpenInfo *onlineOpenInfo = [[OnlineOpenInfo alloc] init];
+                    onlineOpenInfo.onlineOpenStartTime = [dateFormatter stringFromDate:beginDate];
+                    onlineOpenInfo.onlineOpenEndTime = [dateFormatter stringFromDate:endDate];
+                    [SetKeyController setOnlineOpen:basicInfo andOnlineOpenInfo:onlineOpenInfo];
+                    [MBProgressHUD showActivityMessage:STR_PLEASE_CONNECT_LOCK_READ];
+                }
+            } else {
+                [MBProgressHUD showError:STR_KEY_INFO_NO_EXISTENT];
+                [SetKeyController disConnectBle];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }else {
+            if ([response.resultCode intValue]== 15020) {//无部门权限可以操作该钥匙
+                [MBProgressHUD showError:STR_KEY_NO_DEPT_POWER];
+            }else {
+                [MBProgressHUD showError:response.msg];
+            }
+            [SetKeyController disConnectBle];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_TIMEOUT];
+    }];
 }
 //获取锁数据
 - (void)requestActiveReport:(ResultInfo *)info {

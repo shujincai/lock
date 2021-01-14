@@ -41,6 +41,8 @@ UIKIT_EXTERN NSString *const kTaskList;
 UIKIT_EXTERN NSString *const kTaskValid;
 //注册蓝牙钥匙
 UIKIT_EXTERN NSString *const kRegKey;
+//根据钥匙编号获取钥匙详细信息
+UIKIT_EXTERN NSString *const kKeyDetail;
 //注册锁
 UIKIT_EXTERN NSString *const kRegLock;
 //修改密码

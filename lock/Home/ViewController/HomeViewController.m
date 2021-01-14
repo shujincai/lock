@@ -103,9 +103,9 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     self.userInfo = [CommonUtil getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
     [self.imageArray addObject:[UIImage imageNamed:@"ctl_my_task"]];
     [self.titleArray addObject:STR_MY_TASK];
+    [self.imageArray addObject:[UIImage imageNamed:@"ctl_apply_open_lock"]];
+    [self.titleArray addObject:STR_APPLY_OPEN_LOCK];
     if ([self.userInfo.ismanager isEqualToString:@"1"]) {
-        [self.imageArray addObject:[UIImage imageNamed:@"ctl_apply_open_lock"]];
-        [self.titleArray addObject:STR_APPLY_OPEN_LOCK];
         [self.imageArray addObject:[UIImage imageNamed:@"ctl_open_lock_audit"]];
         [self.titleArray addObject:STR_OPEN_LOCK_AUDIT];
     }
@@ -127,7 +127,7 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     if ([self.userInfo.ismanager isEqualToString:@"1"]) {
         bgView.frame = CGRectMake(0, 0, UIScreenWidth, 130*3+155);
     }else {
-        bgView.frame = CGRectMake(0, 0, UIScreenWidth, 130*1+155);
+        bgView.frame = CGRectMake(0, 0, UIScreenWidth, 130*2+155);
     }
     UIImageView * image = [UIImageView new];
     image.frame = CGRectMake(0, 0, UIScreenWidth, 150);
@@ -177,7 +177,7 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
         if ([self.userInfo.ismanager isEqualToString:@"1"]) {
             _rightCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(5,155,UIScreenWidth-10,130*3) collectionViewLayout:self.flowLayout];
         }else {
-            _rightCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(5,155,UIScreenWidth-10,130*1) collectionViewLayout:self.flowLayout];
+            _rightCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(5,155,UIScreenWidth-10,130*2) collectionViewLayout:self.flowLayout];
         }
         
         _rightCollectionView.delegate = self;
@@ -216,16 +216,25 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     if ([self.userInfo.ismanager isEqualToString:@"1"]) {
         return  3;
     }else {
-        return 1;
+        return 2;
     }
     
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (section == 2) {
-        return 1;
+    if ([self.userInfo.ismanager isEqualToString:@"1"]) {
+        if (section == 2) {
+            return 1;
+        }else {
+            return 3;
+        }
     }else {
-        return 3;
+        if (section == 1) {
+            return 1;
+        }else {
+            return 3;
+        }
     }
+    
 }
 // 两行之间的最小间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {

@@ -37,6 +37,8 @@ NSString *const kTaskList = @"api/v1/app/keydatas";
 NSString *const kTaskValid = @"api/v1/app/keydatas/%@";
 //注册蓝牙钥匙
 NSString *const kRegKey = @"api/v1/app/keys";
+//根据钥匙编号获取钥匙详细信息
+NSString *const kKeyDetail = @"api/v1/app/keys/%@";
 //注册锁
 NSString *const kRegLock = @"api/v1/app/locks";
 //修改密码
