@@ -50,27 +50,27 @@
 "登录"="Login";
 "设置"="Settings";
 "设置服务器地址"="Server address";
-"请设置服务器地址"="Please set the server permission";
+"请设置服务器地址"="Please set server address";
 "请输入账户"="Enter account";
 "请输入密码"="Enter password";
 "账号或密码错误"="Wrong account or password";
-"用户名错误"="Wrong username";
-"密码错误"="Wrong password";
-"用户不存在"="User does not exit";
+"用户名错误"="Wrong Name";
+"密码错误"="Wrong Password";
+"用户不存在"="Name not exists";
 
 //首页
 "地图"="Map";
-"主页"="Homepage";
-"我的任务"="My task";
-"工作记录"="Work record";
-"注册锁"="Register lock";
-"注册钥匙"="Register key";
-"系统参数"="System parameter";
-"申请开锁"="Apply unlock";
-"开锁审核"="Unlock audit";
+"主页"="Home";
+"我的任务"="My Task";
+"工作记录"="Operation Log";
+"注册锁"="Lock Registration";
+"注册钥匙"="Key Registration";
+"系统参数"="Parameters";
+"申请开锁"="Unlock Request";
+"开锁审核"="Unlock Approvals";
 
 //蓝牙钥匙搜索
-"搜索蓝牙钥匙"="Researching Bluetooth key";
+"搜索蓝牙钥匙"="Searching Bluetooth Key";
 "暂无蓝牙"="No result";
 "未连接"="No connection";
 "连接中"="Connecting";
@@ -78,10 +78,10 @@
 "断开中"="Disconnecting";
 
 //注册钥匙
-"连接钥匙失败"="Failed to connect key";
+"连接钥匙失败"="Key Connect Failed";
 "名称"="Name";
 "钥匙"="Key";
-"钥匙序号"="Key number";
+"钥匙序号"="Key No.";
 "注册钥匙成功"="Register key successfully";
 "请连接锁"="Please connect lock...";
 "设置初始化锁系统码钥匙"="Set initialization lock system code key";
@@ -96,13 +96,13 @@
 "钥匙编号已超出范围"="Key number is out of the range";
 "请输入钥匙名称"="Please enter the key name";
 "钥匙已存在，请勿重复注册"="Key already exists, please do not register again";
-"该钥匙已丢失"="The key has been lost";
-"该钥匙已损坏"="The key is damaged";
-"该钥匙已领出"="The key has been taken out";
-"无部门权限可以操作该钥匙"="The key can be operated without Department authority";
+"该钥匙已丢失"="Abnormal key status of Lost";
+"该钥匙已损坏"="Abnormal key status of Damage";
+"该钥匙已领出"="Abnormal key status of Using";
+"无部门权限可以操作该钥匙"="No Dept. Authority to operate this key";
 
 //注册锁
-"请连锁，读取锁id..."="Please connect, read ID of lock...";
+"请连锁，读取锁id..."="Pls connect with the lock, read the lock number";
 "连接锁失败"="Failed to connect lock";
 "锁ID"="Lock ID";
 "请输入锁名称"="Please enter the lock name";
@@ -118,41 +118,41 @@
 "锁硬件编号重复"="Hardware number is repeated";
 
 //工作记录
-"日期选择"="Date selection";
+"日期选择"="DatePicker";
 "请选择开始时间"="Please choose start time";
 "请选择结束时间"="Please choose end time";
 "yyyy年MM月"="yyyy-MM";
 "yyyy年MM月dd日"="yyyy-MM-dd";
 "查询"="Query";
 "开关锁记录"="Switch lock record";
-"开锁成功"="Unlock successfully";
-"设置成功"="Set successes";
-"设置失败"="Set failed";
-"超出有效期"="Beyond expiry date";
-"没有权限"="No permission";
-"超出时间范围"="Beyond time range";
+"开锁成功"="UnLock Successfully";
+"设置成功"="Set Successfully";
+"设置失败"="Set Failed";
+"超出有效期"="Beyond the Validity";
+"没有权限"="No Authorization";
+"超出时间范围"="Beyond the Time";
 "蓝牙钥匙开锁成功"="Bluetooth key unlocked successfully";
 "蓝牙钥匙关锁成功"="Bluetooth key locked successfully";
 
 //我的任务
-"工作任务"="Task";
+"工作任务"="My Task";
 "开关锁"="Switch lock";
-"初始化成功"="Initialization data succeed";
-"连接钥匙成功"="Key connection succeed";
-"钥匙号码不匹配"="Key number do not match";
+"初始化成功"="Synchronize Successfully";
+"连接钥匙成功"="Key Connect Succeed";
+"钥匙号码不匹配"="Unauthorized Key";
 "请开关锁"="Please switch the lock";
-"关锁成功"="Unlock successfully";
+"关锁成功"="Lock Successfully";
 "任务已失效"="Mission failure";
-"锁列表"="Lock list";
-"暂无"="Not yet";
+"锁列表"="Locks List";
+"暂无"="No data";
 
 //系统参数
-"退出"="Log out";
+"退出"="Exit";
 "确定退出当前帐号吗"="Are you sure to logout?";
-"设备号码"="Device number";
-"服务器地址"="Server address";
+"设备号码"="Device ID";
+"服务器地址"="Server Address";
 "版本号"="Version";
-"修改密码"="Modify password";
+"修改密码"="Change Password";
 "点击修改"="Click on modify";
 "退出成功"="Log out successfully";
 
@@ -160,29 +160,29 @@
 "原密码"="Old password";
 "新密码"="New password";
 "确认密码"="Confirm password";
-"请输入原密码"="Please enter the old password";
-"请输入新密码"="Please enter the new password";
-"请输入确认密码"="Please confirm password";
+"请输入原密码"="pls login the new password";
+"请输入新密码"="pls login the new password";
+"请输入确认密码"="pls re-enter the new password";
 "两次密码不一致"="The two passwords do not match";
 "确定修改密码吗"="Confirm the modify the password?";
 "修改成功，请重新登录"="Modify the password, please login again";
-"原密码错误"="Original password error";
+"原密码错误"="Wrong original password";
 "新密码和旧密码相同"="The new password is the same as old password";
 
 //申请开锁
-"请选择要删除的开锁申请"="Please select the unlock application to delete";
-"确定要删除开锁申请？"="Are you sure you want to delete the unlock request?";
-"删除成功"="Successfully deleted";
-"新建申请开锁"="New application unlock";
+"请选择要删除的开锁申请"="Select unlock request to delete";
+"确定要删除开锁申请？"="Sure to delete?";
+"删除成功"="Done to delete";
+"新建申请开锁"="Create new unlock request";
 "日期"="Date";
-"请选择要开的锁"="Please select the lock to open";
-"待审批"="Pending approval";
-"已驳回"="Rejected";
-"任务已存在"="The task already exists";
+"请选择要开的锁"="Select locks";
+"待审批"="Pending";
+"已驳回"="Unapproved";
+"任务已存在"="Task already exist";
 
 //开锁审核
-"同意"="Agree";
+"同意"="Approve";
 "驳回"="Reject";
-"申请人"="Applicant";
-"确定要同意开锁申请？"="Are you sure you want to approve the unlock application?";
-"确定要驳回开锁申请？"="Are you sure you want to reject the unlock application?";
+"申请人"="User";
+"确定要同意开锁申请？"="Sure to approve?";
+"确定要驳回开锁申请？"="Sure to reject?";

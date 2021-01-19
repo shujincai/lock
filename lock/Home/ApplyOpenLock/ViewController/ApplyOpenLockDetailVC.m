@@ -100,6 +100,7 @@
     }
     
 }
+
 //初始化
 - (void)requestInitSdkResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
@@ -138,6 +139,7 @@
     }
 }
 // 获取钥匙详情
+
 - (void)getKeyInfoDetail {
     RequestBean * request = [[RequestBean alloc]init];
     [MSHTTPRequest GET:[NSString stringWithFormat:kKeyDetail,self.keyInfo.key_id] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
