@@ -14,6 +14,9 @@
 #import "SwitchLockViewController.h"
 #import "MyTaskModel.h"
 #import "ApplyOpenLockDetailVC.h"
+#import "BlackListRelieveVC.h"
+#import "BlackListCreateVC.h"
+#import "WriteListCreateVC.h"
 
 @interface RegistrationKeyViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,SetKeyControllerDelegate>
 
@@ -203,6 +206,23 @@
         ApplyOpenLockDetailVC * applyDetailVC = [[ApplyOpenLockDetailVC alloc]init];
         applyDetailVC.currentBle = currentBle;
         [self.navigationController pushViewController:applyDetailVC animated:YES];
+    }
+    if ([self.type isEqualToString:@"4"]) {//解除挂失
+        BlackListRelieveVC * relieveVC = [[BlackListRelieveVC alloc]init];
+        relieveVC.currentBle = currentBle;
+        relieveVC.blacklistBean = _blacklistBean;
+        [self.navigationController pushViewController:relieveVC animated:YES];
+    }
+    if ([self.type isEqualToString:@"5"]) {//创建黑钥匙
+        BlackListCreateVC * blackCreateVC = [[BlackListCreateVC alloc]init];
+        blackCreateVC.currentBle = currentBle;
+        blackCreateVC.blacklistArray = _blacklistArray;
+        [self.navigationController pushViewController:blackCreateVC animated:YES];
+    }
+    if ([self.type isEqualToString:@"6"]) {//创建白钥匙
+        WriteListCreateVC * writeCreateVC = [[WriteListCreateVC alloc]init];
+        writeCreateVC.currentBle = currentBle;
+        [self.navigationController pushViewController:writeCreateVC animated:YES];
     }
 }
 

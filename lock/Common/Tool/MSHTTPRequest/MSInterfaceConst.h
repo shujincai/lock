@@ -57,3 +57,11 @@ UIKIT_EXTERN NSString *const kExistenceKey;
 UIKIT_EXTERN NSString *const kLockTree;
 //审核开关锁任务
 UIKIT_EXTERN NSString *const kTaskAuthid;
+//获取已领出钥匙列表
+UIKIT_EXTERN NSString *const kKeyTaskOutdatas;
+//钥匙挂失
+UIKIT_EXTERN NSString *const kBlackListLoss;
+//获取黑名单列表
+UIKIT_EXTERN NSString *const kBlackList;
+//设置黑、白钥匙
+UIKIT_EXTERN NSString *const kSetKeyFlag;

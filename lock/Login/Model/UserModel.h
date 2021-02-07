@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 //部门信息
+
+@protocol UserDepartmentInfo
+@end
 @interface UserDepartmentInfo : BaseBean
 @property(nonatomic,copy)NSString * children;//
 @property(nonatomic,copy)NSString * createtime;//创建时间
