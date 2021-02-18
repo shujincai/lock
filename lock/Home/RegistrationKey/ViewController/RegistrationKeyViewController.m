@@ -17,6 +17,7 @@
 #import "BlackListRelieveVC.h"
 #import "BlackListCreateVC.h"
 #import "WriteListCreateVC.h"
+#import "LockReplaceDetailVC.h"
 
 @interface RegistrationKeyViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,SetKeyControllerDelegate>
 
@@ -223,6 +224,12 @@
         WriteListCreateVC * writeCreateVC = [[WriteListCreateVC alloc]init];
         writeCreateVC.currentBle = currentBle;
         [self.navigationController pushViewController:writeCreateVC animated:YES];
+    }
+    if ([self.type isEqualToString:@"7"]) {//替换锁
+        LockReplaceDetailVC * lockReplaceVC = [[LockReplaceDetailVC alloc]init];
+        lockReplaceVC.currentBle = currentBle;
+        lockReplaceVC.replaceLockBean = _replaceLockBean;
+        [self.navigationController pushViewController:lockReplaceVC animated:YES];
     }
 }
 

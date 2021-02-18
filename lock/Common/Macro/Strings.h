@@ -14,6 +14,7 @@
 #define NF_KEY_BACKGROUND                   @"houmeBackGround"//退出后台
 #define NF_KEY_APPLY_OPEN_LOCK_SUCCESS      @"applyOpenLockTaskSuccess"//申请开锁任务成功
 #define NF_KEY_KEY_RELIEVE_SUCCESS          @"keyRelieveSuccess"//钥匙解除挂失成功
+#define NF_KEY_LOCK_REPLACE_SUCCESS         @"lockReplaceSuccess"//锁替换成功
 
 //公共
 #define STR_TIMEOUT                         L(@"网络连接超时")
@@ -223,6 +224,19 @@
 
 //锁替换
 #define STR_LOCK_REPLACE                    L(@"锁替换")
+#define STR_REPLACE                         L(@"替换")
+#define STR_STATUS                          L(@"状态")
+#define STR_NO_INSTALL                      L(@"未安装")
+#define STR_ALREADY_INSTALL                 L(@"已安装")
+#define STR_DAMAGE                          L(@"损坏")
+#define STR_REPAIR                          L(@"维修")
+#define STR_REPLACE_MINE_TPS                L(@"您想用自己替换自己吗?")
+#define STR_REPLACE_LOCK_EXIT               L(@"使用已存在系统内的锁[%@]替换?")
+#define STR_REPLACE_LOCK_NEW                L(@"使用此新锁进行替换?")
+#define STR_PLEASE_REPLACE_REASON           L(@"请输入替换原因")
+#define STR_REPLACE_REASON_EMPTY            L(@"替换原因不能为空")
+#define STR_REPLACE_SUCCESS                 L(@"替换锁成功")
+
 
 
 #endif /* Strings_h */

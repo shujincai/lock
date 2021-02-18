@@ -238,6 +238,8 @@
                     self.tableView.mj_footer.hidden = YES;
                 }
                 [self.tableView reloadData];
+                self.pageNumber = 1;
+                [self getApplyTaskDatas];
             }
         } failure:^(NSError * _Nonnull error) {
             [MBProgressHUD hideHUD];

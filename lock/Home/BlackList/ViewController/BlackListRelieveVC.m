@@ -105,6 +105,7 @@
             [SetKeyController disConnectBle];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
+            self.isHide = YES;
             [MBProgressHUD hideHUD];
             MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
             infoBean.name = STR_PLEASE_REMOVE_LOSS;

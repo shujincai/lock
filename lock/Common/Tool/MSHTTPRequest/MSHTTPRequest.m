@@ -32,6 +32,11 @@
     //设置对应接口的Url
     [self requestWithMethod:MSRequestMethodPUT url:URL parameters:parameters cachePolicy:cachePolicy success:success failure:failure];
 }
+/** 修改*/
++ (void)PATCH:(NSString *)URL parameters:(id)parameters cachePolicy:(MSCachePolicy)cachePolicy success:(MSHttpSuccess)success failure:(MSHttpFail)failure{
+    //设置对应接口的Url
+    [self requestWithMethod:MSRequestMethodPATCH url:URL parameters:parameters cachePolicy:cachePolicy success:success failure:failure];
+}
 
 
 /*

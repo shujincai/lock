@@ -65,3 +65,5 @@ UIKIT_EXTERN NSString *const kBlackListLoss;
 UIKIT_EXTERN NSString *const kBlackList;
 //设置黑、白钥匙
 UIKIT_EXTERN NSString *const kSetKeyFlag;
+//获取锁详情 替换锁
+UIKIT_EXTERN NSString *const kLockDetail;

@@ -61,3 +61,5 @@ NSString *const kBlackListLoss = @"api/v1/app/keys/blacklists/%@";
 NSString *const kBlackList = @"api/v1/app/keys/blacklists";
 //设置黑、白钥匙  keyflag钥匙标识：1-黑钥匙，2-白钥匙
 NSString *const kSetKeyFlag = @"api/v1/app/keys/%@?keyflag=%ld";
+//获取锁详情 替换锁
+NSString *const kLockDetail = @"api/v1/app/locks/%@";

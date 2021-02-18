@@ -130,7 +130,7 @@
                     [SetKeyController disConnectBle];
                     [self.navigationController popViewControllerAnimated:YES];
                 }else {
-                    //设置在线开关锁模式
+                    self.isHide = YES;
                     [MBProgressHUD hideHUD];
                     MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
                     infoBean.name = STR_PLEASE_CREATE_BLACK_KEY;

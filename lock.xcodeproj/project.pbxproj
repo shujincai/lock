@@ -78,6 +78,11 @@
 		A45A6C2E2437355100148E08 /* RayonicsBleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45A6C2D2437355100148E08 /* RayonicsBleSDK.framework */; };
 		FB03940D2490ED5C00D95AEA /* SystemParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB03940B2490ED5C00D95AEA /* SystemParameterCell.m */; };
 		FB03940E2490ED5C00D95AEA /* SystemParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */; };
+		FB0E39CB25CF76CE0040342F /* LockReplaceListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39CA25CF76CE0040342F /* LockReplaceListVC.m */; };
+		FB0E39D425CF7A790040342F /* LockReplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39D325CF7A790040342F /* LockReplaceModel.m */; };
+		FB0E39DB25CF80500040342F /* LockReplaceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39D925CF80500040342F /* LockReplaceListCell.m */; };
+		FB0E39DC25CF80500040342F /* LockReplaceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0E39DA25CF80500040342F /* LockReplaceListCell.xib */; };
+		FB0E39E225CF96AB0040342F /* LockReplaceDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39E125CF96AB0040342F /* LockReplaceDetailVC.m */; };
 		FB23C69E248B6C1400E3C5AF /* RangeDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB23C69D248B6C1400E3C5AF /* RangeDatePickerCell.m */; };
 		FB30C09E25540DA1008D5F59 /* MyTaskLockSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB30C09D25540DA1008D5F59 /* MyTaskLockSearchVC.m */; };
 		FB3BDEAB248F0FE800B54021 /* SwitchLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3BDEAA248F0FE800B54021 /* SwitchLockViewController.m */; };
@@ -270,6 +275,15 @@
 		FB03940A2490ED5C00D95AEA /* SystemParameterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemParameterCell.h; sourceTree = "<group>"; };
 		FB03940B2490ED5C00D95AEA /* SystemParameterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemParameterCell.m; sourceTree = "<group>"; };
 		FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SystemParameterCell.xib; sourceTree = "<group>"; };
+		FB0E39C925CF76CE0040342F /* LockReplaceListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockReplaceListVC.h; sourceTree = "<group>"; };
+		FB0E39CA25CF76CE0040342F /* LockReplaceListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockReplaceListVC.m; sourceTree = "<group>"; };
+		FB0E39D225CF7A790040342F /* LockReplaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockReplaceModel.h; sourceTree = "<group>"; };
+		FB0E39D325CF7A790040342F /* LockReplaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockReplaceModel.m; sourceTree = "<group>"; };
+		FB0E39D825CF80500040342F /* LockReplaceListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockReplaceListCell.h; sourceTree = "<group>"; };
+		FB0E39D925CF80500040342F /* LockReplaceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockReplaceListCell.m; sourceTree = "<group>"; };
+		FB0E39DA25CF80500040342F /* LockReplaceListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockReplaceListCell.xib; sourceTree = "<group>"; };
+		FB0E39E025CF96AB0040342F /* LockReplaceDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockReplaceDetailVC.h; sourceTree = "<group>"; };
+		FB0E39E125CF96AB0040342F /* LockReplaceDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockReplaceDetailVC.m; sourceTree = "<group>"; };
 		FB23C69C248B6C1400E3C5AF /* RangeDatePickerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeDatePickerCell.h; sourceTree = "<group>"; };
 		FB23C69D248B6C1400E3C5AF /* RangeDatePickerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeDatePickerCell.m; sourceTree = "<group>"; };
 		FB30C09C25540DA1008D5F59 /* MyTaskLockSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTaskLockSearchVC.h; sourceTree = "<group>"; };
@@ -541,6 +555,7 @@
 				FBCC72DD25A552E800A2B86D /* OpenLockAudit */,
 				FB905F3D25CB8C74008BFC3B /* KeyLoss */,
 				FB905F3925CB87A7008BFC3B /* BlackList */,
+				FB0E39C525CF76AD0040342F /* LockReplace */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -955,6 +970,46 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		FB0E39C525CF76AD0040342F /* LockReplace */ = {
+			isa = PBXGroup;
+			children = (
+				FB0E39C625CF76AD0040342F /* Model */,
+				FB0E39C725CF76AD0040342F /* View */,
+				FB0E39C825CF76AD0040342F /* ViewController */,
+			);
+			path = LockReplace;
+			sourceTree = "<group>";
+		};
+		FB0E39C625CF76AD0040342F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB0E39D225CF7A790040342F /* LockReplaceModel.h */,
+				FB0E39D325CF7A790040342F /* LockReplaceModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FB0E39C725CF76AD0040342F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB0E39D825CF80500040342F /* LockReplaceListCell.h */,
+				FB0E39D925CF80500040342F /* LockReplaceListCell.m */,
+				FB0E39DA25CF80500040342F /* LockReplaceListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB0E39C825CF76AD0040342F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FB0E39C925CF76CE0040342F /* LockReplaceListVC.h */,
+				FB0E39CA25CF76CE0040342F /* LockReplaceListVC.m */,
+				FB0E39E025CF96AB0040342F /* LockReplaceDetailVC.h */,
+				FB0E39E125CF96AB0040342F /* LockReplaceDetailVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		FB905F3925CB87A7008BFC3B /* BlackList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1235,6 +1290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44661B4242473A6000D1D9D /* LaunchScreen.storyboard in Resources */,
+				FB0E39DC25CF80500040342F /* LockReplaceListCell.xib in Resources */,
 				FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */,
 				FB905F5425CBBABD008BFC3B /* KeyLossListCell.xib in Resources */,
 				A4102A75242B200500B03620 /* resource.bundle in Resources */,
@@ -1357,8 +1413,10 @@
 				8405DBE024738669000F94EE /* HomeCollectionViewCell.m in Sources */,
 				FBA45AE2259C11BB00EF2BF9 /* ApplyOpenLockListVC.m in Sources */,
 				A44661AC242473A4000D1D9D /* ViewController.m in Sources */,
+				FB0E39D425CF7A790040342F /* LockReplaceModel.m in Sources */,
 				8405DB9B2473814F000F94EE /* LogInViewController.m in Sources */,
 				A409CA1F2428AFC500A4004E /* SZKLabel.m in Sources */,
+				FB0E39DB25CF80500040342F /* LockReplaceListCell.m in Sources */,
 				8405DBEC2473BB15000F94EE /* BaseBean.m in Sources */,
 				842F51D22474C68700478914 /* BaseViewController.m in Sources */,
 				842F51E32474DA3400478914 /* NSDate+Calendar.m in Sources */,
@@ -1399,10 +1457,12 @@
 				8405DBD924738669000F94EE /* MyTaskViewController.m in Sources */,
 				A4102A342429A7F500B03620 /* RKNotificationHub.m in Sources */,
 				8405DBDA24738669000F94EE /* WorkListModel.m in Sources */,
+				FB0E39E225CF96AB0040342F /* LockReplaceDetailVC.m in Sources */,
 				FB608CB5248A1D32008BA56C /* SearchBluetoothView.m in Sources */,
 				8405DBD524738669000F94EE /* RegistrationKeyTableViewCell.m in Sources */,
 				FBCC72E625A552E800A2B86D /* OpenLockAuditListVC.m in Sources */,
 				842F51E02474CAB200478914 /* BaseTableViewCell.m in Sources */,
+				FB0E39CB25CF76CE0040342F /* LockReplaceListVC.m in Sources */,
 				FB905F6025CBD93B008BFC3B /* BlackListModel.m in Sources */,
 				FB905F5325CBBABD008BFC3B /* KeyLossListCell.m in Sources */,
 				8405DBF22473BB6B000F94EE /* ResponseBean.m in Sources */,
@@ -1611,7 +1671,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.8.1;
+				CURRENT_PROJECT_VERSION = 1.1.0.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1629,7 +1689,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
 				PRODUCT_NAME = "万码电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1645,7 +1705,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.8.1;
+				CURRENT_PROJECT_VERSION = 1.1.0.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1663,7 +1723,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
 				PRODUCT_NAME = "万码电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
