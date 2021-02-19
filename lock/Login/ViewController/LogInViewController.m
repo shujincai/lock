@@ -125,7 +125,6 @@
         make.bottom.equalTo(self.view.mas_bottom).offset(-(10+TABBAR_AREA_HEIGHT));
         make.height.mas_equalTo(20);
     }];
-    
 }
 -(void)tapView:(UITapGestureRecognizer *)sender{
     SettingViewController * setting = [SettingViewController new];

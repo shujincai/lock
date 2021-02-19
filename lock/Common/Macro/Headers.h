@@ -57,5 +57,6 @@
 #import "FSCalendar.h"
 #import "UserModel.h"
 #import "HomeModel.h"
+#import "RegistrationKeyViewController.h"
 
 #endif /* Headers_h */

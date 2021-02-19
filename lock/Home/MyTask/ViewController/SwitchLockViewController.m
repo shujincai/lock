@@ -181,6 +181,10 @@
             infoBean.name = STR_OVERSTEP_TIME_RANGE;
             infoBean.iamgeName = @"ic_switch_fail";
         }
+        if ([self.lockInfo.event_type isEqualToString:@"8"]) {//黑名单钥匙
+            infoBean.name = STR_BLACKLIST_KEY;
+            infoBean.iamgeName = @"ic_switch_fail";
+        }
         if ([self.lockInfo.event_type isEqualToString:@"13"]) {//开锁成功
             infoBean.name = STR_OPEN_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";

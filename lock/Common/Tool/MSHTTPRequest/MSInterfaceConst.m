@@ -53,3 +53,13 @@ NSString *const kExistenceKey = @"api/v1/app/keys/existence/%@";
 NSString *const kLockTree = @"api/v1/app/locks/tree";
 //审核开关锁任务, 可批量审核
 NSString *const kTaskAuthid = @"api/v1/app/keydatas/auth/%ld?auth=%ld";
+//获取已领出钥匙列表
+NSString *const kKeyTaskOutdatas = @"api/v1/app/keys";
+//钥匙挂失
+NSString *const kBlackListLoss = @"api/v1/app/keys/blacklists/%@";
+//获取黑名单列表
+NSString *const kBlackList = @"api/v1/app/keys/blacklists";
+//设置黑、白钥匙  keyflag钥匙标识：1-黑钥匙，2-白钥匙
+NSString *const kSetKeyFlag = @"api/v1/app/keys/%@?keyflag=%ld";
+//获取锁详情 替换锁
+NSString *const kLockDetail = @"api/v1/app/locks/%@";

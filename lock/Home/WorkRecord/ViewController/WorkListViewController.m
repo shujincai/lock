@@ -114,6 +114,8 @@
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_NO_POWER];
     }else  if (model.eventtype.integerValue == 6){//超出时间范围
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_OVERSTEP_TIME_RANGE];
+    }else  if (model.eventtype.integerValue == 8){//黑名单钥匙
+        cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_BLACKLIST_KEY];
     }else  if (model.eventtype.integerValue == 13){//蓝牙钥匙开锁成功
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_BLUETOOTH_OPEN_LOCK_SUCCESS];
     }else  if (model.eventtype.integerValue == 14){//蓝牙钥匙关锁成功

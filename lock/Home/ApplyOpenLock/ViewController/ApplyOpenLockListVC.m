@@ -9,7 +9,6 @@
 #import "ApplyOpenLockListVC.h"
 #import "MyTaskListCell.h"
 #import "MyTaskModel.h"
-#import "RegistrationKeyViewController.h"
 #import "ApplyOpenLockDetailVC.h"
 
 @interface ApplyOpenLockListVC ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource>

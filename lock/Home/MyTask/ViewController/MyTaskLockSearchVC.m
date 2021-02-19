@@ -9,7 +9,6 @@
 #import "MyTaskLockSearchVC.h"
 #import "MyTaskModel.h"
 #import "SwitchLockListCell.h"
-#import "RegistrationKeyViewController.h"
 
 @interface MyTaskLockSearchVC ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate>
 

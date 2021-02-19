@@ -186,3 +186,52 @@
 "申请人"="User";
 "确定要同意开锁申请？"="Sure to approve?";
 "确定要驳回开锁申请？"="Sure to reject?";
+
+//黑名单
+"黑名单"="Blacklist";
+"黑名单钥匙"="Blacklist key";
+"解除"="Recover";
+"黑：下载黑名单到锁内以防止被丢失的钥匙开锁"="Download blacklist to lock(s) to avoid illegal unlocking";
+"白：将黑名单从锁中移除"="Remove blacklist from lock(s)";
+"黑钥匙"="Black key";
+"请选择丢失的钥匙"="Please select lost key(s)";
+"白钥匙"="White key";
+"操作用户"="Operator";
+"拉黑时间"="Operate time";
+"解除挂失"="Recover from loss";
+"请解除挂失"="Please recover from loss";
+"重要！解除挂失后，务必创建新的白钥匙将此钥匙从关联锁的黑名单中移除，否则可能会出现再次标记为黑名单而无法开锁的情况"="Please be sure to create new white key to remove this key from blacklist of related locks, otherwise might be marked as blacklist key agian that can not unlock any lock";
+"解除挂失成功"="Done to recover from loss";
+"创建黑钥匙"="Create black key";
+"请创建黑钥匙"="Please create black key";
+"创建"="Create";
+"创建黑钥匙失败"="Failed to create black key";
+"创建黑钥匙成功"="Done to create black key";
+"创建白钥匙"="Create white key";
+"请创建白钥匙"="Please create white key";
+"创建白钥匙失败"="Fail to create white key";
+"创建白钥匙成功"="Done to create white key";
+
+//钥匙挂失
+"钥匙挂失"="Report loss of key";
+"丢失"="Lost";
+"部门"="Dept";
+"使用人"="Occupier";
+"更新时间"="Update time";
+"确定要挂失钥匙"="Confirm to report loss of the key";
+"挂失成功"="Done to report loss of the key";
+
+//锁替换
+"锁替换"="Lock replace";
+"替换"="Replace";
+"状态"="Status";
+"未安装"="Uninstalled";
+"已安装"="Installed";
+"损坏"="Damaged";
+"维修"="Repair";
+"您想用自己替换自己吗?"="Do not read the same lock?";
+"使用已存在系统内的锁[%@]替换?"="Replace with already exist[%@]?";
+"使用此新锁进行替换?"="Replace with this new lock?";
+"请输入替换原因"="Please input replace reason";
+"替换原因不能为空"="Replace reason is required";
+"替换锁成功"="Done to replace lock";

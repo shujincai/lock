@@ -13,6 +13,8 @@
 #define NF_KEY_FOREGROUND                   @"enterForeground"//进入前台
 #define NF_KEY_BACKGROUND                   @"houmeBackGround"//退出后台
 #define NF_KEY_APPLY_OPEN_LOCK_SUCCESS      @"applyOpenLockTaskSuccess"//申请开锁任务成功
+#define NF_KEY_KEY_RELIEVE_SUCCESS          @"keyRelieveSuccess"//钥匙解除挂失成功
+#define NF_KEY_LOCK_REPLACE_SUCCESS         @"lockReplaceSuccess"//锁替换成功
 
 //公共
 #define STR_TIMEOUT                         L(@"网络连接超时")
@@ -185,5 +187,56 @@
 #define STR_APPLICANT                       L(@"申请人")
 #define STR_AGREE_UNLOCK_APPLY              L(@"确定要同意开锁申请？")
 #define STR_REJECT_UNLOCK_APPLY             L(@"确定要驳回开锁申请？")
+
+//黑名单
+#define STR_BLACKLIST                       L(@"黑名单")
+#define STR_BLACKLIST_KEY                   L(@"黑名单钥匙")
+#define STR_RELIEVE                         L(@"解除")
+#define STR_BLACK_KEY_TIPS                  L(@"黑：下载黑名单到锁内以防止被丢失的钥匙开锁")
+#define STR_WHITE_KEY_TIPS                  L(@"白：将黑名单从锁中移除")
+#define STR_BLACK_KEY                       L(@"黑钥匙")
+#define STR_SELECT_LOSS_KEY                 L(@"请选择丢失的钥匙")
+#define STR_WHITE_KEY                       L(@"白钥匙")
+#define STR_OPERATION_USER                  L(@"操作用户")
+#define STR_BLACKOUT_TIME                   L(@"拉黑时间")
+#define STR_REMOVE_LOSS                     L(@"解除挂失")
+#define STR_PLEASE_REMOVE_LOSS              L(@"请解除挂失")
+#define STR_REMOVE_LOSS_TIPS                L(@"重要！解除挂失后，务必创建新的白钥匙将此钥匙从关联锁的黑名单中移除，否则可能会出现再次标记为黑名单而无法开锁的情况")
+#define STR_REMOVE_LOSS_SUCCESS             L(@"解除挂失成功")
+#define STR_CREATE_BLACK_KEY                L(@"创建黑钥匙")
+#define STR_PLEASE_CREATE_BLACK_KEY         L(@"请创建黑钥匙")
+#define STR_CREATE                          L(@"创建")
+#define STR_CREATE_BLACK_KEY_FAIL           L(@"创建黑钥匙失败")
+#define STR_CREATE_BLACK_KEY_SUCCESS        L(@"创建黑钥匙成功")
+#define STR_CREATE_WHITE_KEY                L(@"创建白钥匙")
+#define STR_PLEASE_CREATE_WHITE_KEY         L(@"请创建白钥匙")
+#define STR_CREATE_WHITE_KEY_FAIL           L(@"创建白钥匙失败")
+#define STR_CREATE_WHITE_KEY_SUCCESS        L(@"创建白钥匙成功")
+
+//钥匙挂失
+#define STR_KEY_LOSS                        L(@"钥匙挂失")
+#define STR_LOSS                            L(@"丢失")
+#define STR_DEPT                            L(@"部门")
+#define STR_USER                            L(@"使用人")
+#define STR_UPDATE_TIME                     L(@"更新时间")
+#define STR_DEFINE_LOSS_KEY                 L(@"确定要挂失钥匙")
+#define STR_LOSS_SUCCESS                    L(@"挂失成功")
+
+//锁替换
+#define STR_LOCK_REPLACE                    L(@"锁替换")
+#define STR_REPLACE                         L(@"替换")
+#define STR_STATUS                          L(@"状态")
+#define STR_NO_INSTALL                      L(@"未安装")
+#define STR_ALREADY_INSTALL                 L(@"已安装")
+#define STR_DAMAGE                          L(@"损坏")
+#define STR_REPAIR                          L(@"维修")
+#define STR_REPLACE_MINE_TPS                L(@"您想用自己替换自己吗?")
+#define STR_REPLACE_LOCK_EXIT               L(@"使用已存在系统内的锁[%@]替换?")
+#define STR_REPLACE_LOCK_NEW                L(@"使用此新锁进行替换?")
+#define STR_PLEASE_REPLACE_REASON           L(@"请输入替换原因")
+#define STR_REPLACE_REASON_EMPTY            L(@"替换原因不能为空")
+#define STR_REPLACE_SUCCESS                 L(@"替换锁成功")
+
+
 
 #endif /* Strings_h */

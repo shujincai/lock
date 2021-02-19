@@ -78,6 +78,11 @@
 		A45A6C2E2437355100148E08 /* RayonicsBleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45A6C2D2437355100148E08 /* RayonicsBleSDK.framework */; };
 		FB03940D2490ED5C00D95AEA /* SystemParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB03940B2490ED5C00D95AEA /* SystemParameterCell.m */; };
 		FB03940E2490ED5C00D95AEA /* SystemParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */; };
+		FB0E39CB25CF76CE0040342F /* LockReplaceListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39CA25CF76CE0040342F /* LockReplaceListVC.m */; };
+		FB0E39D425CF7A790040342F /* LockReplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39D325CF7A790040342F /* LockReplaceModel.m */; };
+		FB0E39DB25CF80500040342F /* LockReplaceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39D925CF80500040342F /* LockReplaceListCell.m */; };
+		FB0E39DC25CF80500040342F /* LockReplaceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0E39DA25CF80500040342F /* LockReplaceListCell.xib */; };
+		FB0E39E225CF96AB0040342F /* LockReplaceDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39E125CF96AB0040342F /* LockReplaceDetailVC.m */; };
 		FB23C69E248B6C1400E3C5AF /* RangeDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB23C69D248B6C1400E3C5AF /* RangeDatePickerCell.m */; };
 		FB30C09E25540DA1008D5F59 /* MyTaskLockSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB30C09D25540DA1008D5F59 /* MyTaskLockSearchVC.m */; };
 		FB3BDEAB248F0FE800B54021 /* SwitchLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3BDEAA248F0FE800B54021 /* SwitchLockViewController.m */; };
@@ -87,6 +92,17 @@
 		FB608CBB248A1E47008BA56C /* RegistrationLockTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */; };
 		FB608CBE248A1E4F008BA56C /* RegistrationLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */; };
 		FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB83FF81249B493600432C35 /* InfoPlist.strings */; };
+		FB8ACA3525CCD63300CB0F05 /* BlackListCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8ACA3425CCD63300CB0F05 /* BlackListCreateVC.m */; };
+		FB8ACA3B25CCF93900CB0F05 /* WriteListCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8ACA3A25CCF93900CB0F05 /* WriteListCreateVC.m */; };
+		FB905F4325CB8D95008BFC3B /* KeyLossListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F4225CB8D95008BFC3B /* KeyLossListVC.m */; };
+		FB905F4C25CBA008008BFC3B /* KeyLossModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F4B25CBA008008BFC3B /* KeyLossModel.m */; };
+		FB905F5325CBBABD008BFC3B /* KeyLossListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F5125CBBABD008BFC3B /* KeyLossListCell.m */; };
+		FB905F5425CBBABD008BFC3B /* KeyLossListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB905F5225CBBABD008BFC3B /* KeyLossListCell.xib */; };
+		FB905F5A25CBD7ED008BFC3B /* BlackListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F5925CBD7ED008BFC3B /* BlackListVC.m */; };
+		FB905F6025CBD93B008BFC3B /* BlackListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F5F25CBD93B008BFC3B /* BlackListModel.m */; };
+		FB905F6725CBDDA6008BFC3B /* BlackListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F6425CBDDA6008BFC3B /* BlackListCell.m */; };
+		FB905F6825CBDDA6008BFC3B /* BlackListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB905F6525CBDDA6008BFC3B /* BlackListCell.xib */; };
+		FB905F6E25CBE063008BFC3B /* BlackListRelieveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F6D25CBE063008BFC3B /* BlackListRelieveVC.m */; };
 		FBA45ADC259C119400EF2BF9 /* ApplyOpenLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA45ADB259C119400EF2BF9 /* ApplyOpenLockModel.m */; };
 		FBA45AE2259C11BB00EF2BF9 /* ApplyOpenLockListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA45AE1259C11BB00EF2BF9 /* ApplyOpenLockListVC.m */; };
 		FBCC72D025A552C400A2B86D /* ApplyOpenLockDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBCC72CA25A552C300A2B86D /* ApplyOpenLockDateCell.xib */; };
@@ -259,6 +275,15 @@
 		FB03940A2490ED5C00D95AEA /* SystemParameterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemParameterCell.h; sourceTree = "<group>"; };
 		FB03940B2490ED5C00D95AEA /* SystemParameterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemParameterCell.m; sourceTree = "<group>"; };
 		FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SystemParameterCell.xib; sourceTree = "<group>"; };
+		FB0E39C925CF76CE0040342F /* LockReplaceListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockReplaceListVC.h; sourceTree = "<group>"; };
+		FB0E39CA25CF76CE0040342F /* LockReplaceListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockReplaceListVC.m; sourceTree = "<group>"; };
+		FB0E39D225CF7A790040342F /* LockReplaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockReplaceModel.h; sourceTree = "<group>"; };
+		FB0E39D325CF7A790040342F /* LockReplaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockReplaceModel.m; sourceTree = "<group>"; };
+		FB0E39D825CF80500040342F /* LockReplaceListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockReplaceListCell.h; sourceTree = "<group>"; };
+		FB0E39D925CF80500040342F /* LockReplaceListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockReplaceListCell.m; sourceTree = "<group>"; };
+		FB0E39DA25CF80500040342F /* LockReplaceListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockReplaceListCell.xib; sourceTree = "<group>"; };
+		FB0E39E025CF96AB0040342F /* LockReplaceDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockReplaceDetailVC.h; sourceTree = "<group>"; };
+		FB0E39E125CF96AB0040342F /* LockReplaceDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockReplaceDetailVC.m; sourceTree = "<group>"; };
 		FB23C69C248B6C1400E3C5AF /* RangeDatePickerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeDatePickerCell.h; sourceTree = "<group>"; };
 		FB23C69D248B6C1400E3C5AF /* RangeDatePickerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeDatePickerCell.m; sourceTree = "<group>"; };
 		FB30C09C25540DA1008D5F59 /* MyTaskLockSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTaskLockSearchVC.h; sourceTree = "<group>"; };
@@ -279,6 +304,26 @@
 		FB83FF82249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		FB83FF83249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		FB83FF84249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		FB8ACA3325CCD63300CB0F05 /* BlackListCreateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackListCreateVC.h; sourceTree = "<group>"; };
+		FB8ACA3425CCD63300CB0F05 /* BlackListCreateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlackListCreateVC.m; sourceTree = "<group>"; };
+		FB8ACA3925CCF93900CB0F05 /* WriteListCreateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WriteListCreateVC.h; sourceTree = "<group>"; };
+		FB8ACA3A25CCF93900CB0F05 /* WriteListCreateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriteListCreateVC.m; sourceTree = "<group>"; };
+		FB905F4125CB8D95008BFC3B /* KeyLossListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyLossListVC.h; sourceTree = "<group>"; };
+		FB905F4225CB8D95008BFC3B /* KeyLossListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyLossListVC.m; sourceTree = "<group>"; };
+		FB905F4A25CBA008008BFC3B /* KeyLossModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyLossModel.h; sourceTree = "<group>"; };
+		FB905F4B25CBA008008BFC3B /* KeyLossModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyLossModel.m; sourceTree = "<group>"; };
+		FB905F5025CBBABD008BFC3B /* KeyLossListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyLossListCell.h; sourceTree = "<group>"; };
+		FB905F5125CBBABD008BFC3B /* KeyLossListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyLossListCell.m; sourceTree = "<group>"; };
+		FB905F5225CBBABD008BFC3B /* KeyLossListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyLossListCell.xib; sourceTree = "<group>"; };
+		FB905F5825CBD7ED008BFC3B /* BlackListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackListVC.h; sourceTree = "<group>"; };
+		FB905F5925CBD7ED008BFC3B /* BlackListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlackListVC.m; sourceTree = "<group>"; };
+		FB905F5E25CBD93B008BFC3B /* BlackListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackListModel.h; sourceTree = "<group>"; };
+		FB905F5F25CBD93B008BFC3B /* BlackListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlackListModel.m; sourceTree = "<group>"; };
+		FB905F6425CBDDA6008BFC3B /* BlackListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackListCell.m; sourceTree = "<group>"; };
+		FB905F6525CBDDA6008BFC3B /* BlackListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlackListCell.xib; sourceTree = "<group>"; };
+		FB905F6625CBDDA6008BFC3B /* BlackListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackListCell.h; sourceTree = "<group>"; };
+		FB905F6C25CBE063008BFC3B /* BlackListRelieveVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackListRelieveVC.h; sourceTree = "<group>"; };
+		FB905F6D25CBE063008BFC3B /* BlackListRelieveVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlackListRelieveVC.m; sourceTree = "<group>"; };
 		FBA45ADA259C119400EF2BF9 /* ApplyOpenLockModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockModel.h; sourceTree = "<group>"; };
 		FBA45ADB259C119400EF2BF9 /* ApplyOpenLockModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyOpenLockModel.m; sourceTree = "<group>"; };
 		FBA45AE0259C11BB00EF2BF9 /* ApplyOpenLockListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockListVC.h; sourceTree = "<group>"; };
@@ -508,6 +553,9 @@
 				8405DBC824738669000F94EE /* SystemParameter */,
 				FBA45AD6259C070300EF2BF9 /* ApplyOpenLock */,
 				FBCC72DD25A552E800A2B86D /* OpenLockAudit */,
+				FB905F3D25CB8C74008BFC3B /* KeyLoss */,
+				FB905F3925CB87A7008BFC3B /* BlackList */,
+				FB0E39C525CF76AD0040342F /* LockReplace */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -922,6 +970,129 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		FB0E39C525CF76AD0040342F /* LockReplace */ = {
+			isa = PBXGroup;
+			children = (
+				FB0E39C625CF76AD0040342F /* Model */,
+				FB0E39C725CF76AD0040342F /* View */,
+				FB0E39C825CF76AD0040342F /* ViewController */,
+			);
+			path = LockReplace;
+			sourceTree = "<group>";
+		};
+		FB0E39C625CF76AD0040342F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB0E39D225CF7A790040342F /* LockReplaceModel.h */,
+				FB0E39D325CF7A790040342F /* LockReplaceModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FB0E39C725CF76AD0040342F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB0E39D825CF80500040342F /* LockReplaceListCell.h */,
+				FB0E39D925CF80500040342F /* LockReplaceListCell.m */,
+				FB0E39DA25CF80500040342F /* LockReplaceListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB0E39C825CF76AD0040342F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FB0E39C925CF76CE0040342F /* LockReplaceListVC.h */,
+				FB0E39CA25CF76CE0040342F /* LockReplaceListVC.m */,
+				FB0E39E025CF96AB0040342F /* LockReplaceDetailVC.h */,
+				FB0E39E125CF96AB0040342F /* LockReplaceDetailVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FB905F3925CB87A7008BFC3B /* BlackList */ = {
+			isa = PBXGroup;
+			children = (
+				FB905F3A25CB87A7008BFC3B /* Model */,
+				FB905F3B25CB87A7008BFC3B /* View */,
+				FB905F3C25CB87A7008BFC3B /* ViewController */,
+			);
+			name = BlackList;
+			path = lock/Home/BlackList;
+			sourceTree = SOURCE_ROOT;
+		};
+		FB905F3A25CB87A7008BFC3B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB905F5E25CBD93B008BFC3B /* BlackListModel.h */,
+				FB905F5F25CBD93B008BFC3B /* BlackListModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FB905F3B25CB87A7008BFC3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB905F6625CBDDA6008BFC3B /* BlackListCell.h */,
+				FB905F6425CBDDA6008BFC3B /* BlackListCell.m */,
+				FB905F6525CBDDA6008BFC3B /* BlackListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB905F3C25CB87A7008BFC3B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FB905F5825CBD7ED008BFC3B /* BlackListVC.h */,
+				FB905F5925CBD7ED008BFC3B /* BlackListVC.m */,
+				FB905F6C25CBE063008BFC3B /* BlackListRelieveVC.h */,
+				FB905F6D25CBE063008BFC3B /* BlackListRelieveVC.m */,
+				FB8ACA3325CCD63300CB0F05 /* BlackListCreateVC.h */,
+				FB8ACA3425CCD63300CB0F05 /* BlackListCreateVC.m */,
+				FB8ACA3925CCF93900CB0F05 /* WriteListCreateVC.h */,
+				FB8ACA3A25CCF93900CB0F05 /* WriteListCreateVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FB905F3D25CB8C74008BFC3B /* KeyLoss */ = {
+			isa = PBXGroup;
+			children = (
+				FB905F3E25CB8C74008BFC3B /* Model */,
+				FB905F3F25CB8C74008BFC3B /* View */,
+				FB905F4025CB8C74008BFC3B /* ViewController */,
+			);
+			path = KeyLoss;
+			sourceTree = "<group>";
+		};
+		FB905F3E25CB8C74008BFC3B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB905F4A25CBA008008BFC3B /* KeyLossModel.h */,
+				FB905F4B25CBA008008BFC3B /* KeyLossModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FB905F3F25CB8C74008BFC3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB905F5025CBBABD008BFC3B /* KeyLossListCell.h */,
+				FB905F5125CBBABD008BFC3B /* KeyLossListCell.m */,
+				FB905F5225CBBABD008BFC3B /* KeyLossListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB905F4025CB8C74008BFC3B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FB905F4125CB8D95008BFC3B /* KeyLossListVC.h */,
+				FB905F4225CB8D95008BFC3B /* KeyLossListVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		FBA45AD6259C070300EF2BF9 /* ApplyOpenLock */ = {
 			isa = PBXGroup;
 			children = (
@@ -1119,11 +1290,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44661B4242473A6000D1D9D /* LaunchScreen.storyboard in Resources */,
+				FB0E39DC25CF80500040342F /* LockReplaceListCell.xib in Resources */,
 				FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */,
+				FB905F5425CBBABD008BFC3B /* KeyLossListCell.xib in Resources */,
 				A4102A75242B200500B03620 /* resource.bundle in Resources */,
 				FBFB51F32553F36600E5D71A /* SwitchLockListCell.xib in Resources */,
 				FBCC72D125A552C400A2B86D /* ApplyOpenLockLockCell.xib in Resources */,
 				A44661B1242473A6000D1D9D /* Assets.xcassets in Resources */,
+				FB905F6825CBDDA6008BFC3B /* BlackListCell.xib in Resources */,
 				A430EF752432C69C00F68BCE /* WSDatePickerView.xib in Resources */,
 				842FC896247E2C8800489C50 /* MyTaskListCell.xib in Resources */,
 				FBCC72D025A552C400A2B86D /* ApplyOpenLockDateCell.xib in Resources */,
@@ -1239,8 +1413,10 @@
 				8405DBE024738669000F94EE /* HomeCollectionViewCell.m in Sources */,
 				FBA45AE2259C11BB00EF2BF9 /* ApplyOpenLockListVC.m in Sources */,
 				A44661AC242473A4000D1D9D /* ViewController.m in Sources */,
+				FB0E39D425CF7A790040342F /* LockReplaceModel.m in Sources */,
 				8405DB9B2473814F000F94EE /* LogInViewController.m in Sources */,
 				A409CA1F2428AFC500A4004E /* SZKLabel.m in Sources */,
+				FB0E39DB25CF80500040342F /* LockReplaceListCell.m in Sources */,
 				8405DBEC2473BB15000F94EE /* BaseBean.m in Sources */,
 				842F51D22474C68700478914 /* BaseViewController.m in Sources */,
 				842F51E32474DA3400478914 /* NSDate+Calendar.m in Sources */,
@@ -1253,20 +1429,27 @@
 				842FC891247E0E1200489C50 /* MyTaskModel.m in Sources */,
 				842F51E92474DB1700478914 /* UIViewController+Helper.m in Sources */,
 				FB3BDEAB248F0FE800B54021 /* SwitchLockViewController.m in Sources */,
+				FB905F6E25CBE063008BFC3B /* BlackListRelieveVC.m in Sources */,
 				8405DBD824738669000F94EE /* RegistrationKeyViewController.m in Sources */,
 				A44661A6242473A4000D1D9D /* AppDelegate.m in Sources */,
+				FB905F5A25CBD7ED008BFC3B /* BlackListVC.m in Sources */,
+				FB8ACA3525CCD63300CB0F05 /* BlackListCreateVC.m in Sources */,
 				842F51ED2474F55800478914 /* CommonUtil.m in Sources */,
 				8405DBE9247387EA000F94EE /* BaseTableViewController.m in Sources */,
+				FB905F4C25CBA008008BFC3B /* KeyLossModel.m in Sources */,
 				8405DBE6247386E2000F94EE /* MapViewController.m in Sources */,
 				FB608CB2248A1CF7008BA56C /* RegistrationKeyModel.m in Sources */,
 				8405DBEF2473BB47000F94EE /* RequestBean.m in Sources */,
+				FB905F4325CB8D95008BFC3B /* KeyLossListVC.m in Sources */,
 				FBFB51F42553F36600E5D71A /* SwitchLockListCell.m in Sources */,
+				FB905F6725CBDDA6008BFC3B /* BlackListCell.m in Sources */,
 				FBCC72D925A552CF00A2B86D /* ApplyOpenLockDetailVC.m in Sources */,
 				FB30C09E25540DA1008D5F59 /* MyTaskLockSearchVC.m in Sources */,
 				8405DBDB24738669000F94EE /* WorkListTableViewCell.m in Sources */,
 				8405DBD624738669000F94EE /* ConnectKeyTableViewCell.m in Sources */,
 				FBCC72D225A552C400A2B86D /* ApplyOpenLockDateCell.m in Sources */,
 				A430EF792432C69C00F68BCE /* UIView+Extension.m in Sources */,
+				FB8ACA3B25CCF93900CB0F05 /* WriteListCreateVC.m in Sources */,
 				8405DBDC24738669000F94EE /* WorkRecordViewController.m in Sources */,
 				8405DB9C2473814F000F94EE /* SettingViewController.m in Sources */,
 				8405DBA0247382F7000F94EE /* MainViewController.m in Sources */,
@@ -1274,10 +1457,14 @@
 				8405DBD924738669000F94EE /* MyTaskViewController.m in Sources */,
 				A4102A342429A7F500B03620 /* RKNotificationHub.m in Sources */,
 				8405DBDA24738669000F94EE /* WorkListModel.m in Sources */,
+				FB0E39E225CF96AB0040342F /* LockReplaceDetailVC.m in Sources */,
 				FB608CB5248A1D32008BA56C /* SearchBluetoothView.m in Sources */,
 				8405DBD524738669000F94EE /* RegistrationKeyTableViewCell.m in Sources */,
 				FBCC72E625A552E800A2B86D /* OpenLockAuditListVC.m in Sources */,
 				842F51E02474CAB200478914 /* BaseTableViewCell.m in Sources */,
+				FB0E39CB25CF76CE0040342F /* LockReplaceListVC.m in Sources */,
+				FB905F6025CBD93B008BFC3B /* BlackListModel.m in Sources */,
+				FB905F5325CBBABD008BFC3B /* KeyLossListCell.m in Sources */,
 				8405DBF22473BB6B000F94EE /* ResponseBean.m in Sources */,
 				FBA45ADC259C119400EF2BF9 /* ApplyOpenLockModel.m in Sources */,
 				A4102A73242B200500B03620 /* MMScanView.m in Sources */,
@@ -1484,7 +1671,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.8.1;
+				CURRENT_PROJECT_VERSION = 1.1.0.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1502,7 +1689,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
 				PRODUCT_NAME = "万码电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1518,7 +1705,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.8.1;
+				CURRENT_PROJECT_VERSION = 1.1.0.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1536,7 +1723,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
 				PRODUCT_NAME = "万码电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
