@@ -38,19 +38,15 @@
     
     self.titles = @[STR_HOMEPAGE,STR_MAP];
     UIView * topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, UISCREEN_WIDTH, STATUS_BAR_HEIGHT)];
-    topView.backgroundColor = COLOR_BLUE;
     [self.view addSubview:topView];
     self.categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, UISCREEN_WIDTH, NAV_BAR_HEIGHT)];
     self.categoryView.cellSpacing = 0;
-    self.categoryView.backgroundColor = COLOR_BLUE;
     self.categoryView.titles = self.titles;
     self.categoryView.contentEdgeInsetLeft = 0;
     self.categoryView.contentEdgeInsetRight = 0;
     self.categoryView.averageCellSpacingEnabled = NO;
     self.categoryView.defaultSelectedIndex = 0;
     self.categoryView.cellWidth = UISCREEN_WIDTH/2.0;
-    self.categoryView.titleColor = COLOR_WHITE;
-    self.categoryView.titleSelectedColor = COLOR_WHITE;
     self.categoryView.titleFont = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3);
     self.categoryView.titleSelectedFont = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
     self.categoryView.delegate = self;
@@ -58,7 +54,6 @@
     // 添加指示器
     JXCategoryIndicatorLineView * lineView = [[JXCategoryIndicatorLineView alloc] init];
     lineView.indicatorWidth = UISCREEN_WIDTH/2.0;
-    lineView.indicatorColor = COLOR_RED;
     self.categoryView.indicators = @[lineView];
     //关联到categoryView
     //添加试图
@@ -66,6 +61,19 @@
     self.listContainerView.frame = CGRectMake(0, NAV_HEIGHT, UISCREEN_WIDTH, UISCREEN_HEIGHT - NAV_HEIGHT);
     [self.view addSubview:self.listContainerView];
     self.categoryView.listContainer = self.listContainerView;
+#if LOCK_APP
+    topView.backgroundColor = COLOR_BLUE;
+    self.categoryView.backgroundColor = COLOR_BLUE;
+    self.categoryView.titleSelectedColor = COLOR_WHITE;
+    self.categoryView.titleColor = COLOR_WHITE;
+    lineView.indicatorColor = COLOR_RED;
+#elif VANMALOCK_APP
+    topView.backgroundColor = COLOR_WHITE;
+    self.categoryView.backgroundColor = COLOR_WHITE;
+    self.categoryView.titleSelectedColor = COLOR_BTN_BG;
+    self.categoryView.titleColor = COLOR_BLACK;
+    lineView.indicatorColor = COLOR_BTN_BG;
+#endif
 }
 
 //返回列表的数量

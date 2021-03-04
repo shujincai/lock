@@ -35,7 +35,7 @@
     self.oldPassword.textField.secureTextEntry = YES;
     [self.view addSubview:self.oldPassword];
     [self.oldPassword mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+10);
+        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+20);
         make.centerX.equalTo(self.view.mas_centerX).offset(0);
         make.size.mas_equalTo(CGSizeMake(UISCREEN_WIDTH-60, 60));
     }];
@@ -60,7 +60,11 @@
         make.size.mas_equalTo(CGSizeMake(UISCREEN_WIDTH-60, 60));
     }];
     
+#if LOCK_APP
     SZKButton * changeBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_CHANGE_PASSWORD titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:COLOR_BLUE backgroundImage:NULL image:NULL];
+#elif VANMALOCK_APP
+    SZKButton * changeBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_CHANGE_PASSWORD titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:COLOR_BTN_BG backgroundImage:NULL image:NULL];
+#endif
     changeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self.view addSubview:changeBtn];
     [changeBtn setClicAction:^(UIButton * _Nonnull sender) {//修改密码

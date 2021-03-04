@@ -6,7 +6,7 @@
 //  Copyright © 2020 li. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

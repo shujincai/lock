@@ -86,6 +86,7 @@
 #define STR_REG_KEY_SUCCESS                 L(@"注册钥匙成功")
 #define STR_PLEASE_CONNECT_LOCK             L(@"请连接锁")
 #define STR_INIT_LOCK_CODE                  L(@"设置初始化锁系统码钥匙")
+#define STR_KEY_HARDWARE_VERSION            L(@"钥匙硬件版本")
 #define STR_CHANGE_KEY_ID                   L(@"修改钥匙ID")
 #define STR_CHANGE_KEY_ID_FAIL              L(@"修改钥匙ID失败")
 #define STR_KEY_INFO_NO_EXISTENT            L(@"该钥匙信息不存在")
@@ -146,6 +147,15 @@
 #define STR_MY_TASK_INVALID                 L(@"任务已失效")
 #define STR_LOCK_LIST                       L(@"锁列表")
 #define STR_NO_YET                          L(@"暂无")
+#define STR_PASSWORD_MISMATCH               L(@"密码不匹配")
+#define STR_OPERAT_DISTURBANCE              L(@"操作中断")
+#define STR_KEY_LOCK_MATCH_FAIL             L(@"钥匙与锁密钥匹配失败")
+#define STR_BLACKLIST_KEY                   L(@"黑名单钥匙")
+#define STR_OPEN_LOCK_FAIL                  L(@"开锁失败")
+#define STR_CLOSE_LOCK_FAIL                 L(@"关锁失败")
+#define STR_VALIDATION_FAILED               L(@"验证失败")
+#define STR_FINGERPRINT_AUTHORIZE_SUCCESS   L(@"指纹授权成功")
+#define STR_FINGERPRINT_AUTHORIZE_FAIL      L(@"指纹授权失败")
 
 //系统参数
 #define STR_QUIT                            L(@"退出")

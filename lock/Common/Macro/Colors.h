@@ -42,5 +42,7 @@
 #define COLOR_TASK_HEADER_BG                [UIColor colorFromHexString:@"#AA66CC"]
 //日期背景色
 #define COLOR_COVER                         [UIColor colorWithRed:0 / 255.f green:0 / 255.f blue:0 / 255.f alpha:0.3]
+//按钮背景色
+#define COLOR_BTN_BG                        [UIColor colorFromHexString:@"#FF7E42"]
 
 #endif /* Colors_h */

@@ -162,7 +162,11 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+#if LOCK_APP
     self.tableView.backgroundColor = COLOR_HOME_BG;
+#elif VANMALOCK_APP
+    self.tableView.backgroundColor = COLOR_BG_VIEW;
+#endif
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -190,7 +194,12 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
         
         _rightCollectionView.delegate = self;
         _rightCollectionView.dataSource = self;
+        
+#if LOCK_APP
         _rightCollectionView.backgroundColor = COLOR_HOME_BG;
+#elif VANMALOCK_APP
+        _rightCollectionView.backgroundColor = COLOR_BG_VIEW;
+#endif
         [_rightCollectionView registerClass:[HomeCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifer];
     }
     return _rightCollectionView;

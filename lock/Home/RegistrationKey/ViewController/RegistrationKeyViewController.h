@@ -6,7 +6,7 @@
 //  Copyright © 2020 li. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseViewController.h"
 @class MyTaskListBean;
 @class UnlockListBean;
 @class BlackListBean;

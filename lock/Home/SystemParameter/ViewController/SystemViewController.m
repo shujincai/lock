@@ -42,7 +42,11 @@
     headerView.frame = CGRectMake(0, 0, UIScreenWidth, 150);
     self.tableView.tableFooterView = headerView;
     
+#if LOCK_APP
     SZKButton * buton = [[SZKButton alloc]initWithFrame:CGRectMake(20, 40, UIScreenWidth-40, 40) title:STR_QUIT titleColor:UIColor.whiteColor titleFont:18 cornerRadius:5 backgroundColor:COLOR_BLUE backgroundImage:nil image:nil];
+#elif VANMALOCK_APP
+    SZKButton * buton = [[SZKButton alloc]initWithFrame:CGRectMake(20, 40, UIScreenWidth-40, 40) title:STR_QUIT titleColor:UIColor.whiteColor titleFont:18 cornerRadius:5 backgroundColor:COLOR_BTN_BG backgroundImage:nil image:nil];
+#endif
     buton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [headerView addSubview:buton];
     [buton setClicAction:^(UIButton * _Nonnull sender) {//退出

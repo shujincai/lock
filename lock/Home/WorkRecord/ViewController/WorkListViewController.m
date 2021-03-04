@@ -120,6 +120,16 @@
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_BLUETOOTH_OPEN_LOCK_SUCCESS];
     }else  if (model.eventtype.integerValue == 14){//蓝牙钥匙关锁成功
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_BLUETOOTH_CLOSE_LOCK_SUCCESS];
+    }else  if (model.eventtype.integerValue == 19){//密码不匹配
+        cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_PASSWORD_MISMATCH];
+    }else  if (model.eventtype.integerValue == 20){//操作中断
+        cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_OPERAT_DISTURBANCE];
+    }else  if (model.eventtype.integerValue == 21){//钥匙与锁密钥匹配失败
+        cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_BLUETOOTH_CLOSE_LOCK_SUCCESS];
+    }else  if (model.eventtype.integerValue == 255){//黑名单钥匙
+        cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_BLACKLIST_KEY];
+    }else  if (model.eventtype.integerValue == 254){//验证失败 国内外
+        cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_VALIDATION_FAILED];
     }else {
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@",model.opttime];
     }

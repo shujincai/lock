@@ -6,6 +6,7 @@
   Copyright © 2020 li. All rights reserved.
 */
 //info.plist
+
 "CFBundleDisplayName" = "JWM LOCK";
 "NSBluetoothAlwaysUsageDescription" = "App needs your permission to access Bluetooth, To facilitate the connection of the key";
 "NSBluetoothPeripheralUsageDescription" = "App needs your permission to access Bluetooth, To facilitate the connection of the key";

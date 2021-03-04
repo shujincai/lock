@@ -45,26 +45,40 @@
         
     }];
     [self.view addSubview:erweima];
-    [erweima mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).offset(-20);
-        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
-        make.size.mas_equalTo(CGSizeMake(40, 40));
-    }];
     
     self.account = [[RJTextField alloc]init];
     self.account.placeholder = STR_ADDRESS_PLACEHOLER;
     self.account.textField.text = kFetchMyDefault(@"address");
     [self.view addSubview:self.account];
+    
+#if LOCK_APP
+    [erweima mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
     [self.account mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(20);
         make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
         make.right.equalTo(erweima.mas_left).offset(0);
         make.height.mas_equalTo(60);
     }];
-    
-    
-    
     SZKButton * BCBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_SAVE titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:COLOR_BLUE backgroundImage:NULL image:NULL];
+#elif VANMALOCK_APP
+    [erweima mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+    }];
+    [self.account mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+20);
+        make.right.equalTo(erweima.mas_left).offset(0);
+        make.height.mas_equalTo(60);
+    }];
+    SZKButton * BCBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_SAVE titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:COLOR_BTN_BG backgroundImage:NULL image:NULL];
+#endif
+    
     BCBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self.view addSubview:BCBtn];
     [BCBtn setClicAction:^(UIButton * _Nonnull sender) {

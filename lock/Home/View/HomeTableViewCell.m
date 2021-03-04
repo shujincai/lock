@@ -30,7 +30,11 @@
 }
 -(void)configSubView{
     
+#if LOCK_APP
     self.backgroundColor = COLOR_HOME_BG;
+#elif VANMALOCK_APP
+    self.backgroundColor = COLOR_BG_VIEW;
+#endif
     
     UIView * bg = [UIView new];
     bg.backgroundColor = UIColor.whiteColor;

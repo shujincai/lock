@@ -17,7 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:FONT_NAVI_TITLE, NSForegroundColorAttributeName:COLOR_WHITE}];
+#if LOCK_APP
     [[UINavigationBar appearance] setBarTintColor:COLOR_BLUE];
+#elif VANMALOCK_APP
+    [[UINavigationBar appearance] setBarTintColor:COLOR_BTN_BG];
+#endif
     //设置右滑返回手势的代理为自身
     WEAKSELF
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {

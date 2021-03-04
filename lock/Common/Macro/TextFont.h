@@ -25,5 +25,4 @@
 #define FONT_SIZE_H3                    14
 #define FONT_SIZE_H4                    13
 
-
 #endif /* TextFont_h */

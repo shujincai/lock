@@ -1,0 +1,6 @@
+framework module Pods_Vanmalock {
+  umbrella header "Pods-Vanmalock-umbrella.h"
+
+  export *
+  module * { export * }
+}
