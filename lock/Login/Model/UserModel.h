@@ -49,6 +49,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@protocol FingerPrintListBean
+@end
+@interface FingerPrintListBean : BaseBean
+@property(nonatomic,copy)NSString * listid;//id
+@property(nonatomic,copy)NSString * fingerprint;//指纹
+@property(nonatomic,copy)NSString * fingerprintid;//指纹id
+@property(nonatomic,copy)NSString * name;//指纹名称
+@property(nonatomic,copy)NSString * workerid;//用户id
+@end
+
 @interface UserInfo : BaseBean
 
 @property(nonatomic,copy)NSString * address;//地址
@@ -68,6 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL wmSdk;//true C锁 false B锁
 @property(nonatomic,strong)NSMutableArray<UserKeyInfoList> * keylist;//钥匙数组
 @property(nonatomic,strong)UserDepartmentInfo * dept;//部门信息
+@property(nonatomic,strong)NSMutableArray<FingerPrintListBean> * fingerlist;//指纹数组
 
 @end
 

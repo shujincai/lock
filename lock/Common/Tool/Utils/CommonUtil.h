@@ -65,7 +65,12 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString*)getCurrentTimes;
 
 //获取连接蓝牙钥匙密钥
+#if LOCK_APP
 + (NSArray *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key;
+#elif VANMALOCK_APP
++ (NSString *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key;
+#endif
+
 
 // 通过蓝牙钥匙名称获取mac地址
 + (NSString *)getBluetoothKeyMac:(NSString *)name;

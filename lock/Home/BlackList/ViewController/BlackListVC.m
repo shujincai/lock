@@ -180,7 +180,7 @@
     BlackListRequest * request = [[BlackListRequest alloc]init];
     request.page = self.pageNumber;
     request.pagesize = 10;
-    request.keytype = 1;
+    request.keytype = 3;
     [MSHTTPRequest GET:kBlackList parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
         if (self.pageNumber == 1) {
             [self.listArray removeAllObjects];

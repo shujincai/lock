@@ -20,6 +20,10 @@
 
 @end
 
+@implementation FingerPrintListBean
+
+@end
+
 @implementation UserInfo
 
 @end

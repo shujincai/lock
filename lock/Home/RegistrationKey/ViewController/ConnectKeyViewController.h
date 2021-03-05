@@ -7,12 +7,14 @@
 //
 
 #import "BaseViewController.h"
+@class BluetoothKeyBean;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ConnectKeyViewController : BaseViewController
 
 @property (strong, nonatomic) CBPeripheral *currentBle;
+@property (strong, nonatomic) BluetoothKeyBean *keyDictionary;
 
 @end
 

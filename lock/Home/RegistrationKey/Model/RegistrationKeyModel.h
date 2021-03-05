@@ -62,4 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)RegistrationKeyExistenceBean * data;
 @end
 
+//连接蓝牙获取的钥匙信息
+@interface BluetoothKeyBean : BaseBean
+@property(nonatomic,copy)NSString * keyId;//钥匙id
+@property(nonatomic,copy)NSString * mac;//mac地址
+@end
+
 NS_ASSUME_NONNULL_END

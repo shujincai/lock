@@ -28,3 +28,7 @@
 @implementation RegistrationKeyExistenceResponse
 
 @end
+
+@implementation BluetoothKeyBean
+
+@end

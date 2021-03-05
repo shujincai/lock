@@ -1,0 +1,6 @@
+framework module BleKeySdk {
+  umbrella header "BleKeySdk.h"
+
+  export *
+  module * { export * }
+}

@@ -12,11 +12,18 @@
 #import "RegistrationLockModel.h"
 #import "MyTaskModel.h"
 
+#if LOCK_APP
 @interface SwitchLockViewController ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
-
-@property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
 @property (nonatomic,strong)RegistrationLockInfoBean * lockInfo; //锁信息
+#elif VANMALOCK_APP
+@interface SwitchLockViewController ()<UITableViewDataSource,UITableViewDelegate,KeyDelegate>
+@property (nonatomic,strong)KeyInfo * keyInfo; //钥匙信息
+@property (nonatomic,strong)RecordInfo * lockInfo; //锁信息
+@property (nonatomic,strong)BleKeySdk * bleKeysdk;
+#endif
+
+@property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UserInfo * userInfo;
@@ -41,8 +48,24 @@
         }
     });
     [self createTableView];
+#if LOCK_APP
     [SetKeyController setDelegate:self];
     [SetKeyController initSDK];
+#elif VANMALOCK_APP
+    //初始化蓝牙SDK
+    self.bleKeysdk = [BleKeySdk shareKeySdk];
+    //设置代理
+    [self.bleKeysdk setDelgate:self];
+    MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+    infoBean.name = STR_INIT_SUCCESS;
+    infoBean.time = [self getCurrentTime];
+    infoBean.iamgeName = @"ic_switch_init";
+    [self.listArray addObject:infoBean];
+    [self.tableView reloadData];
+    //连接钥匙
+    [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+#endif
+    
 }
 - (NSMutableArray *)listArray {
     if (_listArray == nil) {
@@ -51,9 +74,15 @@
     return _listArray;
 }
 - (void)returnClick {
+#if LOCK_APP
     [SetKeyController disConnectBle];
+#elif VANMALOCK_APP
+    [self.bleKeysdk disConnectFromKey];
+#endif
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#if LOCK_APP
 //初始化
 - (void)requestInitSdkResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
@@ -201,6 +230,231 @@
         [self uploadKeyDatas:infoBean];
     }
 }
+#elif VANMALOCK_APP
+//侧滑返回上一页
+- (void)didMoveToParentViewController:(nullable UIViewController *)parent {
+    [self.bleKeysdk disConnectFromKey];
+}
+//连接钥匙
+- (void)onConnectToKey:(Result *)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.name = STR_CONNECT_KEY_SUCCESS;
+        infoBean.time = [self getCurrentTime];
+        infoBean.iamgeName = @"ic_switch_key";
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+        [self.bleKeysdk readKeyInfo];
+    }
+}
+//获取钥匙数据
+- (void)onReadKeyInfo:(Result<KeyInfo *> *)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        self.keyInfo = result.obj;
+        for (UserKeyInfoList * keyList in self.taskBean.keylist) {
+            if ([keyList.keyno isEqualToString:self.keyInfo.keyId]) {
+                self.taskBean.keyno = keyList.keyno;
+                break;
+            }
+        }
+        if (![self.keyInfo.keyId isEqualToString:self.taskBean.keyno]) {//钥匙不匹配
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:STR_KEY_NUMBER_NO_MATE];
+            [self.bleKeysdk disConnectFromKey];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            //校时
+            [self.bleKeysdk setDateTime:[NSDate date]];
+        }
+    }
+}
+//校时
+-(void)onSetDateTime:(Result*)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        if (_keyInfo.device == 1284) { //指纹蓝牙钥匙
+            //指纹授权
+            NSMutableArray<NSNumber*> * fingerArray = [NSMutableArray<NSNumber*> array];
+            for (FingerPrintListBean * fingerList in self.userInfo.fingerlist) {
+                [fingerArray addObject:[NSNumber numberWithInt:[fingerList.fingerprintid intValue]]];
+            }
+            [self.bleKeysdk setFingers:[fingerArray copy]];
+        }else { //蓝牙钥匙
+            //设置开关锁钥匙
+            NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+            NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"yyyy-MM-dd";
+            NSDateFormatter * timeFormatter = [[NSDateFormatter alloc] init];
+            timeFormatter.dateFormat = @"HH:mm:ss";
+            //当前日期
+            NSDate *nowDate = [NSDate date];
+            NSString * nowString = [dateFormatter stringFromDate:nowDate];
+            
+            NSDate * beginDate = [formatter dateFromString:self.taskBean.begindatetime];
+            NSDate * endDate = [formatter dateFromString:self.taskBean.enddatetime];
+            //多时间段
+            NSMutableArray<TimeSection*> *times = [[NSMutableArray<TimeSection*>  alloc]init];
+            for (MyTaskTimeRangeListBean * timeList in _taskBean.timerangelist) {
+                NSString * beginTime = [NSString stringWithFormat:@"%@ %@",nowString,[timeFormatter stringFromDate:[formatter dateFromString:timeList.begintime]]];
+                NSString * endTime = [NSString stringWithFormat:@"%@ %@",nowString,[timeFormatter stringFromDate:[formatter dateFromString:timeList.endtime]]];
+                TimeSection * timeSection = [[TimeSection alloc]initSection:[formatter dateFromString:beginTime] to:[formatter dateFromString:endTime]];
+                [times addObject:timeSection];
+            }
+            //时间块，时间片
+            NSArray<DateSection*> *dates =[NSArray arrayWithObjects:[[DateSection alloc] initSection:beginDate to:endDate times:times], nil];
+            //锁号
+            NSArray *lockIds = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",self.lockBean.lockno], nil];
+            UserKeyInfo *userkeyInfo = [[UserKeyInfo alloc] initUserKeyInfo:dates lockIds:lockIds];
+            [self.bleKeysdk setUserKey:userkeyInfo isOnline:NO];
+        }
+    }
+}
+
+//指纹授权
+-(void)onSetFingers:(Result*)result {
+    if (result.ret == NO) {
+           [MBProgressHUD hideHUD];
+           [MBProgressHUD showError:STR_FINGERPRINT_AUTHORIZE_FAIL];
+           [self.bleKeysdk disConnectFromKey];
+           [self.navigationController popViewControllerAnimated:YES];
+           return;
+    }else {
+        //指纹授权成功
+//        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+//        infoBean.name = STR_FINGERPRINT_AUTHORIZE_SUCCESS;
+//        infoBean.time = [self getCurrentTime];
+//        infoBean.iamgeName = @"ic_switch_fingerprint";
+//        [self.listArray addObject:infoBean];
+//        [self.tableView reloadData];
+        
+        //设置开关锁钥匙
+        NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd";
+        NSDateFormatter * timeFormatter = [[NSDateFormatter alloc] init];
+        timeFormatter.dateFormat = @"HH:mm:ss";
+        //当前日期
+        NSDate *nowDate = [NSDate date];
+        NSString * nowString = [dateFormatter stringFromDate:nowDate];
+        
+        NSDate * beginDate = [formatter dateFromString:self.taskBean.begindatetime];
+        NSDate * endDate = [formatter dateFromString:self.taskBean.enddatetime];
+        //多时间段
+        NSMutableArray<TimeSection*> *times = [[NSMutableArray<TimeSection*>  alloc]init];
+        for (MyTaskTimeRangeListBean * timeList in _taskBean.timerangelist) {
+            NSString * beginTime = [NSString stringWithFormat:@"%@ %@",nowString,[timeFormatter stringFromDate:[formatter dateFromString:timeList.begintime]]];
+            NSString * endTime = [NSString stringWithFormat:@"%@ %@",nowString,[timeFormatter stringFromDate:[formatter dateFromString:timeList.endtime]]];
+            TimeSection * timeSection = [[TimeSection alloc]initSection:[formatter dateFromString:beginTime] to:[formatter dateFromString:endTime]];
+            [times addObject:timeSection];
+        }
+        //时间块，时间片
+        NSArray<DateSection*> *dates =[NSArray arrayWithObjects:[[DateSection alloc] initSection:beginDate to:endDate times:times], nil];
+        //锁号
+        NSArray *lockIds = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",self.lockBean.lockno], nil];
+        UserKeyInfo *userkeyInfo = [[UserKeyInfo alloc] initUserKeyInfo:dates lockIds:lockIds];
+        [self.bleKeysdk setUserKey:userkeyInfo isOnline:NO];
+    }
+}
+
+//设置开关锁钥匙--用户钥匙,isOnline 是否在线，在线断开连接后，钥匙不能开关锁
+-(void)onSetUserKey:(Result*)result {
+    self.isHide = YES;
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_SETTING_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {//请开关锁
+        [MBProgressHUD hideHUD];
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.name = STR_PLEASE_SWITH_LOCK;
+        infoBean.time = [self getCurrentTime];
+        infoBean.iamgeName = @"ic_switch_lock";
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+    }
+}
+//获取锁数据
+- (void)onReport:(Result<RecordInfo *> *)result {
+    NSLog(@"%@",result.obj);
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_LOCK_FAIL];
+    }else {
+        self.lockInfo = result.obj;
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.time = [self getCurrentTime];
+        infoBean.eventtype = [NSString stringWithFormat:@"%d",self.lockInfo.flag];
+        infoBean.opttype = self.lockInfo.status; //当前处于 开 0 关 1
+
+        if (self.lockInfo.flag == 5) {//没有权限
+            infoBean.name = STR_NO_POWER;
+            infoBean.iamgeName = @"ic_switch_fail";
+        }
+        if (self.lockInfo.flag == 6) {//超出时间范围
+            infoBean.name = STR_OVERSTEP_TIME_RANGE;
+            infoBean.iamgeName = @"ic_switch_fail";
+        }
+        if (self.lockInfo.flag == 19) {//密码不匹配
+            infoBean.name = STR_PASSWORD_MISMATCH;
+            infoBean.iamgeName = @"ic_switch_fail";
+        }
+        if (self.lockInfo.flag == 20) {//操作中断
+            if (self.lockInfo.status == 0) {//关锁失败
+                infoBean.name = STR_CLOSE_LOCK_FAIL;
+                infoBean.iamgeName = @"ic_switch_fail";
+            }else {//开锁失败
+                infoBean.name = STR_OPEN_LOCK_FAIL;
+                infoBean.iamgeName = @"ic_switch_fail";
+            }
+        }
+        if (self.lockInfo.flag == 21) {//钥匙与锁密钥匹配失败
+            infoBean.name = STR_KEY_LOCK_MATCH_FAIL;
+            infoBean.iamgeName = @"ic_switch_fail";
+        }
+        if (self.lockInfo.flag == 255) {//黑名单钥匙
+            infoBean.name = STR_BLACKLIST_KEY;
+            infoBean.iamgeName = @"ic_switch_fail";
+        }
+        if (self.lockInfo.flag == 254) {//验证失败 国内外
+            infoBean.name = STR_VALIDATION_FAILED;
+            infoBean.iamgeName = @"ic_switch_fail";
+        }
+        if (self.lockInfo.flag == 0) {//开锁成功
+            infoBean.name = STR_OPEN_LOCK_SUCCESS;
+            infoBean.iamgeName = @"ic_switch_success";
+        }
+        if (self.lockInfo.flag == 1) {//关锁成功
+            infoBean.name = STR_CLOSE_LOCK_SUCCESS;
+            infoBean.iamgeName = @"ic_switch_success";
+        }
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+        [self uploadKeyDatas:infoBean];
+    }
+}
+#endif
+
 
 - (void)createTableView {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];

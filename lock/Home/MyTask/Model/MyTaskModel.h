@@ -110,6 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy)NSString * time;
 @property (nonatomic,copy)NSString * iamgeName;
 @property (nonatomic,copy)NSString * eventtype;
+@property (nonatomic,assign)NSInteger opttype;
 @end
 
 //上传开关锁记录

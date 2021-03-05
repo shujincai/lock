@@ -33,6 +33,7 @@
 #import "TextFont.h"
 #import "Enums.h"
 #import "Strings.h"
+#if LOCK_APP
 #import <RayonicsBleSDK/BasicInfo.h>
 #import <RayonicsBleSDK/ParticularInfo.h>
 #import <RayonicsBleSDK/RALogicUnlockGroupInfo.h>
@@ -42,6 +43,9 @@
 #import <RayonicsBleSDK/ResultInfo.h>
 #import <RayonicsBleSDK/TimeScaleInfo.h>
 #import <RayonicsBleSDK/TimeSliceInfo.h>
+#elif VANMALOCK_APP
+#import <BleKeySdk/BleKeySdk.h>
+#endif
 #import "BaseTableViewCell.h"
 #import "BaseViewController.h"
 #import "BaseNavigationController.h"

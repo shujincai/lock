@@ -12,10 +12,16 @@
 #import "BlackListModel.h"
 #import "MyTaskModel.h"
 
+#if LOCK_APP
 @interface BlackListRelieveVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
+#elif VANMALOCK_APP
+@interface BlackListRelieveVC ()<UITableViewDataSource,UITableViewDelegate,KeyDelegate>
+@property (nonatomic,strong)KeyInfo * keyInfo;
+@property (nonatomic,strong)BleKeySdk * bleKeysdk;
+#endif
 
 @property (nonatomic,strong)UITableView * tableView;
-@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UserInfo * userInfo;
 @property (nonatomic,assign)BOOL isHide; //根据加载时间判断是否隐藏加载框
@@ -39,8 +45,22 @@
         }
     });
     [self createTableView];
+#if LOCK_APP
     [SetKeyController setDelegate:self];
     [SetKeyController initSDK];
+#elif VANMALOCK_APP
+    self.bleKeysdk = [BleKeySdk shareKeySdk];
+    [self.bleKeysdk setDelgate:self];
+    MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+    infoBean.name = STR_INIT_SUCCESS;
+    infoBean.time = [self getCurrentTime];
+    infoBean.iamgeName = @"ic_switch_init";
+    [self.listArray addObject:infoBean];
+    [self.tableView reloadData];
+    //连接钥匙
+    [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+#endif
+    
 }
 - (NSMutableArray *)listArray {
     if (_listArray == nil) {
@@ -49,9 +69,15 @@
     return _listArray;
 }
 - (void)returnClick {
+#if LOCK_APP
     [SetKeyController disConnectBle];
+#elif VANMALOCK_APP
+    [self.bleKeysdk disConnectFromKey];
+#endif
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#if LOCK_APP
 //初始化
 - (void)requestInitSdkResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
@@ -116,6 +142,71 @@
         }
     }
 }
+#elif VANMALOCK_APP
+//侧滑返回上一页
+- (void)didMoveToParentViewController:(nullable UIViewController *)parent {
+    [self.bleKeysdk disConnectFromKey];
+}
+//连接钥匙
+- (void)onConnectToKey:(Result *)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.name = STR_CONNECT_KEY_SUCCESS;
+        infoBean.time = [self getCurrentTime];
+        infoBean.iamgeName = @"ic_switch_key";
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+        [self.bleKeysdk readKeyInfo];
+    }
+}
+//获取钥匙数据
+- (void)onReadKeyInfo:(Result<KeyInfo *> *)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        self.keyInfo = result.obj;
+        if (![self.keyInfo.keyId isEqualToString:self.blacklistBean.keyno]) {//钥匙不匹配
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:STR_KEY_NUMBER_NO_MATE];
+            [self.bleKeysdk disConnectFromKey];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            //校时
+            [self.bleKeysdk setDateTime:[NSDate date]];
+        }
+    }
+}
+//校时
+-(void)onSetDateTime:(Result*)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        self.isHide = YES;
+        [MBProgressHUD hideHUD];
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.name = STR_PLEASE_REMOVE_LOSS;
+        infoBean.time = [self getCurrentTime];
+        infoBean.iamgeName = @"ic_relieve_key";
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+    }
+}
+#endif
+
 
 - (void)createTableView {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
