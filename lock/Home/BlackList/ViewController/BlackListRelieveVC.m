@@ -195,6 +195,16 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
+        // 清除黑名单钥匙
+        [self.bleKeysdk clearBlocklistFlag];
+    }
+}
+- (void)onClearBlocklistFlag:(Result *)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CREATE_WHITE_KEY_FAIL];
+        return;
+    }else {
         self.isHide = YES;
         [MBProgressHUD hideHUD];
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];

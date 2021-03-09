@@ -210,7 +210,7 @@
                     [self.bleKeysdk disConnectFromKey];
 #endif
                     [self.navigationController popViewControllerAnimated:YES];
-                }else if ([response.data.keystatus isEqualToString:@"1"]){ // 领出
+                }else if ([response.data.keystatus isEqualToString:@"4"]){ // 领出
                     [MBProgressHUD showError:STR_KEY_TASK_OUT];
 #if LOCK_APP
                     [SetKeyController disConnectBle];
@@ -352,7 +352,10 @@
     [SetKeyController setBlackListKey:basicInfo andBlackListKeyInfo:blackListKeyInfo];
     
 #elif VANMALOCK_APP
-    [self.bleKeysdk clearBlocklistFlag];
+    // 清除黑名单
+    NSDate *from = [NSDate date];
+    NSDate *to = [NSDate dateWithTimeIntervalSinceNow:7*24*60*60];
+    [self.bleKeysdk setBlockListKey:from to:to keyIds:@[@""]];
 #endif
 }
 
@@ -367,7 +370,7 @@
     }
 }
 #elif VANMALOCK_APP
-- (void)onClearBlocklistFlag:(Result *)result {
+- (void)onSetBlockListKey:(Result *)result {
     if (result.ret == NO) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:STR_CREATE_WHITE_KEY_FAIL];
