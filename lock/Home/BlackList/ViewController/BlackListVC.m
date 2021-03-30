@@ -13,7 +13,6 @@
 @interface BlackListVC ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * listArray;
-@property (nonatomic,strong)NSMutableArray * fingerprintArray;
 @property (nonatomic,strong)NSMutableArray * checkboxArray;
 @property (nonatomic,assign)NSInteger pageNumber;
 @property (nonatomic,assign)BOOL isFirst;
@@ -43,12 +42,6 @@
         _listArray = [NSMutableArray array];
     }
     return _listArray;
-}
-- (NSMutableArray *)fingerprintArray {
-    if (_fingerprintArray == nil) {
-        _fingerprintArray = [NSMutableArray array];
-    }
-    return _fingerprintArray;
 }
 - (NSMutableArray *)checkboxArray {
     if (_checkboxArray == nil) {
@@ -131,7 +124,7 @@
     return 90;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _listArray.count + _fingerprintArray.count;
+    return _listArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -150,10 +143,7 @@
         
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSMutableArray * array  = [NSMutableArray new];
-    [array addObjectsFromArray:_listArray];
-    [array addObjectsFromArray:_fingerprintArray];
-    BlackListBean * blackList = [array objectAtIndex:indexPath.row];
+    BlackListBean * blackList = [_listArray objectAtIndex:indexPath.row];
     cell.nameLabel.text = [NSString stringWithFormat:@"%@：%@",STR_KEY_NAME,blackList.keyname];
     cell.deptLabel.text = [NSString stringWithFormat:@"%@：%@",STR_DEPT,blackList.deptname];
     cell.userLabel.text = [NSString stringWithFormat:@"%@：%@",STR_OPERATION_USER,blackList.username];
@@ -196,72 +186,43 @@
         if (self.pageNumber == 1) {
             [self.listArray removeAllObjects];
         }
+        if (self.isFirst == YES) {
+            [MBProgressHUD hideHUD];
+        }
         NSError * error = nil;
-        BlackListResponse * bleResponse = [[BlackListResponse alloc]initWithDictionary:responseObject error:&error];
+        BlackListResponse * response = [[BlackListResponse alloc]initWithDictionary:responseObject error:&error];
         if (error) {
             [MBProgressHUD showMessage:STR_PARSE_FAILURE];
             return ;
         }
-        if ([bleResponse.resultCode intValue] != 0) {
-            [MBProgressHUD showError:bleResponse.msg];
+        if ([response.resultCode intValue] != 0) {
+            [MBProgressHUD showError:response.msg];
             return ;
         }else {
-            [self.listArray addObjectsFromArray:bleResponse.data.content];
-            // 蓝牙指纹钥匙黑名单
-            BlackListRequest * request = [[BlackListRequest alloc]init];
-            request.page = self.pageNumber;
-            request.pagesize = 10;
-            request.keytype = 3;
-            [MSHTTPRequest GET:kBlackList parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
-                if (self.pageNumber == 1) {
-                    [self.fingerprintArray removeAllObjects];
-                }
-                if (self.isFirst == YES) {
-                    [MBProgressHUD hideHUD];
-                }
-                NSError * error = nil;
-                BlackListResponse * response = [[BlackListResponse alloc]initWithDictionary:responseObject error:&error];
-                if (error) {
-                    [MBProgressHUD showMessage:STR_PARSE_FAILURE];
-                    return ;
-                }
-                if ([response.resultCode intValue] != 0) {
-                    [MBProgressHUD showError:response.msg];
-                    return ;
+            self.isFirst = NO;
+            if (response.data.content.count > 0) {
+                self.tableView.mj_footer.hidden = NO;
+            }else {
+                self.tableView.mj_footer.hidden = YES;
+            }
+            if (self.pageNumber == 1) {
+                self.pageNumber++;
+                [self.tableView.mj_header endRefreshing];
+                if (response.data.totalcount <= self.listArray.count+10) {
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 }else {
-                    self.isFirst = NO;
-                    if (response.data.content.count + bleResponse.data.content.count > 0) {
-                        self.tableView.mj_footer.hidden = NO;
-                    }else {
-                        self.tableView.mj_footer.hidden = YES;
-                    }
-                    if (self.pageNumber == 1) {
-                        self.pageNumber++;
-                        [self.tableView.mj_header endRefreshing];
-                        if (bleResponse.data.totalcount <= self.listArray.count+10&&response.data.totalcount <=self.fingerprintArray.count+10) {
-                            [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                        }else {
-                            self.tableView.mj_footer.state = MJRefreshStateIdle;
-                        }
-                    }else {
-                        if (bleResponse.data.totalcount <= self.listArray.count+10&&response.data.totalcount <=self.fingerprintArray.count+10) {
-                            [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                        }else {
-                            [self.tableView.mj_footer endRefreshing];
-                            self.pageNumber++;
-                        }
-                    }
-                    [self.fingerprintArray addObjectsFromArray:response.data.content];
-                    [self.tableView reloadData];
+                    self.tableView.mj_footer.state = MJRefreshStateIdle;
                 }
-            } failure:^(NSError * _Nonnull error) {
-                if (self.isFirst == YES) {
-                    [MBProgressHUD hideHUD];
+            }else {
+                if (response.data.totalcount <= self.listArray.count+10) {
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 }else {
                     [self.tableView.mj_footer endRefreshing];
+                    self.pageNumber++;
                 }
-                [MBProgressHUD showError:STR_TIMEOUT];
-            }];
+            }
+            [self.listArray addObjectsFromArray:response.data.content];
+            [self.tableView reloadData];
         }
     } failure:^(NSError * _Nonnull error) {
         if (self.isFirst == YES) {

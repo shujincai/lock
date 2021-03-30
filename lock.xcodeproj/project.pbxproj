@@ -69,13 +69,10 @@
 		A44661AC242473A4000D1D9D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44661AB242473A4000D1D9D /* ViewController.m */; };
 		A44661AF242473A4000D1D9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44661AD242473A4000D1D9D /* Main.storyboard */; };
 		A44661B1242473A6000D1D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44661B0242473A6000D1D9D /* Assets.xcassets */; };
-		A44661B4242473A6000D1D9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44661B2242473A6000D1D9D /* LaunchScreen.storyboard */; };
 		A44661B7242473A6000D1D9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A44661B6242473A6000D1D9D /* main.m */; };
 		A44661C1242473A6000D1D9D /* _______Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A44661C0242473A6000D1D9D /* _______Tests.m */; };
 		A44661CC242473A6000D1D9D /* _______UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A44661CB242473A6000D1D9D /* _______UITests.m */; };
 		A45A6C262436E73700148E08 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45A6C252436E73700148E08 /* CoreBluetooth.framework */; };
-		EB3C9C0B6B4C205D61D4D26C /* Pods_Vanmalock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B65E8757B5FEC21F5DFA87F /* Pods_Vanmalock.framework */; };
-		FB0151D525F0EA8000A77017 /* BleKeySdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0151D325F0EA7F00A77017 /* BleKeySdk.framework */; };
 		FB03940D2490ED5C00D95AEA /* SystemParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB03940B2490ED5C00D95AEA /* SystemParameterCell.m */; };
 		FB03940E2490ED5C00D95AEA /* SystemParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */; };
 		FB0E39CB25CF76CE0040342F /* LockReplaceListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39CA25CF76CE0040342F /* LockReplaceListVC.m */; };
@@ -86,118 +83,13 @@
 		FB23C69E248B6C1400E3C5AF /* RangeDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB23C69D248B6C1400E3C5AF /* RangeDatePickerCell.m */; };
 		FB30C09E25540DA1008D5F59 /* MyTaskLockSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB30C09D25540DA1008D5F59 /* MyTaskLockSearchVC.m */; };
 		FB3BDEAB248F0FE800B54021 /* SwitchLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3BDEAA248F0FE800B54021 /* SwitchLockViewController.m */; };
+		FB43949625F85F29008F04E2 /* LaunchScreen-Chinese.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB43949225F85F29008F04E2 /* LaunchScreen-Chinese.storyboard */; };
+		FB43949725F85F29008F04E2 /* LaunchScreen-English.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB43949425F85F29008F04E2 /* LaunchScreen-English.storyboard */; };
 		FB608CB2248A1CF7008BA56C /* RegistrationKeyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB0248A1CF7008BA56C /* RegistrationKeyModel.m */; };
 		FB608CB5248A1D32008BA56C /* SearchBluetoothView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB3248A1D32008BA56C /* SearchBluetoothView.m */; };
 		FB608CB8248A1E3C008BA56C /* RegistrationLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB6248A1E3B008BA56C /* RegistrationLockModel.m */; };
 		FB608CBB248A1E47008BA56C /* RegistrationLockTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */; };
 		FB608CBE248A1E4F008BA56C /* RegistrationLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */; };
-		FB6B812D25EE1B4E00F83921 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6B812C25EE1B4E00F83921 /* AppDelegate.m */; };
-		FB6B813325EE1B4E00F83921 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6B813225EE1B4E00F83921 /* ViewController.m */; };
-		FB6B813625EE1B4E00F83921 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6B813425EE1B4E00F83921 /* Main.storyboard */; };
-		FB6B813825EE1B5100F83921 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB6B813725EE1B5100F83921 /* Assets.xcassets */; };
-		FB6B813E25EE1B5100F83921 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6B813D25EE1B5100F83921 /* main.m */; };
-		FB6B814825EE1B5200F83921 /* VanmalockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6B814725EE1B5200F83921 /* VanmalockTests.m */; };
-		FB6B815325EE1B5200F83921 /* VanmalockUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6B815225EE1B5200F83921 /* VanmalockUITests.m */; };
-		FB6B819725EE23E700F83921 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45A6C252436E73700148E08 /* CoreBluetooth.framework */; };
-		FB6B819825EE23F000F83921 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409C9F62428647600A4004E /* CoreLocation.framework */; };
-		FB6B819925EE23FA00F83921 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409C9F82428647D00A4004E /* CoreTelephony.framework */; };
-		FB6B819A25EE240800F83921 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409C9EC2428644400A4004E /* GLKit.framework */; };
-		FB6B819B25EE241E00F83921 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A409C9EE2428645200A4004E /* libc++.tbd */; };
-		FB6B81A225EE242A00F83921 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A409C9F02428645B00A4004E /* libz.tbd */; };
-		FB6B81A925EE243800F83921 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4102A2F2429A7B400B03620 /* QuartzCore.framework */; };
-		FB6B81AA25EE245100F83921 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409C9F22428646500A4004E /* Security.framework */; };
-		FB6B81AB25EE245D00F83921 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409C9F42428646D00A4004E /* SystemConfiguration.framework */; };
-		FB6B81D025EE2B2900F83921 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842F51D12474C68700478914 /* BaseViewController.m */; };
-		FB6B81D725EE2B3E00F83921 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842F51DC2474C9BB00478914 /* BaseNavigationController.m */; };
-		FB6B81DE25EE2B4200F83921 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842F51DF2474CAB200478914 /* BaseTableViewCell.m */; };
-		FB6B81E525EE2B4D00F83921 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DB952473814F000F94EE /* LogInViewController.m */; };
-		FB6B81EC25EE2BA100F83921 /* SZKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A409CA212428B08700A4004E /* SZKButton.m */; };
-		FB6B81F325EE2BA400F83921 /* SZKLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A409CA1E2428AFC500A4004E /* SZKLabel.m */; };
-		FB6B81FA25EE2BA800F83921 /* RKNotificationHub.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102A332429A7F500B03620 /* RKNotificationHub.m */; };
-		FB6B820125EE2BAD00F83921 /* MMScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102A6F242B200300B03620 /* MMScanView.m */; };
-		FB6B820825EE2BB100F83921 /* MMScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102A70242B200300B03620 /* MMScanViewController.m */; };
-		FB6B820F25EE2BB400F83921 /* resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4102A71242B200400B03620 /* resource.bundle */; };
-		FB6B821625EE2BBD00F83921 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A430EF702432C69A00F68BCE /* NSDate+Extension.m */; };
-		FB6B821D25EE2BC000F83921 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A430EF742432C69C00F68BCE /* UIView+Extension.m */; };
-		FB6B822425EE2BC300F83921 /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A430EF6F2432C69A00F68BCE /* WSDatePickerView.m */; };
-		FB6B822B25EE2BC900F83921 /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A430EF6D2432C69700F68BCE /* WSDatePickerView.xib */; };
-		FB6B823225EE2BDA00F83921 /* BaseBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBEB2473BB15000F94EE /* BaseBean.m */; };
-		FB6B823925EE2BDE00F83921 /* RequestBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBEE2473BB47000F94EE /* RequestBean.m */; };
-		FB6B824025EE2BE100F83921 /* ResponseBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBF12473BB6B000F94EE /* ResponseBean.m */; };
-		FB6B824725EE2BEA00F83921 /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72EF25A555AF00A2B86D /* DatePickerView.m */; };
-		FB6B824E25EE2BF000F83921 /* MSNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102AC7242B46CA00B03620 /* MSNetwork.m */; };
-		FB6B825525EE2BF800F83921 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 842F51EC2474F55800478914 /* CommonUtil.m */; };
-		FB6B825C25EE2BFD00F83921 /* MSHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102ACA242B477500B03620 /* MSHTTPRequest.m */; };
-		FB6B826325EE2C0100F83921 /* MSInterfaceConst.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102ACC242B477600B03620 /* MSInterfaceConst.m */; };
-		FB6B826A25EE2C1300F83921 /* MBProgressHUD+Hud.m in Sources */ = {isa = PBXBuildFile; fileRef = A4102AC0242B45C600B03620 /* MBProgressHUD+Hud.m */; };
-		FB6B827125EE2C1600F83921 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 842F51D42474C79100478914 /* UIColor+Helper.m */; };
-		FB6B827825EE2C1900F83921 /* NSDate+Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 842F51E22474DA3400478914 /* NSDate+Calendar.m */; };
-		FB6B827F25EE2C1D00F83921 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 842F51E52474DA8200478914 /* UIImage+Helper.m */; };
-		FB6B828625EE2C2000F83921 /* UIViewController+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 842F51E82474DB1700478914 /* UIViewController+Helper.m */; };
-		FB6B828D25EE2C2300F83921 /* MBProgressHUD+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CA53492476175900D32586 /* MBProgressHUD+Helper.m */; };
-		FB6B829425EE2C2800F83921 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DB982473814F000F94EE /* SettingViewController.m */; };
-		FB6B829B25EE2C3000F83921 /* RJTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DB932473814F000F94EE /* RJTextField.m */; };
-		FB6B82A225EE2C3500F83921 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DB8F2473814F000F94EE /* UserModel.m */; };
-		FB6B82A925EE2C3A00F83921 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBE4247386E1000F94EE /* MapViewController.m */; };
-		FB6B82B025EE2C4300F83921 /* LockReplaceListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39CA25CF76CE0040342F /* LockReplaceListVC.m */; };
-		FB6B82B725EE2C4700F83921 /* LockReplaceDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39E125CF96AB0040342F /* LockReplaceDetailVC.m */; };
-		FB6B82BE25EE2C4C00F83921 /* LockReplaceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39D925CF80500040342F /* LockReplaceListCell.m */; };
-		FB6B82C525EE2C5200F83921 /* LockReplaceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0E39DA25CF80500040342F /* LockReplaceListCell.xib */; };
-		FB6B82CC25EE2C5800F83921 /* LockReplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E39D325CF7A790040342F /* LockReplaceModel.m */; };
-		FB6B82D325EE2C6600F83921 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DB9E247382F7000F94EE /* MainViewController.m */; };
-		FB6B82EE25EE314100F83921 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBC224738669000F94EE /* HomeModel.m */; };
-		FB6B82F525EE314600F83921 /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBC724738669000F94EE /* HomeCollectionViewCell.m */; };
-		FB6B82FC25EE314900F83921 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBC524738669000F94EE /* HomeTableViewCell.m */; };
-		FB6B830325EE314E00F83921 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBCF24738669000F94EE /* HomeViewController.m */; };
-		FB6B830A25EE315400F83921 /* MyTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842FC890247E0E1200489C50 /* MyTaskModel.m */; };
-		FB6B831125EE315900F83921 /* MyTaskListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842FC893247E2C8800489C50 /* MyTaskListCell.m */; };
-		FB6B831825EE315E00F83921 /* MyTaskListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842FC894247E2C8800489C50 /* MyTaskListCell.xib */; };
-		FB6B831F25EE316300F83921 /* SwitchLockListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFB51F22553F36600E5D71A /* SwitchLockListCell.m */; };
-		FB6B832625EE316600F83921 /* SwitchLockListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFB51F12553F36600E5D71A /* SwitchLockListCell.xib */; };
-		FB6B832D25EE316B00F83921 /* MyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBB324738669000F94EE /* MyTaskViewController.m */; };
-		FB6B833425EE316E00F83921 /* MyTaskLockSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB30C09D25540DA1008D5F59 /* MyTaskLockSearchVC.m */; };
-		FB6B833B25EE317100F83921 /* SwitchLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3BDEAA248F0FE800B54021 /* SwitchLockViewController.m */; };
-		FB6B834225EE317900F83921 /* WorkListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBB724738669000F94EE /* WorkListModel.m */; };
-		FB6B834925EE317D00F83921 /* WorkListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBBA24738669000F94EE /* WorkListTableViewCell.m */; };
-		FB6B835025EE318100F83921 /* RangeDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB23C69D248B6C1400E3C5AF /* RangeDatePickerCell.m */; };
-		FB6B835725EE318600F83921 /* WorkRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBBD24738669000F94EE /* WorkRecordViewController.m */; };
-		FB6B835E25EE318900F83921 /* WorkListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBBE24738669000F94EE /* WorkListViewController.m */; };
-		FB6B836525EE319000F83921 /* RegistrationLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB6248A1E3B008BA56C /* RegistrationLockModel.m */; };
-		FB6B836C25EE319400F83921 /* RegistrationLockTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */; };
-		FB6B837325EE319A00F83921 /* RegistrationLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */; };
-		FB6B837A25EE319F00F83921 /* RegistrationKeyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB0248A1CF7008BA56C /* RegistrationKeyModel.m */; };
-		FB6B838125EE31A300F83921 /* ConnectKeyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBA724738668000F94EE /* ConnectKeyTableViewCell.m */; };
-		FB6B838825EE31A600F83921 /* RegistrationKeyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBA624738668000F94EE /* RegistrationKeyTableViewCell.m */; };
-		FB6B838F25EE31A900F83921 /* SearchBluetoothView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB3248A1D32008BA56C /* SearchBluetoothView.m */; };
-		FB6B839625EE31AF00F83921 /* RegistrationKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBAC24738668000F94EE /* RegistrationKeyViewController.m */; };
-		FB6B839D25EE31B200F83921 /* ConnectKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBAB24738668000F94EE /* ConnectKeyViewController.m */; };
-		FB6B83A425EE31B700F83921 /* SystemParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */; };
-		FB6B83AB25EE31BB00F83921 /* SystemParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB03940B2490ED5C00D95AEA /* SystemParameterCell.m */; };
-		FB6B83B225EE31C000F83921 /* SystemParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */; };
-		FB6B83B925EE31C600F83921 /* SystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405DBCC24738669000F94EE /* SystemViewController.m */; };
-		FB6B83C025EE31C900F83921 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */; };
-		FB6B83C725EE31CF00F83921 /* ApplyOpenLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA45ADB259C119400EF2BF9 /* ApplyOpenLockModel.m */; };
-		FB6B83CE25EE31D500F83921 /* ApplyOpenLockDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72CD25A552C400A2B86D /* ApplyOpenLockDateCell.m */; };
-		FB6B83D525EE31DA00F83921 /* ApplyOpenLockDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBCC72CA25A552C300A2B86D /* ApplyOpenLockDateCell.xib */; };
-		FB6B83DC25EE31DE00F83921 /* ApplyOpenLockLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72CF25A552C400A2B86D /* ApplyOpenLockLockCell.m */; };
-		FB6B83E325EE31E400F83921 /* ApplyOpenLockLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBCC72CB25A552C300A2B86D /* ApplyOpenLockLockCell.xib */; };
-		FB6B83EA25EE31EB00F83921 /* ApplyOpenLockListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA45AE1259C11BB00EF2BF9 /* ApplyOpenLockListVC.m */; };
-		FB6B83F125EE31EE00F83921 /* ApplyOpenLockDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72D825A552CF00A2B86D /* ApplyOpenLockDetailVC.m */; };
-		FB6B83F825EE31F300F83921 /* OpenLockAuditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72E025A552E800A2B86D /* OpenLockAuditModel.m */; };
-		FB6B83FF25EE31FA00F83921 /* OpenLockAuditListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC72E425A552E800A2B86D /* OpenLockAuditListVC.m */; };
-		FB6B840625EE320300F83921 /* KeyLossModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F4B25CBA008008BFC3B /* KeyLossModel.m */; };
-		FB6B840D25EE320800F83921 /* KeyLossListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F5125CBBABD008BFC3B /* KeyLossListCell.m */; };
-		FB6B841425EE320E00F83921 /* KeyLossListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB905F5225CBBABD008BFC3B /* KeyLossListCell.xib */; };
-		FB6B841B25EE321300F83921 /* KeyLossListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F4225CB8D95008BFC3B /* KeyLossListVC.m */; };
-		FB6B842225EE321E00F83921 /* BlackListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F5F25CBD93B008BFC3B /* BlackListModel.m */; };
-		FB6B842925EE322700F83921 /* BlackListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F6425CBDDA6008BFC3B /* BlackListCell.m */; };
-		FB6B843025EE322B00F83921 /* BlackListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB905F6525CBDDA6008BFC3B /* BlackListCell.xib */; };
-		FB6B843725EE323000F83921 /* BlackListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F5925CBD7ED008BFC3B /* BlackListVC.m */; };
-		FB6B843E25EE323300F83921 /* BlackListRelieveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F6D25CBE063008BFC3B /* BlackListRelieveVC.m */; };
-		FB6B844525EE323600F83921 /* BlackListCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8ACA3425CCD63300CB0F05 /* BlackListCreateVC.m */; };
-		FB6B844C25EE323A00F83921 /* WriteListCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8ACA3A25CCF93900CB0F05 /* WriteListCreateVC.m */; };
-		FB6B846525EE35B600F83921 /* LaunchScreen-English.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6B846125EE35B500F83921 /* LaunchScreen-English.storyboard */; };
-		FB6B846625EE35B600F83921 /* LaunchScreen-Chinese.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6B846325EE35B600F83921 /* LaunchScreen-Chinese.storyboard */; };
 		FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB83FF81249B493600432C35 /* InfoPlist.strings */; };
 		FB8ACA3525CCD63300CB0F05 /* BlackListCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8ACA3425CCD63300CB0F05 /* BlackListCreateVC.m */; };
 		FB8ACA3B25CCF93900CB0F05 /* WriteListCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8ACA3A25CCF93900CB0F05 /* WriteListCreateVC.m */; };
@@ -210,6 +102,7 @@
 		FB905F6725CBDDA6008BFC3B /* BlackListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F6425CBDDA6008BFC3B /* BlackListCell.m */; };
 		FB905F6825CBDDA6008BFC3B /* BlackListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB905F6525CBDDA6008BFC3B /* BlackListCell.xib */; };
 		FB905F6E25CBE063008BFC3B /* BlackListRelieveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB905F6D25CBE063008BFC3B /* BlackListRelieveVC.m */; };
+		FB953D4725F7563B005565DD /* BleKeySdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB953D4625F7563B005565DD /* BleKeySdk.framework */; };
 		FBA45ADC259C119400EF2BF9 /* ApplyOpenLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA45ADB259C119400EF2BF9 /* ApplyOpenLockModel.m */; };
 		FBA45AE2259C11BB00EF2BF9 /* ApplyOpenLockListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA45AE1259C11BB00EF2BF9 /* ApplyOpenLockListVC.m */; };
 		FBCC72D025A552C400A2B86D /* ApplyOpenLockDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBCC72CA25A552C300A2B86D /* ApplyOpenLockDateCell.xib */; };
@@ -223,7 +116,6 @@
 		FBCE1CD525F1B000005E76A6 /* RayonicsBleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45A6C2B2437351700148E08 /* RayonicsBleSDK.framework */; };
 		FBD313C02491C4160053CBC8 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */; };
 		FBD313C3249212EA0053CBC8 /* SystemParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */; };
-		FBDE7FA825EF2D22007C24F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBDE7FAA25EF2D22007C24F7 /* InfoPlist.strings */; };
 		FBFB51F32553F36600E5D71A /* SwitchLockListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFB51F12553F36600E5D71A /* SwitchLockListCell.xib */; };
 		FBFB51F42553F36600E5D71A /* SwitchLockListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFB51F22553F36600E5D71A /* SwitchLockListCell.m */; };
 /* End PBXBuildFile section */
@@ -242,20 +134,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = A44661A0242473A4000D1D9D;
 			remoteInfo = lock;
-		};
-		FB6B814425EE1B5200F83921 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4466199242473A4000D1D9D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FB6B812825EE1B4E00F83921;
-			remoteInfo = Vanmalock;
-		};
-		FB6B814F25EE1B5200F83921 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4466199242473A4000D1D9D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FB6B812825EE1B4E00F83921;
-			remoteInfo = Vanmalock;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -374,14 +252,13 @@
 		A430EF702432C69A00F68BCE /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		A430EF732432C69B00F68BCE /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A430EF742432C69C00F68BCE /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		A44661A1242473A4000D1D9D /* 万码电子锁.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "万码电子锁.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A44661A1242473A4000D1D9D /* 巡检电子锁.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "巡检电子锁.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44661A4242473A4000D1D9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A44661A5242473A4000D1D9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A44661AA242473A4000D1D9D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A44661AB242473A4000D1D9D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A44661AE242473A4000D1D9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A44661B0242473A6000D1D9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A44661B3242473A6000D1D9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A44661B5242473A6000D1D9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A44661B6242473A6000D1D9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A44661BC242473A6000D1D9D /* lockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -396,7 +273,6 @@
 		A45A6C2B2437351700148E08 /* RayonicsBleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RayonicsBleSDK.framework; sourceTree = "<group>"; };
 		A45A6C2D2437355100148E08 /* RayonicsBleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RayonicsBleSDK.framework; path = ../RayonicsBleSDK.framework; sourceTree = "<group>"; };
 		A715926BD6D7E8C606AD630C /* Pods_lock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB0151D325F0EA7F00A77017 /* BleKeySdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BleKeySdk.framework; sourceTree = "<group>"; };
 		FB03940A2490ED5C00D95AEA /* SystemParameterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemParameterCell.h; sourceTree = "<group>"; };
 		FB03940B2490ED5C00D95AEA /* SystemParameterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemParameterCell.m; sourceTree = "<group>"; };
 		FB03940C2490ED5C00D95AEA /* SystemParameterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SystemParameterCell.xib; sourceTree = "<group>"; };
@@ -415,6 +291,8 @@
 		FB30C09D25540DA1008D5F59 /* MyTaskLockSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTaskLockSearchVC.m; sourceTree = "<group>"; };
 		FB3BDEA9248F0FE800B54021 /* SwitchLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchLockViewController.h; sourceTree = "<group>"; };
 		FB3BDEAA248F0FE800B54021 /* SwitchLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchLockViewController.m; sourceTree = "<group>"; };
+		FB43949325F85F29008F04E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/LaunchScreen-Chinese.storyboard"; sourceTree = "<group>"; };
+		FB43949525F85F29008F04E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/LaunchScreen-English.storyboard"; sourceTree = "<group>"; };
 		FB608CB0248A1CF7008BA56C /* RegistrationKeyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationKeyModel.m; sourceTree = "<group>"; };
 		FB608CB1248A1CF7008BA56C /* RegistrationKeyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationKeyModel.h; sourceTree = "<group>"; };
 		FB608CB3248A1D32008BA56C /* SearchBluetoothView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBluetoothView.m; sourceTree = "<group>"; };
@@ -425,26 +303,8 @@
 		FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationLockTFCell.m; sourceTree = "<group>"; };
 		FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationLockVC.m; sourceTree = "<group>"; };
 		FB608CBD248A1E4F008BA56C /* RegistrationLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationLockVC.h; sourceTree = "<group>"; };
-		FB6B812925EE1B4E00F83921 /* Vanmalock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vanmalock.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB6B812B25EE1B4E00F83921 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		FB6B812C25EE1B4E00F83921 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FB6B813125EE1B4E00F83921 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FB6B813225EE1B4E00F83921 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		FB6B813525EE1B4E00F83921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FB6B813725EE1B5100F83921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FB6B813C25EE1B5100F83921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB6B813D25EE1B5100F83921 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FB6B814325EE1B5200F83921 /* VanmalockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VanmalockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB6B814725EE1B5200F83921 /* VanmalockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VanmalockTests.m; sourceTree = "<group>"; };
-		FB6B814925EE1B5200F83921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB6B814E25EE1B5200F83921 /* VanmalockUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VanmalockUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB6B815225EE1B5200F83921 /* VanmalockUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VanmalockUITests.m; sourceTree = "<group>"; };
-		FB6B815425EE1B5200F83921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB6B846225EE35B500F83921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/LaunchScreen-English.storyboard"; sourceTree = "<group>"; };
-		FB6B846425EE35B600F83921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/LaunchScreen-Chinese.storyboard"; sourceTree = "<group>"; };
 		FB83FF80249B493600432C35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FB83FF82249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		FB83FF83249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		FB83FF84249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FB8ACA3325CCD63300CB0F05 /* BlackListCreateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackListCreateVC.h; sourceTree = "<group>"; };
 		FB8ACA3425CCD63300CB0F05 /* BlackListCreateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlackListCreateVC.m; sourceTree = "<group>"; };
@@ -466,6 +326,7 @@
 		FB905F6625CBDDA6008BFC3B /* BlackListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackListCell.h; sourceTree = "<group>"; };
 		FB905F6C25CBE063008BFC3B /* BlackListRelieveVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackListRelieveVC.h; sourceTree = "<group>"; };
 		FB905F6D25CBE063008BFC3B /* BlackListRelieveVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlackListRelieveVC.m; sourceTree = "<group>"; };
+		FB953D4625F7563B005565DD /* BleKeySdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BleKeySdk.framework; sourceTree = "<group>"; };
 		FBA45ADA259C119400EF2BF9 /* ApplyOpenLockModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockModel.h; sourceTree = "<group>"; };
 		FBA45ADB259C119400EF2BF9 /* ApplyOpenLockModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyOpenLockModel.m; sourceTree = "<group>"; };
 		FBA45AE0259C11BB00EF2BF9 /* ApplyOpenLockListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockListVC.h; sourceTree = "<group>"; };
@@ -488,9 +349,6 @@
 		FBD313BF2491C4160053CBC8 /* ChangePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
 		FBD313C1249212EA0053CBC8 /* SystemParameterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemParameterModel.h; sourceTree = "<group>"; };
 		FBD313C2249212EA0053CBC8 /* SystemParameterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemParameterModel.m; sourceTree = "<group>"; };
-		FBDE7F8C25EF1074007C24F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		FBDE7FA925EF2D22007C24F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		FBDE7FAB25EF2D47007C24F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FBF5895A25A45EE700A650A1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FBFB51F02553F36600E5D71A /* SwitchLockListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchLockListCell.h; sourceTree = "<group>"; };
 		FBFB51F12553F36600E5D71A /* SwitchLockListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchLockListCell.xib; sourceTree = "<group>"; };
@@ -511,6 +369,7 @@
 				A409C9F12428645B00A4004E /* libz.tbd in Frameworks */,
 				A409C9EF2428645200A4004E /* libc++.tbd in Frameworks */,
 				FBCE1CD525F1B000005E76A6 /* RayonicsBleSDK.framework in Frameworks */,
+				FB953D4725F7563B005565DD /* BleKeySdk.framework in Frameworks */,
 				A409C9ED2428644400A4004E /* GLKit.framework in Frameworks */,
 				6317908B63317FC7B0A45B61 /* Pods_lock.framework in Frameworks */,
 			);
@@ -524,38 +383,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A44661C4242473A6000D1D9D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB6B812625EE1B4E00F83921 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FB6B81A925EE243800F83921 /* QuartzCore.framework in Frameworks */,
-				FB6B819B25EE241E00F83921 /* libc++.tbd in Frameworks */,
-				FB6B819925EE23FA00F83921 /* CoreTelephony.framework in Frameworks */,
-				FB6B81A225EE242A00F83921 /* libz.tbd in Frameworks */,
-				FB6B819825EE23F000F83921 /* CoreLocation.framework in Frameworks */,
-				FB6B819725EE23E700F83921 /* CoreBluetooth.framework in Frameworks */,
-				FB6B81AB25EE245D00F83921 /* SystemConfiguration.framework in Frameworks */,
-				FB6B819A25EE240800F83921 /* GLKit.framework in Frameworks */,
-				FB0151D525F0EA8000A77017 /* BleKeySdk.framework in Frameworks */,
-				FB6B81AA25EE245100F83921 /* Security.framework in Frameworks */,
-				EB3C9C0B6B4C205D61D4D26C /* Pods_Vanmalock.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB6B814025EE1B5200F83921 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB6B814B25EE1B5200F83921 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1077,9 +904,6 @@
 				A44661A3242473A4000D1D9D /* lock */,
 				A44661BF242473A6000D1D9D /* lockTests */,
 				A44661CA242473A6000D1D9D /* lockUITests */,
-				FB6B812A25EE1B4E00F83921 /* Vanmalock */,
-				FB6B814625EE1B5200F83921 /* VanmalockTests */,
-				FB6B815125EE1B5200F83921 /* VanmalockUITests */,
 				A44661A2242473A4000D1D9D /* Products */,
 				A409C9EB2428644400A4004E /* Frameworks */,
 				8C74E8B170B859E39839E4D5 /* Pods */,
@@ -1089,12 +913,9 @@
 		A44661A2242473A4000D1D9D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A44661A1242473A4000D1D9D /* 万码电子锁.app */,
+				A44661A1242473A4000D1D9D /* 巡检电子锁.app */,
 				A44661BC242473A6000D1D9D /* lockTests.xctest */,
 				A44661C7242473A6000D1D9D /* lockUITests.xctest */,
-				FB6B812925EE1B4E00F83921 /* Vanmalock.app */,
-				FB6B814325EE1B5200F83921 /* VanmalockTests.xctest */,
-				FB6B814E25EE1B5200F83921 /* VanmalockUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1103,6 +924,7 @@
 			isa = PBXGroup;
 			children = (
 				A45A6C2B2437351700148E08 /* RayonicsBleSDK.framework */,
+				FB953D4625F7563B005565DD /* BleKeySdk.framework */,
 				8405DB9D247382F7000F94EE /* Main */,
 				8405DBA124738668000F94EE /* Home */,
 				8405DBE3247386E1000F94EE /* Map */,
@@ -1115,7 +937,8 @@
 				FB83FF81249B493600432C35 /* InfoPlist.strings */,
 				A44661AD242473A4000D1D9D /* Main.storyboard */,
 				A44661B0242473A6000D1D9D /* Assets.xcassets */,
-				A44661B2242473A6000D1D9D /* LaunchScreen.storyboard */,
+				FB43949225F85F29008F04E2 /* LaunchScreen-Chinese.storyboard */,
+				FB43949425F85F29008F04E2 /* LaunchScreen-English.storyboard */,
 				A44661B5242473A6000D1D9D /* Info.plist */,
 				A44661B6242473A6000D1D9D /* main.m */,
 			);
@@ -1192,43 +1015,6 @@
 				FB0E39E125CF96AB0040342F /* LockReplaceDetailVC.m */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		FB6B812A25EE1B4E00F83921 /* Vanmalock */ = {
-			isa = PBXGroup;
-			children = (
-				FB0151D325F0EA7F00A77017 /* BleKeySdk.framework */,
-				FB6B812B25EE1B4E00F83921 /* AppDelegate.h */,
-				FB6B812C25EE1B4E00F83921 /* AppDelegate.m */,
-				FB6B813125EE1B4E00F83921 /* ViewController.h */,
-				FB6B813225EE1B4E00F83921 /* ViewController.m */,
-				FB6B813425EE1B4E00F83921 /* Main.storyboard */,
-				FB6B813725EE1B5100F83921 /* Assets.xcassets */,
-				FB6B813C25EE1B5100F83921 /* Info.plist */,
-				FB6B846325EE35B600F83921 /* LaunchScreen-Chinese.storyboard */,
-				FB6B846125EE35B500F83921 /* LaunchScreen-English.storyboard */,
-				FB6B813D25EE1B5100F83921 /* main.m */,
-				FBDE7FAA25EF2D22007C24F7 /* InfoPlist.strings */,
-			);
-			path = Vanmalock;
-			sourceTree = "<group>";
-		};
-		FB6B814625EE1B5200F83921 /* VanmalockTests */ = {
-			isa = PBXGroup;
-			children = (
-				FB6B814725EE1B5200F83921 /* VanmalockTests.m */,
-				FB6B814925EE1B5200F83921 /* Info.plist */,
-			);
-			path = VanmalockTests;
-			sourceTree = "<group>";
-		};
-		FB6B815125EE1B5200F83921 /* VanmalockUITests */ = {
-			isa = PBXGroup;
-			children = (
-				FB6B815225EE1B5200F83921 /* VanmalockUITests.m */,
-				FB6B815425EE1B5200F83921 /* Info.plist */,
-			);
-			path = VanmalockUITests;
 			sourceTree = "<group>";
 		};
 		FB905F3925CB87A7008BFC3B /* BlackList */ = {
@@ -1422,7 +1208,7 @@
 			);
 			name = lock;
 			productName = lock;
-			productReference = A44661A1242473A4000D1D9D /* 万码电子锁.app */;
+			productReference = A44661A1242473A4000D1D9D /* 巡检电子锁.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A44661BB242473A6000D1D9D /* lockTests */ = {
@@ -1461,63 +1247,6 @@
 			productReference = A44661C7242473A6000D1D9D /* lockUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		FB6B812825EE1B4E00F83921 /* Vanmalock */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FB6B815525EE1B5200F83921 /* Build configuration list for PBXNativeTarget "Vanmalock" */;
-			buildPhases = (
-				237DD6841B6A9376B98F3C4E /* [CP] Check Pods Manifest.lock */,
-				FB6B812525EE1B4E00F83921 /* Sources */,
-				FB6B812625EE1B4E00F83921 /* Frameworks */,
-				FB6B812725EE1B4E00F83921 /* Resources */,
-				A40F8F930CEEC2DD896828A5 /* [CP] Embed Pods Frameworks */,
-				735F68F2AF2BB1355A556508 /* [CP] Copy Pods Resources */,
-				FB0151FD25F0F9A800A77017 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Vanmalock;
-			productName = Vanmalock;
-			productReference = FB6B812925EE1B4E00F83921 /* Vanmalock.app */;
-			productType = "com.apple.product-type.application";
-		};
-		FB6B814225EE1B5200F83921 /* VanmalockTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FB6B815825EE1B5200F83921 /* Build configuration list for PBXNativeTarget "VanmalockTests" */;
-			buildPhases = (
-				FB6B813F25EE1B5200F83921 /* Sources */,
-				FB6B814025EE1B5200F83921 /* Frameworks */,
-				FB6B814125EE1B5200F83921 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FB6B814525EE1B5200F83921 /* PBXTargetDependency */,
-			);
-			name = VanmalockTests;
-			productName = VanmalockTests;
-			productReference = FB6B814325EE1B5200F83921 /* VanmalockTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		FB6B814D25EE1B5200F83921 /* VanmalockUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FB6B815B25EE1B5200F83921 /* Build configuration list for PBXNativeTarget "VanmalockUITests" */;
-			buildPhases = (
-				FB6B814A25EE1B5200F83921 /* Sources */,
-				FB6B814B25EE1B5200F83921 /* Frameworks */,
-				FB6B814C25EE1B5200F83921 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FB6B815025EE1B5200F83921 /* PBXTargetDependency */,
-			);
-			name = VanmalockUITests;
-			productName = VanmalockUITests;
-			productReference = FB6B814E25EE1B5200F83921 /* VanmalockUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1537,17 +1266,6 @@
 					A44661C6242473A6000D1D9D = {
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = A44661A0242473A4000D1D9D;
-					};
-					FB6B812825EE1B4E00F83921 = {
-						CreatedOnToolsVersion = 12.4;
-					};
-					FB6B814225EE1B5200F83921 = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = FB6B812825EE1B4E00F83921;
-					};
-					FB6B814D25EE1B5200F83921 = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = FB6B812825EE1B4E00F83921;
 					};
 				};
 			};
@@ -1569,9 +1287,6 @@
 				A44661A0242473A4000D1D9D /* lock */,
 				A44661BB242473A6000D1D9D /* lockTests */,
 				A44661C6242473A6000D1D9D /* lockUITests */,
-				FB6B812825EE1B4E00F83921 /* Vanmalock */,
-				FB6B814225EE1B5200F83921 /* VanmalockTests */,
-				FB6B814D25EE1B5200F83921 /* VanmalockUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1581,9 +1296,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A44661B4242473A6000D1D9D /* LaunchScreen.storyboard in Resources */,
 				FB0E39DC25CF80500040342F /* LockReplaceListCell.xib in Resources */,
 				FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */,
+				FB43949725F85F29008F04E2 /* LaunchScreen-English.storyboard in Resources */,
 				FB905F5425CBBABD008BFC3B /* KeyLossListCell.xib in Resources */,
 				A4102A75242B200500B03620 /* resource.bundle in Resources */,
 				FBFB51F32553F36600E5D71A /* SwitchLockListCell.xib in Resources */,
@@ -1593,6 +1308,7 @@
 				A430EF752432C69C00F68BCE /* WSDatePickerView.xib in Resources */,
 				842FC896247E2C8800489C50 /* MyTaskListCell.xib in Resources */,
 				FBCC72D025A552C400A2B86D /* ApplyOpenLockDateCell.xib in Resources */,
+				FB43949625F85F29008F04E2 /* LaunchScreen-Chinese.storyboard in Resources */,
 				FB03940E2490ED5C00D95AEA /* SystemParameterCell.xib in Resources */,
 				A44661AF242473A4000D1D9D /* Main.storyboard in Resources */,
 			);
@@ -1612,84 +1328,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FB6B812725EE1B4E00F83921 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FB6B846525EE35B600F83921 /* LaunchScreen-English.storyboard in Resources */,
-				FBDE7FA825EF2D22007C24F7 /* InfoPlist.strings in Resources */,
-				FB6B813825EE1B5100F83921 /* Assets.xcassets in Resources */,
-				FB6B841425EE320E00F83921 /* KeyLossListCell.xib in Resources */,
-				FB6B83B225EE31C000F83921 /* SystemParameterCell.xib in Resources */,
-				FB6B813625EE1B4E00F83921 /* Main.storyboard in Resources */,
-				FB6B83E325EE31E400F83921 /* ApplyOpenLockLockCell.xib in Resources */,
-				FB6B820F25EE2BB400F83921 /* resource.bundle in Resources */,
-				FB6B843025EE322B00F83921 /* BlackListCell.xib in Resources */,
-				FB6B822B25EE2BC900F83921 /* WSDatePickerView.xib in Resources */,
-				FB6B831825EE315E00F83921 /* MyTaskListCell.xib in Resources */,
-				FB6B83D525EE31DA00F83921 /* ApplyOpenLockDateCell.xib in Resources */,
-				FB6B846625EE35B600F83921 /* LaunchScreen-Chinese.storyboard in Resources */,
-				FB6B832625EE316600F83921 /* SwitchLockListCell.xib in Resources */,
-				FB6B82C525EE2C5200F83921 /* LockReplaceListCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB6B814125EE1B5200F83921 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB6B814C25EE1B5200F83921 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		237DD6841B6A9376B98F3C4E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Vanmalock-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		735F68F2AF2BB1355A556508 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vanmalock/Pods-Vanmalock-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vanmalock/Pods-Vanmalock-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vanmalock/Pods-Vanmalock-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		937E59C77EF1CD251CFA51F7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1705,23 +1346,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lock/Pods-lock-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A40F8F930CEEC2DD896828A5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vanmalock/Pods-Vanmalock-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vanmalock/Pods-Vanmalock-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vanmalock/Pods-Vanmalock-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C945610E0DDBCE6AAA3051C2 /* [CP] Copy Pods Resources */ = {
@@ -1762,23 +1386,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		FB0151FD25F0F9A800A77017 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n#\n# Copyright 2016 Bugly, Tencent. All rights reserved.\n#\n# V1.4.0\n#\n# 2016.08.03\n#\n#\n#\n######################################################\n# 1. 脚本集成到Xcode工程的Target\n######################################################\n#\n# --- Copy the SCRIPT to the Run Script of Build Phases in the Xcode project ---\n#\n# #\nBUGLY_APP_ID=\"b8acaf1b6f\"\n# #\nBUGLY_APP_KEY=\"7ba0e523-e78b-44d5-99e2-54bf7888ac50\"\n# #\nBUNDLE_IDENTIFIER=\"com.jwm.Vanmalock\"\n# #\nUPLOAD_DSYM_ONLY=1\n#\n# # 脚本默认配置的版本格式为CFBundleShortVersionString(CFBundleVersion),  如果你修改默认的版本格式, 请设置此变量, 如果不想修改, 请忽略此设置\n# CUSTOMIZED_APP_VERSION=\"\"\n#\n# # Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\n UPLOAD_DEBUG_SYMBOLS=1\n#\n# # 模拟器编译是否上传，1=上传 0=不上传，默认不上传\n# UPLOAD_SIMULATOR_SYMBOLS=0\n#\n# #只有Archive操作时上传, 1=支持Archive上传 0=所有Release模式编译都上传\n# UPLOAD_ARCHIVE_ONLY=0\n#\n# #\n# source dSYMUpload.sh\n#\n# --- END OF SCRIPT ---\n#\n#\n#\n#\n#######################################################\n# 2. 脚本根据输入参数处理\n#######################################################\n#\n# #命令行下输入应用基本信息, .dSYM文件的父目录路径, 输出文件目录即可\n#\n# sh dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir>\n#\n# #\n#\n# #注意:\n# # 1. dSYMUpload.sh会调用buglySymboliOS.jar进行.dSYM解析，所以依赖Java运行时环境\n# # 2. dSYMUpload.sh和buglySymboliOS.jar的文件路径需一致\n#\n#\n\n#\n# --- CONTENT OF SCRIPT ---\n#\n\n# Bugly服务域名\nBUGLY_DSYM_UPLOAD_DOMAIN=\"api.bugly.qq.com\"\n\n# 注意jar工具的路径跟dSYMUpload.sh脚本路径一致, 请务必保证jar路径的正确性\nBUGLY_SYMBOL_JAR_PATH=\"dsymtool/buglySymboliOS.jar\"\n# 查找添加到系统目录的jar工具\nif [ ! -f \"${BUGLY_SYMBOL_JAR_PATH}\" ]; then\n    BUGLY_SYMBOL_JAR_PATH=\"$HOME/bin/buglySymboliOS.jar\"\nfi\n\n# 打印错误信息\nfunction exitWithMessage(){\n    echo \"--------------------------------\"\n    echo \"${1}\"\n    echo \"--------------------------------\"\n    exit ${2}\n}\n\n# 上传bSYMBOL文件\nfunction dSYMUpload() {\n    P_APP_ID=\"$1\"\n    P_APP_KEY=\"$2\"\n    P_APP_BUNDLE_ID=\"$3\"\n    P_APP_VERSION=\"$4\"\n    P_BSYMBOL_ZIP_FILE=\"$5\"\n\n    #\n    P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE##*/}\n    P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE_NAME//&/_}\n    P_BSYMBOL_ZIP_FILE_NAME=\"${P_BSYMBOL_ZIP_FILE_NAME// /_}\"\n\n    DSYM_UPLOAD_URL=\"https://${BUGLY_DSYM_UPLOAD_DOMAIN}/openapi/file/upload/symbol?app_id=${P_APP_ID}&app_key=${P_APP_KEY}\"\n    echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n\n    echo \"-----------------------------\"\n    STATUS=$(/usr/bin/curl -k \"${DSYM_UPLOAD_URL}\" --form \"api_version=1\" --form \"app_id=${P_APP_ID}\" --form \"app_key=${P_APP_KEY}\" --form \"symbolType=2\"  --form \"bundleId=${BUNDLE_IDENTIFIER}\" --form \"productVersion=${BUGLY_APP_VERSION}\" --form \"fileName=${P_BSYMBOL_ZIP_FILE_NAME}\" --form \"file=@${P_BSYMBOL_ZIP_FILE}\" --verbose)\n    echo \"-----------------------------\"\n\n    UPLOAD_RESULT=\"FAILTURE\"\n    echo \"Bugly server response: ${STATUS}\"\n    if [ ! \"${STATUS}\" ]; then\n        echo \"Error: Failed to upload the zip archive file.\"\n    elif [[ \"${STATUS}\" == *\"{\\\"reponseCode\\\":\\\"0\\\"}\"* ]]; then\n        echo \"Success to upload the dSYM for the app [${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION}]\"\n        UPLOAD_RESULT=\"SUCCESS\"\n    else\n        echo \"Error: Failed to upload the zip archive file to Bugly.\"\n    fi\n\n    #Remove temp dSYM archive\n    #echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n    #/bin/rm -f \"${DSYM_ZIP_FPATH}\"\n\n    if [ \"$?\" -ne 0 ]; then\n        exitWithMessage \"Error: Failed to remove temporary zip archive.\" 0\n    fi\n\n    echo \"--------------------------------\"\n    echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n\n    if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n        echo \"--------------------------------\"\n        echo \"Failed to upload the dSYM\"\n        echo \"Please check the script and try it again.\"\n    fi\n}\n\n# .dSYM解析为bSYMBOL文件\nfunction dSYMParse() {\n    DSYM_FILE=\"$1\"\n    DSYM_SYMBOL_FILE=\"$2\"\n\n    echo \"--------------------------------\"\n    echo \"Extract symbol info from .dSYM file. to ${DSYM_SYMBOL_FILE}\"\n    (/usr/bin/java -Xms512m -Xmx1024m -Dfile.encoding=UTF8 -jar \"${BUGLY_SYMBOL_JAR_PATH}\" -i \"${DSYM_FILE}\" -o \"${DSYM_SYMBOL_FILE}\" ) || exitWithMessage \"Error: Failed to extract symbols.\" 1\n    echo \"--------------------------------\"\n\n}\n\n# 执行\nfunction run() {\n\n    CONFIG_BUGLY_APP_ID=\"$1\"\n    CONFIG_BUGLY_APP_KEY=\"$2\"\n\n    CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER=\"$3\"\n    CONFIG_BUGLY_APP_VERSION=\"$4\"\n    CONFIG_DSYM_SOURCE_DIR=\"$5\"\n    CONFIG_DSYM_DEST_DIR=\"$6\"\n    CONFIG_UPLOAD_DSYM_ONLY=\"$7\"\n\n    # 检查必须参数是否设置\n    if [ ! \"${CONFIG_BUGLY_APP_ID}\" ]; then\n        exitWithMessage \"Error: Bugly App ID not defined. Please set 'BUGLY_APP_ID' \" 0\n    fi\n\n    if [[ \"${CONFIG_BUGLY_APP_ID}\" == *\"App ID\"* ]]; then\n        exitWithMessage \"Error: Bugly App ID not defined.\" 0\n    fi\n\n    if [ ! \"${CONFIG_BUGLY_APP_KEY}\" ]; then\n        exitWithMessage \"Error: Bugly App Key not defined.\" 0\n    fi\n\n    if [ ! \"${CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER}\" ]; then\n        exitWithMessage \"Error: Bundle Identifier not defined.\" 0\n    fi\n\n    if [ ! \"${CONFIG_BUGLY_APP_VERSION}\" ]; then\n        exitWithMessage \"Error: App Version not defined.\" 0\n    fi\n\n    if [ ! -e \"${CONFIG_DSYM_SOURCE_DIR}\" ]; then\n        exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_SOURCE_DIR}\" 0\n    fi\n\n    if [ ! \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n        exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_DEST_DIR}\" 0\n    fi\n\n    if [ ! -e \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n        mkdir ${CONFIG_DSYM_DEST_DIR}\n    fi\n\n    DSYM_FOLDER=\"${CONFIG_DSYM_SOURCE_DIR}\"\n    IFS=$'\\n'\n\n    echo \"Scaning dSYM FOLDER: ${DSYM_FOLDER} ...\"\n    RET=\"F\"\n    \n    #\n    for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n        RET=\"T\"\n        echo \"Found dSYM file: $dsymFile\"\n\n        DSYM_FILE_NAME=${dsymFile##*/}\n        DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_FILE_NAME}.zip\"\n        DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_SYMBOL_ZIP_FILE_NAME// /_}\"\n        DSYM_SYMBOL_ZIP_FILE=${CONFIG_DSYM_DEST_DIR}/${DSYM_SYMBOL_ZIP_FILE_NAME}\n\n        if [ $CONFIG_UPLOAD_DSYM_ONLY -eq 1 ]; then\n            if [ -e $DSYM_SYMBOL_ZIP_FILE ]; then\n                rm -f $DSYM_SYMBOL_ZIP_FILE\n            fi\n            # 如果只上传dSYM，直接压缩dSYM目录\n            zip -r -j $DSYM_SYMBOL_ZIP_FILE $dsymFile -x *.plist\n        else\n            # 使用符号表工具来生成Symbol文件\n            dSYMParse $dsymFile $DSYM_SYMBOL_ZIP_FILE\n        fi\n        \n        # 上传\n        dSYMUpload $CONFIG_BUGLY_APP_ID $CONFIG_BUGLY_APP_KEY $CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER $CONFIG_BUGLY_APP_VERSION $DSYM_SYMBOL_ZIP_FILE\n    done\n\n    if [ $RET = \"F\" ]; then\n        exitWithMessage \"No .dSYM found in ${DSYM_FOLDER}\" 0\n    fi\n}\n\n# 在Xcode工程中执行\nfunction runInXcode(){\n    echo \"Uploading dSYM to Bugly in Xcode ...\"\n\n    echo \"Info.Plist : ${INFOPLIST_FILE}\"\n\n    BUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\n    BUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n\n    # 组装Bugly默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\n    if [ ! \"${CUSTOMIZED_APP_VERSION}\" ]; then\n        BUGLY_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\n    else\n        BUGLY_APP_VERSION=\"${CUSTOMIZED_APP_VERSION}\"\n    fi\n\n    echo \"--------------------------------\"\n    echo \"Prepare application information.\"\n    echo \"--------------------------------\"\n\n    echo \"Product Name: ${PRODUCT_NAME}\"\n    echo \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\n    echo \"Version: ${BUNDLE_SHORT_VERSION}\"\n    echo \"Build: ${BUNDLE_VERSION}\"\n\n    echo \"Bugly App ID: ${BUGLY_APP_ID}\"\n    echo \"Bugly App key: ${BUGLY_APP_KEY}\"\n    echo \"Bugly App Version: ${BUGLY_APP_VERSION}\"\n\n    echo \"--------------------------------\"\n    echo \"Check the arguments ...\"\n\n    ##检查模拟器编译是否允许上传符号\n    if [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\n    if [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\n        exitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\n    fi\n    fi\n\n    ##检查是否是Release模式编译\n    if [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\n    if [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\n        exitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\n    fi\n    fi\n\n    ##检查是否Archive操作\n    if [ $UPLOAD_ARCHIVE_ONLY -eq 1 ]; then\n    if [[ \"$TARGET_BUILD_DIR\" == *\"/Archive\"* ]]; then\n        echo \"Archive the package\"\n    else\n        exitWithMessage \"Warning: Build for NOT Archive mode and skipping to upload. \\nYou can modify 'UPLOAD_ARCHIVE_ONLY' to 0 in the script.\" 0\n    fi\n    fi\n\n    #\n    run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${BUILD_DIR}/BuglySymbolTemp ${UPLOAD_DSYM_ONLY}\n}\n\n# 根据Xcode的环境变量判断是否处于Xcode环境\nINFO_PLIST_FILE=\"${INFOPLIST_FILE}\"\n\nBuildInXcode=\"F\"\nif [ -f \"${INFO_PLIST_FILE}\" ]; then\n    BuildInXcode=\"T\"\nfi\n\nif [ $BuildInXcode = \"T\" ]; then\n    runInXcode\nelse\n    echo \"\\nUsage: dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir> [upload_dsym_only]\\n\"\n    # 你可以在此处直接设置BuglyAppID和BuglyAppKey，排除不常变参数的输入\n    BUGLY_APP_ID=\"$1\"\n    BUGLY_APP_KEY=\"$2\"\n    BUNDLE_IDENTIFIER=\"$3\"\n    BUGLY_APP_VERSION=\"$4\"\n    DWARF_DSYM_FOLDER_PATH=\"$5\"\n    SYMBOL_OUTPUT_PATH=\"$6\"\n    UPLOAD_DSYM_ONLY=$7\n    run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${SYMBOL_OUTPUT_PATH} ${UPLOAD_DSYM_ONLY}\nfi\n\n";
 		};
 		FB6A0AFB2493067F0064F385 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1905,111 +1512,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FB6B812525EE1B4E00F83921 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FB6B831125EE315900F83921 /* MyTaskListCell.m in Sources */,
-				FB6B834225EE317900F83921 /* WorkListModel.m in Sources */,
-				FB6B81E525EE2B4D00F83921 /* LogInViewController.m in Sources */,
-				FB6B838F25EE31A900F83921 /* SearchBluetoothView.m in Sources */,
-				FB6B835E25EE318900F83921 /* WorkListViewController.m in Sources */,
-				FB6B830A25EE315400F83921 /* MyTaskModel.m in Sources */,
-				FB6B83C725EE31CF00F83921 /* ApplyOpenLockModel.m in Sources */,
-				FB6B81FA25EE2BA800F83921 /* RKNotificationHub.m in Sources */,
-				FB6B837A25EE319F00F83921 /* RegistrationKeyModel.m in Sources */,
-				FB6B841B25EE321300F83921 /* KeyLossListVC.m in Sources */,
-				FB6B81DE25EE2B4200F83921 /* BaseTableViewCell.m in Sources */,
-				FB6B839625EE31AF00F83921 /* RegistrationKeyViewController.m in Sources */,
-				FB6B842225EE321E00F83921 /* BlackListModel.m in Sources */,
-				FB6B834925EE317D00F83921 /* WorkListTableViewCell.m in Sources */,
-				FB6B840625EE320300F83921 /* KeyLossModel.m in Sources */,
-				FB6B820125EE2BAD00F83921 /* MMScanView.m in Sources */,
-				FB6B82B725EE2C4700F83921 /* LockReplaceDetailVC.m in Sources */,
-				FB6B830325EE314E00F83921 /* HomeViewController.m in Sources */,
-				FB6B844C25EE323A00F83921 /* WriteListCreateVC.m in Sources */,
-				FB6B82BE25EE2C4C00F83921 /* LockReplaceListCell.m in Sources */,
-				FB6B837325EE319A00F83921 /* RegistrationLockVC.m in Sources */,
-				FB6B838125EE31A300F83921 /* ConnectKeyTableViewCell.m in Sources */,
-				FB6B83F125EE31EE00F83921 /* ApplyOpenLockDetailVC.m in Sources */,
-				FB6B81EC25EE2BA100F83921 /* SZKButton.m in Sources */,
-				FB6B824725EE2BEA00F83921 /* DatePickerView.m in Sources */,
-				FB6B813325EE1B4E00F83921 /* ViewController.m in Sources */,
-				FB6B82CC25EE2C5800F83921 /* LockReplaceModel.m in Sources */,
-				FB6B826A25EE2C1300F83921 /* MBProgressHUD+Hud.m in Sources */,
-				FB6B83AB25EE31BB00F83921 /* SystemParameterCell.m in Sources */,
-				FB6B83DC25EE31DE00F83921 /* ApplyOpenLockLockCell.m in Sources */,
-				FB6B843E25EE323300F83921 /* BlackListRelieveVC.m in Sources */,
-				FB6B823225EE2BDA00F83921 /* BaseBean.m in Sources */,
-				FB6B827F25EE2C1D00F83921 /* UIImage+Helper.m in Sources */,
-				FB6B81D025EE2B2900F83921 /* BaseViewController.m in Sources */,
-				FB6B825C25EE2BFD00F83921 /* MSHTTPRequest.m in Sources */,
-				FB6B823925EE2BDE00F83921 /* RequestBean.m in Sources */,
-				FB6B833425EE316E00F83921 /* MyTaskLockSearchVC.m in Sources */,
-				FB6B83B925EE31C600F83921 /* SystemViewController.m in Sources */,
-				FB6B844525EE323600F83921 /* BlackListCreateVC.m in Sources */,
-				FB6B812D25EE1B4E00F83921 /* AppDelegate.m in Sources */,
-				FB6B813E25EE1B5100F83921 /* main.m in Sources */,
-				FB6B824E25EE2BF000F83921 /* MSNetwork.m in Sources */,
-				FB6B82F525EE314600F83921 /* HomeCollectionViewCell.m in Sources */,
-				FB6B835725EE318600F83921 /* WorkRecordViewController.m in Sources */,
-				FB6B826325EE2C0100F83921 /* MSInterfaceConst.m in Sources */,
-				FB6B82EE25EE314100F83921 /* HomeModel.m in Sources */,
-				FB6B838825EE31A600F83921 /* RegistrationKeyTableViewCell.m in Sources */,
-				FB6B81D725EE2B3E00F83921 /* BaseNavigationController.m in Sources */,
-				FB6B83F825EE31F300F83921 /* OpenLockAuditModel.m in Sources */,
-				FB6B831F25EE316300F83921 /* SwitchLockListCell.m in Sources */,
-				FB6B821D25EE2BC000F83921 /* UIView+Extension.m in Sources */,
-				FB6B843725EE323000F83921 /* BlackListVC.m in Sources */,
-				FB6B839D25EE31B200F83921 /* ConnectKeyViewController.m in Sources */,
-				FB6B81F325EE2BA400F83921 /* SZKLabel.m in Sources */,
-				FB6B828625EE2C2000F83921 /* UIViewController+Helper.m in Sources */,
-				FB6B83FF25EE31FA00F83921 /* OpenLockAuditListVC.m in Sources */,
-				FB6B835025EE318100F83921 /* RangeDatePickerCell.m in Sources */,
-				FB6B83C025EE31C900F83921 /* ChangePasswordVC.m in Sources */,
-				FB6B840D25EE320800F83921 /* KeyLossListCell.m in Sources */,
-				FB6B82A925EE2C3A00F83921 /* MapViewController.m in Sources */,
-				FB6B82D325EE2C6600F83921 /* MainViewController.m in Sources */,
-				FB6B825525EE2BF800F83921 /* CommonUtil.m in Sources */,
-				FB6B82FC25EE314900F83921 /* HomeTableViewCell.m in Sources */,
-				FB6B82A225EE2C3500F83921 /* UserModel.m in Sources */,
-				FB6B829B25EE2C3000F83921 /* RJTextField.m in Sources */,
-				FB6B821625EE2BBD00F83921 /* NSDate+Extension.m in Sources */,
-				FB6B827125EE2C1600F83921 /* UIColor+Helper.m in Sources */,
-				FB6B820825EE2BB100F83921 /* MMScanViewController.m in Sources */,
-				FB6B836C25EE319400F83921 /* RegistrationLockTFCell.m in Sources */,
-				FB6B842925EE322700F83921 /* BlackListCell.m in Sources */,
-				FB6B83A425EE31B700F83921 /* SystemParameterModel.m in Sources */,
-				FB6B824025EE2BE100F83921 /* ResponseBean.m in Sources */,
-				FB6B83EA25EE31EB00F83921 /* ApplyOpenLockListVC.m in Sources */,
-				FB6B828D25EE2C2300F83921 /* MBProgressHUD+Helper.m in Sources */,
-				FB6B827825EE2C1900F83921 /* NSDate+Calendar.m in Sources */,
-				FB6B83CE25EE31D500F83921 /* ApplyOpenLockDateCell.m in Sources */,
-				FB6B822425EE2BC300F83921 /* WSDatePickerView.m in Sources */,
-				FB6B82B025EE2C4300F83921 /* LockReplaceListVC.m in Sources */,
-				FB6B829425EE2C2800F83921 /* SettingViewController.m in Sources */,
-				FB6B832D25EE316B00F83921 /* MyTaskViewController.m in Sources */,
-				FB6B833B25EE317100F83921 /* SwitchLockViewController.m in Sources */,
-				FB6B836525EE319000F83921 /* RegistrationLockModel.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB6B813F25EE1B5200F83921 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FB6B814825EE1B5200F83921 /* VanmalockTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB6B814A25EE1B5200F83921 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FB6B815325EE1B5200F83921 /* VanmalockUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2023,16 +1525,6 @@
 			target = A44661A0242473A4000D1D9D /* lock */;
 			targetProxy = A44661C8242473A6000D1D9D /* PBXContainerItemProxy */;
 		};
-		FB6B814525EE1B5200F83921 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FB6B812825EE1B4E00F83921 /* Vanmalock */;
-			targetProxy = FB6B814425EE1B5200F83921 /* PBXContainerItemProxy */;
-		};
-		FB6B815025EE1B5200F83921 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FB6B812825EE1B4E00F83921 /* Vanmalock */;
-			targetProxy = FB6B814F25EE1B5200F83921 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -2045,38 +1537,20 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		A44661B2242473A6000D1D9D /* LaunchScreen.storyboard */ = {
+		FB43949225F85F29008F04E2 /* LaunchScreen-Chinese.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A44661B3242473A6000D1D9D /* Base */,
-				FB83FF83249B495600432C35 /* zh-Hans */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		FB6B813425EE1B4E00F83921 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB6B813525EE1B4E00F83921 /* Base */,
-				FBDE7F8C25EF1074007C24F7 /* zh-Hans */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FB6B846125EE35B500F83921 /* LaunchScreen-English.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB6B846225EE35B500F83921 /* Base */,
-			);
-			name = "LaunchScreen-English.storyboard";
-			sourceTree = "<group>";
-		};
-		FB6B846325EE35B600F83921 /* LaunchScreen-Chinese.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB6B846425EE35B600F83921 /* Base */,
+				FB43949325F85F29008F04E2 /* Base */,
 			);
 			name = "LaunchScreen-Chinese.storyboard";
+			sourceTree = "<group>";
+		};
+		FB43949425F85F29008F04E2 /* LaunchScreen-English.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB43949525F85F29008F04E2 /* Base */,
+			);
+			name = "LaunchScreen-English.storyboard";
 			sourceTree = "<group>";
 		};
 		FB83FF81249B493600432C35 /* InfoPlist.strings */ = {
@@ -2085,15 +1559,6 @@
 				FB83FF80249B493600432C35 /* en */,
 				FB83FF84249B495600432C35 /* zh-Hans */,
 				FBF5895A25A45EE700A650A1 /* ru */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		FBDE7FAA25EF2D22007C24F7 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FBDE7FA925EF2D22007C24F7 /* zh-Hans */,
-				FBDE7FAB25EF2D47007C24F7 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2220,7 +1685,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.3.3;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2230,6 +1695,7 @@
 					"$(PROJECT_DIR)/lock/Tool",
 					"$(PROJECT_DIR)/lock/Tool/蓝牙1",
 					"$(PROJECT_DIR)/lock",
+					"$(PROJECT_DIR)/Vanmalock",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lock/Common/Macro/PrefixHeader.pch";
 				INFOPLIST_FILE = lock/Info.plist;
@@ -2239,10 +1705,10 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.1.0;
-				OTHER_CFLAGS = "-DLOCK_APP=1";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
-				PRODUCT_NAME = "万码电子锁";
+				MARKETING_VERSION = 1.0.3;
+				OTHER_CFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.Vanmalock;
+				PRODUCT_NAME = "巡检电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2256,7 +1722,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.3.3;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2266,6 +1732,7 @@
 					"$(PROJECT_DIR)/lock/Tool",
 					"$(PROJECT_DIR)/lock/Tool/蓝牙1",
 					"$(PROJECT_DIR)/lock",
+					"$(PROJECT_DIR)/Vanmalock",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lock/Common/Macro/PrefixHeader.pch";
 				INFOPLIST_FILE = lock/Info.plist;
@@ -2275,10 +1742,10 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.1.0;
-				OTHER_CFLAGS = "-DLOCK_APP=1";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.lock;
-				PRODUCT_NAME = "万码电子锁";
+				MARKETING_VERSION = 1.0.3;
+				OTHER_CFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.Vanmalock;
+				PRODUCT_NAME = "巡检电子锁";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2359,148 +1826,6 @@
 			};
 			name = Release;
 		};
-		FB6B815625EE1B5200F83921 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06941612A3FF348D4C9F0AC3 /* Pods-Vanmalock.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.2.1;
-				DEVELOPMENT_TEAM = KVP75BU8WE;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Vanmalock",
-				);
-				GCC_PREFIX_HEADER = "$(SRCROOT)/lock/Common/Macro/PrefixHeader.pch";
-				INFOPLIST_FILE = Vanmalock/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0.2;
-				OTHER_CFLAGS = "-DVANMALOCK_APP=2";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.Vanmalock;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		FB6B815725EE1B5200F83921 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07B187D92DB14D372C3062CA /* Pods-Vanmalock.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.2.1;
-				DEVELOPMENT_TEAM = KVP75BU8WE;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Vanmalock",
-				);
-				GCC_PREFIX_HEADER = "$(SRCROOT)/lock/Common/Macro/PrefixHeader.pch";
-				INFOPLIST_FILE = Vanmalock/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0.2;
-				OTHER_CFLAGS = "-DVANMALOCK_APP=2";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.Vanmalock;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		FB6B815925EE1B5200F83921 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KVP75BU8WE;
-				INFOPLIST_FILE = VanmalockTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.VanmalockTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vanmalock.app/Vanmalock";
-			};
-			name = Debug;
-		};
-		FB6B815A25EE1B5200F83921 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KVP75BU8WE;
-				INFOPLIST_FILE = VanmalockTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.VanmalockTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vanmalock.app/Vanmalock";
-			};
-			name = Release;
-		};
-		FB6B815C25EE1B5200F83921 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KVP75BU8WE;
-				INFOPLIST_FILE = VanmalockUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.VanmalockUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Vanmalock;
-			};
-			name = Debug;
-		};
-		FB6B815D25EE1B5200F83921 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KVP75BU8WE;
-				INFOPLIST_FILE = VanmalockUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.VanmalockUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Vanmalock;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2536,33 +1861,6 @@
 			buildConfigurations = (
 				A44661D7242473A6000D1D9D /* Debug */,
 				A44661D8242473A6000D1D9D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FB6B815525EE1B5200F83921 /* Build configuration list for PBXNativeTarget "Vanmalock" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FB6B815625EE1B5200F83921 /* Debug */,
-				FB6B815725EE1B5200F83921 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FB6B815825EE1B5200F83921 /* Build configuration list for PBXNativeTarget "VanmalockTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FB6B815925EE1B5200F83921 /* Debug */,
-				FB6B815A25EE1B5200F83921 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FB6B815B25EE1B5200F83921 /* Build configuration list for PBXNativeTarget "VanmalockUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FB6B815C25EE1B5200F83921 /* Debug */,
-				FB6B815D25EE1B5200F83921 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

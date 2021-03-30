@@ -12,15 +12,11 @@
 #import "BlackListModel.h"
 #import "MyTaskModel.h"
 
-#if LOCK_APP
-@interface BlackListRelieveVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
-@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
-#elif VANMALOCK_APP
-@interface BlackListRelieveVC ()<UITableViewDataSource,UITableViewDelegate,KeyDelegate>
-@property (nonatomic,strong)KeyInfo * keyInfo;
-@property (nonatomic,strong)BleKeySdk * bleKeysdk;
-#endif
+@interface BlackListRelieveVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate,KeyDelegate>
 
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfoB; //B钥匙信息
+@property (nonatomic,strong)KeyInfo * keyInfoC; //C钥匙信息
+@property (nonatomic,strong)BleKeySdk * bleKeysdk;
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UserInfo * userInfo;
@@ -45,10 +41,10 @@
         }
     });
     [self createTableView];
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
     [SetKeyController setDelegate:self];
     [SetKeyController initSDK];
-#elif VANMALOCK_APP
+} else {
     self.bleKeysdk = [BleKeySdk shareKeySdk];
     [self.bleKeysdk setDelgate:self];
     MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
@@ -58,8 +54,8 @@
     [self.listArray addObject:infoBean];
     [self.tableView reloadData];
     //连接钥匙
-    [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
-#endif
+    [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+}
     
 }
 - (NSMutableArray *)listArray {
@@ -69,15 +65,16 @@
     return _listArray;
 }
 - (void)returnClick {
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
     [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
+} else {
     [self.bleKeysdk disConnectFromKey];
-#endif
+}
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#if LOCK_APP
+#pragma mark B锁
+
 //初始化
 - (void)requestInitSdkResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
@@ -124,8 +121,8 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
-        if (![self.keyInfo.key_id isEqualToString:self.blacklistBean.keyno]) {//钥匙不匹配
+        self.keyInfoB = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        if (![self.keyInfoB.key_id isEqualToString:self.blacklistBean.keyno]) {//钥匙不匹配
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:STR_KEY_NUMBER_NO_MATE];
             [SetKeyController disConnectBle];
@@ -142,10 +139,14 @@
         }
     }
 }
-#elif VANMALOCK_APP
+
+#pragma mark C锁
+
 //侧滑返回上一页
 - (void)didMoveToParentViewController:(nullable UIViewController *)parent {
-    [self.bleKeysdk disConnectFromKey];
+    if (self.bleKeysdk) {
+        [self.bleKeysdk disConnectFromKey];
+    }
 }
 //连接钥匙
 - (void)onConnectToKey:(Result *)result {
@@ -174,8 +175,8 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = result.obj;
-        if (![self.keyInfo.keyId isEqualToString:self.blacklistBean.keyno]) {//钥匙不匹配
+        self.keyInfoC = result.obj;
+        if (![self.keyInfoC.keyId isEqualToString:self.blacklistBean.keyno]) {//钥匙不匹配
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:STR_KEY_NUMBER_NO_MATE];
             [self.bleKeysdk disConnectFromKey];
@@ -215,8 +216,8 @@
         [self.tableView reloadData];
     }
 }
-#endif
 
+#pragma mark 公共方法
 
 - (void)createTableView {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];

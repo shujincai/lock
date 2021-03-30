@@ -13,17 +13,13 @@
 #import "BlackListModel.h"
 #import "MyTaskModel.h"
 
-#if LOCK_APP
-@interface BlackListCreateVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
-@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
-@property (nonatomic,strong)RegistrationLockInfoBean * lockInfo; //锁信息
-#elif VANMALOCK_APP
-@interface BlackListCreateVC ()<UITableViewDataSource,UITableViewDelegate,KeyDelegate>
-@property (nonatomic,strong)KeyInfo * keyInfo; //钥匙信息
-@property (nonatomic,strong)RecordInfo * lockInfo; //锁信息
-@property (nonatomic,strong)BleKeySdk * bleKeysdk;
-#endif
+@interface BlackListCreateVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate,KeyDelegate>
 
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfoB; //B钥匙信息
+@property (nonatomic,strong)RegistrationLockInfoBean * lockInfoB; //B锁信息
+@property (nonatomic,strong)KeyInfo * keyInfoC; //C钥匙信息
+@property (nonatomic,strong)RecordInfo * lockInfoC; //C锁信息
+@property (nonatomic,strong)BleKeySdk * bleKeysdk;
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UserInfo * userInfo;
@@ -48,21 +44,21 @@
         }
     });
     [self createTableView];
-#if LOCK_APP
-    [SetKeyController setDelegate:self];
-    [SetKeyController initSDK];
-#elif VANMALOCK_APP
-    self.bleKeysdk = [BleKeySdk shareKeySdk];
-    [self.bleKeysdk setDelgate:self];
-    MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
-    infoBean.name = STR_INIT_SUCCESS;
-    infoBean.time = [self getCurrentTime];
-    infoBean.iamgeName = @"ic_switch_init";
-    [self.listArray addObject:infoBean];
-    [self.tableView reloadData];
-    //连接钥匙
-    [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController setDelegate:self];
+        [SetKeyController initSDK];
+    } else {
+        self.bleKeysdk = [BleKeySdk shareKeySdk];
+        [self.bleKeysdk setDelgate:self];
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.name = STR_INIT_SUCCESS;
+        infoBean.time = [self getCurrentTime];
+        infoBean.iamgeName = @"ic_switch_init";
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+        //连接钥匙
+        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+    }
     
 }
 - (NSMutableArray *)listArray {
@@ -72,14 +68,16 @@
     return _listArray;
 }
 - (void)returnClick {
-#if LOCK_APP
-    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-    [self.bleKeysdk disConnectFromKey];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController disConnectBle];
+    } else {
+        [self.bleKeysdk disConnectFromKey];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
-#if LOCK_APP
+
+#pragma mark B锁
+
 //初始化
 - (void)requestInitSdkResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
@@ -126,14 +124,28 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
-        [self getKeyInfoDetail:self.keyInfo.key_id];
+        self.keyInfoB = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        [self getKeyInfoDetail:self.keyInfoB.key_id];
     }
 }
-#elif VANMALOCK_APP
+//设置黑名单钥匙
+- (void)requestSetBlackListKeyResultInfo:(ResultInfo *)info{
+    if (info.feedBackState == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CREATE_BLACK_KEY_FAIL];
+        return;
+    }else {
+        [self setBlackList:self.keyInfoB.key_id];
+    }
+}
+
+#pragma mark C锁
+
 //侧滑返回上一页
 - (void)didMoveToParentViewController:(nullable UIViewController *)parent {
-    [self.bleKeysdk disConnectFromKey];
+    if (self.bleKeysdk) {
+        [self.bleKeysdk disConnectFromKey];
+    }
 }
 //连接钥匙
 - (void)onConnectToKey:(Result *)result {
@@ -162,7 +174,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = result.obj;
+        self.keyInfoC = result.obj;
         //校时
         [self.bleKeysdk setDateTime:[NSDate date]];
     }
@@ -176,10 +188,21 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        [self getKeyInfoDetail:self.keyInfo.keyId];
+        [self getKeyInfoDetail:self.keyInfoC.keyId];
     }
 }
-#endif
+//设置黑名单钥匙
+- (void)onSetBlockListKey:(Result *)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CREATE_BLACK_KEY_FAIL];
+        return;
+    }else {
+        [self setBlackList:self.keyInfoC.keyId];
+    }
+}
+
+#pragma mark 公共方法
 
 // 获取钥匙详情
 - (void)getKeyInfoDetail:(NSString *)keyId {
@@ -196,27 +219,27 @@
             if (response.data) {
                 if ([response.data.keystatus isEqualToString:@"2"]) { // 损坏
                     [MBProgressHUD showError:STR_KEY_DAMAGED];
-#if LOCK_APP
-                    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                    [self.bleKeysdk disConnectFromKey];
-#endif
+                    if ([CommonUtil getLockType]) {
+                        [SetKeyController disConnectBle];
+                    } else {
+                        [self.bleKeysdk disConnectFromKey];
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
                 }else if ([response.data.keystatus isEqualToString:@"3"]){ // 丢失
                     [MBProgressHUD showError:STR_KEY_LOSE];
-#if LOCK_APP
-                    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                    [self.bleKeysdk disConnectFromKey];
-#endif
+                    if ([CommonUtil getLockType]) {
+                        [SetKeyController disConnectBle];
+                    } else {
+                        [self.bleKeysdk disConnectFromKey];
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
                 }else if ([response.data.keystatus isEqualToString:@"1"]){ // 领出
                     [MBProgressHUD showError:STR_KEY_TASK_OUT];
-#if LOCK_APP
-                    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                    [self.bleKeysdk disConnectFromKey];
-#endif
+                    if ([CommonUtil getLockType]) {
+                        [SetKeyController disConnectBle];
+                    } else {
+                        [self.bleKeysdk disConnectFromKey];
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
                 }else {
                     self.isHide = YES;
@@ -230,11 +253,11 @@
                 }
             } else {
                 [MBProgressHUD showError:STR_KEY_INFO_NO_EXISTENT];
-#if LOCK_APP
-                [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                [self.bleKeysdk disConnectFromKey];
-#endif
+                if ([CommonUtil getLockType]) {
+                    [SetKeyController disConnectBle];
+                } else {
+                    [self.bleKeysdk disConnectFromKey];
+                }
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }else {
@@ -243,11 +266,11 @@
             }else {
                 [MBProgressHUD showError:response.msg];
             }
-#if LOCK_APP
-            [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-            [self.bleKeysdk disConnectFromKey];
-#endif
+            if ([CommonUtil getLockType]) {
+                [SetKeyController disConnectBle];
+            } else {
+                [self.bleKeysdk disConnectFromKey];
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(NSError * _Nonnull error) {
@@ -311,13 +334,13 @@
         relieveBtn.layer.masksToBounds = YES;
         relieveBtn.layer.cornerRadius = 4;
         [relieveBtn addTarget:self action:@selector(createBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-#if LOCK_APP
-        [relieveBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BLUE] forState:UIControlStateNormal];
-        [relieveBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BLUE] forState:UIControlStateHighlighted];
-#elif VANMALOCK_APP
-        [relieveBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BTN_BG] forState:UIControlStateNormal];
-        [relieveBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BTN_BG] forState:UIControlStateHighlighted];
-#endif
+        if ([CommonUtil getLockType]) {
+            [relieveBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BLUE] forState:UIControlStateNormal];
+            [relieveBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BLUE] forState:UIControlStateHighlighted];
+        } else {
+            [relieveBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BTN_BG] forState:UIControlStateNormal];
+            [relieveBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BTN_BG] forState:UIControlStateHighlighted];
+        }
         [bgView addSubview:relieveBtn];
         [relieveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(bgView.mas_centerX).offset(0);
@@ -343,44 +366,24 @@
 
 - (void)createBtnClick:(UIButton *)btn {
     [MBProgressHUD showActivityMessage:STR_LOADING];
-#if LOCK_APP
-    BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
-    basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
-    basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
-    basicInfo.keyId = [self.keyInfo.key_id intValue];
-    BlackListKeyInfo *blackListKeyInfo = [[BlackListKeyInfo alloc] init];
-    blackListKeyInfo.blackKeyList = _blacklistArray;
-    [SetKeyController setBlackListKey:basicInfo andBlackListKeyInfo:blackListKeyInfo];
-#elif VANMALOCK_APP
-    NSDate *from = [NSDate date];
-    NSDate *to = [NSDate dateWithTimeIntervalSinceNow:7*24*60*60];
-    [self.bleKeysdk setBlockListKey:from to:to keyIds:_blacklistArray];
-#endif
+    if ([CommonUtil getLockType]) {
+        BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+        basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+        basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+        basicInfo.keyId = [self.keyInfoB.key_id intValue];
+        BlackListKeyInfo *blackListKeyInfo = [[BlackListKeyInfo alloc] init];
+        blackListKeyInfo.blackKeyList = _blacklistArray;
+        [SetKeyController setBlackListKey:basicInfo andBlackListKeyInfo:blackListKeyInfo];
+    } else {
+        NSDate *from = [NSDate date];
+        NSDate *to = [NSDate dateWithTimeIntervalSinceNow:7*24*60*60];
+        [self.bleKeysdk setBlockListKey:from to:to keyIds:_blacklistArray];
+    }
     
 }
 
-#if LOCK_APP
-- (void)requestSetBlackListKeyResultInfo:(ResultInfo *)info{
-    if (info.feedBackState == NO) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:STR_CREATE_BLACK_KEY_FAIL];
-        return;
-    }else {
-        [self setBlackList:self.keyInfo.key_id];
-    }
-}
-#elif VANMALOCK_APP
-- (void)onSetBlockListKey:(Result *)result {
-    if (result.ret == NO) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:STR_CREATE_BLACK_KEY_FAIL];
-        return;
-    }else {
-        [self setBlackList:self.keyInfo.keyId];
-    }
-}
-#endif
-
+/// 设置钥匙为黑钥匙
+/// @param keyId 钥匙id
 - (void)setBlackList:(NSString *)keyId {
     RequestBean * request = [[RequestBean alloc]init];
     [MSHTTPRequest PUT:[NSString stringWithFormat:kSetKeyFlag,keyId,1] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {

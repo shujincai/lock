@@ -15,16 +15,11 @@
 #import "MyTaskModel.h"
 #import "RegistrationKeyModel.h"
 
-#if LOCK_APP
-@interface ApplyOpenLockDetailVC ()<UITableViewDelegate,UITableViewDataSource,DatePickerViewDelegate,SetKeyControllerDelegate>
-@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
-#elif VANMALOCK_APP
-@interface ApplyOpenLockDetailVC ()<UITableViewDelegate,UITableViewDataSource,DatePickerViewDelegate,KeyDelegate>
-@property (nonatomic,strong)KeyInfo * keyInfo;
+@interface ApplyOpenLockDetailVC ()<UITableViewDelegate,UITableViewDataSource,DatePickerViewDelegate,SetKeyControllerDelegate,KeyDelegate>
+
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfoB; //B钥匙信息
+@property (nonatomic,strong)KeyInfo * keyInfoC; //C钥匙信息
 @property (nonatomic,strong)BleKeySdk * bleKeysdk;
-#endif
-
-
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)NSMutableArray * checkboxArray;
@@ -57,11 +52,11 @@
     return _checkboxArray;
 }
 - (void)returnClick {
-#if LOCK_APP
-    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-    [self.bleKeysdk disConnectFromKey];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController disConnectBle];
+    } else {
+        [self.bleKeysdk disConnectFromKey];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)initData {
@@ -88,17 +83,17 @@
         for (UnlockListBean * lockList in _taskBean.unlocklist) {
             [self.checkboxArray addObject:lockList.lockno];
         }
-#if LOCK_APP
-        self.keyInfo = [[RegistrationKeyInfoBean alloc]init];
-        for (UserKeyInfoList * keyList in _taskBean.keylist) {
-            self.keyInfo.key_id = keyList.keyno;
+        if ([CommonUtil getLockType]) {
+            self.keyInfoB = [[RegistrationKeyInfoBean alloc]init];
+            for (UserKeyInfoList * keyList in _taskBean.keylist) {
+                self.keyInfoB.key_id = keyList.keyno;
+            }
+        } else {
+            self.keyInfoC = [[KeyInfo alloc]init];
+            for (UserKeyInfoList * keyList in _taskBean.keylist) {
+                self.keyInfoC.keyId = keyList.keyno;
+            }
         }
-#elif VANMALOCK_APP
-        self.keyInfo = [[KeyInfo alloc]init];
-        for (UserKeyInfoList * keyList in _taskBean.keylist) {
-            self.keyInfo.keyId = keyList.keyno;
-        }
-#endif
         [self getLockTreeData];
     }else {
         NSDate * currentDate = [NSDate date];
@@ -108,14 +103,14 @@
         self.finishTime = @"23:59:59";
         self.isHide = NO;
         [MBProgressHUD showActivityMessage:STR_CONNECTING];
-#if LOCK_APP
-        [SetKeyController setDelegate:self];
-        [SetKeyController initSDK];
-#elif VANMALOCK_APP
-        self.bleKeysdk = [BleKeySdk shareKeySdk];
-        [self.bleKeysdk setDelgate:self];
-        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
-#endif
+        if ([CommonUtil getLockType]) {
+            [SetKeyController setDelegate:self];
+            [SetKeyController initSDK];
+        } else {
+            self.bleKeysdk = [BleKeySdk shareKeySdk];
+            [self.bleKeysdk setDelgate:self];
+            [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+        }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (self.isHide == NO) {
                 [MBProgressHUD hideHUD];
@@ -124,7 +119,8 @@
     }
 }
 
-#if LOCK_APP
+#pragma mark B锁
+
 //初始化
 - (void)requestInitSdkResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
@@ -157,15 +153,19 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        self.keyInfoB = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
         self.isHide = YES;
-        [self getKeyInfoDetail:self.keyInfo.key_id];
+        [self getKeyInfoDetail:self.keyInfoB.key_id];
     }
 }
-#elif VANMALOCK_APP
+
+#pragma mark C锁
+
 //侧滑返回上一页
 - (void)didMoveToParentViewController:(nullable UIViewController *)parent {
-    [self.bleKeysdk disConnectFromKey];
+    if (self.bleKeysdk) {
+        [self.bleKeysdk disConnectFromKey];
+    }
 }
 //连接
 - (void)onConnectToKey:(Result *)result {
@@ -188,12 +188,26 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = result.obj;
-        [self getKeyInfoDetail:self.keyInfo.keyId];
+        self.keyInfoC = result.obj;
+        [self getKeyInfoDetail:self.keyInfoC.keyId];
     }
 }
-#endif
 
+//校时
+-(void)onSetDateTime:(Result*)result {
+    if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        self.isHide = YES;
+        [self getLockTreeData];
+    }
+}
+
+#pragma mark 公共方法
 
 // 获取钥匙详情
 
@@ -212,47 +226,47 @@
                 if ([response.data.keystatus isEqualToString:@"2"]) { // 损坏
                     [MBProgressHUD hideHUD];
                     [MBProgressHUD showError:STR_KEY_DAMAGED];
-#if LOCK_APP
-                    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                    [self.bleKeysdk disConnectFromKey];
-#endif
+                    if ([CommonUtil getLockType]) {
+                        [SetKeyController disConnectBle];
+                    } else {
+                        [self.bleKeysdk disConnectFromKey];
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
                 }else if ([response.data.keystatus isEqualToString:@"3"]){ // 丢失
                     [MBProgressHUD hideHUD];
                     [MBProgressHUD showError:STR_KEY_LOSE];
-#if LOCK_APP
-                    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                    [self.bleKeysdk disConnectFromKey];
-#endif
+                    if ([CommonUtil getLockType]) {
+                        [SetKeyController disConnectBle];
+                    } else {
+                        [self.bleKeysdk disConnectFromKey];
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
                 }else if ([response.data.keystatus isEqualToString:@"1"]){ // 领出
                     [MBProgressHUD hideHUD];
                     [MBProgressHUD showError:STR_KEY_TASK_OUT];
-#if LOCK_APP
-                    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                    [self.bleKeysdk disConnectFromKey];
-#endif
+                    if ([CommonUtil getLockType]) {
+                        [SetKeyController disConnectBle];
+                    } else {
+                        [self.bleKeysdk disConnectFromKey];
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
                 }else {
-#if LOCK_APP
-                    [self getLockTreeData];
-#elif VANMALOCK_APP
-                    //校时
-                    [self.bleKeysdk setDateTime:[NSDate date]];
-#endif
+                    if ([CommonUtil getLockType]) {
+                        [self getLockTreeData];
+                    } else {
+                        //校时
+                        [self.bleKeysdk setDateTime:[NSDate date]];
+                    }
                     
                 }
             } else {
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:STR_KEY_INFO_NO_EXISTENT];
-#if LOCK_APP
-                [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                [self.bleKeysdk disConnectFromKey];
-#endif
+                if ([CommonUtil getLockType]) {
+                    [SetKeyController disConnectBle];
+                } else {
+                    [self.bleKeysdk disConnectFromKey];
+                }
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }else {
@@ -262,11 +276,11 @@
             }else {
                 [MBProgressHUD showError:response.msg];
             }
-#if LOCK_APP
-            [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-            [self.bleKeysdk disConnectFromKey];
-#endif
+            if ([CommonUtil getLockType]) {
+                [SetKeyController disConnectBle];
+            } else {
+                [self.bleKeysdk disConnectFromKey];
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(NSError * _Nonnull error) {
@@ -275,22 +289,6 @@
     }];
 }
 
-#if LOCK_APP
-#elif VANMALOCK_APP
-//校时
--(void)onSetDateTime:(Result*)result {
-    if (result.ret == NO) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
-        [self.bleKeysdk disConnectFromKey];
-        [self.navigationController popViewControllerAnimated:YES];
-        return;
-    }else {
-        self.isHide = YES;
-        [self getLockTreeData];
-    }
-}
-#endif
 
 // 根据区域id获取锁-区域列表
 - (void)getLockTreeData {
@@ -424,11 +422,11 @@
         [MBProgressHUD showActivityMessage:STR_LOADING];
         ApplyOpenLockTaskRequest * request = [[ApplyOpenLockTaskRequest alloc]init];
         request.daterange = [NSArray arrayWithObjects:self.beginDate,self.finishDate, nil];
-#if LOCK_APP
-        request.keynos = [NSArray arrayWithObjects:self.keyInfo.key_id, nil];
-#elif VANMALOCK_APP
-        request.keynos = [NSArray arrayWithObjects:self.keyInfo.keyId, nil];
-#endif
+        if ([CommonUtil getLockType]) {
+            request.keynos = [NSArray arrayWithObjects:self.keyInfoB.key_id, nil];
+        } else {
+            request.keynos = [NSArray arrayWithObjects:self.keyInfoC.keyId, nil];
+        }
         request.locknos = self.checkboxArray;
         request.timerangelist = [NSArray arrayWithObjects:[NSArray arrayWithObjects:self.beginTime,self.finishTime, nil], nil];
         [MSHTTPRequest PUT:[NSString stringWithFormat:kTaskValid,_taskBean.taskid] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
@@ -461,11 +459,11 @@
         [MBProgressHUD showActivityMessage:STR_LOADING];
         ApplyOpenLockTaskRequest * request = [[ApplyOpenLockTaskRequest alloc]init];
         request.daterange = [NSArray arrayWithObjects:self.beginDate,self.finishDate, nil];
-#if LOCK_APP
-        request.keynos = [NSArray arrayWithObjects:self.keyInfo.key_id, nil];
-#elif VANMALOCK_APP
-        request.keynos = [NSArray arrayWithObjects:self.keyInfo.keyId, nil];
-#endif
+        if ([CommonUtil getLockType]) {
+            request.keynos = [NSArray arrayWithObjects:self.keyInfoB.key_id, nil];
+        } else {
+            request.keynos = [NSArray arrayWithObjects:self.keyInfoC.keyId, nil];
+        }
         request.locknos = self.checkboxArray;
         request.timerangelist = [NSArray arrayWithObjects:[NSArray arrayWithObjects:self.beginTime,self.finishTime, nil], nil];
         [MSHTTPRequest POST:kTaskList parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
@@ -486,11 +484,11 @@
                 }
                 return ;
             }else {
-#if LOCK_APP
-                [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                [self.bleKeysdk disConnectFromKey];
-#endif
+                if ([CommonUtil getLockType]) {
+                    [SetKeyController disConnectBle];
+                } else {
+                    [self.bleKeysdk disConnectFromKey];
+                }
                 [[NSNotificationCenter defaultCenter]postNotificationName:NF_KEY_APPLY_OPEN_LOCK_SUCCESS object:nil];
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
             }

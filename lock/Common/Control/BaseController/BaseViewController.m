@@ -35,11 +35,11 @@
 
 //设置状态栏的颜色的颜色
 - (UIStatusBarStyle)preferredStatusBarStyle {
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
     return UIStatusBarStyleLightContent;
-#elif VANMALOCK_APP
+} else {
     return UIStatusBarStyleDefault;
-#endif
+}
 }
 
 

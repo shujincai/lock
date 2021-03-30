@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A44661A0242473A4000D1D9D"
-               BuildableName = "&#x4e07;&#x7801;&#x7535;&#x5b50;&#x9501;.app"
+               BuildableName = "&#x5de1;&#x68c0;&#x7535;&#x5b50;&#x9501;.app"
                BlueprintName = "lock"
                ReferencedContainer = "container:lock.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A44661A0242473A4000D1D9D"
-            BuildableName = "&#x4e07;&#x7801;&#x7535;&#x5b50;&#x9501;.app"
+            BuildableName = "&#x5de1;&#x68c0;&#x7535;&#x5b50;&#x9501;.app"
             BlueprintName = "lock"
             ReferencedContainer = "container:lock.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A44661A0242473A4000D1D9D"
-            BuildableName = "&#x4e07;&#x7801;&#x7535;&#x5b50;&#x9501;.app"
+            BuildableName = "&#x5de1;&#x68c0;&#x7535;&#x5b50;&#x9501;.app"
             BlueprintName = "lock"
             ReferencedContainer = "container:lock.xcodeproj">
          </BuildableReference>

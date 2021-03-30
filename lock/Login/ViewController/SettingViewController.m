@@ -20,6 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = STR_SET_ADDRESS;
+    self.navigationController.navigationBar.tintColor = COLOR_BLUE;
     WS(weakSelf);
     
     SZKButton * erweima = [[SZKButton alloc]initWithFrame:CGRectZero title:@"" titleColor:UIColor.clearColor titleFont:0 cornerRadius:0 backgroundColor:UIColor.clearColor backgroundImage:[UIImage imageNamed:@"ctl_qr_code"]image:nil];
@@ -45,18 +46,18 @@
         
     }];
     [self.view addSubview:erweima];
-    
-    self.account = [[RJTextField alloc]init];
-    self.account.placeholder = STR_ADDRESS_PLACEHOLER;
-    self.account.textField.text = kFetchMyDefault(@"address");
-    [self.view addSubview:self.account];
-    
-#if LOCK_APP
     [erweima mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_right).offset(-20);
         make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
+    
+    self.account = [[RJTextField alloc]init];
+    self.account.placeholder = STR_ADDRESS_PLACEHOLER;
+    self.account.lineSelectedColor = COLOR_RED;
+    self.account.textField.tintColor = COLOR_RED;
+    self.account.textField.text = kFetchMyDefault(@"address");
+    [self.view addSubview:self.account];
     [self.account mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(20);
         make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
@@ -64,26 +65,20 @@
         make.height.mas_equalTo(60);
     }];
     SZKButton * BCBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_SAVE titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:COLOR_BLUE backgroundImage:NULL image:NULL];
-#elif VANMALOCK_APP
-    [erweima mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).offset(-20);
-        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+30);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
-    }];
-    [self.account mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left).offset(20);
-        make.top.equalTo(self.view.mas_top).offset(NAV_HEIGHT+20);
-        make.right.equalTo(erweima.mas_left).offset(0);
-        make.height.mas_equalTo(60);
-    }];
-    SZKButton * BCBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_SAVE titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:COLOR_BTN_BG backgroundImage:NULL image:NULL];
-#endif
-    
     BCBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self.view addSubview:BCBtn];
+    
     [BCBtn setClicAction:^(UIButton * _Nonnull sender) {
-        
-        weakSelf.sendValueBlock(weakSelf.account.textField.text);
+        NSString * urlStr = weakSelf.account.textField.text;
+        NSString * httpStr = @"";
+        NSString * suffixStr = @"";
+        if (![urlStr hasPrefix:@"http"]) {
+            httpStr = @"http://";
+        }
+        if (![urlStr hasSuffix:@"/"]) {
+            suffixStr = @"/";
+        }
+        weakSelf.sendValueBlock([NSString stringWithFormat:@"%@%@%@",httpStr,urlStr,suffixStr]);
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     [BCBtn mas_makeConstraints:^(MASConstraintMaker *make) {

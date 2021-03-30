@@ -42,11 +42,11 @@ static CGFloat lineWidth = 4.0f;
 }
 
 -(void)start{
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
     _animationLayer.strokeColor = COLOR_BLUE.CGColor;
-#elif VANMALOCK_APP
+} else {
     _animationLayer.strokeColor = COLOR_BTN_BG.CGColor;
-#endif
+}
     _link.paused = false;
 }
 
@@ -77,11 +77,11 @@ static CGFloat lineWidth = 4.0f;
     _animationLayer.bounds = CGRectMake(0, 0, 70, 70);
     _animationLayer.position = CGPointMake(self.bounds.size.width/2.0f, self.bounds.size.height/2.0);
     _animationLayer.fillColor = [UIColor clearColor].CGColor;
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
     _animationLayer.strokeColor = COLOR_BLUE.CGColor;
-#elif VANMALOCK_APP
+} else {
     _animationLayer.strokeColor = COLOR_BTN_BG.CGColor;
-#endif
+}
     _animationLayer.lineWidth = lineWidth;
     _animationLayer.lineCap = kCALineCapRound;
     [self.layer addSublayer:_animationLayer];

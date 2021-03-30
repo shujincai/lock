@@ -12,17 +12,13 @@
 #import "RegistrationLockModel.h"
 #import "MyTaskModel.h"
 
-#if LOCK_APP
-@interface SwitchLockViewController ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
-@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
-@property (nonatomic,strong)RegistrationLockInfoBean * lockInfo; //锁信息
-#elif VANMALOCK_APP
-@interface SwitchLockViewController ()<UITableViewDataSource,UITableViewDelegate,KeyDelegate>
-@property (nonatomic,strong)KeyInfo * keyInfo; //钥匙信息
-@property (nonatomic,strong)RecordInfo * lockInfo; //锁信息
-@property (nonatomic,strong)BleKeySdk * bleKeysdk;
-#endif
+@interface SwitchLockViewController ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate,KeyDelegate>
 
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfoB; //B钥匙信息
+@property (nonatomic,strong)RegistrationLockInfoBean * lockInfoB; //B锁信息
+@property (nonatomic,strong)KeyInfo * keyInfoC; //C钥匙信息
+@property (nonatomic,strong)RecordInfo * lockInfoC; //C锁信息
+@property (nonatomic,strong)BleKeySdk * bleKeysdk;
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UITextField * keyTF;
@@ -48,23 +44,23 @@
         }
     });
     [self createTableView];
-#if LOCK_APP
-    [SetKeyController setDelegate:self];
-    [SetKeyController initSDK];
-#elif VANMALOCK_APP
-    //初始化蓝牙SDK
-    self.bleKeysdk = [BleKeySdk shareKeySdk];
-    //设置代理
-    [self.bleKeysdk setDelgate:self];
-    MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
-    infoBean.name = STR_INIT_SUCCESS;
-    infoBean.time = [self getCurrentTime];
-    infoBean.iamgeName = @"ic_switch_init";
-    [self.listArray addObject:infoBean];
-    [self.tableView reloadData];
-    //连接钥匙
-    [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController setDelegate:self];
+        [SetKeyController initSDK];
+    } else {
+        //初始化蓝牙SDK
+        self.bleKeysdk = [BleKeySdk shareKeySdk];
+        //设置代理
+        [self.bleKeysdk setDelgate:self];
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.name = STR_INIT_SUCCESS;
+        infoBean.time = [self getCurrentTime];
+        infoBean.iamgeName = @"ic_switch_init";
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+        //连接钥匙
+        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+    }
     
 }
 - (NSMutableArray *)listArray {
@@ -74,15 +70,16 @@
     return _listArray;
 }
 - (void)returnClick {
-#if LOCK_APP
-    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-    [self.bleKeysdk disConnectFromKey];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController disConnectBle];
+    } else {
+        [self.bleKeysdk disConnectFromKey];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#if LOCK_APP
+#pragma mark B锁
+
 //初始化
 - (void)requestInitSdkResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
@@ -129,14 +126,14 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        self.keyInfoB = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
         for (UserKeyInfoList * keyList in self.taskBean.keylist) {
-            if ([keyList.keyno isEqualToString:self.keyInfo.key_id]) {
+            if ([keyList.keyno isEqualToString:self.keyInfoB.key_id]) {
                 self.taskBean.keyno = keyList.keyno;
                 break;
             }
         }
-        if (![self.keyInfo.key_id isEqualToString:self.taskBean.keyno]) {//钥匙不匹配
+        if (![self.keyInfoB.key_id isEqualToString:self.taskBean.keyno]) {//钥匙不匹配
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:STR_KEY_NUMBER_NO_MATE];
             [SetKeyController disConnectBle];
@@ -194,35 +191,35 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.lockInfo = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        self.lockInfoB = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
         infoBean.time = [self getCurrentTime];
-        infoBean.eventtype = self.lockInfo.event_type;
-        if ([self.lockInfo.event_type isEqualToString:@"4"]) {//超出有效期
+        infoBean.eventtype = self.lockInfoB.event_type;
+        if ([self.lockInfoB.event_type isEqualToString:@"4"]) {//超出有效期
             infoBean.name = STR_OVERSTEP_TERM_VALIDITY;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if ([self.lockInfo.event_type isEqualToString:@"5"]) {//没有权限
+        if ([self.lockInfoB.event_type isEqualToString:@"5"]) {//没有权限
             infoBean.name = STR_NO_POWER;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if ([self.lockInfo.event_type isEqualToString:@"6"]) {//超出时间范围
+        if ([self.lockInfoB.event_type isEqualToString:@"6"]) {//超出时间范围
             infoBean.name = STR_OVERSTEP_TIME_RANGE;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if ([self.lockInfo.event_type isEqualToString:@"8"]) {//黑名单钥匙
+        if ([self.lockInfoB.event_type isEqualToString:@"8"]) {//黑名单钥匙
             infoBean.name = STR_BLACKLIST_KEY;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if ([self.lockInfo.event_type isEqualToString:@"13"]) {//开锁成功
+        if ([self.lockInfoB.event_type isEqualToString:@"13"]) {//开锁成功
             infoBean.name = STR_OPEN_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
         }
-        if ([self.lockInfo.event_type isEqualToString:@"14"]) {//关锁成功
+        if ([self.lockInfoB.event_type isEqualToString:@"14"]) {//关锁成功
             infoBean.name = STR_CLOSE_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
         }
-        if (![self.lockInfo.event_type isEqualToString:@"1"]) {//钥匙与锁接触
+        if (![self.lockInfoB.event_type isEqualToString:@"1"]) {//钥匙与锁接触
             [self.listArray addObject:infoBean];
             [self.tableView reloadData];
         }
@@ -230,10 +227,14 @@
         [self uploadKeyDatas:infoBean];
     }
 }
-#elif VANMALOCK_APP
+
+#pragma mark C锁
+
 //侧滑返回上一页
 - (void)didMoveToParentViewController:(nullable UIViewController *)parent {
-    [self.bleKeysdk disConnectFromKey];
+    if (self.bleKeysdk) {
+        [self.bleKeysdk disConnectFromKey];
+    }
 }
 //连接钥匙
 - (void)onConnectToKey:(Result *)result {
@@ -262,14 +263,14 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = result.obj;
+        self.keyInfoC = result.obj;
         for (UserKeyInfoList * keyList in self.taskBean.keylist) {
-            if ([keyList.keyno isEqualToString:self.keyInfo.keyId]) {
+            if ([keyList.keyno isEqualToString:self.keyInfoC.keyId]) {
                 self.taskBean.keyno = keyList.keyno;
                 break;
             }
         }
-        if (![self.keyInfo.keyId isEqualToString:self.taskBean.keyno]) {//钥匙不匹配
+        if (![self.keyInfoC.keyId isEqualToString:self.taskBean.keyno]) {//钥匙不匹配
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:STR_KEY_NUMBER_NO_MATE];
             [self.bleKeysdk disConnectFromKey];
@@ -289,7 +290,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        if (_keyInfo.device == 1284) { //指纹蓝牙钥匙
+        if (_keyInfoC.device == 1284) { //指纹蓝牙钥匙
             //指纹授权
             NSMutableArray<NSNumber*> * fingerArray = [NSMutableArray<NSNumber*> array];
             for (FingerPrintListBean * fingerList in self.userInfo.fingerlist) {
@@ -322,7 +323,7 @@
             NSArray<DateSection*> *dates =[NSArray arrayWithObjects:[[DateSection alloc] initSection:beginDate to:endDate times:times], nil];
             //锁号
             NSArray *lockIds = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",self.lockBean.lockno], nil];
-            UserKeyInfo *userkeyInfo = [[UserKeyInfo alloc] initUserKeyInfo:dates lockIds:lockIds];
+            WMUserKeyInfo *userkeyInfo = [[WMUserKeyInfo alloc] initUserKeyInfo:dates lockIds:lockIds];
             [self.bleKeysdk setUserKey:userkeyInfo isOnline:NO];
         }
     }
@@ -331,19 +332,19 @@
 //指纹授权
 -(void)onSetFingers:(Result*)result {
     if (result.ret == NO) {
-           [MBProgressHUD hideHUD];
-           [MBProgressHUD showError:STR_FINGERPRINT_AUTHORIZE_FAIL];
-           [self.bleKeysdk disConnectFromKey];
-           [self.navigationController popViewControllerAnimated:YES];
-           return;
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_FINGERPRINT_AUTHORIZE_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
     }else {
         //指纹授权成功
-//        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
-//        infoBean.name = STR_FINGERPRINT_AUTHORIZE_SUCCESS;
-//        infoBean.time = [self getCurrentTime];
-//        infoBean.iamgeName = @"ic_switch_fingerprint";
-//        [self.listArray addObject:infoBean];
-//        [self.tableView reloadData];
+        //        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        //        infoBean.name = STR_FINGERPRINT_AUTHORIZE_SUCCESS;
+        //        infoBean.time = [self getCurrentTime];
+        //        infoBean.iamgeName = @"ic_switch_fingerprint";
+        //        [self.listArray addObject:infoBean];
+        //        [self.tableView reloadData];
         
         //设置开关锁钥匙
         NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
@@ -370,7 +371,7 @@
         NSArray<DateSection*> *dates =[NSArray arrayWithObjects:[[DateSection alloc] initSection:beginDate to:endDate times:times], nil];
         //锁号
         NSArray *lockIds = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",self.lockBean.lockno], nil];
-        UserKeyInfo *userkeyInfo = [[UserKeyInfo alloc] initUserKeyInfo:dates lockIds:lockIds];
+        WMUserKeyInfo *userkeyInfo = [[WMUserKeyInfo alloc] initUserKeyInfo:dates lockIds:lockIds];
         [self.bleKeysdk setUserKey:userkeyInfo isOnline:NO];
     }
 }
@@ -387,7 +388,11 @@
     }else {//请开关锁
         [MBProgressHUD hideHUD];
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
-        infoBean.name = STR_PLEASE_SWITH_LOCK;
+        if (_keyInfoC.device == 1284) { //指纹蓝牙钥匙
+            infoBean.name = STR_VERIFY_FINGERPRINT_SWITH_LOCK;
+        }else {
+            infoBean.name = STR_PLEASE_SWITH_LOCK;
+        }
         infoBean.time = [self getCurrentTime];
         infoBean.iamgeName = @"ic_switch_lock";
         [self.listArray addObject:infoBean];
@@ -401,26 +406,26 @@
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:STR_CONNECT_LOCK_FAIL];
     }else {
-        self.lockInfo = result.obj;
+        self.lockInfoC = result.obj;
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
         infoBean.time = [self getCurrentTime];
-        infoBean.eventtype = [NSString stringWithFormat:@"%d",self.lockInfo.flag];
-        infoBean.opttype = self.lockInfo.status; //当前处于 开 0 关 1
-
-        if (self.lockInfo.flag == 5) {//没有权限
+        infoBean.eventtype = [NSString stringWithFormat:@"%d",self.lockInfoC.flag];
+        infoBean.opttype = self.lockInfoC.status; //当前处于 开 0 关 1
+        
+        if (self.lockInfoC.flag == 5) {//没有权限
             infoBean.name = STR_NO_POWER;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if (self.lockInfo.flag == 6) {//超出时间范围
+        if (self.lockInfoC.flag == 6) {//超出时间范围
             infoBean.name = STR_OVERSTEP_TIME_RANGE;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if (self.lockInfo.flag == 19) {//密码不匹配
+        if (self.lockInfoC.flag == 19) {//密码不匹配
             infoBean.name = STR_PASSWORD_MISMATCH;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if (self.lockInfo.flag == 20) {//操作中断
-            if (self.lockInfo.status == 0) {//关锁失败
+        if (self.lockInfoC.flag == 20) {//操作中断
+            if (self.lockInfoC.status == 0) {//关锁失败
                 infoBean.name = STR_CLOSE_LOCK_FAIL;
                 infoBean.iamgeName = @"ic_switch_fail";
             }else {//开锁失败
@@ -428,23 +433,23 @@
                 infoBean.iamgeName = @"ic_switch_fail";
             }
         }
-        if (self.lockInfo.flag == 21) {//钥匙与锁密钥匹配失败
+        if (self.lockInfoC.flag == 21) {//钥匙与锁密钥匹配失败
             infoBean.name = STR_KEY_LOCK_MATCH_FAIL;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if (self.lockInfo.flag == 255) {//黑名单钥匙
+        if (self.lockInfoC.flag == 255) {//黑名单钥匙
             infoBean.name = STR_BLACKLIST_KEY;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if (self.lockInfo.flag == 254) {//验证失败 国内外
+        if (self.lockInfoC.flag == 254) {//验证失败 国内外
             infoBean.name = STR_VALIDATION_FAILED;
             infoBean.iamgeName = @"ic_switch_fail";
         }
-        if (self.lockInfo.flag == 0) {//开锁成功
+        if (self.lockInfoC.flag == 0) {//开锁成功
             infoBean.name = STR_OPEN_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
         }
-        if (self.lockInfo.flag == 1) {//关锁成功
+        if (self.lockInfoC.flag == 1) {//关锁成功
             infoBean.name = STR_CLOSE_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
         }
@@ -453,8 +458,8 @@
         [self uploadKeyDatas:infoBean];
     }
 }
-#endif
 
+#pragma mark 公共方法
 
 - (void)createTableView {
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -516,7 +521,11 @@
     request.eventtype = switchBean.eventtype;
     request.time = switchBean.time;
     request.keyno = self.taskBean.keyno;
-    request.lockno = self.lockBean.lockno;
+    if ([CommonUtil getLockType]) {
+        request.lockno = self.lockInfoB.lock_id;
+    } else {
+        request.lockno = self.lockInfoC.lockid;
+    }
     request.opttype = self.taskBean.opttype;
     NSArray *parameterArr = [NSArray arrayWithObject:[request toDictionary]];
     NSString *parameterstr = [MSNetwork dictionaryToJson:parameterArr];

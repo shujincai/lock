@@ -124,8 +124,7 @@
     return currentTimeString;
 
 }
-//获取连接蓝牙钥匙密钥
-#if LOCK_APP
+//获取B锁连接蓝牙钥匙密钥
 + (NSArray *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key {
     
     NSData * codeData = [[NSData alloc]initWithBase64EncodedString:code options:NSDataBase64DecodingIgnoreUnknownCharacters];
@@ -172,8 +171,8 @@
     }
     return array;
 }
-#elif VANMALOCK_APP
-+ (NSString *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key {
+//获取C锁连接蓝牙钥匙密钥
++ (NSString *)getCLockDesDecodeWithCode:(NSString *)code withPassword:(NSString *)key {
     
     NSData * codeData = [[NSData alloc]initWithBase64EncodedString:code options:NSDataBase64DecodingIgnoreUnknownCharacters];
     //设置密钥
@@ -213,8 +212,6 @@
     }
     return plainText;
 }
-#endif
-
 
 + (NSString *)getBluetoothKeyMac:(NSString *)name {
     NSString * string = [name substringFromIndex:name.length - 12];
@@ -224,6 +221,13 @@
         [array addObject:str];
     }
     return [array componentsJoinedByString:@""];
+}
+
+// 判断是B锁 C锁
+// true B锁 false C锁
++ (BOOL)getLockType {
+    UserInfo * userInfo = [self getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
+    return !userInfo.wmSdk;
 }
 @end
 

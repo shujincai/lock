@@ -59,12 +59,13 @@
         make.centerX.equalTo(self.view.mas_centerX).offset(0);
         make.size.mas_equalTo(CGSizeMake(UISCREEN_WIDTH-60, 60));
     }];
-    
-#if LOCK_APP
-    SZKButton * changeBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_CHANGE_PASSWORD titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:COLOR_BLUE backgroundImage:NULL image:NULL];
-#elif VANMALOCK_APP
-    SZKButton * changeBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_CHANGE_PASSWORD titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:COLOR_BTN_BG backgroundImage:NULL image:NULL];
-#endif
+    UIColor * btnColor;
+    if ([CommonUtil getLockType]) {
+        btnColor = COLOR_BLUE;
+    } else {
+        btnColor = COLOR_BTN_BG;
+    }
+    SZKButton * changeBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_CHANGE_PASSWORD titleColor:UIColor.whiteColor titleFont:18 cornerRadius:4 backgroundColor:btnColor backgroundImage:NULL image:NULL];
     changeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self.view addSubview:changeBtn];
     [changeBtn setClicAction:^(UIButton * _Nonnull sender) {//修改密码

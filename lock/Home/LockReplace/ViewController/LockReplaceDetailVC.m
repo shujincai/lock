@@ -13,23 +13,20 @@
 #import "LockReplaceModel.h"
 #import "MyTaskModel.h"
 
-#if LOCK_APP
-@interface LockReplaceDetailVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate>
-@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfo; //钥匙信息
-@property (nonatomic,strong)RegistrationLockInfoBean * lockInfo; //锁信息
-@property (nonatomic,assign)BOOL isLockHide; //根据加载时间判断是否隐藏连接锁加载框
-@property (nonatomic,strong)NSString * setLockId; //设置锁ID
-#elif VANMALOCK_APP
-@interface LockReplaceDetailVC ()<UITableViewDataSource,UITableViewDelegate,KeyDelegate>
-@property (nonatomic,strong)KeyInfo * keyInfo; //钥匙信息
-@property (nonatomic,strong)RecordInfo * lockInfo; //锁信息
-@property (nonatomic,strong)BleKeySdk * bleKeysdk;
-#endif
 
+@interface LockReplaceDetailVC ()<UITableViewDataSource,UITableViewDelegate,SetKeyControllerDelegate,KeyDelegate>
+
+@property (nonatomic,strong)RegistrationKeyInfoBean * keyInfoB; //B钥匙信息
+@property (nonatomic,strong)RegistrationLockInfoBean * lockInfoB; //B锁信息
+@property (nonatomic,strong)KeyInfo * keyInfoC; //C钥匙信息
+@property (nonatomic,strong)RecordInfo * lockInfoC; //C锁信息
+@property (nonatomic,strong)BleKeySdk * bleKeysdk;
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)NSMutableArray * listArray;
 @property (nonatomic,strong)UserInfo * userInfo;
 @property (nonatomic,assign)BOOL isHide; //根据加载时间判断是否隐藏加载框
+@property (nonatomic,assign)BOOL isLockHide; //根据加载时间判断是否隐藏连接锁加载框
+@property (nonatomic,strong)NSString * setLockId; //设置锁ID
 @property (nonatomic,strong)UITextField * reasonTF;
 
 @end
@@ -51,21 +48,21 @@
         }
     });
     [self createTableView];
-#if LOCK_APP
-    [SetKeyController setDelegate:self];
-    [SetKeyController initSDK];
-#elif VANMALOCK_APP
-    self.bleKeysdk = [BleKeySdk shareKeySdk];
-    [self.bleKeysdk setDelgate:self];
-    MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
-    infoBean.name = STR_INIT_SUCCESS;
-    infoBean.time = [self getCurrentTime];
-    infoBean.iamgeName = @"ic_switch_init";
-    [self.listArray addObject:infoBean];
-    [self.tableView reloadData];
-    //连接钥匙 根据钥匙系统码和锁注册码连接钥匙
-    [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController setDelegate:self];
+        [SetKeyController initSDK];
+    } else {
+        self.bleKeysdk = [BleKeySdk shareKeySdk];
+        [self.bleKeysdk setDelgate:self];
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.name = STR_INIT_SUCCESS;
+        infoBean.time = [self getCurrentTime];
+        infoBean.iamgeName = @"ic_switch_init";
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+        //连接钥匙 根据钥匙系统码和锁注册码连接钥匙
+        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+    }
 }
 - (NSMutableArray *)listArray {
     if (_listArray == nil) {
@@ -74,11 +71,11 @@
     return _listArray;
 }
 - (void)returnClick {
-#if LOCK_APP
-    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-    [self.bleKeysdk disConnectFromKey];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController disConnectBle];
+    } else {
+        [self.bleKeysdk disConnectFromKey];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)createTableView {
@@ -128,7 +125,8 @@
     
 }
 
-#if LOCK_APP
+#pragma mark B锁
+
 //初始化
 - (void)requestInitSdkResultInfo:(ResultInfo *)info {
     if (info.feedBackState == NO) {
@@ -175,14 +173,55 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
-        [self getKeyInfoDetail:self.keyInfo.key_id];
+        self.keyInfoB = [[RegistrationKeyInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        [self getKeyInfoDetail:self.keyInfoB.key_id];
     }
 }
-#elif VANMALOCK_APP
+//设置开关锁 获取锁号
+- (void)requestSetOnlineOpenResultInfo:(ResultInfo *)info {
+    if (info.feedBackState == NO) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [SetKeyController disConnectBle];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        self.isHide = YES;
+        [MBProgressHUD hideHUD];
+        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
+        infoBean.name = STR_PLEASE_CONNECT_LOCK;
+        infoBean.time = [self getCurrentTime];
+        infoBean.iamgeName = @"ic_switch_lock";
+        [self.listArray addObject:infoBean];
+        [self.tableView reloadData];
+    }
+}
+//获取锁数据
+- (void)requestActiveReport:(ResultInfo *)info {
+    if (info.feedBackState == NO) {
+        [MBProgressHUD showError:STR_CONNECT_LOCK_FAIL];
+        [SetKeyController disConnectBle];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
+        self.lockInfoB = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        if ([self.lockInfoB.event_type isEqualToString:@"5"]) { //没有权限开锁
+            if ([self.replaceLockBean.lockno isEqualToString:self.lockInfoB.lock_id]) {
+                [MBProgressHUD showError:STR_REPLACE_MINE_TPS];
+            }else {
+                [self getLockDetail:self.lockInfoB.lock_id];
+            }
+        }
+    }
+}
+
+#pragma mark C锁
+
 //侧滑返回上一页
 - (void)didMoveToParentViewController:(nullable UIViewController *)parent {
-    [self.bleKeysdk disConnectFromKey];
+    if (self.bleKeysdk) {
+        [self.bleKeysdk disConnectFromKey];
+    }
 }
 //连接
 - (void)onConnectToKey:(Result *)result {
@@ -211,125 +250,10 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.keyInfo = result.obj;
-        [self getKeyInfoDetail:self.keyInfo.keyId];
+        self.keyInfoC = result.obj;
+        [self getKeyInfoDetail:self.keyInfoC.keyId];
     }
 }
-#endif
-
-// 获取钥匙详情
-- (void)getKeyInfoDetail:(NSString *)keyId {
-    RequestBean * request = [[RequestBean alloc]init];
-    [MSHTTPRequest GET:[NSString stringWithFormat:kKeyDetail,keyId] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
-        [MBProgressHUD hideHUD];
-        NSError * error = nil;
-        KeyInfoDetailResponse * response = [[KeyInfoDetailResponse alloc]initWithDictionary:responseObject error:&error];
-        if (error) {
-            [MBProgressHUD showMessage:STR_PARSE_FAILURE];
-            return ;
-        }
-        if ([response.resultCode intValue] == 0) {
-            if (response.data) {
-                if ([response.data.keystatus isEqualToString:@"2"]) { // 损坏
-                    [MBProgressHUD showError:STR_KEY_DAMAGED];
-#if LOCK_APP
-                    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                    [self.bleKeysdk disConnectFromKey];
-#endif
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else if ([response.data.keystatus isEqualToString:@"3"]){ // 丢失
-                    [MBProgressHUD showError:STR_KEY_LOSE];
-#if LOCK_APP
-                    [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                    [self.bleKeysdk disConnectFromKey];
-#endif
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else {
-#if LOCK_APP
-                    // 设置开关锁模式，获取锁号
-                    BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
-                    basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
-                    basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
-                    basicInfo.keyId = [self.keyInfo.key_id intValue];
-                    
-                    OnlineOpenInfo *onlineOpenInfo = [[OnlineOpenInfo alloc] init];
-                    onlineOpenInfo.onlineOpenStartTime = @"00-01-01-00-00";
-                    onlineOpenInfo.onlineOpenEndTime = @"99-12-31-23-59";
-                    [SetKeyController setOnlineOpen:basicInfo andOnlineOpenInfo:onlineOpenInfo];
-#elif VANMALOCK_APP
-                    //校时
-                    [self.bleKeysdk setDateTime:[NSDate date]];
-#endif
-                    
-                }
-            } else {
-                [MBProgressHUD showError:STR_KEY_INFO_NO_EXISTENT];
-#if LOCK_APP
-                [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-                [self.bleKeysdk disConnectFromKey];
-#endif
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }else {
-            if ([response.resultCode intValue]== 15020) {//无部门权限可以操作该钥匙
-                [MBProgressHUD showError:STR_KEY_NO_DEPT_POWER];
-            }else {
-                [MBProgressHUD showError:response.msg];
-            }
-#if LOCK_APP
-            [SetKeyController disConnectBle];
-#elif VANMALOCK_APP
-            [self.bleKeysdk disConnectFromKey];
-#endif
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    } failure:^(NSError * _Nonnull error) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:STR_TIMEOUT];
-    }];
-}
-
-#if LOCK_APP
-- (void)requestSetOnlineOpenResultInfo:(ResultInfo *)info {
-    if (info.feedBackState == NO) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
-        [SetKeyController disConnectBle];
-        [self.navigationController popViewControllerAnimated:YES];
-        return;
-    }else {
-        self.isHide = YES;
-        [MBProgressHUD hideHUD];
-        MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
-        infoBean.name = STR_PLEASE_CONNECT_LOCK;
-        infoBean.time = [self getCurrentTime];
-        infoBean.iamgeName = @"ic_switch_lock";
-        [self.listArray addObject:infoBean];
-        [self.tableView reloadData];
-    }
-}
-//获取锁数据
-- (void)requestActiveReport:(ResultInfo *)info {
-    if (info.feedBackState == NO) {
-        [MBProgressHUD showError:STR_CONNECT_LOCK_FAIL];
-        [SetKeyController disConnectBle];
-        [self.navigationController popViewControllerAnimated:YES];
-        return;
-    }else {
-        self.lockInfo = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
-        if ([self.lockInfo.event_type isEqualToString:@"5"]) { //没有权限开锁
-            if ([self.replaceLockBean.lockno isEqualToString:self.lockInfo.lock_id]) {
-                [MBProgressHUD showError:STR_REPLACE_MINE_TPS];
-            }else {
-                [self getLockDetail:self.lockInfo.lock_id];
-            }
-        }
-    }
-}
-#elif VANMALOCK_APP
 //校时
 -(void)onSetDateTime:(Result*)result {
     if (result.ret == NO) {
@@ -370,16 +294,95 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        self.lockInfo = result.obj;
-        if ([self.replaceLockBean.lockno isEqualToString:self.lockInfo.lockid]) {
+        self.lockInfoC = result.obj;
+        if ([self.replaceLockBean.lockno isEqualToString:self.lockInfoC.lockid]) {
             [MBProgressHUD showError:STR_REPLACE_MINE_TPS];
         }else {
-            [self getLockDetail:self.lockInfo.lockid];
+            [self getLockDetail:self.lockInfoC.lockid];
         }
     }
 }
-#endif
 
+#pragma mark 公共方法
+
+// 获取钥匙详情
+- (void)getKeyInfoDetail:(NSString *)keyId {
+    RequestBean * request = [[RequestBean alloc]init];
+    [MSHTTPRequest GET:[NSString stringWithFormat:kKeyDetail,keyId] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+        [MBProgressHUD hideHUD];
+        NSError * error = nil;
+        KeyInfoDetailResponse * response = [[KeyInfoDetailResponse alloc]initWithDictionary:responseObject error:&error];
+        if (error) {
+            [MBProgressHUD showMessage:STR_PARSE_FAILURE];
+            return ;
+        }
+        if ([response.resultCode intValue] == 0) {
+            if (response.data) {
+                if ([response.data.keystatus isEqualToString:@"2"]) { // 损坏
+                    [MBProgressHUD showError:STR_KEY_DAMAGED];
+                    if ([CommonUtil getLockType]) {
+                        [SetKeyController disConnectBle];
+                    } else {
+                        [self.bleKeysdk disConnectFromKey];
+                    }
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else if ([response.data.keystatus isEqualToString:@"3"]){ // 丢失
+                    [MBProgressHUD showError:STR_KEY_LOSE];
+                    if ([CommonUtil getLockType]) {
+                        [SetKeyController disConnectBle];
+                    } else {
+                        [self.bleKeysdk disConnectFromKey];
+                    }
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else {
+                    if ([CommonUtil getLockType]) {
+                        // 设置开关锁模式，获取锁号
+                        BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+                        basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+                        basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+                        basicInfo.keyId = [self.keyInfoB.key_id intValue];
+                        
+                        OnlineOpenInfo *onlineOpenInfo = [[OnlineOpenInfo alloc] init];
+                        onlineOpenInfo.onlineOpenStartTime = @"00-01-01-00-00";
+                        onlineOpenInfo.onlineOpenEndTime = @"99-12-31-23-59";
+                        [SetKeyController setOnlineOpen:basicInfo andOnlineOpenInfo:onlineOpenInfo];
+                    } else {
+                        //校时
+                        [self.bleKeysdk setDateTime:[NSDate date]];
+                    }
+                    
+                }
+            } else {
+                [MBProgressHUD showError:STR_KEY_INFO_NO_EXISTENT];
+                if ([CommonUtil getLockType]) {
+                    [SetKeyController disConnectBle];
+                } else {
+                    [self.bleKeysdk disConnectFromKey];
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }else {
+            if ([response.resultCode intValue]== 15020) {//无部门权限可以操作该钥匙
+                [MBProgressHUD showError:STR_KEY_NO_DEPT_POWER];
+            }else {
+                [MBProgressHUD showError:response.msg];
+            }
+            if ([CommonUtil getLockType]) {
+                [SetKeyController disConnectBle];
+            } else {
+                [self.bleKeysdk disConnectFromKey];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_TIMEOUT];
+    }];
+}
+
+
+/// 获取锁详情
+/// @param lockId 锁号
 - (void)getLockDetail:(NSString *)lockId {
     [MBProgressHUD showActivityMessage:STR_LOADING];
     RequestBean * request = [[RequestBean alloc]init];
@@ -425,6 +428,7 @@
         [MBProgressHUD showError:STR_TIMEOUT];
     }];
 }
+
 //保存替换锁信息
 
 - (void)saveReplaceLockInfo:(LockReplaceListBean *)replaceInfo withLockId:(NSString *)lockId {

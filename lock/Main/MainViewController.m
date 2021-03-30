@@ -61,19 +61,19 @@
     self.listContainerView.frame = CGRectMake(0, NAV_HEIGHT, UISCREEN_WIDTH, UISCREEN_HEIGHT - NAV_HEIGHT);
     [self.view addSubview:self.listContainerView];
     self.categoryView.listContainer = self.listContainerView;
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
     topView.backgroundColor = COLOR_BLUE;
     self.categoryView.backgroundColor = COLOR_BLUE;
     self.categoryView.titleSelectedColor = COLOR_WHITE;
     self.categoryView.titleColor = COLOR_WHITE;
     lineView.indicatorColor = COLOR_RED;
-#elif VANMALOCK_APP
+} else {
     topView.backgroundColor = COLOR_WHITE;
     self.categoryView.backgroundColor = COLOR_WHITE;
     self.categoryView.titleSelectedColor = COLOR_BTN_BG;
     self.categoryView.titleColor = COLOR_BLACK;
     lineView.indicatorColor = COLOR_BTN_BG;
-#endif
+}
 }
 
 //返回列表的数量

@@ -20,14 +20,9 @@
 #import "LockReplaceDetailVC.h"
 #import "RegistrationKeyModel.h"
 
-#if LOCK_APP
-@interface RegistrationKeyViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,SetKeyControllerDelegate>
-#elif VANMALOCK_APP
-@interface RegistrationKeyViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,KeyDelegate>
+@interface RegistrationKeyViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,SetKeyControllerDelegate,KeyDelegate>
+
 @property (nonatomic,strong)BleKeySdk * bleKeysdk;
-#endif
-
-
 @property (strong, nonatomic) NSMutableArray *bleArray; //搜索到蓝牙
 @property (strong, nonatomic) NSMutableArray *keyArray;
 @property (nonatomic,strong)UITableView * tableView;
@@ -46,51 +41,51 @@
     [self createTableView];
     [self KeyBtn];
     //初始化
-#if LOCK_APP
-    [SetKeyController initBlueToothManager];
-    [SetKeyController setDelegate:self];
-#elif VANMALOCK_APP
-    self.bleKeysdk = [BleKeySdk shareKeySdk];
-    [self.bleKeysdk setDelgate:self];
-    [self.bleKeysdk initSdk];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController initBlueToothManager];
+        [SetKeyController setDelegate:self];
+    } else {
+        self.bleKeysdk = [BleKeySdk shareKeySdk];
+        [self.bleKeysdk setDelgate:self];
+        [self.bleKeysdk initSdk];
+    }
     
 }
 - (void)returnClick {
     [self.navigationController popViewControllerAnimated:YES];
     //停止蓝牙搜索
     [self.searchBluetoothView hide];
-#if LOCK_APP
-    [SetKeyController stopScan];
-#elif VANMALOCK_APP
-    [self.bleKeysdk stopScan];
-#endif
+    if ([CommonUtil getLockType]) {
+        [SetKeyController stopScan];
+    } else {
+        [self.bleKeysdk stopScan];
+    }
     
 }
 //当侧滑返回 停止蓝牙搜索
 - (void)didMoveToParentViewController:(nullable UIViewController *)parent {
     if (parent == nil) {
         [self.searchBluetoothView hide];
-#if LOCK_APP
-        [SetKeyController stopScan];
-#elif VANMALOCK_APP
-        [self.bleKeysdk stopScan];
-#endif
+        if ([CommonUtil getLockType]) {
+            [SetKeyController stopScan];
+        } else {
+            [self.bleKeysdk stopScan];
+        }
     }
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     //开始蓝牙搜索
     [self.searchBluetoothView start];
-#if LOCK_APP
-    [SetKeyController startScan];
-    if (![SetKeyController sharedManager].delegate){
-        [SetKeyController setDelegate:self];
+    if ([CommonUtil getLockType]) {
+        [SetKeyController startScan];
+        if (![SetKeyController sharedManager].delegate){
+            [SetKeyController setDelegate:self];
+        }
+    } else {
+        [self.bleKeysdk startScan:10*1000];
+        [self.bleKeysdk setDelgate:self];
     }
-#elif VANMALOCK_APP
-    [self.bleKeysdk startScan:10*1000];
-    [self.bleKeysdk setDelgate:self];
-#endif
     
 }
 
@@ -134,26 +129,26 @@
     self.searchBluetoothView = [[SearchBluetoothView alloc]initWithFrame:CGRectMake(UISCREEN_WIDTH-80, UISCREEN_HEIGHT-TABBAR_AREA_HEIGHT-80, 80, 80)];
     [self.view addSubview:self.searchBluetoothView];
     self.searchBluetoothView.searchBluetoothBlock = ^(BOOL type) {
-#if LOCK_APP
-        if (type == false) {//开始扫描
-            [weakSelf.bleArray removeAllObjects];
-            [weakSelf.tableView reloadData];
-            [SetKeyController startScan];
-            if (![SetKeyController sharedManager].delegate){
-                [SetKeyController setDelegate:weakSelf];
+        if ([CommonUtil getLockType]) {
+            if (type == false) {//开始扫描
+                [weakSelf.bleArray removeAllObjects];
+                [weakSelf.tableView reloadData];
+                [SetKeyController startScan];
+                if (![SetKeyController sharedManager].delegate){
+                    [SetKeyController setDelegate:weakSelf];
+                }
+            }else {
+                [SetKeyController stopScan];
             }
-        }else {
-            [SetKeyController stopScan];
+        } else {
+            if (type == false) {//开始扫描
+                [weakSelf.bleArray removeAllObjects];
+                [weakSelf.tableView reloadData];
+                [weakSelf.bleKeysdk startScan:1000*10];
+            }else {
+                [weakSelf.bleKeysdk stopScan];
+            }
         }
-#elif VANMALOCK_APP
-        if (type == false) {//开始扫描
-            [weakSelf.bleArray removeAllObjects];
-            [weakSelf.tableView reloadData];
-            [weakSelf.bleKeysdk startScan:1000*10];
-        }else {
-            [weakSelf.bleKeysdk stopScan];
-        }
-#endif
         
     };
 }
@@ -173,52 +168,52 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
-#if LOCK_APP
-    CBPeripheral * peripheral = [_bleArray objectAtIndex:indexPath.row];
-    cell.topLabel.text =  peripheral.name;
-    if (peripheral.state == CBPeripheralStateDisconnected) {//未连接
-        cell.bottomLabel.text = STR_NO_CONNECT;
-    }
-    if (peripheral.state == CBPeripheralStateConnecting) {//连接中
-        cell.bottomLabel.text = STR_CONNECTING;
-    }
-    if (peripheral.state == CBPeripheralStateConnected) {//已连接
-        cell.bottomLabel.text = STR_CONNECTED;
-    }
-    if (peripheral.state == CBPeripheralStateDisconnecting) {//断开中
-        cell.bottomLabel.text = STR_DISCONNECTING;
-    }
-    NSString *str = [[(CBPeripheral *)self.bleArray[[indexPath row]] name] substringToIndex:4];//str3 = "this"
-    if ([str isEqualToString:@"B030"] || [str isEqualToString:@"rayonicskey"]) {
-        cell.leftImage.image = [UIImage imageNamed:@"ic_list_key"];
-    }else{
-        cell.leftImage.image = [UIImage imageNamed:@"ic_list_bluetooth"];
-        
-    }
-    if (_taskBean) {
-        for (UserKeyInfoList * keyList in _taskBean.keylist) {
-            if ([keyList.bleflag isEqualToString:[CommonUtil getBluetoothKeyMac:peripheral.name]]) {
-                cell.rightImage.image = [UIImage imageNamed:@"ic_lock_open"];
-                break;
-            }
+    if ([CommonUtil getLockType]) {
+        CBPeripheral * peripheral = [_bleArray objectAtIndex:indexPath.row];
+        cell.topLabel.text =  peripheral.name;
+        if (peripheral.state == CBPeripheralStateDisconnected) {//未连接
+            cell.bottomLabel.text = STR_NO_CONNECT;
         }
-    }
-#elif VANMALOCK_APP
-    BluetoothKeyBean * keyBean = [_keyArray objectAtIndex:indexPath.row];
-    cell.topLabel.text = [keyBean.keyId substringFromIndex:4];
-    cell.bottomLabel.text = keyBean.mac;
-    cell.leftImage.image = [UIImage imageNamed:@"ic_list_key"];
-    if (_taskBean) {
-        for (UserKeyInfoList * keyList in _taskBean.keylist) {
-            if (keyList.bleflag.length > 0) {
-                if ([keyBean.keyId rangeOfString:keyList.bleflag].location != NSNotFound) {
+        if (peripheral.state == CBPeripheralStateConnecting) {//连接中
+            cell.bottomLabel.text = STR_CONNECTING;
+        }
+        if (peripheral.state == CBPeripheralStateConnected) {//已连接
+            cell.bottomLabel.text = STR_CONNECTED;
+        }
+        if (peripheral.state == CBPeripheralStateDisconnecting) {//断开中
+            cell.bottomLabel.text = STR_DISCONNECTING;
+        }
+        NSString *str = [[(CBPeripheral *)self.bleArray[[indexPath row]] name] substringToIndex:4];//str3 = "this"
+        if ([str isEqualToString:@"B030"] || [str isEqualToString:@"rayonicskey"]) {
+            cell.leftImage.image = [UIImage imageNamed:@"ic_list_key"];
+        }else{
+            cell.leftImage.image = [UIImage imageNamed:@"ic_list_bluetooth"];
+            
+        }
+        if (_taskBean) {
+            for (UserKeyInfoList * keyList in _taskBean.keylist) {
+                if ([keyList.bleflag isEqualToString:[CommonUtil getBluetoothKeyMac:peripheral.name]]) {
                     cell.rightImage.image = [UIImage imageNamed:@"ic_lock_open"];
                     break;
                 }
             }
         }
+    } else {
+        BluetoothKeyBean * keyBean = [_keyArray objectAtIndex:indexPath.row];
+        cell.topLabel.text = [keyBean.keyId substringFromIndex:4];
+        cell.bottomLabel.text = keyBean.mac;
+        cell.leftImage.image = [UIImage imageNamed:@"ic_list_key"];
+        if (_taskBean) {
+            for (UserKeyInfoList * keyList in _taskBean.keylist) {
+                if (keyList.bleflag.length > 0) {
+                    if ([keyBean.keyId rangeOfString:keyList.bleflag].location != NSNotFound) {
+                        cell.rightImage.image = [UIImage imageNamed:@"ic_lock_open"];
+                        break;
+                    }
+                }
+            }
+        }
     }
-#endif
     
     return cell;
 }
@@ -229,7 +224,9 @@
     return nil;
 }
 //扫描蓝牙
-#if LOCK_APP
+
+#pragma mark B锁
+
 - (void)scanedPeripheral:(CBPeripheral *)peripheral{
     NSLog(@"%@",peripheral);
     if ([peripheral.name rangeOfString:@"B030"].location != NSNotFound||[peripheral.name rangeOfString:@"rayonicskey"].location != NSNotFound) {
@@ -239,7 +236,9 @@
         [self.tableView reloadData];
     }
 }
-#elif VANMALOCK_APP
+
+#pragma mark C锁
+
 -(void)onScanedPeripheral:(CBPeripheral *)peripheral keyIdData:(NSDictionary *)keyIdData RSSI:(NSNumber *)RSSI {
     if (![_bleArray containsObject:peripheral]){
         [_bleArray addObject:peripheral];
@@ -247,29 +246,29 @@
     }
     [self.tableView reloadData];
 }
-#endif
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //停止扫描
     CBPeripheral * currentBle = [_bleArray objectAtIndex:indexPath.row];
-#if LOCK_APP
-    [self.searchBluetoothView hide];
-    [SetKeyController stopScan];
-    if ([self.type isEqualToString:@"0"]) {//注册钥匙
-        ConnectKeyViewController * connectKey = [[ConnectKeyViewController alloc]init];
-        connectKey.currentBle = currentBle;
-        [self.navigationController pushViewController: connectKey animated:YES];
+    if ([CommonUtil getLockType]) {
+        [self.searchBluetoothView hide];
+        [SetKeyController stopScan];
+        if ([self.type isEqualToString:@"0"]) {//注册钥匙
+            ConnectKeyViewController * connectKey = [[ConnectKeyViewController alloc]init];
+            connectKey.currentBle = currentBle;
+            [self.navigationController pushViewController: connectKey animated:YES];
+        }
+    } else {
+        BluetoothKeyBean * dict = [_keyArray objectAtIndex:indexPath.row];
+        [self.searchBluetoothView hide];
+        [self.bleKeysdk stopScan];
+        if ([self.type isEqualToString:@"0"]) {//注册钥匙
+            ConnectKeyViewController * connectKey = [[ConnectKeyViewController alloc]init];
+            connectKey.currentBle = currentBle;
+            connectKey.keyDictionary = dict;
+            [self.navigationController pushViewController: connectKey animated:YES];
+        }
     }
-#elif VANMALOCK_APP
-    BluetoothKeyBean * dict = [_keyArray objectAtIndex:indexPath.row];
-    [self.searchBluetoothView hide];
-    [self.bleKeysdk stopScan];
-    if ([self.type isEqualToString:@"0"]) {//注册钥匙
-        ConnectKeyViewController * connectKey = [[ConnectKeyViewController alloc]init];
-        connectKey.currentBle = currentBle;
-        connectKey.keyDictionary = dict;
-        [self.navigationController pushViewController: connectKey animated:YES];
-    }
-#endif
     
     if ([self.type isEqualToString:@"1"]) {//注册锁
         RegistrationLockVC * lockVC = [[RegistrationLockVC alloc]init];

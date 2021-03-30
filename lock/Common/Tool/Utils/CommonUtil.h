@@ -64,16 +64,19 @@ NS_ASSUME_NONNULL_BEGIN
 //获取当前时间
 +(NSString*)getCurrentTimes;
 
-//获取连接蓝牙钥匙密钥
-#if LOCK_APP
+//获取B锁连接蓝牙钥匙密钥
 + (NSArray *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key;
-#elif VANMALOCK_APP
-+ (NSString *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key;
-#endif
 
+//获取C锁连接蓝牙钥匙密钥
++ (NSString *)getCLockDesDecodeWithCode:(NSString *)code withPassword:(NSString *)key;
 
 // 通过蓝牙钥匙名称获取mac地址
 + (NSString *)getBluetoothKeyMac:(NSString *)name;
+
+// 判断是B锁 C锁
+// true B锁 false C锁
++ (BOOL)getLockType;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -17,17 +17,3 @@ target 'lock' do
   pod 'Bugly'
 end
 
-target 'Vanmalock' do
-  pod 'YYCache'
-  pod 'AFNetworking'
-  pod 'AMap2DMap'
-  pod 'JSONModel'
-  pod 'Masonry'
-  pod 'MJRefresh'
-  pod 'JXCategoryView'
-  pod 'MBProgressHUD'
-  pod 'DZNEmptyDataSet'
-  pod 'IQKeyboardManager'
-  pod 'FSCalendar'
-  pod 'Bugly'
-end

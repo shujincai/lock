@@ -143,6 +143,7 @@
 #define STR_CONNECT_KEY_SUCCESS             L(@"连接钥匙成功")
 #define STR_KEY_NUMBER_NO_MATE              L(@"钥匙号码不匹配")
 #define STR_PLEASE_SWITH_LOCK               L(@"请开关锁")
+#define STR_VERIFY_FINGERPRINT_SWITH_LOCK   L(@"请按指纹进行身份确认，然后开关锁")
 #define STR_CLOSE_LOCK_SUCCESS              L(@"关锁成功")
 #define STR_MY_TASK_INVALID                 L(@"任务已失效")
 #define STR_LOCK_LIST                       L(@"锁列表")

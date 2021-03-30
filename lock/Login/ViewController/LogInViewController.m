@@ -17,6 +17,7 @@
 @property(nonatomic,strong)UILabel * addressLabel;
 @end
 
+
 @implementation LogInViewController
 
 - (void)viewDidLoad {
@@ -29,29 +30,23 @@
     });
     self.navigationController.delegate = self;
     self.view.backgroundColor = COLOR_WHITE;
-#if LOCK_APP
     UIImageView * image = [UIImageView new];
     image.frame = self.view.bounds;
     image.image = [UIImage imageNamed:@"LoginBg"];
     image.userInteractionEnabled = YES;
     [self.view addSubview:image];
-#elif VANMALOCK_APP
-    
-#endif
     
     __weak typeof(self) weakSelf =  self;
     
     
     self.account = [[RJTextField alloc]init];
     self.account.placeholder = STR_ACCOUNT;
+    self.account.lineSelectedColor = COLOR_RED;
+    self.account.textField.tintColor = COLOR_RED;
     self.account.tag = 10000;
     self.account.textField.text = kFetchMyDefault(@"appusername");
     //    self.account.textField.text = @"sjc";
-#if LOCK_APP
     [image addSubview:self.account];
-#elif VANMALOCK_APP
-    [self.view addSubview:self.account];
-#endif
     [self.account mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.view.mas_centerY).offset(-60);
         make.centerX.equalTo(self.view.mas_centerX).offset(0);
@@ -59,7 +54,6 @@
     }];
     
     UIImageView * Titleimage = [UIImageView new];
-#if LOCK_APP
     Titleimage.image = [UIImage imageNamed:@"login_pic"];
     [image addSubview:Titleimage];
     [Titleimage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -68,44 +62,23 @@
         make.size.mas_equalTo(CGSizeMake(180, 120));
     }];
     
-#elif VANMALOCK_APP
-    Titleimage.image = [UIImage imageNamed:@"ic_login_logo"];
-    [self.view addSubview:Titleimage];
-    [Titleimage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.mas_centerX).offset(0);
-        make.bottom.equalTo(self.account.mas_top).offset(-40);
-        make.size.mas_equalTo(CGSizeMake(100 , 100));
-    }];
-    
-#endif
-    
     self.password = [[RJTextField alloc]init];
     self.password.tag = 10001;
-    self. password.placeholder = STR_PASSWORD;
+    self.password.placeholder = STR_PASSWORD;
+    self.password.lineSelectedColor = COLOR_RED;
+    self.password.textField.tintColor = COLOR_RED;
     self.password.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.password.textField.secureTextEntry = YES;
     //    self.password.textField.text = @"123";
-#if LOCK_APP
     [image addSubview:self.password];
-#elif VANMALOCK_APP
-    [self.view addSubview:self.password];
-#endif
     [self.password mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.account.mas_bottom).offset(10);
         make.centerX.equalTo(self.view.mas_centerX).offset(0);
         make.size.mas_equalTo(CGSizeMake(UISCREEN_WIDTH-60, 60));
     }];
-#if LOCK_APP
     SZKButton * logInBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_LOGIN titleColor:COLOR_WHITE titleFont:18 cornerRadius:4 backgroundColor:UIColor.blueColor backgroundImage:NULL image:NULL];
-#elif VANMALOCK_APP
-    SZKButton * logInBtn = [[SZKButton alloc]initWithFrame:CGRectZero title:STR_LOGIN titleColor:COLOR_WHITE titleFont:18 cornerRadius:4 backgroundColor:COLOR_BTN_BG backgroundImage:NULL image:NULL];
-#endif
     logInBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-#if LOCK_APP
     [image addSubview:logInBtn];
-#elif VANMALOCK_APP
-    [self.view addSubview:logInBtn];
-#endif
     [logInBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.password.mas_bottom).offset(30);
         make.centerX.equalTo(self.view.mas_centerX).offset(0);
@@ -119,13 +92,8 @@
     UIView * rightView = [UIView new];
     rightView.layer.masksToBounds = YES;
     rightView.layer.cornerRadius = 5;
-#if LOCK_APP
-    rightView.backgroundColor = COLOR_GREEN;
+    rightView.backgroundColor = UIColor.blueColor;
     [image addSubview:rightView];
-#elif VANMALOCK_APP
-    rightView.backgroundColor = COLOR_BTN_BG;
-    [self.view addSubview:rightView];
-#endif
     [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(logInBtn.mas_bottom).offset(30);
         make.right.equalTo(logInBtn.mas_right).offset(0);
@@ -162,8 +130,8 @@
         make.bottom.equalTo(self.view.mas_bottom).offset(-(10+TABBAR_AREA_HEIGHT));
         make.height.mas_equalTo(20);
     }];
-    self.password.textField.text = @"123";
-    [self getNetWork];
+//    self.password.textField.text = @"123";
+//    [self getNetWork];
 }
 -(void)tapView:(UITapGestureRecognizer *)sender{
     SettingViewController * setting = [SettingViewController new];
@@ -208,36 +176,15 @@
             return ;
         }
         if ([response.resultCode intValue] == 0) {
-#if LOCK_APP
-            if (response.data.wmSdk == false) {
-                kSaveMyDefault(@"token", response.data.token);
-                kSaveMyDefault(@"appusername", response.data.appusername);
-                [CommonUtil saveObjectToUserDefault:response.data forKey:@"userInfo"];
-                NSDictionary *tokenDic =@{@"token":response.data.token};
-                [MSNetwork setBaseParameters:tokenDic];
-                [MSNetwork setHeadr:tokenDic];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self gotoMain];
-                });
-            }else {
-                [MBProgressHUD showError:STR_WRONG_ACCOUNT_PASSWORD];
-            }
-#elif VANMALOCK_APP
-            if (response.data.wmSdk == true) {
-                kSaveMyDefault(@"token", response.data.token);
-                kSaveMyDefault(@"appusername", response.data.appusername);
-                [CommonUtil saveObjectToUserDefault:response.data forKey:@"userInfo"];
-                NSDictionary *tokenDic =@{@"token":response.data.token};
-                [MSNetwork setBaseParameters:tokenDic];
-                [MSNetwork setHeadr:tokenDic];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self gotoMain];
-                });
-            }else {
-                [MBProgressHUD showError:STR_WRONG_ACCOUNT_PASSWORD];
-            }
-#endif
-            
+            kSaveMyDefault(@"token", response.data.token);
+            kSaveMyDefault(@"appusername", response.data.appusername);
+            [CommonUtil saveObjectToUserDefault:response.data forKey:@"userInfo"];
+            NSDictionary *tokenDic =@{@"token":response.data.token};
+            [MSNetwork setBaseParameters:tokenDic];
+            [MSNetwork setHeadr:tokenDic];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self gotoMain];
+            });
         }else {
             if ([response.resultCode intValue] == 20001) {//用户名错误
                 [MBProgressHUD showError:STR_USER_NAME_ERROR];

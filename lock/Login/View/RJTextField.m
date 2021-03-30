@@ -34,11 +34,11 @@
 //        self.placeholder = UIColor.whiteColor;
         self.lineDefaultColor = COLOR_BLACK;
         
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
         self.lineSelectedColor = UIColor.redColor;
-#elif VANMALOCK_APP
+} else {
         self.lineSelectedColor = COLOR_BTN_BG;
-#endif
+}
         self.lineWarningColor = SELECT_COLOR(252, 57, 24,1);
         self.errorLableColor = SELECT_COLOR(252, 57, 24, 1);
     }
@@ -99,10 +99,10 @@
     if(!_textField){
         _textField = [UITextField new];
         _textField.backgroundColor = [UIColor clearColor];
-#if LOCK_APP
-#elif VANMALOCK_APP
+if ([CommonUtil getLockType]) {
+} else {
         _textField.tintColor = COLOR_BTN_BG;
-#endif
+}
         _textField.textColor = self.textColor;
         _textField.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
         _textField.textAlignment = NSTextAlignmentLeft;
@@ -126,11 +126,7 @@
     if(!_headerPlaceLabel){
         _headerPlaceLabel = [UILabel new];
         _headerPlaceLabel.backgroundColor = [UIColor clearColor];
-#if LOCK_APP
-        _headerPlaceLabel.textColor = UIColor.redColor;
-#elif VANMALOCK_APP
-        _headerPlaceLabel.textColor = COLOR_BTN_BG;
-#endif
+        _headerPlaceLabel.textColor = _lineSelectedColor;
         _headerPlaceLabel.textAlignment = NSTextAlignmentLeft;
         _headerPlaceLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
         _headerPlaceLabel.text = self.textField.placeholder;

@@ -7,7 +7,8 @@
 */
 //info.plist
 
-"CFBundleDisplayName" = "JWM LOCK";
+"CFBundleDisplayName" = "VANMA LOCK";
+"UILaunchStoryboardName" = "LaunchScreen-English";
 "NSBluetoothAlwaysUsageDescription" = "App needs your permission to access Bluetooth, To facilitate the connection of the key";
 "NSBluetoothPeripheralUsageDescription" = "App needs your permission to access Bluetooth, To facilitate the connection of the key";
 "NSCameraUsageDescription" = "Allow APP to access to the Camera？In order to scan QR code and so on";
@@ -86,6 +87,7 @@
 "注册钥匙成功"="Register key successfully";
 "请连接锁"="Please connect lock...";
 "设置初始化锁系统码钥匙"="Set initialization lock system code key";
+"钥匙硬件版本"="Key hardware version";
 "修改钥匙ID"="Modify key ID";
 "修改钥匙ID失败"="Failed to modify key ID";
 "该钥匙信息不存在"="This key information is not exist";
@@ -142,8 +144,17 @@
 "连接钥匙成功"="Key Connect Succeed";
 "钥匙号码不匹配"="Unauthorized Key";
 "请开关锁"="Please switch the lock";
+"请按指纹进行身份确认，然后开关锁"="Please verify the fingerprint to confirm the identity, and then lock or unlock";
 "关锁成功"="Lock Successfully";
 "任务已失效"="Mission failure";
+"密码不匹配"="Password Not Match";
+"操作中断"="Operate Break";
+"钥匙与锁密钥匹配失败"="Secret Key Not Match";
+"关锁失败"="Lock Failed";
+"开锁失败"="Unlock Failed";
+"验证失败"="Validation failed";
+"指纹授权成功"="Fingerprint authorization succeed";
+"指纹授权失败"="Fingerprint authorization failed";
 "锁列表"="Locks List";
 "暂无"="No data";
 

@@ -107,13 +107,13 @@
     queryBtn.layer.masksToBounds = YES;
     queryBtn.layer.cornerRadius = 4;
     [queryBtn addTarget:self action:@selector(queryBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
     [queryBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BLUE] forState:UIControlStateNormal];
     [queryBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BLUE] forState:UIControlStateHighlighted];
-#elif VANMALOCK_APP
+} else {
     [queryBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BTN_BG] forState:UIControlStateNormal];
     [queryBtn setBackgroundImage:[UIImage mm_imageWithColor:COLOR_BTN_BG] forState:UIControlStateHighlighted];
-#endif
+}
     
     [view addSubview:queryBtn];
     [queryBtn mas_makeConstraints:^(MASConstraintMaker *make) {

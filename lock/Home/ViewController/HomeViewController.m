@@ -139,7 +139,11 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     }
     UIImageView * image = [UIImageView new];
     image.frame = CGRectMake(0, 0, UIScreenWidth, 150);
-    image.image = [UIImage imageNamed:@"lock_background"];
+    if ([CommonUtil getLockType]) {
+        image.image = [UIImage imageNamed:@"lock_background"];
+    } else {
+        image.image = [UIImage imageNamed:@"vanmalock_background"];
+    }
     image.userInteractionEnabled = YES;
     [bgView addSubview:image];
     self.leftLabel = [SZKLabel labelWithFrame:CGRectMake(20, 130, UIScreenWidth/2-20, 15) text:kFetchMyDefault(@"appusername") textColor:UIColor.whiteColor font:[UIFont systemFontOfSize:16] textAlignment:NSTextAlignmentLeft backgroundColor:UIColor.clearColor];
@@ -162,11 +166,11 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
     self.tableView.backgroundColor = COLOR_HOME_BG;
-#elif VANMALOCK_APP
+} else {
     self.tableView.backgroundColor = COLOR_BG_VIEW;
-#endif
+}
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -195,11 +199,11 @@ static NSString * cellIdentifer = @"HomeCollectionViewCell";
         _rightCollectionView.delegate = self;
         _rightCollectionView.dataSource = self;
         
-#if LOCK_APP
+if ([CommonUtil getLockType]) {
         _rightCollectionView.backgroundColor = COLOR_HOME_BG;
-#elif VANMALOCK_APP
+} else {
         _rightCollectionView.backgroundColor = COLOR_BG_VIEW;
-#endif
+}
         [_rightCollectionView registerClass:[HomeCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifer];
     }
     return _rightCollectionView;
