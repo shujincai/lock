@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy)NSString * eventtype;//锁状态
 @property (nonatomic,copy)NSString * keyno;//钥匙号
 @property (nonatomic,copy)NSString * lockno;//锁号
-@property (nonatomic,copy)NSString * opttype;//0
+@property (nonatomic,assign)NSInteger opttype;//0
 @property (nonatomic,copy)NSString * time;//时间
 @end
 

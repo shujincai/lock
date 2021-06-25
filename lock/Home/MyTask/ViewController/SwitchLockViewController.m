@@ -195,6 +195,7 @@
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
         infoBean.time = [self getCurrentTime];
         infoBean.eventtype = self.lockInfoB.event_type;
+        infoBean.opttype = 0;
         if ([self.lockInfoB.event_type isEqualToString:@"4"]) {//超出有效期
             infoBean.name = STR_OVERSTEP_TERM_VALIDITY;
             infoBean.iamgeName = @"ic_switch_fail";
@@ -214,10 +215,12 @@
         if ([self.lockInfoB.event_type isEqualToString:@"13"]) {//开锁成功
             infoBean.name = STR_OPEN_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
+            infoBean.opttype = 1;
         }
         if ([self.lockInfoB.event_type isEqualToString:@"14"]) {//关锁成功
             infoBean.name = STR_CLOSE_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
+            infoBean.opttype = 0;
         }
         if (![self.lockInfoB.event_type isEqualToString:@"1"]) {//钥匙与锁接触
             [self.listArray addObject:infoBean];
@@ -522,11 +525,15 @@
     request.time = switchBean.time;
     request.keyno = self.taskBean.keyno;
     if ([CommonUtil getLockType]) {
-        request.lockno = self.lockInfoB.lock_id;
+        if (self.lockInfoB.lock_id) {
+            request.lockno = self.lockInfoB.lock_id;
+        }else {
+            request.lockno = self.lockBean.lockno;
+        }
     } else {
         request.lockno = self.lockInfoC.lockid;
     }
-    request.opttype = self.taskBean.opttype;
+    request.opttype = switchBean.opttype;
     NSArray *parameterArr = [NSArray arrayWithObject:[request toDictionary]];
     NSString *parameterstr = [MSNetwork dictionaryToJson:parameterArr];
     [MSNetwork postWithUrl:kLockdatas body:[parameterstr dataUsingEncoding:NSUTF8StringEncoding] success:^(id  _Nonnull responseObject) {
