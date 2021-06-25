@@ -1685,7 +1685,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.4.1;
+				CURRENT_PROJECT_VERSION = 1.0.5.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1705,7 +1705,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.Vanmalock;
 				PRODUCT_NAME = "巡检电子锁";
@@ -1722,7 +1722,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.4.1;
+				CURRENT_PROJECT_VERSION = 1.0.5.1;
 				DEVELOPMENT_TEAM = KVP75BU8WE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1742,7 +1742,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lock/主页/首页/RayonicsBleSDK.framework\"";
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jwm.Vanmalock;
 				PRODUCT_NAME = "巡检电子锁";

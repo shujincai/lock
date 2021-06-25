@@ -413,7 +413,8 @@
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
         infoBean.time = [self getCurrentTime];
         infoBean.eventtype = [NSString stringWithFormat:@"%d",self.lockInfoC.flag];
-        infoBean.opttype = self.lockInfoC.status; //当前处于 开 0 关 1
+        //status 本状态描述的是开关锁的动作，即操作后锁的状态
+        infoBean.opttype = (self.lockInfoC.status + ((self.lockInfoC.flag == 0 || self.lockInfoC.flag == 1) ? 0 : 1)) % 2; //  开 0 关 1
         
         if (self.lockInfoC.flag == 5) {//没有权限
             infoBean.name = STR_NO_POWER;
@@ -428,11 +429,12 @@
             infoBean.iamgeName = @"ic_switch_fail";
         }
         if (self.lockInfoC.flag == 20) {//操作中断
-            if (self.lockInfoC.status == 0) {//关锁失败
-                infoBean.name = STR_CLOSE_LOCK_FAIL;
-                infoBean.iamgeName = @"ic_switch_fail";
-            }else {//开锁失败
+            if (self.lockInfoC.status == 0) {//开锁失败
                 infoBean.name = STR_OPEN_LOCK_FAIL;
+                infoBean.iamgeName = @"ic_switch_fail";
+                
+            }else {//关锁失败
+                infoBean.name = STR_CLOSE_LOCK_FAIL;
                 infoBean.iamgeName = @"ic_switch_fail";
             }
         }
