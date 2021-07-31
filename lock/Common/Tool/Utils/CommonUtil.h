@@ -77,6 +77,9 @@ NS_ASSUME_NONNULL_BEGIN
 // true B锁 false C锁
 + (BOOL)getLockType;
 
+// 获取当前系统语言是否是中文
++ (BOOL)getAppleLanguages;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -100,9 +100,9 @@
     LockRecordListBean * model = _listArray[indexPath.row];
     cell.topLabel.text = model.lockname;
     
-    if ([model.eventtype isEqualToString:@"0"]) {//关锁成功
+    if ([model.eventtype isEqualToString:@"1"]) {//关锁成功
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_CLOSE_LOCK_SUCCESS];
-    }else if ([model.eventtype isEqualToString:@"1"]) {//开锁成功
+    }else if ([model.eventtype isEqualToString:@"0"]) {//开锁成功
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_OPEN_LOCK_SUCCESS];
     }else  if (model.eventtype.integerValue == 2){//设置成功
         cell.bottomLabel.text =   [NSString stringWithFormat:@"%@      %@",model.opttime,STR_SETTING_SUCCESS];

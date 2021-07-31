@@ -59,7 +59,7 @@
         [self.listArray addObject:infoBean];
         [self.tableView reloadData];
         //连接钥匙
-        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:[CommonUtil getAppleLanguages] ? 0: 1];
     }
     
 }
@@ -95,7 +95,7 @@
         [self.listArray addObject:infoBean];
         [self.tableView reloadData];
         //连接钥匙
-        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
+        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:[CommonUtil getAppleLanguages] ? RASCRBleSDKLanguageTypeChinese : RASCRBleSDKLanguageTypeEnglish   needResetKey:NO];
     }
     
 }
@@ -241,7 +241,7 @@
 }
 //连接钥匙
 - (void)onConnectToKey:(Result *)result {
-    if (result.ret == NO) {
+    if (result.ret == NO || result.code < 0) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
         [self.bleKeysdk disConnectFromKey];
@@ -429,7 +429,7 @@
             infoBean.iamgeName = @"ic_switch_fail";
         }
         if (self.lockInfoC.flag == 20) {//操作中断
-            if (self.lockInfoC.status == 0) {//开锁失败
+            if ((self.lockInfoC.status + ((self.lockInfoC.flag == 0 || self.lockInfoC.flag == 1) ? 0 : 1)) % 2 == 0) {//开锁失败
                 infoBean.name = STR_OPEN_LOCK_FAIL;
                 infoBean.iamgeName = @"ic_switch_fail";
                 

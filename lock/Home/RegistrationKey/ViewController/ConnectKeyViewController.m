@@ -49,7 +49,7 @@
     } else {
         self.bleKeysdk = [BleKeySdk shareKeySdk];
         [self.bleKeysdk setDelgate:self];
-        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:[CommonUtil getAppleLanguages] ? 0: 1];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.isHide == NO) {
@@ -76,7 +76,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
-        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
+        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:[CommonUtil getAppleLanguages] ? RASCRBleSDKLanguageTypeChinese : RASCRBleSDKLanguageTypeEnglish needResetKey:NO];
     }
     
 }
@@ -94,7 +94,7 @@
                 [SetKeyController disConnectBle];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     self.registerNumber++;
-                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:DEFINE_SYSCODE withRegcode:DEFINE_REGCODE withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:YES];
+                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:DEFINE_SYSCODE withRegcode:DEFINE_REGCODE withLanguageType:[CommonUtil getAppleLanguages] ? RASCRBleSDKLanguageTypeChinese : RASCRBleSDKLanguageTypeEnglish needResetKey:YES];
                 });
             }
             
@@ -273,8 +273,8 @@
 }
 //连接
 -(void)onConnectToKey:(Result*)result {
-    if (result.ret == NO) {//连接失败
-        if ([result.msg isEqualToString:@"time_out"]||[result.msg isEqualToString:@"failed_verify"]) {//连接密钥错误
+    if (result.ret == NO || result.code < 0) {//连接失败
+        if (result.code == -4118) {//连接密钥错误
             if (self.registerNumber > 0) {
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
@@ -282,10 +282,10 @@
                 [self.navigationController popViewControllerAnimated:YES];
                 return;
             }else {
-                [self.bleKeysdk disConnectFromKey];
+//                [self.bleKeysdk disConnectFromKey];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     self.registerNumber++;
-                    [self.bleKeysdk connectToKey:self.currentBle secret:@"FFFFFFFFFFFFFFFFFFFF" sign:0];
+                    [self.bleKeysdk connectToKey:self.currentBle secret:@"FFFFFFFFFFFFFFFFFFFF" sign:[CommonUtil getAppleLanguages] ? 0: 1];
                 });
             }
             
@@ -315,9 +315,8 @@
 }
 //校时
 -(void)onSetDateTime:(Result*)result {
-    self.isHideInit = YES;
-    [MBProgressHUD hideHUD];
     if (result.ret == NO) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
         [self.bleKeysdk disConnectFromKey];
         [self.navigationController popViewControllerAnimated:YES];
@@ -326,11 +325,27 @@
         if (self.registerNumber > 0) {
             //设置钥匙密钥
             [self.bleKeysdk setKeySecret:[[SecretInfo alloc] initSecret:@"FFFFFFFFFFFFFFFFFFFF" nowSecret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd]]];
+        }else {
+            self.isHideInit = YES;
+            [MBProgressHUD hideHUD];
+            [self.tableView reloadData];
         }
+        
+    }
+}
+//设置钥匙密钥
+-(void)onSetKeySecret:(Result*)result {
+    self.isHideInit = YES;
+    [MBProgressHUD hideHUD];
+    if (result.ret == NO) {
+        [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
+        [self.bleKeysdk disConnectFromKey];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }else {
         [self.tableView reloadData];
     }
 }
-
 //设置开关锁钥匙--用户钥匙,isOnline 是否在线，在线断开连接后，钥匙不能开关锁
 -(void)onSetUserKey:(Result*)result {
     if (result.ret == NO) {

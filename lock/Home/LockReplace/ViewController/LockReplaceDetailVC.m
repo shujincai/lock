@@ -61,7 +61,7 @@
         [self.listArray addObject:infoBean];
         [self.tableView reloadData];
         //连接钥匙 根据钥匙系统码和锁注册码连接钥匙
-        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:0];
+        [self.bleKeysdk connectToKey:_currentBle secret:[CommonUtil getCLockDesDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] sign:[CommonUtil getAppleLanguages] ? 0: 1];
     }
 }
 - (NSMutableArray *)listArray {
@@ -142,7 +142,7 @@
         [self.listArray addObject:infoBean];
         [self.tableView reloadData];
         //连接钥匙
-        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:RASCRBleSDKLanguageTypeChinese needResetKey:NO];
+        [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:[CommonUtil getAppleLanguages] ? RASCRBleSDKLanguageTypeChinese : RASCRBleSDKLanguageTypeEnglish needResetKey:NO];
     }
     
 }
@@ -225,7 +225,7 @@
 }
 //连接
 - (void)onConnectToKey:(Result *)result {
-    if (result.ret == NO) {
+    if (result.ret == NO|| result.code < 0) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:STR_CONNECT_KEY_FAIL];
         [self.bleKeysdk disConnectFromKey];

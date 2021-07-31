@@ -120,9 +120,9 @@
     //----------将nsdate按formatter格式转成nsstring
     NSString *currentTimeString = [formatter stringFromDate:datenow];
     NSLog(@"currentTimeString =  %@",currentTimeString);
-
+    
     return currentTimeString;
-
+    
 }
 //获取B锁连接蓝牙钥匙密钥
 + (NSArray *)desDecodeWithCode:(NSString *)code withPassword:(NSString *)key {
@@ -228,6 +228,18 @@
 + (BOOL)getLockType {
     UserInfo * userInfo = [self getObjectFromUserDefaultWith:[UserInfo class] forKey:@"userInfo"];
     return !userInfo.wmSdk;
+}
+
+// 获取当前系统语言是否是中文
++ (BOOL)getAppleLanguages {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSArray * allLanguages = [defaults objectForKey:@"AppleLanguages"];
+    NSString * preferredLang = [allLanguages objectAtIndex:0];
+    if ([preferredLang rangeOfString:@"zh-"].location != NSNotFound) {
+        return YES;
+    }else {
+        return NO;
+    }
 }
 @end
 
