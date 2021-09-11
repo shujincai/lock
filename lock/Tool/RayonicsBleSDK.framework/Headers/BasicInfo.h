@@ -25,13 +25,13 @@
 @property(assign, nonatomic) RASCRBleSDKLanguageType languageType;
 
 
-@property(strong, nonatomic) NSString *keyValidityPeriodStart;//yy-MM-DD-HH-mm 有效期起
-@property(strong, nonatomic) NSString *keyValidityPeriodEnd;//yy-MM-DD-HH-mm 有效期止
+@property(strong, nonatomic) NSString *keyValidityPeriodStart;//yy-MM-dd-HH-mm 有效期起
+@property(strong, nonatomic) NSString *keyValidityPeriodEnd;//yy-MM-dd-HH-mm 有效期止
 @property(assign, nonatomic) NSInteger keyId;
 
 @property(strong, nonatomic) NSString *keyMadeTime;//钥匙制作时间
 
-
+@property(strong, nonatomic) NSString *taskId;
 
 @end
 

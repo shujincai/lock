@@ -12,8 +12,8 @@
 
 @property (assign, nonatomic) NSInteger timeScaleID;//时间段编号
 @property (assign, nonatomic) NSInteger timeSliceID;
-@property (strong, nonatomic) NSString *timeScaleStartTime;//时间段开始时间 HH-mm
-@property (strong, nonatomic) NSString *timeScaleEndTime;//时间段结束时间 HH-mm
+@property (strong, nonatomic) NSString *timeScaleStartTime;//时间段开始时间 HH:mm
+@property (strong, nonatomic) NSString *timeScaleEndTime;//时间段结束时间 HH:mm
 @property (strong, nonatomic) NSString *weekdayFlag;//星期标志
 @property (strong, nonatomic) NSString *calendarFlag;//日历标志
 

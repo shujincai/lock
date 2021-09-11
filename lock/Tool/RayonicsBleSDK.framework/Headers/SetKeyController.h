@@ -1,40 +1,32 @@
 //
 //  SetKeyController.h
-//  test1
 //
 //  Created by Piccolo on 2017/4/19.
 //  Copyright © 2017年 Piccolo. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "BasicInfo.h"
-#import "ParticularInfo.h"
-#import "ResultInfo.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "RASCRBleSDKPublicEnum.h"
 
+//After the bluetooth disconnect, the permission turn back to 'NSRAPermissionFlagOfflineOpenOnly'.
+//While set user key.
+typedef NS_ENUM(NSUInteger, NSRAPermissionFlag) {
+    NSRAPermissionFlagOnlineOpenAndOffLineOpen = 0x00,
+    NSRAPermissionFlagOnlineOpenOnly = 0x01,
+    NSRAPermissionFlagOfflineOpenOnly = 0xff,
+};
 
+@class RASCRBleSDKPeripheralModel, BasicInfo, ParticularInfo, ResultInfo, BlackListKeyInfo, BlankKeyInfo, RegisterKeyInfo, SettingKeyInfo, UserKeyInfo, OnlineOpenInfo;
 
-#define CLEAN_APP_OPEN 1
-#define NOT_CLEAN_APP_OPEN 0
-
-#define SDK_VERSION [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
-#define SDK_RELEASE_TIME @"2018-4-25"
-
-//#define DEFINE_SYSCODE @[@0x37, @0x37, @0x37, @0x37]
 #define DEFINE_SYSCODE @[@0x36, @0x36, @0x36, @0x36]
-//#define DEFINE_SYSCODE @[@0x36, @0x36, @0x36, @0x37]
 #define DEFINE_REGCODE @[@0x31, @0x31, @0x31, @0x31]
-
-
 
 @protocol SetKeyControllerDelegate <NSObject>
 @optional
 
-- (void)requestResultInfo:(ResultInfo *)info;
-- (void)scanedPeripheral:(CBPeripheral *)peripheral;
+- (void)scannedPeripheralModel:(RASCRBleSDKPeripheralModel *)peripheralModel;
 - (void)currentRssi:(NSNumber *)rssi;
-- (void)activeReport:(NSData *)data;
-
 
 - (void)requestInitSdkResultInfo:(ResultInfo *)info;
 - (void)requestDestroyResultInfo:(ResultInfo *)info;
@@ -44,6 +36,7 @@
 - (void)requestConnectResultInfo:(ResultInfo *)info;
 - (void)requestSetRegisterKeyResultInfo:(ResultInfo *)info;
 - (void)requestSetSettingKeyResultInfo:(ResultInfo *)info;
+- (void)requestGetSettingKeyInfoResultInfo:(ResultInfo *)info;
 - (void)requestSetTraceKeyResultInfo:(ResultInfo *)info;
 - (void)requestSetBlackListKeyResultInfo:(ResultInfo *)info;
 - (void)requestSetVerifyKeyResultInfo:(ResultInfo *)info;
@@ -58,15 +51,17 @@
 - (void)requestSetOnlineOpenResultInfo:(ResultInfo *)info;
 - (void)requestActiveReport:(ResultInfo *)info;
 - (void)requestInitKeyResultInfo:(ResultInfo *)info;
+- (void)requestSetKeyRotationAngleEnabledResultInfo:(ResultInfo *)info;
+- (void)requestSetKeyTaskIdResultInfo:(ResultInfo *)info;
+- (void)requestGetKeyTaskIdResultInfo:(ResultInfo *)info;
+- (void)requestGetKeySecretResultInfo:(ResultInfo *)info;
+
 @end
 
 
 @interface SetKeyController : NSObject
 
-
 @property(nonatomic,weak) id<SetKeyControllerDelegate>delegate;
-
-//+ (void)startBlueTooth:(id)delegate;
 
 /**
  *获取单例对象的方法
@@ -81,14 +76,14 @@
 + (void)initBlueToothManager;
 + (void)startScan;
 + (void)stopScan;
-+ (void)connectBlueTooth:(CBPeripheral *)per withSyscode:(NSArray *)syscode withRegcode:(NSArray *)regcode withLanguageType:(RASCRBleSDKLanguageType)languageType needResetKey:(BOOL)needResetKey;
++ (void)connectBlueTooth:(CBPeripheral *)peripheral withSyscode:(NSArray *)syscode withRegcode:(NSArray *)regcode withLanguageType:(RASCRBleSDKLanguageType)languageType needResetKey:(BOOL)needResetKey;
++ (void)connectBlueTooth:(CBPeripheral *)peripheral originalSyscode:(NSArray *)originalSyscode syscode:(NSArray *)syscode originalRegcode:(NSArray *)originalRegcode regcode:(NSArray *)regcode languageType:(RASCRBleSDKLanguageType)languageType needResetKey:(BOOL)needResetKey;
 + (void)disConnectBle;
-//+ (void)registerKey:(NSArray *)syscode andRegcode:(NSArray *)regcode;
 + (void)destroyBle;
 + (void)setManager:(CBCentralManager *)manager peripheral:(CBPeripheral *)peripheral;
 + (void)releaseBleManager;
 
-+ (void)privateInitKey;
++ (void)privateInitKey:(CBPeripheral *)peripheral;
 + (void)setBlankKey:(BasicInfo *)basicInfo andBlankKeyInfo:(BlankKeyInfo *)blankKeyInfo;
 + (void)setRegisterKey:(BasicInfo *)basicInfo andRegisterKeyInfo:(RegisterKeyInfo *)resigerKeyInfo;
 + (void)setSettingKey:(BasicInfo *)basicInfo andSettingKeyInfo:(SettingKeyInfo *)settingKeyInfo;
@@ -100,11 +95,37 @@
 + (void)setConstructionKey:(BasicInfo *)basicInfo;
 + (void)setLogoutKey:(BasicInfo *)basicInfo;
 + (void)setUserKey:(BasicInfo *)basicInfo andUserKeyInfo:(UserKeyInfo *)userKeyInfo;
+/** onlineoOpen :
+ * CN--是否在钥匙蓝牙连接的时候去判断开门权限,默认为NO,蓝牙连接状态忽略离线权限.
+ * EN--Whether to judge the opening permission when the key is connected by bluetooth, and the default is NO(the offline permission is ignored in the bluetooth connection state)
+ * onlineOpen ? NSRAPermissionFlagOnlineOpenAndOffLineOpen : NSRAPermissionFlagOfflineOpenOnly
+ */
++ (void)setUserKey:(BasicInfo *)basicInfo andUserKeyInfo:(UserKeyInfo *)userKeyInfo onlineOpen:(BOOL)onlineOpen;
++ (void)setUserKey:(BasicInfo *)basicInfo andUserKeyInfo:(UserKeyInfo *)userKeyInfo permissionFlag:(NSRAPermissionFlag)permissionFlag;
 + (void)resetKey;
 + (void)setOnlineOpen:(BasicInfo *)basicInfo andOnlineOpenInfo:(OnlineOpenInfo *)onlineOpenInfo;
++ (void)setKeyRotationAngleEnabled:(BOOL)enabled;
++ (void)setKeyTaskId:(NSString *)taskId;
++ (void)readKeyTaskId;
 
 + (void)readKeyBasicInfo;
++ (void)getSettingKeyInfo;
 + (void)readKeyEvent;
++ (void)readKeyEventClean:(BOOL)clean;
 + (void)manageActiveReportingValueOfCharacteristic:(NSData *)activeReportingValue;
++ (void)getKeySecretsFromPosition:(NSUInteger)position size:(NSUInteger)size;
+
+
+/**
+ * V0.0.72
+ * Fix the V208 crash in iPhone 6
+ * May 21 2021
+ */
+
+/**
+ * V0.0.73
+ * Fix the issue while the key not support task id
+ * May 25 2021
+ */
 
 @end

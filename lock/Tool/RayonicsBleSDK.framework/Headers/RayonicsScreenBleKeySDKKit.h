@@ -18,5 +18,8 @@
 #import <RayonicsBleSDK/SetKeyController.h>
 #import <RayonicsBleSDK/TimeScaleInfo.h>
 #import <RayonicsBleSDK/TimeSliceInfo.h>
+#import <RayonicsBleSDK/RASCRBleSDKCalendarModel.h>
+#import <RayonicsBleSDK/RASCRBleSDKPublicUtil.h>
+#import <RayonicsBleSDK/RASCRBleSDKPeripheralModel.h>
 
 #endif /* RayonicsScreenBleKeySDKKit_h */

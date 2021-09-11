@@ -169,21 +169,22 @@
         
     }
     if ([CommonUtil getLockType]) {
-        CBPeripheral * peripheral = [_bleArray objectAtIndex:indexPath.row];
-        cell.topLabel.text =  peripheral.name;
-        if (peripheral.state == CBPeripheralStateDisconnected) {//未连接
+        RASCRBleSDKPeripheralModel *peripheralModel = _bleArray[indexPath.row];
+        NSString * peripheralName = peripheralModel.peripheralName;
+        cell.topLabel.text =  peripheralName;
+        if (peripheralModel.peripheral.state == CBPeripheralStateDisconnected) {//未连接
             cell.bottomLabel.text = STR_NO_CONNECT;
         }
-        if (peripheral.state == CBPeripheralStateConnecting) {//连接中
+        if (peripheralModel.peripheral.state == CBPeripheralStateConnecting) {//连接中
             cell.bottomLabel.text = STR_CONNECTING;
         }
-        if (peripheral.state == CBPeripheralStateConnected) {//已连接
+        if (peripheralModel.peripheral.state == CBPeripheralStateConnected) {//已连接
             cell.bottomLabel.text = STR_CONNECTED;
         }
-        if (peripheral.state == CBPeripheralStateDisconnecting) {//断开中
+        if (peripheralModel.peripheral.state == CBPeripheralStateDisconnecting) {//断开中
             cell.bottomLabel.text = STR_DISCONNECTING;
         }
-        NSString *str = [[(CBPeripheral *)self.bleArray[[indexPath row]] name] substringToIndex:4];//str3 = "this"
+        NSString *str = [peripheralName substringToIndex:4];//str3 = "this"
         if ([str isEqualToString:@"B030"] || [str isEqualToString:@"rayonicskey"]) {
             cell.leftImage.image = [UIImage imageNamed:@"ic_list_key"];
         }else{
@@ -192,7 +193,7 @@
         }
         if (_taskBean) {
             for (UserKeyInfoList * keyList in _taskBean.keylist) {
-                if ([keyList.bleflag isEqualToString:[CommonUtil getBluetoothKeyMac:peripheral.name]]) {
+                if ([keyList.bleflag isEqualToString:[CommonUtil getBluetoothKeyMac:peripheralName]]) {
                     cell.rightImage.image = [UIImage imageNamed:@"ic_lock_open"];
                     break;
                 }
@@ -226,16 +227,23 @@
 //扫描蓝牙
 
 #pragma mark B锁
-
-- (void)scanedPeripheral:(CBPeripheral *)peripheral{
-    NSLog(@"%@",peripheral);
-    if ([peripheral.name rangeOfString:@"B030"].location != NSNotFound||[peripheral.name rangeOfString:@"rayonicskey"].location != NSNotFound) {
-        if (![_bleArray containsObject:peripheral]){
-            [_bleArray addObject:peripheral];
-        }
+- (void)scannedPeripheralModel:(RASCRBleSDKPeripheralModel *)peripheralModel {
+    RASCRBleSDKKeyHardwareType keyHardWareType = [RASCRBleSDKPublicUtil keyHardwareTypeFromPeripheralName:peripheralModel.peripheralName];
+    if (keyHardWareType != RASCRBleSDKKeyHardwareTypeUnknow && ![RASCRBleSDKPublicUtil peripheralModelArray:_bleArray containsPeripheral:peripheralModel.peripheral]) {
+        [_bleArray addObject:peripheralModel];
+        _bleArray = [RASCRBleSDKPublicUtil sortedPeripheralModelArrayFromArray:_bleArray];
         [self.tableView reloadData];
     }
 }
+//- (void)scanedPeripheral:(CBPeripheral *)peripheral{
+//    NSLog(@"%@",peripheral);
+//    if ([peripheral.name rangeOfString:@"B030"].location != NSNotFound||[peripheral.name rangeOfString:@"rayonicskey"].location != NSNotFound) {
+//        if (![_bleArray containsObject:peripheral]){
+//            [_bleArray addObject:peripheral];
+//        }
+//        [self.tableView reloadData];
+//    }
+//}
 
 #pragma mark C锁
 
@@ -249,7 +257,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //停止扫描
-    CBPeripheral * currentBle = [_bleArray objectAtIndex:indexPath.row];
+    CBPeripheral * currentBle;
+    if ([CommonUtil getLockType]) {
+        RASCRBleSDKPeripheralModel * peripheralModel = _bleArray[indexPath.row];
+        currentBle = peripheralModel.peripheral;
+    } else {
+        currentBle = [_bleArray objectAtIndex:indexPath.row];
+    }
     if ([CommonUtil getLockType]) {
         [self.searchBluetoothView hide];
         [SetKeyController stopScan];
