@@ -90,6 +90,7 @@
 		FB608CB8248A1E3C008BA56C /* RegistrationLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CB6248A1E3B008BA56C /* RegistrationLockModel.m */; };
 		FB608CBB248A1E47008BA56C /* RegistrationLockTFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */; };
 		FB608CBE248A1E4F008BA56C /* RegistrationLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */; };
+		FB71CE0D26F2EE230011DF13 /* ApplyOpenLockSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB71CE0C26F2EE230011DF13 /* ApplyOpenLockSubjectCell.m */; };
 		FB83FF7F249B493600432C35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB83FF81249B493600432C35 /* InfoPlist.strings */; };
 		FB8ACA3525CCD63300CB0F05 /* BlackListCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8ACA3425CCD63300CB0F05 /* BlackListCreateVC.m */; };
 		FB8ACA3B25CCF93900CB0F05 /* WriteListCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8ACA3A25CCF93900CB0F05 /* WriteListCreateVC.m */; };
@@ -303,6 +304,8 @@
 		FB608CBA248A1E47008BA56C /* RegistrationLockTFCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationLockTFCell.m; sourceTree = "<group>"; };
 		FB608CBC248A1E4E008BA56C /* RegistrationLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationLockVC.m; sourceTree = "<group>"; };
 		FB608CBD248A1E4F008BA56C /* RegistrationLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationLockVC.h; sourceTree = "<group>"; };
+		FB71CE0B26F2EE230011DF13 /* ApplyOpenLockSubjectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyOpenLockSubjectCell.h; sourceTree = "<group>"; };
+		FB71CE0C26F2EE230011DF13 /* ApplyOpenLockSubjectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyOpenLockSubjectCell.m; sourceTree = "<group>"; };
 		FB83FF80249B493600432C35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FB83FF82249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		FB83FF84249B495600432C35 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1128,6 +1131,8 @@
 				FBCC72CC25A552C400A2B86D /* ApplyOpenLockLockCell.h */,
 				FBCC72CF25A552C400A2B86D /* ApplyOpenLockLockCell.m */,
 				FBCC72CB25A552C300A2B86D /* ApplyOpenLockLockCell.xib */,
+				FB71CE0B26F2EE230011DF13 /* ApplyOpenLockSubjectCell.h */,
+				FB71CE0C26F2EE230011DF13 /* ApplyOpenLockSubjectCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1430,6 +1435,7 @@
 				842F51E32474DA3400478914 /* NSDate+Calendar.m in Sources */,
 				8405DBDD24738669000F94EE /* WorkListViewController.m in Sources */,
 				A4102AC4242B45C600B03620 /* MBProgressHUD+Hud.m in Sources */,
+				FB71CE0D26F2EE230011DF13 /* ApplyOpenLockSubjectCell.m in Sources */,
 				FB608CBE248A1E4F008BA56C /* RegistrationLockVC.m in Sources */,
 				A4102ACE242B477700B03620 /* MSHTTPRequest.m in Sources */,
 				842F51DD2474C9BB00478914 /* BaseNavigationController.m in Sources */,

@@ -191,6 +191,8 @@
 "待审批"="Pending";
 "已驳回"="Unapproved";
 "任务已存在"="Task already exist";
+"主题"="Subject";
+"请输入主题"="pls enter subject";
 
 //开锁审核
 "同意"="Approve";

@@ -121,7 +121,7 @@
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 95;
+    return 85;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MyTaskListBean * taskList = [_listArray objectAtIndex:section];
@@ -148,7 +148,7 @@
         make.left.equalTo(view.mas_left).offset(10);
         make.top.equalTo(view.mas_top).offset(5);
         make.right.equalTo(view.mas_right).offset(-10);
-        make.height.mas_equalTo(90);
+        make.height.mas_equalTo(80);
     }];
     UIButton * checkboxBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     if ([self.deleteArray containsObject:taskList.taskid]) {
@@ -164,6 +164,21 @@
         make.centerY.equalTo(bgView.mas_centerY).offset(0);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
+    UILabel * statusLabel = [[UILabel alloc]init];
+    if ([taskList.approved isEqualToString:@"0"]) {
+        statusLabel.text = STR_PENDING_APPROVAL;
+        statusLabel.textColor = COLOR_YELLOW;
+    }else {
+        statusLabel.text = STR_REJECTED;
+        statusLabel.textColor = COLOR_RED;
+    }
+    statusLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H1);
+    [bgView addSubview:statusLabel];
+    [statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(checkboxBtn.mas_left).offset(-10);
+        make.centerY.equalTo(bgView.mas_centerY).offset(0);
+        make.size.mas_equalTo(CGSizeMake(60, 25));
+    }];
     NSMutableArray * nameArray = [NSMutableArray new];
     for (UserKeyInfoList * keyInfo in taskList.keylist) {
         [nameArray addObject:keyInfo.keyname];
@@ -171,51 +186,35 @@
     UILabel * nameLabel = [[UILabel alloc]init];
     nameLabel.text = [nameArray componentsJoinedByString:@","];
     nameLabel.textColor = COLOR_WHITE;
-    nameLabel.font = BOLD_SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
+    nameLabel.font = BOLD_SYSTEM_FONT_OF_SIZE(FONT_SIZE_H1);
     [bgView addSubview:nameLabel];
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(bgView.mas_left).offset(10);
-        make.top.equalTo(bgView.mas_top).offset(0);
-        make.right.equalTo(checkboxBtn.mas_left).offset(-10);
+        make.top.equalTo(bgView.mas_top).offset(5);
+        make.right.equalTo(statusLabel.mas_left).offset(-10);
         make.height.mas_equalTo(25);
     }];
     
     UILabel * dateLabel = [[UILabel alloc]init];
     dateLabel.text = [NSString stringWithFormat:@"%@~%@",[dateFormatter stringFromDate:beginDate],[dateFormatter stringFromDate:endDate]];
     dateLabel.textColor = COLOR_WHITE;
-    dateLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3);
+    dateLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
     [bgView addSubview:dateLabel];
     [dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(bgView.mas_left).offset(10);
         make.top.equalTo(nameLabel.mas_bottom).offset(0);
-        make.right.equalTo(checkboxBtn.mas_left).offset(-10);
+        make.right.equalTo(statusLabel.mas_left).offset(-10);
         make.height.mas_equalTo(20);
     }];
     UILabel * timeLabel = [[UILabel alloc]init];
     timeLabel.text = [NSString stringWithFormat:@"%@~%@",[timeFormatter stringFromDate:beginTime],[timeFormatter stringFromDate:endTime]];
     timeLabel.textColor = COLOR_WHITE;
-    timeLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3);
+    timeLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H2);
     [bgView addSubview:timeLabel];
     [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(bgView.mas_left).offset(10);
         make.top.equalTo(dateLabel.mas_bottom).offset(0);
-        make.right.equalTo(checkboxBtn.mas_left).offset(-10);
-        make.height.mas_equalTo(20);
-    }];
-    UILabel * statusLabel = [[UILabel alloc]init];
-    if ([taskList.approved isEqualToString:@"0"]) {
-        statusLabel.text = STR_PENDING_APPROVAL;
-        statusLabel.textColor = COLOR_WHITE;
-    }else {
-        statusLabel.text = STR_REJECTED;
-        statusLabel.textColor = COLOR_RED;
-    }
-    statusLabel.font = SYSTEM_FONT_OF_SIZE(FONT_SIZE_H3);
-    [bgView addSubview:statusLabel];
-    [statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(bgView.mas_left).offset(10);
-        make.top.equalTo(timeLabel.mas_bottom).offset(0);
-        make.right.equalTo(checkboxBtn.mas_left).offset(-10);
+        make.right.equalTo(statusLabel.mas_left).offset(-10);
         make.height.mas_equalTo(20);
     }];
     UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(changeOpenlockTask:)];

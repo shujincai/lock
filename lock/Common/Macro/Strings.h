@@ -191,6 +191,8 @@
 #define STR_PENDING_APPROVAL                L(@"待审批")
 #define STR_REJECTED                        L(@"已驳回")
 #define STR_TASK_ALREADY_EXIST              L(@"任务已存在")
+#define STR_TASK_SUBJECT                    L(@"主题")
+#define STR_TASK_SUBJECT_TIPS               L(@"请输入主题")
 
 //开锁审核
 #define STR_AGREE                           L(@"同意")

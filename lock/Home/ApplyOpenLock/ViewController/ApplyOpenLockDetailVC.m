@@ -14,6 +14,7 @@
 #import "RegistrationKeyModel.h"
 #import "MyTaskModel.h"
 #import "RegistrationKeyModel.h"
+#import "ApplyOpenLockSubjectCell.h"
 
 @interface ApplyOpenLockDetailVC ()<UITableViewDelegate,UITableViewDataSource,DatePickerViewDelegate,SetKeyControllerDelegate,KeyDelegate>
 
@@ -30,6 +31,7 @@
 @property (nonatomic,strong)NSString * beginTime;
 @property (nonatomic,strong)NSString * finishTime;
 @property (nonatomic,assign)BOOL isHide;
+@property (nonatomic,strong)UITextField * subjectTF;
 
 @end
 
@@ -335,7 +337,7 @@
     }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0||indexPath.row == 1) {
+    if (indexPath.row == 0||indexPath.row == 1||indexPath.row == 2) {
         return  60;
     }else {
         return 50;
@@ -345,7 +347,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _listArray.count+2;
+    return _listArray.count+3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0;
@@ -361,7 +363,21 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0 || indexPath.row == 1) {
+    if (indexPath.row == 0) {//钥匙主题
+        static NSString * reuseIdentifier =  @"ApplyOpenLockSubjectCell";
+        ApplyOpenLockSubjectCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        if (!cell) {
+            cell = [[ApplyOpenLockSubjectCell alloc]
+                    initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+        }
+        cell.topLabel.text = STR_TASK_SUBJECT;
+        cell.textField.placeholder = STR_TASK_SUBJECT_TIPS;
+        cell.textField.text = self.taskBean.subject;
+        _subjectTF = cell.textField;
+        return cell;
+    } else if (indexPath.row == 1 || indexPath.row == 2) {
         static NSString * reuseIdentifier =  @"ApplyOpenLockDateCell";
         ApplyOpenLockDateCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (!cell) {
@@ -369,14 +385,14 @@
             
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (indexPath.row == 0) {
+        if (indexPath.row == 1) {
             cell.titleLabel.text = STR_DATE;
             cell.timeLabel.text = [NSString stringWithFormat:@"%@～%@",self.beginDate,self.finishDate];
             [cell.rightBtn setImage:[UIImage imageNamed:@"ctl_date_task"] forState:UIControlStateNormal];
             [cell.rightBtn setImage:[UIImage imageNamed:@"ctl_date_task"] forState:UIControlStateHighlighted];
             [cell.rightBtn addTarget:self action:@selector(rightBtnDateClick) forControlEvents:UIControlEventTouchUpInside];
         }
-        if (indexPath.row == 1) {
+        if (indexPath.row == 2) {
             cell.titleLabel.text = STR_TIME;
             cell.timeLabel.text = [NSString stringWithFormat:@"%@～%@",self.beginTime,self.finishTime];
             [cell.rightBtn setImage:[UIImage imageNamed:@"ctl_time_task"] forState:UIControlStateNormal];
@@ -385,7 +401,7 @@
         }
         return cell;
     }else {
-        ApplyOpenLockTreeBean * lockBean = [_listArray objectAtIndex:indexPath.row-2];
+        ApplyOpenLockTreeBean * lockBean = [_listArray objectAtIndex:indexPath.row-3];
         static NSString * reuseIdentifier =  @"ApplyOpenLockLockCell";
         ApplyOpenLockLockCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (!cell) {
@@ -429,6 +445,7 @@
         }
         request.locknos = self.checkboxArray;
         request.timerangelist = [NSArray arrayWithObjects:[NSArray arrayWithObjects:self.beginTime,self.finishTime, nil], nil];
+        request.subject = _subjectTF.text;
         [MSHTTPRequest PUT:[NSString stringWithFormat:kTaskValid,_taskBean.taskid] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
             [MBProgressHUD hideHUD];
             NSError * error = nil;
@@ -466,6 +483,7 @@
         }
         request.locknos = self.checkboxArray;
         request.timerangelist = [NSArray arrayWithObjects:[NSArray arrayWithObjects:self.beginTime,self.finishTime, nil], nil];
+        request.subject = _subjectTF.text;
         [MSHTTPRequest POST:kTaskList parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
             [MBProgressHUD hideHUD];
             NSError * error = nil;
