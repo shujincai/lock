@@ -192,6 +192,10 @@
         return;
     }else {
         self.lockInfoB = [[RegistrationLockInfoBean alloc]initWithDictionary:info.detailDic error:nil];
+        if ([self.lockInfoB.event_type isEqualToString:@"7"]) {
+            [MBProgressHUD showError:STR_SYSTEM_CODE_ERROR];
+            return;
+        }
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
         infoBean.time = [self getCurrentTime];
         infoBean.eventtype = self.lockInfoB.event_type;
@@ -209,6 +213,7 @@
             infoBean.iamgeName = @"ic_switch_fail";
         }
         if ([self.lockInfoB.event_type isEqualToString:@"8"]) {//黑名单钥匙
+            infoBean.eventtype = @"255";
             infoBean.name = STR_BLACKLIST_KEY;
             infoBean.iamgeName = @"ic_switch_fail";
         }
@@ -327,7 +332,7 @@
             //锁号
             NSArray *lockIds = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",self.lockBean.lockno], nil];
             WMUserKeyInfo *userkeyInfo = [[WMUserKeyInfo alloc] initUserKeyInfo:dates lockIds:lockIds];
-            [self.bleKeysdk setUserKey:userkeyInfo isOnline:NO];
+            [self.bleKeysdk setUserKey:userkeyInfo isOnline:YES];
         }
     }
 }
@@ -375,7 +380,7 @@
         //锁号
         NSArray *lockIds = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",self.lockBean.lockno], nil];
         WMUserKeyInfo *userkeyInfo = [[WMUserKeyInfo alloc] initUserKeyInfo:dates lockIds:lockIds];
-        [self.bleKeysdk setUserKey:userkeyInfo isOnline:NO];
+        [self.bleKeysdk setUserKey:userkeyInfo isOnline:YES];
     }
 }
 
@@ -400,6 +405,7 @@
         infoBean.iamgeName = @"ic_switch_lock";
         [self.listArray addObject:infoBean];
         [self.tableView reloadData];
+        [self.bleKeysdk setOnline];
     }
 }
 //获取锁数据

@@ -135,6 +135,7 @@
 #define STR_OVERSTEP_TIME_RANGE             L(@"超出时间范围")
 #define STR_BLUETOOTH_OPEN_LOCK_SUCCESS     L(@"蓝牙钥匙开锁成功")
 #define STR_BLUETOOTH_CLOSE_LOCK_SUCCESS    L(@"蓝牙钥匙关锁成功")
+#define STR_SYSTEM_CODE_ERROR               L(@"锁与钥匙系统码不匹配")
 
 //我的任务
 #define STR_WORK_TASK                       L(@"工作任务")

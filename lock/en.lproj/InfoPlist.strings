@@ -136,6 +136,7 @@
 "超出时间范围"="Beyond the Time";
 "蓝牙钥匙开锁成功"="Bluetooth key unlocked successfully";
 "蓝牙钥匙关锁成功"="Bluetooth key locked successfully";
+"锁与钥匙系统码不匹配"="System code not match";
 
 //我的任务
 "工作任务"="My Task";
