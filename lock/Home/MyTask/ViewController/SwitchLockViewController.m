@@ -24,6 +24,9 @@
 @property (nonatomic,strong)UITextField * keyTF;
 @property (nonatomic,strong)UserInfo * userInfo;
 @property (nonatomic,assign)BOOL isHide; //根据加载时间判断是否隐藏加载框
+@property (nonatomic,strong)UIButton * fingerprintBtn;
+@property (nonatomic,strong)NSMutableArray * fingerprintArray; // 指纹数据
+@property (nonatomic,assign)NSInteger index; // 当前下载的指纹顺序
 
 @end
 
@@ -43,6 +46,7 @@
             [MBProgressHUD hideHUD];
         }
     });
+    [self initLayout];
     [self createTableView];
     if ([CommonUtil getLockType]) {
         [SetKeyController setDelegate:self];
@@ -69,6 +73,12 @@
     }
     return _listArray;
 }
+- (NSMutableArray *)fingerprintArray {
+    if (_fingerprintArray == nil) {
+        _fingerprintArray = [NSMutableArray array];
+    }
+    return _fingerprintArray;
+}
 - (void)returnClick {
     if ([CommonUtil getLockType]) {
         [SetKeyController disConnectBle];
@@ -78,6 +88,95 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark 更新指纹功能 C锁
+
+- (void)initLayout {
+    // 创建更新指纹按钮
+    self.fingerprintBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.fingerprintBtn setTitle:STR_UPDATE_FINGERPRINT forState:UIControlStateNormal];
+    self.fingerprintBtn.frame = CGRectMake(0, 0, 60, 36);
+    [self.fingerprintBtn setHidden:YES];
+    [self.fingerprintBtn addTarget:self action:@selector(fingerprintBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * fingerprintBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.fingerprintBtn];
+    self.navigationItem.rightBarButtonItems = @[fingerprintBarItem];
+}
+// 获取当前任务所有人员指纹
+- (void)fingerprintBtnClick {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_BE_CAREFUL message:[NSString stringWithFormat:@"%@？",STR_UPDATE_FINGERPRINT_TIPS] preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self getTaskFingerprintList];
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+- (void)getTaskFingerprintList {
+    [MBProgressHUD showActivityMessage:[NSString stringWithFormat:@"%@...",STR_FINGERPRINT_DOWNLOADING]];
+    MyTaskFingerprintListRequest * request = [[MyTaskFingerprintListRequest alloc]init];
+    request.keydataid = self.taskBean.taskid;
+    [MSHTTPRequest GET:kTaskFingerprintList parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
+        [MBProgressHUD hideHUD];
+        NSError * error = nil;
+        MyTaskFingerprintListResponse * response = [[MyTaskFingerprintListResponse alloc]initWithDictionary:responseObject error:&error];
+        if (error) {
+            [MBProgressHUD showMessage:STR_PARSE_FAILURE];
+            return ;
+        }
+        if ([response.resultCode intValue] != 0) {
+            [MBProgressHUD showError:response.msg];
+            return ;
+        }else {
+            if (response.data.count <= 0) {
+                [MBProgressHUD showError:STR_TASK_USER_NO_FINGERPRINT];
+                return;
+            }
+            [self.fingerprintArray removeAllObjects];
+            [self.fingerprintArray addObjectsFromArray:response.data];
+            self.index = 1;
+            // 删除钥匙中指纹数据 传0删除所有
+            [MBProgressHUD showActivityMessage:[NSString stringWithFormat:@"%@...",STR_FINGERPRINT_DELETING]];
+            [self.bleKeysdk deleteFingerprint:[NSNumber numberWithInt:0]];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:STR_TIMEOUT];
+    }];
+}
+// 删除指纹
+-(void)onDeleteFingerprint:(Result *)result{
+    [MBProgressHUD hideHUD];
+    if (result.ret == NO) {
+        [MBProgressHUD showError:STR_FINGERPRINT_DELETE_FAIL];
+        return;
+    }else {
+        [MBProgressHUD showActivityMessage:[NSString stringWithFormat:@"%@(%ld/%ld)",STR_FINGERPRINT_UPDATING,self.index,self.fingerprintArray.count]];
+        MyTaskFingerprintListBean * listBean = [_fingerprintArray objectAtIndex:self.index - 1];
+        [self.bleKeysdk setFingerprint:[NSNumber numberWithInt:listBean.fid] fea: listBean.fea];
+    }
+}
+// 下载指纹
+-(void)onSetFingerprint:(Result *)result{
+    [MBProgressHUD hideHUD];
+    self.index++;
+    if (result.ret == NO) {
+        [MBProgressHUD showError:STR_UPDATE_FINGERPRINT_FAIL];
+        return;
+    }else {
+        if (self.index > self.fingerprintArray.count) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_BE_CAREFUL message:[NSString stringWithFormat:@"%@！",STR_UPDATE_FINGERPRINT_SUCCESS] preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:STR_DEFINE style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            [MBProgressHUD showActivityMessage:[NSString stringWithFormat:@"%@(%ld/%ld)",STR_FINGERPRINT_UPDATING,self.index,self.fingerprintArray.count]];
+            MyTaskFingerprintListBean * listBean = [_fingerprintArray objectAtIndex:self.index - 1];
+            [self.bleKeysdk setFingerprint:[NSNumber numberWithInt:listBean.fid] fea: listBean.fea];
+        }
+        
+    }
+}
 #pragma mark B锁
 
 //初始化
@@ -299,6 +398,8 @@
         return;
     }else {
         if (_keyInfoC.device == 1284) { //指纹蓝牙钥匙
+            // 显示更新指纹按钮
+            [self.fingerprintBtn setHidden:NO];
             //指纹授权
             NSMutableArray<NSNumber*> * fingerArray = [NSMutableArray<NSNumber*> array];
             for (FingerPrintListBean * fingerList in self.userInfo.fingerlist) {
@@ -539,6 +640,9 @@
             request.lockno = self.lockBean.lockno;
         }
     } else {
+        if (self.keyInfoC.device == 1284) { //指纹蓝牙钥匙
+//            request.fingerid
+        }
         request.lockno = self.lockInfoC.lockid;
     }
     request.opttype = switchBean.opttype;

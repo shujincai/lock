@@ -67,3 +67,5 @@ UIKIT_EXTERN NSString *const kBlackList;
 UIKIT_EXTERN NSString *const kSetKeyFlag;
 //获取锁详情 替换锁
 UIKIT_EXTERN NSString *const kLockDetail;
+//获取任务指纹列表
+UIKIT_EXTERN NSString *const kTaskFingerprintList;

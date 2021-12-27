@@ -90,7 +90,7 @@
             [MBProgressHUD showMessage:STR_NEW_OLD_EQUAL];
             return;
         }
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_DEFINE_CHANGE_PWD message:STR_DEFINE_QUIT preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:STR_BE_CAREFUL message:STR_DEFINE_CHANGE_PWD preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:STR_CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
         }]];

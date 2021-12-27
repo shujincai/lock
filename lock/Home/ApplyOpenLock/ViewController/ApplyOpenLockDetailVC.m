@@ -446,6 +446,7 @@
         request.locknos = self.checkboxArray;
         request.timerangelist = [NSArray arrayWithObjects:[NSArray arrayWithObjects:self.beginTime,self.finishTime, nil], nil];
         request.subject = _subjectTF.text;
+        request.remotefingerprint = true;
         [MSHTTPRequest PUT:[NSString stringWithFormat:kTaskValid,_taskBean.taskid] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
             [MBProgressHUD hideHUD];
             NSError * error = nil;
@@ -479,11 +480,14 @@
         if ([CommonUtil getLockType]) {
             request.keynos = [NSArray arrayWithObjects:self.keyInfoB.key_id, nil];
         } else {
+            if (_keyInfoC.device == 1284) { //指纹蓝牙钥匙
+            }
             request.keynos = [NSArray arrayWithObjects:self.keyInfoC.keyId, nil];
         }
         request.locknos = self.checkboxArray;
         request.timerangelist = [NSArray arrayWithObjects:[NSArray arrayWithObjects:self.beginTime,self.finishTime, nil], nil];
         request.subject = _subjectTF.text;
+        request.remotefingerprint = true;
         [MSHTTPRequest POST:kTaskList parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
             [MBProgressHUD hideHUD];
             NSError * error = nil;

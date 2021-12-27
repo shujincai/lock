@@ -82,6 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<UserKeyInfoList> * keylist;//钥匙列表
 @property(nonatomic,copy)NSString * subject;//任务名称
 @property(nonatomic,copy)NSString * approved;//状态 0-待审核，1-已通过，2-已驳回
+@property(nonatomic,assign)BOOL remotefingerprint; // true无线模式 false有线模式
 
 @end
 
@@ -121,6 +122,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy)NSString * lockno;//锁号
 @property (nonatomic,assign)NSInteger opttype;//0
 @property (nonatomic,copy)NSString * time;//时间
+@property (nonatomic,copy)NSString * fingerid;//C锁要上传指纹id
+@end
+
+/*
+ 获取任务指纹列表
+ */
+@interface MyTaskFingerprintListRequest : RequestBean
+@property (nonatomic,copy)NSString * keydataid;//任务id
+@end
+
+@protocol MyTaskFingerprintListBean
+@end
+@interface MyTaskFingerprintListBean : BaseBean
+@property(nonatomic,assign)int fid;//指纹id
+@property(nonatomic,copy)NSString * fea;//指纹数据
+@end
+
+@interface MyTaskFingerprintListResponse : ResponseBean
+@property (nonatomic,strong)NSMutableArray<MyTaskFingerprintListBean> * data;
 @end
 
 NS_ASSUME_NONNULL_END

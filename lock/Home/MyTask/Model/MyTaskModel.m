@@ -62,3 +62,16 @@
 
 @end
 
+@implementation MyTaskFingerprintListRequest
+
+@end
+
+@implementation MyTaskFingerprintListBean
++(JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:[NSDictionary dictionaryWithObjects:@[@"id"] forKeys:@[@"fid"]]];
+}
+@end
+
+@implementation MyTaskFingerprintListResponse
+
+@end

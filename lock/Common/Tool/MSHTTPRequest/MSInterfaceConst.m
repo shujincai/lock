@@ -63,3 +63,5 @@ NSString *const kBlackList = @"api/v1/app/keys/blacklists";
 NSString *const kSetKeyFlag = @"api/v1/app/keys/%@?keyflag=%ld";
 //获取锁详情 替换锁
 NSString *const kLockDetail = @"api/v1/app/locks/%@";
+//获取任务指纹列表
+NSString *const kTaskFingerprintList = @"api/v1/app/keydatas/fingerprints";

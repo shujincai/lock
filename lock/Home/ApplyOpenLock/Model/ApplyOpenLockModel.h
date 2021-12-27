@@ -42,8 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSArray<NSString*> * deptids;//部门
 @property (nonatomic,strong)NSArray<NSString*> * keynos;//钥匙
 @property (nonatomic,strong)NSArray<NSString*> * locknos;//锁
-@property(nonatomic,copy)NSString * subject; // 任务名称
+@property (nonatomic,copy)NSString * subject; // 任务名称
 @property (nonatomic,strong)NSArray * timerangelist;//时间段
+@property (nonatomic,assign)BOOL remotefingerprint; // 蓝牙指纹无线领出模式
 @end
 
 NS_ASSUME_NONNULL_END

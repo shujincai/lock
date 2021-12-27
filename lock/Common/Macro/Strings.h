@@ -158,7 +158,15 @@
 #define STR_VALIDATION_FAILED               L(@"验证失败")
 #define STR_FINGERPRINT_AUTHORIZE_SUCCESS   L(@"指纹授权成功")
 #define STR_FINGERPRINT_AUTHORIZE_FAIL      L(@"指纹授权失败")
-
+#define STR_UPDATE_FINGERPRINT              L(@"更新指纹")
+#define STR_UPDATE_FINGERPRINT_TIPS         L(@"更新指纹需要等待几分钟的时间，确定要更新吗")
+#define STR_FINGERPRINT_DOWNLOADING         L(@"下载指纹中")
+#define STR_TASK_USER_NO_FINGERPRINT        L(@"任务使用人不存在指纹")
+#define STR_FINGERPRINT_DELETING            L(@"正在删除指纹")
+#define STR_FINGERPRINT_DELETE_FAIL         L(@"删除指纹失败")
+#define STR_FINGERPRINT_UPDATING            L(@"正在更新指纹")
+#define STR_UPDATE_FINGERPRINT_FAIL         L(@"更新钥匙指纹失败")
+#define STR_UPDATE_FINGERPRINT_SUCCESS      L(@"更新指纹完毕，请验证指纹开关锁")
 //系统参数
 #define STR_QUIT                            L(@"退出")
 #define STR_DEFINE_QUIT                     L(@"确定退出当前帐号吗")
