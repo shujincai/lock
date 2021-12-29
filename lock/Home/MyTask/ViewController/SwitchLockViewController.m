@@ -641,7 +641,7 @@
         }
     } else {
         if (self.keyInfoC.device == 1284) { //指纹蓝牙钥匙
-//            request.fingerid
+            request.fingerid = [NSString stringWithFormat:@"%d",self.lockInfoC.finger];
         }
         request.lockno = self.lockInfoC.lockid;
     }
