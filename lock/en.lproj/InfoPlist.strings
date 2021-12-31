@@ -103,6 +103,7 @@
 "该钥匙已损坏"="Abnormal key status of Damage";
 "该钥匙已领出"="Abnormal key status of Using";
 "无部门权限可以操作该钥匙"="No Dept. Authority to operate this key";
+"修改系统码成功"="Done to upgrade system code.";
 
 //注册锁
 "请连锁，读取锁id..."="Pls connect with the lock, read the lock number";

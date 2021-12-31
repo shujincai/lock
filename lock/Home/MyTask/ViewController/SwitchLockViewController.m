@@ -326,8 +326,10 @@
             infoBean.iamgeName = @"ic_switch_success";
             infoBean.opttype = 1;
         }
-        if (![self.lockInfoB.event_type isEqualToString:@"1"]) {//钥匙与锁接触
+        if ([self.lockInfoB.event_type isEqualToString:@"1"]) {//钥匙与锁接触
             infoBean.eventtype = @"0";
+        }
+        if (![self.lockInfoB.event_type isEqualToString:@"1"]) {//钥匙与锁接触
             [self.listArray addObject:infoBean];
             [self.tableView reloadData];
         }

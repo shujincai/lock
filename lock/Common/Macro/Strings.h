@@ -102,6 +102,7 @@
 #define STR_KEY_DAMAGED                     L(@"该钥匙已损坏")
 #define STR_KEY_TASK_OUT                    L(@"该钥匙已领出")
 #define STR_KEY_NO_DEPT_POWER               L(@"无部门权限可以操作该钥匙")
+#define STR_UPDATE_SYSTEM_CODE              L(@"修改系统码成功")
 
 //注册锁
 #define STR_PLEASE_CONNECT_LOCK_READ        L(@"请连锁，读取锁id...")

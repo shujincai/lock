@@ -62,6 +62,8 @@
 -(void)onSetFingers:(Result*)result;
 -(void)onDeleteFingerprint:(Result*)result;
 -(void)onSetFingerprint:(Result*)result;
+
+-(void)onCommand:(NSData*)result;
 @end
 //=========================
 @interface BleKeySdk: NSObject

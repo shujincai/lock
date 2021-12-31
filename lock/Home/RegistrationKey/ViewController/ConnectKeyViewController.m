@@ -76,6 +76,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
+//        needResetKey为Yes自动修改系统码
         [SetKeyController connectBlueTooth:_currentBle withSyscode:[CommonUtil desDecodeWithCode:self.userInfo.syscode withPassword:self.userInfo.apppwd] withRegcode:[CommonUtil desDecodeWithCode:self.userInfo.regcode withPassword:self.userInfo.apppwd] withLanguageType:[CommonUtil getAppleLanguages] ? RASCRBleSDKLanguageTypeChinese : RASCRBleSDKLanguageTypeEnglish needResetKey:NO];
     }
     
@@ -92,9 +93,9 @@
                 return;
             }else {
                 [SetKeyController disConnectBle];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     self.registerNumber++;
-                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:DEFINE_SYSCODE withRegcode:DEFINE_REGCODE withLanguageType:[CommonUtil getAppleLanguages] ? RASCRBleSDKLanguageTypeChinese : RASCRBleSDKLanguageTypeEnglish needResetKey:YES];
+                    [SetKeyController connectBlueTooth:self.currentBle withSyscode:DEFINE_SYSCODE withRegcode:DEFINE_REGCODE withLanguageType:[CommonUtil getAppleLanguages] ? RASCRBleSDKLanguageTypeChinese : RASCRBleSDKLanguageTypeEnglish needResetKey:NO];
                 });
             }
             
@@ -133,7 +134,9 @@
         [self getKeyFactoryInfo];
     }
 }
-
+- (void)requestSetBlankKeyResultInfo:(ResultInfo *)info {
+    [MBProgressHUD showSuccess:STR_UPDATE_SYSTEM_CODE];
+}
 //通过出厂编号查询钥匙信息
 - (void)getKeyFactoryInfo {
     RegistrationKeyExistenceRequest * request = [[RegistrationKeyExistenceRequest alloc]init];
@@ -343,6 +346,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }else {
+        [MBProgressHUD showSuccess:STR_UPDATE_SYSTEM_CODE];
         [self.tableView reloadData];
     }
 }
