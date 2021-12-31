@@ -319,14 +319,15 @@
         if ([self.lockInfoB.event_type isEqualToString:@"13"]) {//开锁成功
             infoBean.name = STR_OPEN_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
-            infoBean.opttype = 1;
+            infoBean.opttype = 0;
         }
         if ([self.lockInfoB.event_type isEqualToString:@"14"]) {//关锁成功
             infoBean.name = STR_CLOSE_LOCK_SUCCESS;
             infoBean.iamgeName = @"ic_switch_success";
-            infoBean.opttype = 0;
+            infoBean.opttype = 1;
         }
         if (![self.lockInfoB.event_type isEqualToString:@"1"]) {//钥匙与锁接触
+            infoBean.eventtype = @"0";
             [self.listArray addObject:infoBean];
             [self.tableView reloadData];
         }
@@ -437,7 +438,6 @@
         }
     }
 }
-
 //指纹授权
 -(void)onSetFingers:(Result*)result {
     if (result.ret == NO) {
