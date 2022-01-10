@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 // 获取黑名单列表
 
 @interface  BlackListRequest : RequestBean
-@property (nonatomic,assign)NSInteger keytype;//钥匙类型（0NFC钥匙、1蓝牙钥匙、2指纹钥匙）
+@property (nonatomic,assign)NSInteger keytype;//钥匙类型（0NFC钥匙、1蓝牙钥匙、2指纹钥匙、2000蓝牙和指纹蓝牙）
 @property (nonatomic,assign)NSInteger page;//页码
 @property (nonatomic,assign)NSInteger pagesize;//每页条数
 @end

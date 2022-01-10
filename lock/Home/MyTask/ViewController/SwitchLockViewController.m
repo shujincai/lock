@@ -296,7 +296,7 @@
             return;
         }
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
-        infoBean.time = [self getCurrentTime];
+        infoBean.time = [self getCurrentSwitchLockBTime:self.lockInfoB.event_time];
         infoBean.eventtype = self.lockInfoB.event_type;
         infoBean.opttype = 0;
         if ([self.lockInfoB.event_type isEqualToString:@"4"]) {//超出有效期
@@ -520,7 +520,7 @@
     }else {
         self.lockInfoC = result.obj;
         MyTaskSwitchLockInfoBean * infoBean = [[MyTaskSwitchLockInfoBean alloc]init];
-        infoBean.time = [self getCurrentTime];
+        infoBean.time = [self getCurrentSwitchLockTime:result.obj.time];
         infoBean.eventtype = [NSString stringWithFormat:@"%d",self.lockInfoC.flag];
         //status 本状态描述的是开关锁的动作，即操作后锁的状态
         infoBean.opttype = (self.lockInfoC.status + ((self.lockInfoC.flag == 0 || self.lockInfoC.flag == 1) ? 0 : 1)) % 2; //  开 0 关 1
@@ -626,6 +626,23 @@
     [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
     NSDate *datenow = [NSDate date];
     NSString *currentTimeString = [formatter stringFromDate:datenow];
+    return currentTimeString;
+}
+//获取C锁开关锁时间
+- (NSString*)getCurrentSwitchLockTime:(NSDate *)date {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSString *currentTimeString = [formatter stringFromDate:date];
+    return currentTimeString;
+}
+//获取B锁开关锁时间
+- (NSString*)getCurrentSwitchLockBTime:(NSString *)time {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yy-MM-dd HH:mm:ss"];
+    NSDate * date = [formatter dateFromString:time];
+    NSDateFormatter * dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSString *currentTimeString = [dateformatter stringFromDate:date];
     return currentTimeString;
 }
 //上传开关锁记录

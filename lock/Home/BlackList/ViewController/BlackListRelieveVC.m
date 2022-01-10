@@ -311,28 +311,52 @@ if ([CommonUtil getLockType]) {
     
     
 }
+// 解除挂失
 -(void)saveRelieveLoss {
     [MBProgressHUD showActivityMessage:STR_LOADING];
     RequestBean * request = [[RequestBean alloc]init];
     [MSHTTPRequest DELETE:[NSString stringWithFormat:kBlackListLoss,_blacklistBean.keyno] parameters:[request toDictionary] cachePolicy:MSCachePolicyOnlyNetNoCache success:^(id  _Nonnull responseObject) {
-        [MBProgressHUD hideHUD];
         NSError * error = nil;
         ResponseBean * response = [[ResponseBean alloc]initWithDictionary:responseObject error:&error];
         if (error) {
+            [MBProgressHUD hideHUD];
             [MBProgressHUD showMessage:STR_PARSE_FAILURE];
             return ;
         }
         if ([response.resultCode intValue] != 0) {
+            [MBProgressHUD hideHUD];
             [MBProgressHUD showError:response.msg];
             return ;
         }else {
-            [MBProgressHUD showSuccess:STR_REMOVE_LOSS_SUCCESS];
-            [[NSNotificationCenter defaultCenter]postNotificationName:NF_KEY_KEY_RELIEVE_SUCCESS object:nil];
-            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+            // 设置为空白钥匙
+            if ([CommonUtil getLockType]) {
+                BasicInfo *basicInfo = [[BasicInfo alloc] initBasicInfo];
+                basicInfo.keyValidityPeriodStart = @"00-01-01-00-00";
+                basicInfo.keyValidityPeriodEnd = @"99-12-31-23-59";
+                basicInfo.keyId = [self.keyInfoB.key_id intValue];
+                BlankKeyInfo *blankKeyInfo = [[BlankKeyInfo alloc] init];
+                [SetKeyController setBlankKey:basicInfo andBlankKeyInfo:blankKeyInfo];
+            } else {
+                [self.bleKeysdk setBlankKey];
+            }
+            
         }
     } failure:^(NSError * _Nonnull error) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:STR_TIMEOUT];
     }];
+}
+// 解除挂失后，设置为空白钥匙，返回
+- (void)requestSetBlankKeyResultInfo:(ResultInfo *)info {
+    [MBProgressHUD hideHUD];
+    [MBProgressHUD showSuccess:STR_REMOVE_LOSS_SUCCESS];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NF_KEY_KEY_RELIEVE_SUCCESS object:nil];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+}
+- (void)onSetBlankKey:(Result *)result {
+    [MBProgressHUD hideHUD];
+    [MBProgressHUD showSuccess:STR_REMOVE_LOSS_SUCCESS];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NF_KEY_KEY_RELIEVE_SUCCESS object:nil];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 }
 @end
