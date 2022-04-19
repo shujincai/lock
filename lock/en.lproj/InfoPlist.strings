@@ -183,7 +183,7 @@
 "原密码"="Old password";
 "新密码"="New password";
 "确认密码"="Confirm password";
-"请输入原密码"="pls login the new password";
+"请输入原密码"="pls login the old password";
 "请输入新密码"="pls login the new password";
 "请输入确认密码"="pls re-enter the new password";
 "两次密码不一致"="The two passwords do not match";
