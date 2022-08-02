@@ -79,6 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<UserKeyInfoList> * keylist;//钥匙数组
 @property(nonatomic,strong)UserDepartmentInfo * dept;//部门信息
 @property(nonatomic,strong)NSMutableArray<FingerPrintListBean> * fingerlist;//指纹数组
+@property(nonatomic,copy)NSString * iosProject;// ec-zzlk智能粮库
 
 @end
 

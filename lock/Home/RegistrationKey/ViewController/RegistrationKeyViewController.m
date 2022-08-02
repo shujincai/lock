@@ -19,6 +19,7 @@
 #import "WriteListCreateVC.h"
 #import "LockReplaceDetailVC.h"
 #import "RegistrationKeyModel.h"
+#import "SwitchLockDateViewController.h"
 
 @interface RegistrationKeyViewController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,SetKeyControllerDelegate,KeyDelegate>
 
@@ -235,15 +236,6 @@
         [self.tableView reloadData];
     }
 }
-//- (void)scanedPeripheral:(CBPeripheral *)peripheral{
-//    NSLog(@"%@",peripheral);
-//    if ([peripheral.name rangeOfString:@"B030"].location != NSNotFound||[peripheral.name rangeOfString:@"rayonicskey"].location != NSNotFound) {
-//        if (![_bleArray containsObject:peripheral]){
-//            [_bleArray addObject:peripheral];
-//        }
-//        [self.tableView reloadData];
-//    }
-//}
 
 #pragma mark C锁
 
@@ -323,6 +315,12 @@
         lockReplaceVC.currentBle = currentBle;
         lockReplaceVC.replaceLockBean = _replaceLockBean;
         [self.navigationController pushViewController:lockReplaceVC animated:YES];
+    }
+    if ([self.type isEqualToString:@"8"]) {//粮库 开关锁
+        SwitchLockDateViewController * switchLockVC = [[SwitchLockDateViewController alloc]init];
+        switchLockVC.currentBle = currentBle;
+        switchLockVC.taskBean = self.taskDateBean;
+        [self.navigationController pushViewController: switchLockVC animated:YES];
     }
 }
 

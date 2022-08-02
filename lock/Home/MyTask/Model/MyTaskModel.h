@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * begintime;//开始时间
 @property(nonatomic,copy)NSString * endtime;//结束时间
 @property(nonatomic,copy)NSString * keydataid;//任务id
+@property(nonatomic,copy)NSString * rangeid;//区间id
 @end
 
 @protocol UnlockListBean
@@ -51,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString * deptname;//部门名称
 @property(nonatomic,copy)NSString * lockname;//锁名称
 @property(nonatomic,copy)NSString * deptcode;//锁编码
+@property(nonatomic,copy)NSString * rangeid;//区间id
 @end
 
 @protocol MyTaskListBean

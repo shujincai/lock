@@ -13,6 +13,8 @@
 #import "RecordInfo.h"
 #import "RecordBean.h"
 #import "UserKeyInfo.h"
+#import "UserKeyInfo4.h"
+#import "LockInfo4.h"
 #import "DateSection.h"
 #import "RegisterKeyInfo.h"
 
@@ -96,6 +98,9 @@
 -(void)setFingers:(NSArray<NSNumber*>*)ids;
 -(void)deleteFingerprint:(NSNumber*) fid;
 -(void)setFingerprint:(NSNumber*)fid fea:(NSString*)fea;
+//2022-07-29 增加，一个锁可以对应多个日期段
+-(void)setUserKey4:(UserKeyInfo4*) userKeyInfo isOnline:(bool) isOnline;
+
 -(void)destory;
 -(NSString*) getSdkVersion;
 

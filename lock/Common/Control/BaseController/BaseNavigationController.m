@@ -17,11 +17,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:FONT_NAVI_TITLE, NSForegroundColorAttributeName:COLOR_WHITE}];
-if ([CommonUtil getLockType]) {
-    [[UINavigationBar appearance] setBarTintColor:COLOR_BLUE];
-} else {
-    [[UINavigationBar appearance] setBarTintColor:COLOR_BTN_BG];
-}
+    if ([CommonUtil getLockType]) {
+        [[UINavigationBar appearance] setBarTintColor:COLOR_BLUE];
+        if (@available(iOS 13.0, *)) {
+            UINavigationBarAppearance * appearance = [UINavigationBarAppearance new];
+            appearance.backgroundColor = COLOR_BLUE; //设置导航栏背景色
+            appearance.shadowColor = COLOR_BLUE; // 设置分割线默认颜色
+            appearance.titleTextAttributes = @{NSFontAttributeName:FONT_NAVI_TITLE, NSForegroundColorAttributeName:COLOR_WHITE}; //设置导航条标题颜色
+            [UINavigationBar appearance].standardAppearance = appearance;
+            [UINavigationBar appearance].scrollEdgeAppearance = appearance;
+        }
+    } else {
+        [[UINavigationBar appearance] setBarTintColor:COLOR_BTN_BG];
+        if (@available(iOS 13.0, *)) {
+            UINavigationBarAppearance * appearance = [UINavigationBarAppearance new];
+            appearance.backgroundColor = COLOR_BTN_BG; //设置导航栏背景色
+            appearance.shadowColor = COLOR_BTN_BG; // 设置分割线默认颜色
+            appearance.titleTextAttributes = @{NSFontAttributeName:FONT_NAVI_TITLE, NSForegroundColorAttributeName:COLOR_WHITE}; //设置导航条标题颜色
+            [UINavigationBar appearance].standardAppearance = appearance;
+            [UINavigationBar appearance].scrollEdgeAppearance = appearance;
+        }
+    }
     //设置右滑返回手势的代理为自身
     WEAKSELF
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {

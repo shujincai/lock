@@ -20,6 +20,7 @@
 #import "KeyLossListVC.h"
 #import "BlackListVC.h"
 #import "LockReplaceListVC.h"
+#import "MyTaskDateViewController.h"
 
 static NSString * cellIdentifer = @"HomeCollectionViewCell";
 
@@ -279,8 +280,14 @@ if ([CommonUtil getLockType]) {
     NSString * titleType = [self.titleArray objectAtIndex:indexPath.section*3+indexPath.item];
     
     if ([titleType isEqualToString:STR_MY_TASK]) {//我的任务
-        MyTaskViewController * myTask = [MyTaskViewController new];
-        [self.navigationController pushViewController:myTask animated:YES];
+        if ([self.userInfo.iosProject isEqualToString:@"ec-zzlk"]) {
+            MyTaskDateViewController * myTaskDate = [MyTaskDateViewController new];
+            [self.navigationController pushViewController:myTaskDate animated:YES];
+        } else {
+            MyTaskViewController * myTask = [MyTaskViewController new];
+            [self.navigationController pushViewController:myTask animated:YES];
+        }
+        
     }
     if ([titleType isEqualToString:STR_WORK_RECORD]){//工作记录
         WorkRecordViewController * workRecord = [WorkRecordViewController new];
